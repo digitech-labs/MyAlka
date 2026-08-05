@@ -28,6 +28,8 @@
                         'float': 'float 3s ease-in-out infinite',
                         'fly-right': 'flyRight 15s linear infinite',
                         'fly-left': 'flyLeft 18s linear infinite',
+                        'wave-fast': 'waveMove 8s linear infinite',
+                        'wave-slow': 'waveMove 12s linear infinite reverse',
                     },
                     keyframes: {
                         fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
@@ -37,7 +39,8 @@
                         slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
                         float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
                         flyRight: { '0%': { transform: 'translateX(-50px) scaleX(1)' }, '100%': { transform: 'translateX(400px) scaleX(1)' } },
-                        flyLeft: { '0%': { transform: 'translateX(400px) scaleX(-1)' }, '100%': { transform: 'translateX(-50px) scaleX(-1)' } }
+                        flyLeft: { '0%': { transform: 'translateX(400px) scaleX(-1)' }, '100%': { transform: 'translateX(-50px) scaleX(-1)' } },
+                        waveMove: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
                     }
                 }
             }
@@ -60,17 +63,21 @@
         .custom-input:focus ~ .icon-input, .custom-input.filled ~ .icon-input { color: var(--theme-color); }
         .custom-input:disabled { background-color: rgba(241, 245, 249, 0.7); color: #64748b; cursor: not-allowed; border-color: rgba(203, 213, 225, 0.5); font-weight: 700; }
 
-        .input-error { border-color: #ef4444 !important; background-color: rgba(254, 242, 242, 0.95) !important; color: #991b1b !important; animation: pulseError 1.5s infinite; }
-        .input-error:focus { box-shadow: none !important; }
+        .input-error { border-color: #ef4444 !important; background-color: rgba(254, 242, 242, 0.95) !important; color: #991b1b !important; }
         .input-error ~ .icon-input { color: #ef4444 !important; }
-        @keyframes pulseError { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); } 70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
         ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.4); border-radius: 10px; }
         
         .wave-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; overflow: hidden; line-height: 0; transform: translateY(1px); }
         .wave-container svg { position: absolute; bottom: 0; left: 0; width: 200%; height: 100%; display: block; }
 
-        select.custom-input { appearance: none; -webkit-appearance: none; background-color: rgba(255, 255, 255, 0.95) !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-position: right 0.8rem center; background-repeat: no-repeat; background-size: 1.1rem 1.1rem; padding-right: 2.2rem; border: 1.5px solid rgba(148, 163, 184, 0.3) !important; color: #475569 !important; }
+        select.custom-input {
+            appearance: none; -webkit-appearance: none; 
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-position: right 0.8rem center; background-repeat: no-repeat; background-size: 1.1rem 1.1rem;
+            padding-right: 2.2rem; border: 1.5px solid rgba(148, 163, 184, 0.3) !important; color: #475569 !important;
+        }
         select.custom-input:focus, select.custom-input.filled { border-color: var(--theme-color) !important; color: #1e293b !important; box-shadow: var(--theme-glow); }
         select.custom-input:disabled { background-color: rgba(241, 245, 249, 0.6) !important; border-color: #e2e8f0 !important; color: #94a3b8 !important; background-image: none; cursor: not-allowed; }
 
@@ -92,7 +99,7 @@
         span.flatpickr-weekday { background: #1e40af !important; color: rgba(255,255,255,0.9) !important; font-weight: bold !important; font-size: 90% !important; }
         .flatpickr-day.selected { background: #ea580c !important; border-color: #ea580c !important; font-weight: bold; box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3); }
         .flatpickr-day.today { border-color: #3b82f6 !important; color: #3b82f6 !important; font-weight: 900; }
-
+        
         .map-line-dash { stroke-dasharray: 12 12; animation: mapDash 30s linear infinite reverse; }
         @keyframes mapDash { to { stroke-dashoffset: 400; } }
     </style>
@@ -100,10 +107,9 @@
 
 <body class="bg-slate-200 antialiased flex justify-center text-slate-800 h-[100dvh] overflow-hidden">
 
-    <!-- KONTAINER UTAMA APLIKASI (Mirip HP) -->
     <div class="w-full max-w-[420px] bg-[#f8fafc] h-full relative shadow-[0_0_50px_rgba(0,0,0,0.15)] flex flex-col border-x border-slate-300">
 
-        <!-- ================= NOTIFIKASI & MODAL ================= -->
+        <!-- Global Modals -->
         <div id="toast" class="absolute top-16 right-[-100%] transition-all duration-300 z-[9999] bg-slate-900/95 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 text-[11px] font-medium border border-slate-700">
             <i class="ph-fill ph-info text-blue-400 text-lg"></i><span id="toast-msg">Pesan</span>
         </div>
@@ -151,17 +157,16 @@
             </div>
         </div>
 
-        <!-- ================= HEADER NAVBAR ================= -->
+        <!-- Header Navbar -->
         <nav id="main-nav" class="w-full z-[500] bg-white border-b border-slate-200/60 shadow-sm shrink-0">
             <div class="px-4 h-14 flex justify-between items-center">
                 <div class="flex items-center cursor-pointer" onclick="handleLogoClick()">
-                    <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/alkaspg.png" alt="Logo Al Kautsar" class="h-9 w-auto object-contain drop-shadow-sm">
+                    <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto object-contain drop-shadow-sm">
                 </div>
                 <button onclick="showToast('Tekan Logo 3x Cepat untuk masuk Admin!')" class="text-slate-500 hover:text-primary bg-slate-100 px-2.5 py-1.5 rounded-lg text-[10px] font-bold"><i class="ph-bold ph-lock-key"></i></button>
             </div>
         </nav>
 
-        <!-- ================= KONTEN HALAMAN ================= -->
         <div id="app-content" class="w-full flex-1 overflow-y-auto overflow-x-hidden flex flex-col relative">
 
             <!-- 1. HALAMAN BERANDA -->
@@ -180,6 +185,7 @@
                 <div class="text-center w-full z-30 flex flex-col items-center mt-2 mb-6 px-4">
                     <h1 class="text-[40px] font-black text-primary tracking-[0.4em] mb-0 leading-none drop-shadow-sm animate-pulse-glow">P S B</h1>
                     <h2 class="text-[13px] font-black text-secondary tracking-[0.15em] mb-1 uppercase drop-shadow-sm">Penerimaan Siswa Baru</h2>
+                    <p class="text-[9px] font-bold text-slate-600 uppercase tracking-widest bg-white/50 backdrop-blur-sm px-3 py-1 rounded-full border border-slate-200">SDIT Muhammadiyah Al Kautsar</p>
                 </div>
 
                 <div class="px-4 w-full mb-6">
@@ -355,7 +361,7 @@
                 </div>
             </section>
 
-            <!-- 4. SYARAT & 5. BIAYA & 6. BROSUR (Sesuai Konsep Sebelumnya) -->
+            <!-- 4. SYARAT -->
             <section id="view-syarat" class="page-section hidden flex-1 w-full flex flex-col bg-[#f8fafc]">
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
@@ -383,6 +389,7 @@
                 </div>
             </section>
 
+            <!-- 5. BROSUR -->
             <section id="view-brosur" class="page-section hidden flex-1 w-full flex flex-col bg-slate-900 relative">
                 <div class="absolute top-4 left-4 z-50"><button onclick="navigate('home')" class="w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 shadow-lg active:scale-95 transition-all"><i class="ph-bold ph-arrow-left text-lg"></i></button></div>
                 <div class="flex-1 w-full overflow-y-auto flex items-center justify-center p-4">
@@ -393,6 +400,7 @@
                 </div>
             </section>
 
+            <!-- 6. BIAYA -->
             <section id="view-biaya" class="page-section hidden flex-1 w-full flex flex-col bg-slate-50">
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
@@ -426,66 +434,156 @@
                 </div>
             </section>
 
-            <!-- ================= FORM PENDAFTARAN (TETAP SAMA SEPERTI SEBELUMNYA) ================= -->
             <section id="view-register" class="page-section hidden w-full relative h-full flex flex-col">
                 <div class="w-full h-full flex flex-col">
+                    
                     <div id="form-container" class="bg-white rounded-t-[1.5rem] shadow-xl h-full flex flex-col relative z-10">
+                        
                         <div id="sticky-header" class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 shrink-0">
                             <div class="flex items-center justify-between px-3">
-                                <button onclick="navigate('home')" class="text-[11px] text-white font-bold flex items-center bg-gradient-to-r from-rose-500 to-red-600 px-4 py-2.5 rounded-xl shadow-md active:scale-95"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Batal</button>
+                                <button onclick="navigate('home')" class="text-[11px] text-white font-bold flex items-center bg-gradient-to-r from-rose-500 to-red-600 px-4 py-2.5 rounded-xl shadow-md shadow-red-500/30 active:scale-95 transition-all z-50 border border-red-400">
+                                    <i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Batal
+                                </button>
                                 <h2 id="big-title" class="text-[14px] font-black text-slate-800 tracking-tight text-center">Biodata Siswa Baru</h2>
                                 <div class="w-[70px]"></div>
                             </div>
+
                             <div class="flex items-center justify-center mt-3 mb-2">
-                                <div class="flex flex-col items-center"><div id="step-icon-1" class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs shadow-md border border-transparent"><i class="ph-fill ph-student"></i></div><span class="text-[8px] font-bold mt-1 text-slate-800">Siswa</span></div>
-                                <div class="w-12 h-[2px] bg-slate-200 mx-2 -mt-4 relative"><div id="step-line" class="h-full bg-primary w-0 transition-all duration-300"></div></div>
-                                <div class="flex flex-col items-center"><div id="step-icon-2" class="w-6 h-6 rounded-full bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center text-xs shadow-sm"><i class="ph-fill ph-users"></i></div><span class="text-[8px] font-bold mt-1 text-slate-400">Ortu</span></div>
+                                <div class="flex flex-col items-center">
+                                    <div id="step-icon-1" class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs shadow-md relative z-10 border border-transparent"><i class="ph-fill ph-student"></i></div>
+                                    <span id="step-text-1" class="text-[8px] font-bold mt-1 text-slate-800">Siswa</span>
+                                </div>
+                                <div class="w-12 h-[2px] bg-slate-200 mx-2 -mt-4 relative">
+                                    <div id="step-line" class="h-full bg-primary w-0 transition-all duration-300"></div>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div id="step-icon-2" class="w-6 h-6 rounded-full bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center text-xs shadow-sm relative z-10"><i class="ph-fill ph-users"></i></div>
+                                    <span id="step-text-2" class="text-[8px] font-bold mt-1 text-slate-400">Ortu</span>
+                                </div>
+                            </div>
+
+                            <div class="px-3">
+                                <div class="bg-red-50 border border-red-200 p-2.5 rounded-xl shadow-sm flex items-start">
+                                    <i class="ph-fill ph-warning-circle text-red-500 text-lg mr-2 mt-0.5 animate-pulse"></i>
+                                    <div class="text-[9px] text-red-800 font-medium leading-relaxed space-y-1.5">
+                                        <p>1. Semua data yang diinputkan wajib sesuai dengan KK (Kartu Keluarga).</p>
+                                        <p>2. Data NISN berada di rapor/ijazah/meminta sekolah sebelumnya.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div id="form-scroll-area" class="p-4 flex-1 overflow-y-auto">
                             <form id="psb-form">
-                                <!-- STEP 1 -->
                                 <div id="step-1" class="form-step">
                                     <div class="grid grid-cols-2 gap-x-3 gap-y-3 pb-8">
+                                        
                                         <div class="col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-indigo-50/50 rounded-[1rem] border-2 border-indigo-200 shadow-sm">
                                             <div class="col-span-2 mb-[-3px]"><h4 class="text-[10px] font-black text-indigo-900 uppercase tracking-wider flex items-center"><i class="ph-bold ph-book-open mr-1.5 text-sm"></i> Data Akademik</h4></div>
-                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tahun Ajaran *</label><div class="relative"><select id="inp-tahun" data-name="Tahun Ajaran" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option></select><i class="ph ph-calendar absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div id="area-program"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Program *</label><div class="relative"><select id="inp-program" data-name="Program" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih Program...</option><option value="UNGGULAN">UNGGULAN</option><option value="ICP">ICP</option></select><i class="ph ph-star absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tahun Ajaran <span class="text-red-500">*</span></label><div class="relative"><select id="inp-tahun" data-name="Tahun Ajaran" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option></select><i class="ph ph-calendar absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div id="area-program"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Program <span class="text-red-500">*</span></label><div class="relative"><select id="inp-program" data-name="Program" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih Program...</option><option value="UNGGULAN">UNGGULAN</option><option value="ICP">ICP</option></select><i class="ph ph-star absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
                                         </div>
+
                                         <div id="area-baru" class="col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-blue-50/50 rounded-[1rem] border-2 border-blue-200 shadow-sm mt-1">
                                             <div class="col-span-2 mb-[-3px]"><h4 class="text-[10px] font-black text-blue-900 uppercase tracking-wider flex items-center"><i class="ph-bold ph-identification-badge mr-1.5 text-sm"></i> Biodata KK</h4></div>
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Lengkap Anak *</label><div class="relative"><input type="text" id="inp-nama-baru" data-name="Nama Lengkap" class="custom-input" placeholder="Ketik nama lengkap..." required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Kelamin *</label><div class="relative"><select id="inp-jk" data-name="Kelamin" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="L">Laki-laki</option><option value="P">Perempuan</option></select><i class="ph ph-gender-intersex absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">NISN *</label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nisn-baru" data-name="NISN" class="custom-input validate-length" data-target="10" placeholder="0 jika blm ada" required maxlength="10"><i class="ph ph-identification-card absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">NIK Anak *</label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nik" data-name="NIK Anak" class="custom-input validate-length" data-target="16" placeholder="16 Digit NIK Sesuai KK" required maxlength="16"><i class="ph ph-fingerprint absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">No KK *</label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nokk" data-name="No KK" class="custom-input validate-length" data-target="16" placeholder="16 Digit Nomor KK" required maxlength="16"><i class="ph ph-files absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tanggal Lahir *</label><div class="relative"><input type="text" id="inp-tgl-lahir" data-name="Tanggal Lahir" class="custom-input flatpickr-date bg-transparent cursor-pointer" placeholder="Pilih..." required><i class="ph ph-calendar-blank absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Lengkap Anak <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-nama-baru" data-name="Nama Lengkap" class="custom-input" placeholder="Ketik nama lengkap..." required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Jenis Kelamin <span class="text-red-500">*</span></label><div class="relative"><select id="inp-jk" data-name="Kelamin" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="L">Laki-laki</option><option value="P">Perempuan</option></select><i class="ph ph-gender-intersex absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor NISN <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nisn-baru" data-name="NISN" class="custom-input" placeholder="0 jika tak ada" required maxlength="10" data-target="10"><i class="ph ph-identification-card absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor NIK Anak <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nik" data-name="NIK Anak" class="custom-input" placeholder="16 Digit NIK Sesuai KK" required maxlength="16" data-target="16"><i class="ph ph-fingerprint absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor Kartu Keluarga (KK) <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nokk" data-name="No KK" class="custom-input" placeholder="16 Digit Nomor KK" required maxlength="16" data-target="16"><i class="ph ph-files absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tanggal KK <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tgl-kk" data-name="Tgl KK" class="custom-input flatpickr-date bg-transparent cursor-pointer" placeholder="Pilih..." required><i class="ph ph-calendar-check absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Anak Ke- <span class="text-red-500">*</span></label><div class="relative"><select id="inp-anak-ke" data-name="Anak Ke" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select><i class="ph ph-list-numbers absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tempat Lahir <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tempat-lahir" data-name="Tempat Lahir" class="custom-input" placeholder="Kota lahir..." required><i class="ph ph-map-pin absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tanggal Lahir <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tgl-lahir" data-name="Tanggal Lahir" class="custom-input flatpickr-date bg-transparent cursor-pointer" placeholder="Pilih..." required><i class="ph ph-calendar-blank absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
                                         </div>
+
                                         <div id="area-mutasi" class="hidden col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-teal-50/50 rounded-[1rem] border-2 border-teal-200 shadow-sm mt-1">
                                             <div class="col-span-2 mb-[-3px]"><h4 class="text-[10px] font-black text-teal-900 uppercase tracking-wider flex items-center"><i class="ph-bold ph-user mr-1.5 text-sm"></i> Identitas Mutasi</h4></div>
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Lengkap *</label><div class="relative"><input type="text" id="inp-nama-mutasi" data-name="Nama Anak" class="custom-input" placeholder="Ketik nama..."><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Lengkap (Dapodik) <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-nama-mutasi" data-name="Nama Anak" class="custom-input" placeholder="Ketik nama lengkap..."><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Kelas Saat Ini <span class="text-red-500">*</span></label><div class="relative"><select id="inp-kelas" data-name="Kelas" class="custom-input cursor-pointer"><option value="" disabled selected>Pilih...</option><option value="1">Kelas 1</option><option value="2">Kelas 2</option><option value="3">Kelas 3</option><option value="4">Kelas 4</option><option value="5">Kelas 5</option><option value="6">Kelas 6</option></select><i class="ph ph-books absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor NISN <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nisn-mutasi-2" data-name="NISN" class="custom-input" placeholder="0 jika tak ada" maxlength="10" data-target="10"><i class="ph ph-identification-card absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                        </div>
+
+                                        <div class="col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-sky-50/50 rounded-[1rem] border-2 border-sky-200 shadow-sm mt-1">
+                                            <div class="col-span-2 mb-[-3px]"><h4 class="text-[10px] font-black text-sky-900 uppercase tracking-wider flex items-center"><i class="ph-bold ph-house-line mr-1.5 text-sm"></i> Alamat Domisili</h4></div>
+                                            
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Provinsi <span class="text-red-500">*</span></label><div class="relative"><select id="inp-provinsi" data-name="Provinsi" class="custom-input cursor-pointer" required><option value="" disabled selected>Loading Provinsi...</option></select><i class="ph ph-map-trifold absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Kabupaten/Kota <span class="text-red-500">*</span></label><div class="relative"><select id="inp-kabkota" data-name="Kab/Kota" class="custom-input cursor-pointer" required disabled><option value="" disabled selected>Pilih Provinsi Dahulu</option></select><i class="ph ph-map-pin-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Kecamatan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-kecamatan" data-name="Kecamatan" class="custom-input cursor-pointer" required disabled><option value="" disabled selected>Pilih Kab/Kota Dahulu</option></select><i class="ph ph-map-pin absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Desa/Kelurahan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-desa" data-name="Desa" class="custom-input cursor-pointer" required disabled><option value="" disabled selected>Pilih Kecamatan Dahulu</option></select><i class="ph ph-house absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Detail Jalan / Dusun <span class="text-red-500">*</span></label><div class="relative"><textarea id="inp-alamat" data-name="Alamat" rows="2" class="custom-input resize-none py-2" placeholder="Nama jalan / perumahan / dusun..." required></textarea><i class="ph ph-signpost absolute left-3 top-3 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">RT <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-rt" data-name="RT" class="custom-input" placeholder="001" required maxlength="3"><i class="ph ph-hash absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">RW <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-rw" data-name="RW" class="custom-input" placeholder="002" required maxlength="3"><i class="ph ph-hash absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                        </div>
+
+                                        <div class="col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-orange-50/50 rounded-[1rem] border-2 border-orange-200 shadow-sm mt-1 relative z-[100]">
+                                            <div class="col-span-2 mb-[-3px]"><h4 class="text-[10px] font-black text-orange-900 uppercase tracking-wider flex items-center justify-between"><span><i class="ph-bold ph-buildings mr-1.5 text-sm"></i> Sekolah Asal</span><span class="text-[7px] bg-orange-100 px-1.5 py-0.5 rounded text-orange-800 border border-orange-200 font-bold"><i class="ph-bold ph-wifi-high"></i> Live Auto-Fill</span></h4></div>
+                                            <div class="col-span-2 relative">
+                                                <label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1"><span id="lbl-nama-sekolah">Pencarian Sekolah / NPSN</span> <span class="text-red-500">*</span></label>
+                                                <div class="relative">
+                                                    <input type="text" id="inp-sekolah-search" data-name="Nama Sekolah" class="custom-input !border-orange-300 focus:!border-orange-600 bg-white relative z-10" placeholder="Ketik nama atau NPSN..." autocomplete="off" required>
+                                                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-orange-500 text-base pointer-events-none icon-input z-20" id="search-icon"></i>
+                                                </div>
+                                                <div id="school-results" class="absolute w-full mt-2 bg-white border border-orange-200 rounded-xl shadow-2xl hidden max-h-56 overflow-y-auto z-[999] p-1"></div>
+                                            </div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">NPSN</label><div class="relative"><input type="text" id="auto-npsn" class="custom-input bg-slate-100/50" placeholder="Otomatis" disabled><i class="ph ph-hash absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Provinsi</label><div class="relative"><input type="text" id="auto-prov" class="custom-input bg-slate-100/50" placeholder="Otomatis" disabled><i class="ph ph-map-trifold absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Kabupaten</label><div class="relative"><input type="text" id="auto-kab" class="custom-input bg-slate-100/50" placeholder="Otomatis" disabled><i class="ph ph-map-pin-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Kecamatan</label><div class="relative"><input type="text" id="auto-kec" class="custom-input bg-slate-100/50" placeholder="Otomatis" disabled><i class="ph ph-map-pin absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i></div></div>
                                         </div>
                                     </div>
-                                    <div class="mt-4 mb-8 flex justify-end"><button type="button" onclick="validateAndProceed(2)" class="w-full px-6 py-3.5 bg-slate-900 text-white rounded-xl font-bold text-[12px] shadow-xl hover:bg-slate-800 transition-all">Selanjutnya (Data Ortu) <i class="ph-bold ph-arrow-right ml-2"></i></button></div>
+                                    <div class="mt-4 mb-8 flex justify-end"><button type="button" onclick="validateAndProceed(2)" class="w-full px-6 py-3.5 bg-slate-900 text-white rounded-xl font-bold text-[12px] shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all flex items-center justify-center">Selanjutnya (Data Ortu) <i class="ph-bold ph-arrow-right ml-2"></i></button></div>
                                 </div>
-                                <!-- STEP 2 -->
+
                                 <div id="step-2" class="form-step hidden pb-8">
                                     <div class="p-3.5 bg-blue-50/50 rounded-[1rem] border-2 border-blue-200 shadow-sm mb-4">
-                                        <h4 class="text-[10px] font-black text-blue-900 uppercase tracking-wider mb-3 flex items-center"><i class="ph-bold ph-user mr-1.5 text-sm"></i> Data Ayah & Ibu</h4>
+                                        <h4 class="text-[10px] font-black text-blue-900 uppercase tracking-wider mb-3 flex items-center"><i class="ph-bold ph-user mr-1.5 text-sm"></i> Data Ayah Kandung</h4>
                                         <div class="grid grid-cols-2 gap-x-3 gap-y-3">
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Ayah *</label><div class="relative"><input type="text" id="inp-ayah-nama" data-name="Nama Ayah" class="custom-input" required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i></div></div>
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Ibu *</label><div class="relative"><input type="text" id="inp-ibu-nama" data-name="Nama Ibu" class="custom-input" required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Ayah <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-ayah-nama" data-name="Nama Ayah" class="custom-input" placeholder="Sesuai KK..." required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">NIK Ayah <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-ayah-nik" data-name="NIK Ayah" class="custom-input" placeholder="16 Digit NIK" required maxlength="16" data-target="16"><i class="ph ph-fingerprint absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tahun Lahir <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-ayah-thn" data-name="Thn Lahir Ayah" class="custom-input" placeholder="Cth: 1985" required maxlength="4" data-target="4"><i class="ph ph-calendar absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Pendidikan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-ayah-pend" data-name="Pend. Ayah" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA</option><option value="D3">D1/D2/D3</option><option value="S1">S1/D4</option><option value="S2">S2/S3</option></select><i class="ph ph-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Pekerjaan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-ayah-pek" data-name="Pekerjaan Ayah" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="PNS">PNS/Polri</option><option value="Karyawan">Karyawan</option><option value="Wiraswasta">Wiraswasta</option><option value="Buruh">Buruh</option><option value="Lainnya">Lainnya</option></select><i class="ph ph-briefcase absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Penghasilan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-ayah-peng" data-name="Penghasilan Ayah" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="<500">< 500rb</option><option value="500-1j">500rb - 1jt</option><option value="1-2j">1jt - 2jt</option><option value="2-5j">2jt - 5jt</option><option value=">5j">> 5jt</option></select><i class="ph ph-wallet absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="p-3.5 bg-pink-50/50 rounded-[1rem] border-2 border-pink-200 shadow-sm mb-4">
+                                        <h4 class="text-[10px] font-black text-pink-900 uppercase tracking-wider mb-3 flex items-center"><i class="ph-bold ph-user mr-1.5 text-sm"></i> Data Ibu Kandung</h4>
+                                        <div class="grid grid-cols-2 gap-x-3 gap-y-3">
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Ibu <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-ibu-nama" data-name="Nama Ibu" class="custom-input" placeholder="Sesuai KK..." required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">NIK Ibu <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-ibu-nik" data-name="NIK Ibu" class="custom-input" placeholder="16 Digit NIK" required maxlength="16" data-target="16"><i class="ph ph-fingerprint absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tahun Lahir <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-ibu-thn" data-name="Thn Lahir Ibu" class="custom-input" placeholder="Cth: 1988" required maxlength="4" data-target="4"><i class="ph ph-calendar absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Pendidikan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-ibu-pend" data-name="Pend. Ibu" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA</option><option value="D3">D1/D2/D3</option><option value="S1">S1/D4</option><option value="S2">S2/S3</option></select><i class="ph ph-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Pekerjaan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-ibu-pek" data-name="Pekerjaan Ibu" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="PNS">PNS/Polri</option><option value="Karyawan">Karyawan</option><option value="Wiraswasta">Wiraswasta</option><option value="IRT">Ibu Rumah Tangga</option><option value="Lainnya">Lainnya</option></select><i class="ph ph-briefcase absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Penghasilan <span class="text-red-500">*</span></label><div class="relative"><select id="inp-ibu-peng" data-name="Penghasilan Ibu" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="Tidak">Tidak Ada</option><option value="<500">< 500rb</option><option value="500-1j">500rb - 1jt</option><option value="1-2j">1jt - 2jt</option><option value=">2j">> 2jt</option></select><i class="ph ph-wallet absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base icon-input"></i></div></div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="mb-5 p-3.5 bg-emerald-50/50 rounded-[1rem] border-2 border-emerald-200 shadow-sm">
                                         <h4 class="text-[10px] font-black text-emerald-900 uppercase tracking-wider mb-2 flex items-center"><i class="ph-bold ph-whatsapp-logo mr-1.5 text-sm"></i> Kontak Utama</h4>
-                                        <label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor WhatsApp *</label>
-                                        <div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-wa" data-name="No WhatsApp" class="custom-input validate-wa border-emerald-300" placeholder="08..." required maxlength="14"><i class="ph ph-whatsapp-logo absolute left-3 top-1/2 -translate-y-1/2 text-emerald-600 text-lg"></i></div>
+                                        <label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor WhatsApp Aktif <span class="text-red-500">*</span></label>
+                                        <div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-wa" data-name="No WhatsApp" class="custom-input border-emerald-300 focus:border-emerald-500 bg-white" placeholder="08..." required maxlength="14" data-target="10"><i class="ph ph-whatsapp-logo absolute left-3 top-1/2 -translate-y-1/2 text-emerald-600 text-lg icon-input"></i></div>
                                     </div>
+                                    
+                                    <div class="mb-4 mt-2 border-t border-slate-200 pt-4">
+                                        <h3 class="font-bold text-slate-800 text-[11px] mb-3 flex items-center justify-between">Upload Berkas <span class="text-[8px] bg-slate-100 px-2 py-0.5 rounded text-slate-500 font-bold border border-slate-200">Opsional</span></h3>
+                                        <div class="grid grid-cols-4 gap-2">
+                                            <label class="flex flex-col items-center justify-center w-full h-16 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer bg-white/50 hover:border-primary transition-all"><i class="ph-duotone ph-file-pdf text-xl text-slate-400 mb-0.5"></i><span class="text-[8px] font-bold text-slate-700">KK</span><input type="file" class="hidden" accept=".jpg,.jpeg,.png,.pdf" onchange="showToast('Berkas KK dipilih')"></label>
+                                            <label class="flex flex-col items-center justify-center w-full h-16 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer bg-white/50 hover:border-primary transition-all"><i class="ph-duotone ph-baby text-xl text-slate-400 mb-0.5"></i><span class="text-[8px] font-bold text-slate-700">Akta</span><input type="file" class="hidden" accept=".jpg,.jpeg,.png,.pdf" onchange="showToast('Berkas Akta dipilih')"></label>
+                                            <label class="flex flex-col items-center justify-center w-full h-16 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer bg-white/50 hover:border-primary transition-all"><i class="ph-duotone ph-identification-card text-xl text-slate-400 mb-0.5"></i><span class="text-[8px] font-bold text-slate-700">NISN</span><input type="file" class="hidden" accept=".jpg,.jpeg,.png,.pdf" onchange="showToast('Berkas NISN dipilih')"></label>
+                                            <label class="flex flex-col items-center justify-center w-full h-16 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer bg-white/50 hover:border-primary transition-all"><i class="ph-duotone ph-receipt text-xl text-slate-400 mb-0.5"></i><span class="text-[8px] font-bold text-slate-700">Transfer</span><input type="file" class="hidden" accept=".jpg,.jpeg,.png,.pdf" onchange="showToast('Berkas Transfer dipilih')"></label>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="flex justify-between items-center pt-6 mt-4 border-t border-slate-200">
-                                        <button type="button" onclick="goToStep(1)" class="px-4 py-2.5 text-slate-500 font-bold text-[10px] bg-slate-100 rounded-xl"><i class="ph-bold ph-arrow-left mr-1"></i> Kembali</button>
-                                        <button id="btn-submit" type="button" onclick="validateAndProceed('submit')" class="px-6 py-3 bg-primary text-white rounded-xl font-bold text-[12px] shadow-lg">Kirim Form <i class="ph-bold ph-paper-plane-right ml-1.5"></i></button>
+                                        <button type="button" onclick="goToStep(1)" class="px-4 py-2.5 text-slate-500 font-bold text-[10px] bg-slate-100 hover:bg-slate-200 rounded-xl transition-all"><i class="ph-bold ph-arrow-left mr-1"></i> Kembali</button>
+                                        <button id="btn-submit" type="button" onclick="validateAndProceed('submit')" class="px-6 py-3 bg-primary text-white rounded-xl font-bold text-[12px] shadow-lg transition-all flex items-center">Kirim Form <i class="ph-bold ph-paper-plane-right ml-1.5"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -494,9 +592,7 @@
                 </div>
             </section>
 
-            <!-- ================= PANEL ADMIN ================= -->
             <section id="view-admin-dashboard" class="page-section hidden w-full h-full flex flex-col bg-slate-100 absolute inset-0 z-[1000]">
-                <!-- Login Panel -->
                 <div id="admin-login-area" class="flex flex-col items-center justify-center h-full p-6 bg-slate-900">
                     <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-md w-full border border-white/20 text-center">
                         <i class="ph-fill ph-lock-key text-5xl text-blue-400 mb-4"></i>
@@ -507,7 +603,6 @@
                     </div>
                 </div>
 
-                <!-- Dashboard Panel -->
                 <div id="admin-main-area" class="hidden h-full flex flex-col">
                     <div class="bg-slate-900 text-white p-4 flex justify-between items-center shrink-0 shadow-md z-10">
                         <h2 class="font-bold text-[13px] flex items-center"><i class="ph-fill ph-shield-check text-green-400 mr-2 text-lg"></i> Admin Panel</h2>
@@ -515,29 +610,23 @@
                     </div>
                     
                     <div class="flex bg-white shadow-sm border-b border-slate-200 shrink-0">
-                        <button onclick="switchAdminTab('pendaftar')" id="tab-pendaftar" class="flex-1 py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600">Data Pendaftar</button>
-                        <button onclick="switchAdminTab('pengaturan')" id="tab-pengaturan" class="flex-1 py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent">Pengaturan Web</button>
+                        <button onclick="switchAdminTab('pendaftar')" id="tab-pendaftar" class="flex-1 py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600">Pendaftar</button>
+                        <button onclick="switchAdminTab('pengaturan')" id="tab-pengaturan" class="flex-1 py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent">Pengaturan</button>
+                        <button onclick="switchAdminTab('database')" id="tab-database" class="flex-1 py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent">Database</button>
                     </div>
 
                     <div class="flex-1 overflow-y-auto p-4 relative">
-                        <!-- Indikator Sinkronisasi GAS -->
-                        <div id="gas-status" class="bg-amber-100 text-amber-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-amber-200 shadow-sm">
-                            <i class="ph-fill ph-warning-circle text-amber-500 mr-2 text-lg"></i> Mode Memori Lokal (Isi URL GAS di Pengaturan agar tersimpan permanen)
+                        <div id="gas-status" class="bg-green-100 text-green-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-green-200 shadow-sm">
+                            <i class="ph-fill ph-check-circle text-green-500 mr-2 text-lg"></i> Sistem Terhubung ke Database Cloud (GAS)
                         </div>
 
-                        <!-- Tab Pendaftar -->
+                        <!-- Panel Pendaftar -->
                         <div id="panel-pendaftar">
                             <div id="list-pendaftar" class="space-y-3"></div>
                         </div>
 
-                        <!-- Tab Pengaturan -->
+                        <!-- Panel Pengaturan -->
                         <div id="panel-pengaturan" class="hidden space-y-4">
-                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                                <h4 class="font-bold text-[12px] text-slate-800 mb-3 border-b pb-2"><i class="ph-fill ph-link text-blue-500 mr-1"></i> Integrasi Database (GAS)</h4>
-                                <label class="block text-[10px] font-bold text-slate-600 mb-1">URL Web App Google Apps Script</label>
-                                <input type="text" id="adm-gas-url" class="w-full border border-slate-300 rounded-lg py-2 px-3 text-[11px] outline-none focus:border-blue-500" placeholder="https://script.google.com/macros/s/AKfycb...">
-                            </div>
-
                             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
                                 <h4 class="font-bold text-[12px] text-slate-800 mb-3 border-b pb-2"><i class="ph-fill ph-users text-blue-500 mr-1"></i> Kuota Penerimaan</h4>
                                 <div class="grid grid-cols-2 gap-3">
@@ -545,7 +634,6 @@
                                     <div><label class="block text-[10px] font-bold text-slate-600 mb-1">ICP</label><input type="number" id="adm-k-icp" class="w-full border rounded-lg py-2 px-3 text-[11px]"></div>
                                 </div>
                             </div>
-                            
                             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
                                 <h4 class="font-bold text-[12px] text-slate-800 mb-3 border-b pb-2"><i class="ph-fill ph-wallet text-blue-500 mr-1"></i> Biaya Formulir</h4>
                                 <div class="grid grid-cols-2 gap-3">
@@ -553,7 +641,6 @@
                                     <div><label class="block text-[10px] font-bold text-slate-600 mb-1">ICP (Rp)</label><input type="text" id="adm-b-icp" class="w-full border rounded-lg py-2 px-3 text-[11px]"></div>
                                 </div>
                             </div>
-
                             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
                                 <h4 class="font-bold text-[12px] text-slate-800 mb-3 border-b pb-2"><i class="ph-fill ph-headset text-blue-500 mr-1"></i> Kontak Admin</h4>
                                 <div class="space-y-3">
@@ -562,19 +649,42 @@
                                     <div class="flex gap-2"><input type="text" id="adm-c3-nama" class="w-1/2 border rounded-lg py-2 px-3 text-[10px]" placeholder="Nama"><input type="text" id="adm-c3-wa" class="w-1/2 border rounded-lg py-2 px-3 text-[10px]" placeholder="08..."></div>
                                 </div>
                             </div>
-
                             <button onclick="saveAdminConfig()" class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold text-[12px] shadow-lg mb-10">Simpan Pengaturan</button>
                         </div>
+
+                        <!-- Panel Database Export Import -->
+                        <div id="panel-database" class="hidden space-y-4">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                                <h4 class="font-bold text-[12px] text-slate-800 mb-3 border-b pb-2"><i class="ph-fill ph-cloud-sync text-blue-500 mr-1"></i> Sinkronisasi Cloud (GAS)</h4>
+                                <p class="text-[9px] text-slate-500 mb-3">Tarik data terbaru dari Google Sheet atau Paksa Timpa Google Sheet dengan data lokal yang ada di HP Anda saat ini.</p>
+                                <div class="flex gap-2">
+                                    <button onclick="manualTarikData()" class="flex-1 py-2.5 bg-sky-50 text-sky-600 border border-sky-200 rounded-xl text-[11px] font-bold hover:bg-sky-600 hover:text-white transition-all"><i class="ph-bold ph-download-simple"></i> Tarik Data</button>
+                                    <button onclick="manualKirimData()" class="flex-1 py-2.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-xl text-[11px] font-bold hover:bg-emerald-600 hover:text-white transition-all"><i class="ph-bold ph-upload-simple"></i> Kirim Data</button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                                <h4 class="font-bold text-[12px] text-slate-800 mb-3 border-b pb-2"><i class="ph-fill ph-database text-amber-500 mr-1"></i> Backup & Restore Lokal</h4>
+                                <p class="text-[9px] text-slate-500 mb-3">Simpan seluruh data ke HP Anda sebagai Template Backup (.json), atau unggah file Backup untuk memulihkan.</p>
+                                <div class="space-y-2">
+                                    <button onclick="downloadJSON()" class="w-full py-2.5 bg-amber-50 text-amber-600 border border-amber-200 rounded-xl text-[11px] font-bold hover:bg-amber-500 hover:text-white transition-all"><i class="ph-bold ph-download"></i> Download Template/Backup</button>
+                                    <label class="w-full py-2.5 bg-slate-50 text-slate-600 border border-slate-200 rounded-xl text-[11px] font-bold hover:bg-slate-600 hover:text-white transition-all flex items-center justify-center cursor-pointer">
+                                        <i class="ph-bold ph-upload mr-1"></i> Upload Backup (.json)
+                                        <input type="file" accept=".json" class="hidden" id="upload-json" onchange="uploadJSON(event)">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
         </div>
     </div>
 
-    <!-- ================= SCRIPT & LOGIKA APLIKASI ================= -->
     <script>
-        // --- 1. STATE MANAGEMENT (DATA PUSAT) ---
-        let GAS_URL = ""; 
+        // HARDCODED GAS URL
+        let GAS_URL = "https://script.google.com/macros/s/AKfycbydjXUgcX1vjjZKU-U0NWLQ7RY9hH6eRgCz9yBXTCf4S7-26cEpyK7u4bjhhYaRcjBv/exec"; 
+        
         let appState = {
             config: {
                 kuotaUnggulan: "45", kuotaICP: "20",
@@ -586,101 +696,214 @@
             pendaftar: []
         };
 
-        // --- 2. FUNGSI RENDER KE DOM ---
         function applyConfigToDOM() {
             document.getElementById('dyn-kuota-unggulan').innerText = appState.config.kuotaUnggulan;
             document.getElementById('dyn-kuota-icp').innerText = appState.config.kuotaICP;
-            
             if(document.getElementById('dyn-biaya-form-unggulan')) document.getElementById('dyn-biaya-form-unggulan').innerText = "Rp " + appState.config.biayaFormulirUnggulan;
             if(document.getElementById('dyn-biaya-form-icp')) document.getElementById('dyn-biaya-form-icp').innerText = "Rp " + appState.config.biayaFormulirICP;
-            
             document.getElementById('dyn-kontak1-nama').innerText = appState.config.kontak1Nama;
             document.getElementById('dyn-kontak2-nama').innerText = appState.config.kontak2Nama;
             document.getElementById('dyn-kontak3-nama').innerText = appState.config.kontak3Nama;
         }
 
-        // --- 3. KOMUNIKASI API / GAS ---
-        async function fetchFromGAS() {
-            if(!GAS_URL) {
-                applyConfigToDOM(); renderAdminList();
-                document.getElementById('gas-status').innerHTML = `<i class="ph-fill ph-warning-circle text-amber-500 mr-2 text-lg"></i> Mode Lokal Aktif (Data belum sinkron)`;
-                document.getElementById('gas-status').className = "bg-amber-100 text-amber-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-amber-200";
-                return; 
-            }
-            try {
-                showToast("Menyinkronkan Database...");
-                let res = await fetch(GAS_URL);
-                let json = await res.json();
-                if(json.status === 'success') {
-                    appState.config = {...appState.config, ...json.config};
-                    appState.pendaftar = json.pendaftar || [];
-                    applyConfigToDOM(); renderAdminList();
-                    document.getElementById('gas-status').innerHTML = `<i class="ph-fill ph-check-circle text-green-500 mr-2 text-lg"></i> Database GAS Online Terhubung!`;
-                    document.getElementById('gas-status').className = "bg-green-100 text-green-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-green-200";
-                    showToast("Sinkronisasi Berhasil");
-                }
-            } catch(e) { console.error("GAS Error:", e); showToast("Gagal menyinkronkan data."); }
-        }
-
-        async function postToGAS(action, data) {
-            if(!GAS_URL) return true; // Local mode success bypass
-            try {
-                await fetch(GAS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Penting untuk GAS
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: action, data: data })
-                });
-                return true;
-            } catch(e) { console.error(e); return false; }
-        }
-
-        // --- 4. VALIDASI & UX INPUT REALTIME ---
-        function checkFieldRule(inp) {
-            if (!inp.value || inp.value.trim() === '') { inp.classList.remove('input-error'); return; }
-            let val = inp.value.trim(); let isValid = true;
-            if (inp.classList.contains('validate-length')) {
-                let target = parseInt(inp.getAttribute('data-target'));
-                if (inp.id === 'inp-nisn-baru' || inp.id === 'inp-nisn-mutasi-2') { if (val !== '0' && val.length !== target) isValid = false; } 
-                else { if (val.length !== target) isValid = false; }
-            } else if (inp.classList.contains('validate-wa')) {
-                if (!val.startsWith('08') || val.length < 10 || val.length > 14) isValid = false;
-            }
-            if (!isValid) { inp.classList.add('input-error'); } else { inp.classList.remove('input-error'); }
-        }
-        document.addEventListener('focusout', (e) => { if(e.target.classList && e.target.classList.contains('custom-input')) checkFieldRule(e.target); });
-        document.addEventListener('input', (e) => { if(e.target.classList && e.target.classList.contains('custom-input')) { e.target.classList.remove('input-error'); e.target.value.trim() !== '' ? e.target.classList.add('filled') : e.target.classList.remove('filled'); } });
-
-        // --- 5. LOGIKA FORM PENDAFTARAN ---
-        let pendaftaranType = 'baru';
-        function navigate(viewId) { document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden')); document.getElementById('view-' + viewId).classList.remove('hidden'); }
-        function openModal() { document.getElementById('type-modal').classList.remove('hidden'); document.getElementById('type-modal').classList.add('flex'); }
-        function closeModal() { document.getElementById('type-modal').classList.add('hidden'); document.getElementById('type-modal').classList.remove('flex'); }
-        
         let toastTimeout; 
         function showToast(msg) { 
             const toast = document.getElementById('toast'); 
             document.getElementById('toast-msg').innerText = msg; 
-            toast.style.right = '16px'; clearTimeout(toastTimeout); 
+            toast.style.right = '16px'; 
+            clearTimeout(toastTimeout); 
             toastTimeout = setTimeout(() => toast.style.right = '-100%', 2500); 
         }
 
+        function navigate(viewId) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden')); 
+            document.getElementById('view-' + viewId).classList.remove('hidden');
+        }
+        function openModal() { document.getElementById('type-modal').classList.remove('hidden'); document.getElementById('type-modal').classList.add('flex'); }
+        function closeModal() { document.getElementById('type-modal').classList.add('hidden'); document.getElementById('type-modal').classList.remove('flex'); }
+        
         function hubungiWA(no) {
             let hp = no === 1 ? appState.config.kontak1WA : (no === 2 ? appState.config.kontak2WA : appState.config.kontak3WA);
             hp = hp.replace(/^0+/, '62');
             window.open(`https://wa.me/${hp}?text=Halo%20Panitia%20PSB%20Al-Kautsar`, '_blank');
         }
 
+        let logoClicks = 0; let logoTimer;
+        function handleLogoClick() {
+            logoClicks++;
+            if (logoClicks >= 3) { navigate('admin-dashboard'); logoClicks = 0; clearTimeout(logoTimer); } 
+            else { navigate('home'); clearTimeout(logoTimer); logoTimer = setTimeout(() => { logoClicks = 0; }, 1000); }
+        }
+
+        // AUTO-FILL SEKOLAH (API NPSN)
+        let pendaftaranType = 'baru';
+        const inpSearch = document.getElementById('inp-sekolah-search'); 
+        const resultsBox = document.getElementById('school-results');
+        const searchIcon = document.getElementById('search-icon'); 
+        const autoNpsn = document.getElementById('auto-npsn');
+        const autoProv = document.getElementById('auto-prov'); 
+        const autoKab = document.getElementById('auto-kab'); 
+        const autoKec = document.getElementById('auto-kec');
+        let searchTimeout;
+
+        inpSearch.addEventListener('input', function(e) {
+            const keyword = e.target.value.trim(); clearTimeout(searchTimeout);
+            autoNpsn.value = ''; autoProv.value = ''; autoKab.value = ''; autoKec.value = '';
+            inpSearch.setAttribute('data-manual', 'true');
+            if (keyword.length < 3) { resultsBox.classList.add('hidden'); return; }
+            searchIcon.className = "ph ph-spinner animate-spin absolute left-3 top-1/2 -translate-y-1/2 text-orange-600 text-lg icon-input z-20";
+            searchTimeout = setTimeout(async () => {
+                try {
+                    const res = await fetch('https://api-sekolah-kita.pages.dev/api/sekolah?limit=15&keyword=' + encodeURIComponent(keyword));
+                    const json = await res.json(); resultsBox.innerHTML = '';
+                    if (json.status === 'success' && json.data && json.data.length > 0) {
+                        json.data.forEach(s => {
+                            const div = document.createElement('div');
+                            div.className = "p-3 mx-1 my-1.5 bg-orange-50/90 border border-orange-300 rounded-xl hover:bg-orange-100 hover:border-orange-500 hover:shadow-md cursor-pointer transition-all relative overflow-hidden group";
+                            div.innerHTML = `
+                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-orange-500 group-hover:w-2.5 transition-all"></div>
+                                <p class="font-bold text-[11px] text-slate-900 ml-2 mb-0.5 leading-tight">${s.nama}</p>
+                                <p class="text-[9px] text-slate-600 ml-2">Kec. ${s.nama_kecamatan ? s.nama_kecamatan.replace('KEC. ','') : '-'} | NPSN: <b class="text-orange-700">${s.npsn || '-'}</b></p>
+                            `;
+                            div.onmousedown = function(e) { e.preventDefault(); };
+                            div.onclick = function(e) { e.stopPropagation(); selectSchool(s); };
+                            resultsBox.appendChild(div);
+                        });
+                        const manualDiv = document.createElement('div');
+                        manualDiv.className = "p-3 text-center border-t border-slate-200 mt-1 bg-slate-50 rounded-b-xl cursor-pointer hover:bg-slate-100 transition-all";
+                        manualDiv.innerHTML = `<p class="text-[10px] text-blue-600 font-bold flex items-center justify-center"><i class="ph-bold ph-pencil-simple mr-1.5 text-sm"></i>Tak ada di daftar? Lanjut ketik manual</p>`;
+                        manualDiv.onmousedown = function(e) { e.preventDefault(); };
+                        manualDiv.onclick = function(e) { e.stopPropagation(); enableManualSchool(); };
+                        resultsBox.appendChild(manualDiv);
+                        resultsBox.classList.remove('hidden');
+                    } else { 
+                        resultsBox.innerHTML = `
+                            <div class="p-4 text-center">
+                                <p class="text-[10px] font-bold text-slate-600 mb-3">Sekolah tidak ditemukan.</p>
+                                <button type="button" id="btn-manual-fallback" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-bold shadow-md hover:bg-slate-800 transition-all flex items-center justify-center mx-auto">
+                                    <i class="ph-bold ph-pencil-simple mr-1.5 text-sm"></i> Ketik Manual Saja
+                                </button>
+                            </div>
+                        `; 
+                        resultsBox.classList.remove('hidden'); 
+                        let btnFall = document.getElementById('btn-manual-fallback');
+                        btnFall.onmousedown = function(e) { e.preventDefault(); };
+                        btnFall.onclick = function(e) { e.stopPropagation(); enableManualSchool(); };
+                    }
+                } catch (error) { resultsBox.classList.add('hidden'); } finally { searchIcon.className = "ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-orange-500 text-base icon-input z-20"; }
+            }, 500); 
+        });
+
+        function selectSchool(school) {
+            inpSearch.value = school.nama; inpSearch.classList.add('filled'); inpSearch.setAttribute('data-manual', 'false'); 
+            autoNpsn.value = school.npsn || '-'; autoProv.value = school.nama_provinsi || '-'; autoKab.value = school.nama_kabupaten || '-'; autoKec.value = school.nama_kecamatan || '-'; 
+            resultsBox.classList.add('hidden'); showToast("Sekolah berhasil dipilih!");
+        }
+
+        window.enableManualSchool = function() {
+            resultsBox.classList.add('hidden'); inpSearch.classList.add('filled');
+            autoNpsn.value = 'Ketik Manual'; autoProv.value = 'Ketik Manual'; autoKab.value = 'Ketik Manual'; autoKec.value = 'Ketik Manual';
+            showToast("Mode Ketik Manual diaktifkan");
+        }
+        document.addEventListener('click', (e) => { if (!inpSearch.contains(e.target) && !resultsBox.contains(e.target)) resultsBox.classList.add('hidden'); });
+
+        // API WILAYAH INDONESIA
+        const API_ENDPOINTS = ['https://kanglerian.github.io/api-wilayah-indonesia/api/', 'https://www.emsifa.com/api-wilayah-indonesia/api/', 'https://emsifa.github.io/api-wilayah-indonesia/api/'];
+        async function fetchWilayah(path) { for (let api of API_ENDPOINTS) { try { const res = await fetch(api + path); if (res.ok) return await res.json(); } catch (e) {} } throw new Error("API Down"); }
+        
+        const selProv = document.getElementById('inp-provinsi'); const selKab = document.getElementById('inp-kabkota'); const selKec = document.getElementById('inp-kecamatan'); const selDesa = document.getElementById('inp-desa');
+        
+        fetchWilayah('provinces.json').then(data => {
+            selProv.innerHTML = '<option value="" disabled selected>Pilih Provinsi...</option>';
+            data.forEach(prov => { selProv.innerHTML += `<option value="${prov.name}" data-id="${prov.id}">${prov.name}</option>`; });
+        }).catch(err => { selProv.innerHTML = '<option value="" disabled selected>Gagal Memuat Server</option>'; });
+
+        selProv.addEventListener('change', function() {
+            selProv.classList.add('filled'); const idProv = this.options[this.selectedIndex].getAttribute('data-id');
+            selKab.innerHTML = '<option value="" disabled selected>Loading...</option>'; selKab.disabled = true; selKab.classList.remove('filled');
+            selKec.innerHTML = '<option value="" disabled selected>Pilih Kab/Kota Dahulu</option>'; selKec.disabled = true; selKec.classList.remove('filled');
+            selDesa.innerHTML = '<option value="" disabled selected>Pilih Kecamatan Dahulu</option>'; selDesa.disabled = true; selDesa.classList.remove('filled');
+            fetchWilayah(`regencies/${idProv}.json`).then(data => {
+                selKab.innerHTML = '<option value="" disabled selected>Pilih Kabupaten/Kota...</option>'; data.forEach(kab => { selKab.innerHTML += `<option value="${kab.name}" data-id="${kab.id}">${kab.name}</option>`; }); selKab.disabled = false;
+            });
+        });
+        selKab.addEventListener('change', function() {
+            selKab.classList.add('filled'); const idKab = this.options[this.selectedIndex].getAttribute('data-id');
+            selKec.innerHTML = '<option value="" disabled selected>Loading...</option>'; selKec.disabled = true; selKec.classList.remove('filled');
+            selDesa.innerHTML = '<option value="" disabled selected>Pilih Kecamatan Dahulu</option>'; selDesa.disabled = true; selDesa.classList.remove('filled');
+            fetchWilayah(`districts/${idKab}.json`).then(data => {
+                selKec.innerHTML = '<option value="" disabled selected>Pilih Kecamatan...</option>'; data.forEach(kec => { selKec.innerHTML += `<option value="${kec.name}" data-id="${kec.id}">${kec.name}</option>`; }); selKec.disabled = false;
+            });
+        });
+        selKec.addEventListener('change', function() {
+            selKec.classList.add('filled'); const idKec = this.options[this.selectedIndex].getAttribute('data-id');
+            selDesa.innerHTML = '<option value="" disabled selected>Loading...</option>'; selDesa.disabled = true; selDesa.classList.remove('filled');
+            fetchWilayahVillages(idKec);
+        });
+        async function fetchWilayahVillages(idKec) {
+            try {
+                const data = await fetchWilayah(`villages/${idKec}.json`);
+                selDesa.innerHTML = '<option value="" disabled selected>Pilih Desa/Kelurahan...</option>'; 
+                data.forEach(desa => { selDesa.innerHTML += `<option value="${desa.name}" data-id="${desa.id}">${desa.name}</option>`; }); selDesa.disabled = false;
+            } catch(e) { selDesa.innerHTML = '<option value="" disabled selected>Gagal memuat desa</option>'; }
+        }
+        selDesa.addEventListener('change', function() { selDesa.classList.add('filled'); });
+
+        // REAL-TIME VALIDATION
+        const handleInputStandard = (e) => {
+            if(e.target.classList.contains('custom-input')) {
+                e.target.value.trim() !== '' ? e.target.classList.add('filled') : e.target.classList.remove('filled');
+                e.target.classList.remove('input-error', 'animate-pulse');
+            }
+        };
+        document.addEventListener('input', handleInputStandard); document.addEventListener('change', handleInputStandard);
+
+        document.addEventListener('focusout', (e) => {
+            if(e.target.classList && e.target.classList.contains('custom-input') && !e.target.disabled) {
+                let val = e.target.value.trim();
+                let isReq = e.target.hasAttribute('required');
+                let targetLen = e.target.hasAttribute('data-target') ? parseInt(e.target.getAttribute('data-target')) : 0;
+                
+                if (isReq && val === '') { e.target.classList.add('input-error', 'animate-pulse'); return; }
+                
+                if (val !== '' && targetLen > 0) {
+                    if (e.target.id === 'inp-nisn-baru' || e.target.id === 'inp-nisn-mutasi-2') {
+                        if (val !== '0' && val.length !== targetLen) { e.target.classList.add('input-error', 'animate-pulse'); }
+                    } else if (e.target.id === 'inp-wa') {
+                        if (!val.startsWith('08') || val.length < 10) { e.target.classList.add('input-error', 'animate-pulse'); }
+                    } else {
+                        if (val.length !== targetLen) { e.target.classList.add('input-error', 'animate-pulse'); }
+                    }
+                }
+            }
+        });
+
+        // FORM LOGIC
         function startRegistration(type) {
-            pendaftaranType = type; closeModal(); const isMutasi = type === 'mutasi';
+            pendaftaranType = type; closeModal(); const root = document.documentElement.style; const isMutasi = type === 'mutasi';
             document.getElementById('big-title').innerText = isMutasi ? "Data Siswa Mutasi" : "Biodata Siswa Baru"; 
+            document.getElementById('lbl-nama-sekolah').innerHTML = isMutasi ? "Pencarian SD / MI Asal <span class='text-red-500'>*</span>" : "Pencarian TK / KB Asal <span class='text-red-500'>*</span>";
+            inpSearch.placeholder = isMutasi ? "Ketik NPSN atau nama SD/MI..." : "Ketik NPSN atau nama TK/KB..."; inpSearch.value = ''; resultsBox.classList.add('hidden');
+            
             document.getElementById('area-baru').classList.toggle('hidden', isMutasi); 
             document.getElementById('area-mutasi').classList.toggle('hidden', !isMutasi);
-            document.getElementById('inp-nama-baru').required = !isMutasi; document.getElementById('inp-jk').required = !isMutasi; document.getElementById('inp-nisn-baru').required = !isMutasi; 
-            document.getElementById('inp-nik').required = !isMutasi; document.getElementById('inp-nokk').required = !isMutasi; 
-            document.getElementById('inp-nama-mutasi').required = isMutasi;
-            document.documentElement.style.setProperty('--theme-color', isMutasi ? '#0f766e' : '#1e40af'); 
-            document.getElementById('btn-submit').className = isMutasi ? "px-6 py-3 bg-teal-700 text-white rounded-xl font-bold text-[12px] shadow-lg flex items-center" : "px-6 py-3 bg-primary text-white rounded-xl font-bold text-[12px] shadow-lg flex items-center";
+            
+            document.getElementById('inp-nama-baru').required = !isMutasi; 
+            document.getElementById('inp-jk').required = !isMutasi; 
+            document.getElementById('inp-nisn-baru').required = !isMutasi; 
+            document.getElementById('inp-nik').required = !isMutasi; 
+            document.getElementById('inp-nokk').required = !isMutasi;
+            document.getElementById('inp-tgl-kk').required = !isMutasi;
+            document.getElementById('inp-anak-ke').required = !isMutasi;
+            document.getElementById('inp-tempat-lahir').required = !isMutasi;
+            document.getElementById('inp-tgl-lahir').required = !isMutasi;
+
+            document.getElementById('inp-nama-mutasi').required = isMutasi; 
+            document.getElementById('inp-kelas').required = isMutasi; 
+            document.getElementById('inp-nisn-mutasi-2').required = isMutasi;
+            
+            root.setProperty('--theme-color', isMutasi ? '#0f766e' : '#1e40af'); root.setProperty('--theme-glow', isMutasi ? '0 0 16px -2px rgba(15, 118, 110, 0.6), inset 0 0 8px rgba(15, 118, 110, 0.15)' : '0 0 16px -2px rgba(30, 64, 175, 0.6), inset 0 0 8px rgba(30, 64, 175, 0.15)');
+            document.getElementById('btn-submit').className = isMutasi ? "px-6 py-3 bg-teal-700 text-white rounded-xl font-bold text-[12px] shadow-lg transition-all flex items-center" : "px-6 py-3 bg-primary text-white rounded-xl font-bold text-[12px] shadow-lg transition-all flex items-center";
             goToStep(1); navigate('register');
         }
 
@@ -690,47 +913,53 @@
             const icon1 = document.getElementById('step-icon-1'); const icon2 = document.getElementById('step-icon-2'); const line = document.getElementById('step-line');
             if(step === 1) {
                 icon1.style.backgroundColor = 'var(--theme-color)'; icon1.innerHTML = pendaftaranType === 'mutasi' ? '<i class="ph-fill ph-arrows-left-right"></i>' : '<i class="ph-fill ph-student"></i>'; line.style.width = '0%';
-                icon2.style.backgroundColor = ''; icon2.className = "w-6 h-6 rounded-full bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center text-xs shadow-sm"; icon2.innerHTML = '<i class="ph-fill ph-users"></i>';
+                icon2.style.backgroundColor = ''; icon2.className = "w-6 h-6 rounded-full bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center text-xs shadow-sm relative z-10"; icon2.innerHTML = '<i class="ph-fill ph-users"></i>';
             } else {
                 icon1.style.backgroundColor = '#22c55e'; icon1.innerHTML = '<i class="ph-bold ph-check text-white"></i>'; line.style.width = '100%';
-                icon2.style.backgroundColor = 'var(--theme-color)'; icon2.className = "w-6 h-6 rounded-full flex items-center justify-center text-xs shadow-md text-white border border-transparent";
+                icon2.style.backgroundColor = 'var(--theme-color)'; icon2.className = "w-6 h-6 rounded-full flex items-center justify-center text-xs shadow-md text-white relative z-10 border border-transparent";
             }
             document.getElementById('form-scroll-area').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function validateAndProceed(targetStep) {
-            let isValid = true; let errorMsg = ""; let errorInput = null;
-            let currentStepNum = targetStep === 'submit' ? 2 : (targetStep - 1);
+            let isValid = true; let errorMsg = ""; let currentStepNum = targetStep === 'submit' ? 2 : (targetStep - 1);
             let inputs = document.getElementById('step-' + currentStepNum).querySelectorAll('input[required], select[required], textarea[required]');
-            
+            let errorInput = null;
+
             for (let inp of inputs) {
                 if (inp.closest('.hidden') || inp.disabled) continue; 
                 let val = inp.value.trim(); let name = inp.getAttribute('data-name') || 'yang wajib';
-                if (!val) { isValid = false; errorMsg = `Kolom <b class='text-secondary uppercase px-1 rounded bg-orange-100/80'>${name}</b> wajib diisi.`; errorInput = inp; break; }
-                if (inp.classList.contains('validate-length')) {
-                    let target = parseInt(inp.getAttribute('data-target'));
-                    if ((inp.id === 'inp-nisn-baru' || inp.id === 'inp-nisn-mutasi-2')) {
-                        if (val !== '0' && val.length !== target) { isValid = false; errorMsg = `<b class='text-secondary'>${name}</b> wajib ${target} digit atau '0'.`; errorInput = inp; break; }
-                    } else if (val.length !== target) { isValid = false; errorMsg = `<b class='text-secondary'>${name}</b> wajib ${target} digit. (Anda isi ${val.length})`; errorInput = inp; break; }
+                
+                if (!val) { 
+                    isValid = false; errorMsg = `Mohon maaf Ayah/Bunda, kolom <b class='text-secondary uppercase px-1 rounded bg-orange-100/80'>${name}</b> wajib diisi.`; errorInput = inp; break; 
                 }
-                if (inp.classList.contains('validate-wa')) {
-                    if (!val.startsWith('08') || val.length < 10 || val.length > 14) { isValid = false; errorMsg = `<b class='text-secondary'>${name}</b> wajib diawali '08' & 10-14 digit.`; errorInput = inp; break; }
+
+                let targetLen = inp.hasAttribute('data-target') ? parseInt(inp.getAttribute('data-target')) : 0;
+                if (targetLen > 0) {
+                    if (inp.id === 'inp-nisn-baru' || inp.id === 'inp-nisn-mutasi-2') {
+                        if (val !== '0' && val.length !== targetLen) { isValid = false; errorMsg = `<b class='text-secondary'>${name}</b> wajib ${targetLen} digit (atau cukup ketik '0' jika belum punya).`; errorInput = inp; break; }
+                    } else if (inp.id === 'inp-wa') {
+                        if (!val.startsWith('08') || val.length < 10) { isValid = false; errorMsg = `<b class='text-secondary'>${name}</b> wajib diawali '08' & min. 10 digit.`; errorInput = inp; break; }
+                    } else {
+                        if (val.length !== targetLen) { isValid = false; errorMsg = `<b class='text-secondary'>${name}</b> wajib ${targetLen} digit. (Anda baru isi ${val.length})`; errorInput = inp; break; }
+                    }
                 }
             }
             
             if (!isValid) { 
-                document.getElementById('val-message').innerHTML = errorMsg; errorInput.classList.add('animate-shake', 'input-error'); 
-                setTimeout(() => errorInput.classList.remove('animate-shake'), 600);
+                document.getElementById('val-message').innerHTML = errorMsg; 
+                errorInput.classList.add('animate-shake', 'input-error'); setTimeout(() => errorInput.classList.remove('animate-shake'), 600);
                 document.getElementById('validation-modal').classList.remove('hidden'); document.getElementById('validation-modal').classList.add('flex'); setTimeout(() => document.getElementById('validation-content').classList.remove('scale-95'), 10);
             } else { targetStep === 'submit' ? handleFormSubmit() : goToStep(targetStep); }
         }
-
         function closeValidationModal() { document.getElementById('validation-content').classList.add('scale-95'); setTimeout(() => { document.getElementById('validation-modal').classList.add('hidden'); document.getElementById('validation-modal').classList.remove('flex'); }, 200); }
 
         async function handleFormSubmit() {
+            document.getElementById('btn-submit').innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Mengirim...';
+            
             let idDaftar = "REG" + new Date().getTime().toString().slice(-6);
             let namaSiswa = pendaftaranType === 'mutasi' ? document.getElementById('inp-nama-mutasi').value : document.getElementById('inp-nama-baru').value;
-            let nisn = pendaftaranType === 'mutasi' ? "0" : document.getElementById('inp-nisn-baru').value;
+            let nisn = pendaftaranType === 'mutasi' ? document.getElementById('inp-nisn-mutasi-2').value : document.getElementById('inp-nisn-baru').value;
             
             let newData = {
                 ID_Daftar: idDaftar, Waktu_Daftar: new Date().toLocaleString('id-ID'), Jalur: pendaftaranType.toUpperCase(),
@@ -740,19 +969,16 @@
             };
 
             appState.pendaftar.push(newData);
-            if(GAS_URL) {
-                document.getElementById('btn-submit').innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Mengirim...';
-                await postToGAS("ADD_PENDAFTAR", newData);
-                document.getElementById('btn-submit').innerHTML = 'Kirim Form <i class="ph-bold ph-paper-plane-right ml-1.5"></i>';
-            }
+            if(GAS_URL) { await postToGAS("ADD_PENDAFTAR", newData); }
 
-            document.getElementById('psb-form').reset(); document.querySelectorAll('.custom-input').forEach(el => el.classList.remove('filled'));
+            document.getElementById('btn-submit').innerHTML = 'Kirim Form <i class="ph-bold ph-paper-plane-right ml-1.5"></i>';
+            document.getElementById('psb-form').reset(); document.querySelectorAll('.custom-input').forEach(el => el.classList.remove('filled', 'input-error'));
+            autoNpsn.value = ''; autoProv.value = ''; autoKab.value = ''; autoKec.value = '';
             document.getElementById('success-modal').classList.remove('hidden'); document.getElementById('success-modal').classList.add('flex'); setTimeout(() => document.getElementById('success-content').classList.remove('scale-95'), 10);
             renderAdminList();
         }
-        function closeSuccessModal() { document.getElementById('success-content').classList.add('scale-95'); setTimeout(() => { document.getElementById('success-modal').classList.add('hidden'); document.getElementById('success-modal').classList.remove('flex'); navigate('home'); }, 200); }
 
-        // --- 6. HASIL & CETAK KARTU ---
+        // HASIL & SERTIFIKAT
         function cekHasilSeleksi() {
             const input = document.getElementById('inp-cek-hasil');
             if(input.value.length < 5) { showToast("Masukkan minimal 5 angka NISN/NIK!"); return; }
@@ -775,150 +1001,183 @@
             });
         }
 
-        // --- 7. SISTEM ADMIN DASHBOARD ---
-        let logoClicks = 0; let logoTimer;
-        function handleLogoClick() {
-            logoClicks++;
-            if (logoClicks >= 3) { navigate('admin-dashboard'); logoClicks = 0; clearTimeout(logoTimer); } 
-            else { navigate('home'); clearTimeout(logoTimer); logoTimer = setTimeout(() => { logoClicks = 0; }, 1000); }
+        // --- BACKEND & ADMIN LOGIC ---
+        async function fetchFromGAS() {
+            if(!GAS_URL) return;
+            try {
+                showToast("Menyinkronkan Database...");
+                let res = await fetch(GAS_URL);
+                let json = await res.json();
+                if(json.status === 'success') {
+                    appState.config = {...appState.config, ...json.config};
+                    appState.pendaftar = json.pendaftar || [];
+                    applyConfigToDOM(); renderAdminList(); populateAdminConfigFields();
+                    showToast("Sinkronisasi Berhasil");
+                }
+            } catch(e) { console.error("GAS Error:", e); showToast("Gagal menyinkronkan data."); }
+        }
+
+        async function postToGAS(action, data) {
+            if(!GAS_URL) return true;
+            try {
+                await fetch(GAS_URL, {
+                    method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: action, data: data })
+                });
+                return true;
+            } catch(e) { console.error(e); return false; }
         }
 
         function loginAdmin() {
             let pwd = document.getElementById('admin-pwd').value;
             if(pwd === "admin") {
-                document.getElementById('admin-login-area').classList.add('hidden');
-                document.getElementById('admin-main-area').classList.remove('hidden');
-                document.getElementById('admin-pwd').value = "";
+                document.getElementById('admin-login-area').classList.add('hidden'); document.getElementById('admin-main-area').classList.remove('hidden'); document.getElementById('admin-pwd').value = "";
                 populateAdminConfigFields(); renderAdminList();
             } else { showToast("PIN Salah!"); }
         }
-
-        function logoutAdmin() {
-            document.getElementById('admin-main-area').classList.add('hidden');
-            document.getElementById('admin-login-area').classList.remove('hidden');
-            navigate('home');
-        }
-
+        function logoutAdmin() { document.getElementById('admin-main-area').classList.add('hidden'); document.getElementById('admin-login-area').classList.remove('hidden'); navigate('home'); }
+        
         function switchAdminTab(tab) {
             document.getElementById('tab-pendaftar').className = "flex-1 py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent";
             document.getElementById('tab-pengaturan').className = "flex-1 py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent";
-            document.getElementById('panel-pendaftar').classList.add('hidden');
-            document.getElementById('panel-pengaturan').classList.add('hidden');
+            document.getElementById('tab-database').className = "flex-1 py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent";
+            document.getElementById('panel-pendaftar').classList.add('hidden'); document.getElementById('panel-pengaturan').classList.add('hidden'); document.getElementById('panel-database').classList.add('hidden');
             
             if(tab === 'pendaftar') { document.getElementById('tab-pendaftar').className = "flex-1 py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600"; document.getElementById('panel-pendaftar').classList.remove('hidden'); renderAdminList(); }
             if(tab === 'pengaturan') { document.getElementById('tab-pengaturan').className = "flex-1 py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600"; document.getElementById('panel-pengaturan').classList.remove('hidden'); }
+            if(tab === 'database') { document.getElementById('tab-database').className = "flex-1 py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600"; document.getElementById('panel-database').classList.remove('hidden'); }
         }
 
         function renderAdminList() {
-            const list = document.getElementById('list-pendaftar');
-            list.innerHTML = "";
+            const list = document.getElementById('list-pendaftar'); list.innerHTML = "";
             if(appState.pendaftar.length === 0) { list.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs font-bold bg-white rounded-xl">Belum ada pendaftar</div>`; return; }
             
             appState.pendaftar.forEach((p, i) => {
                 let statusColor = p.Status_Seleksi === 'Diterima' ? 'text-green-600 bg-green-100' : (p.Status_Seleksi === 'Ditolak' ? 'text-red-600 bg-red-100' : 'text-orange-600 bg-orange-100');
-                let el = document.createElement('div');
-                el.className = "bg-white p-4 rounded-2xl shadow-sm border border-slate-200";
+                let el = document.createElement('div'); el.className = "bg-white p-4 rounded-2xl shadow-sm border border-slate-200";
                 el.innerHTML = `
                     <div class="flex justify-between items-start mb-2 border-b border-slate-100 pb-2">
-                        <div>
-                            <span class="text-[9px] font-black bg-blue-100 text-blue-700 px-2 py-0.5 rounded mr-1">${p.Jalur}</span>
-                            <span class="text-[9px] font-bold text-slate-400">${p.Waktu_Daftar}</span>
-                        </div>
+                        <div><span class="text-[9px] font-black bg-blue-100 text-blue-700 px-2 py-0.5 rounded mr-1">${p.Jalur}</span><span class="text-[9px] font-bold text-slate-400">${p.Waktu_Daftar}</span></div>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded ${statusColor}">${p.Status_Seleksi}</span>
                     </div>
-                    <div class="mb-3">
-                        <h4 class="font-black text-slate-800 text-[13px] leading-tight">${p.Nama_Siswa}</h4>
-                        <p class="text-[10px] text-slate-500 font-medium mt-0.5"><i class="ph-fill ph-whatsapp-logo text-green-500"></i> ${p.No_WA} - Ayah: ${p.Nama_Ayah}</p>
-                    </div>
+                    <div class="mb-3"><h4 class="font-black text-slate-800 text-[13px] leading-tight">${p.Nama_Siswa}</h4><p class="text-[10px] text-slate-500 font-medium mt-0.5"><i class="ph-fill ph-whatsapp-logo text-green-500"></i> ${p.No_WA} - Ayah: ${p.Nama_Ayah}</p></div>
                     <div class="flex gap-2">
                         <button onclick="updateStatus(${i}, 'Diterima')" class="flex-1 py-2 bg-green-50 text-green-600 border border-green-200 rounded-lg text-[10px] font-bold hover:bg-green-600 hover:text-white transition-colors">Terima</button>
                         <button onclick="updateStatus(${i}, 'Ditolak')" class="flex-1 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg text-[10px] font-bold hover:bg-red-600 hover:text-white transition-colors">Tolak</button>
                         <button onclick="deletePendaftar(${i})" class="w-10 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"><i class="ph-bold ph-trash"></i></button>
-                    </div>
-                `;
+                    </div>`;
                 list.appendChild(el);
             });
         }
 
         async function updateStatus(index, newStatus) {
-            let id = appState.pendaftar[index].ID_Daftar;
-            appState.pendaftar[index].Status_Seleksi = newStatus;
-            renderAdminList(); showToast("Status Diubah");
-            if(GAS_URL) await postToGAS("UPDATE_STATUS", {id: id, newStatus: newStatus});
+            let id = appState.pendaftar[index].ID_Daftar; appState.pendaftar[index].Status_Seleksi = newStatus;
+            renderAdminList(); showToast("Status Diubah"); if(GAS_URL) await postToGAS("UPDATE_STATUS", {id: id, newStatus: newStatus});
         }
-
         async function deletePendaftar(index) {
             if(!confirm("Yakin hapus data ini?")) return;
-            let id = appState.pendaftar[index].ID_Daftar;
-            appState.pendaftar.splice(index, 1);
-            renderAdminList(); showToast("Data Dihapus");
-            if(GAS_URL) await postToGAS("DELETE_PENDAFTAR", {id: id});
+            let id = appState.pendaftar[index].ID_Daftar; appState.pendaftar.splice(index, 1);
+            renderAdminList(); showToast("Data Dihapus"); if(GAS_URL) await postToGAS("DELETE_PENDAFTAR", {id: id});
         }
 
         function populateAdminConfigFields() {
-            document.getElementById('adm-gas-url').value = GAS_URL;
-            document.getElementById('adm-k-unggulan').value = appState.config.kuotaUnggulan;
-            document.getElementById('adm-k-icp').value = appState.config.kuotaICP;
-            document.getElementById('adm-b-unggulan').value = appState.config.biayaFormulirUnggulan;
-            document.getElementById('adm-b-icp').value = appState.config.biayaFormulirICP;
-            document.getElementById('adm-c1-nama').value = appState.config.kontak1Nama;
-            document.getElementById('adm-c1-wa').value = appState.config.kontak1WA;
-            document.getElementById('adm-c2-nama').value = appState.config.kontak2Nama;
-            document.getElementById('adm-c2-wa').value = appState.config.kontak2WA;
-            document.getElementById('adm-c3-nama').value = appState.config.kontak3Nama;
-            document.getElementById('adm-c3-wa').value = appState.config.kontak3WA;
+            document.getElementById('adm-k-unggulan').value = appState.config.kuotaUnggulan; document.getElementById('adm-k-icp').value = appState.config.kuotaICP;
+            document.getElementById('adm-b-unggulan').value = appState.config.biayaFormulirUnggulan; document.getElementById('adm-b-icp').value = appState.config.biayaFormulirICP;
+            document.getElementById('adm-c1-nama').value = appState.config.kontak1Nama; document.getElementById('adm-c1-wa').value = appState.config.kontak1WA;
+            document.getElementById('adm-c2-nama').value = appState.config.kontak2Nama; document.getElementById('adm-c2-wa').value = appState.config.kontak2WA;
+            document.getElementById('adm-c3-nama').value = appState.config.kontak3Nama; document.getElementById('adm-c3-wa').value = appState.config.kontak3WA;
         }
 
         async function saveAdminConfig() {
-            GAS_URL = document.getElementById('adm-gas-url').value;
             appState.config = {
-                kuotaUnggulan: document.getElementById('adm-k-unggulan').value,
-                kuotaICP: document.getElementById('adm-k-icp').value,
-                biayaFormulirUnggulan: document.getElementById('adm-b-unggulan').value,
-                biayaFormulirICP: document.getElementById('adm-b-icp').value,
-                kontak1Nama: document.getElementById('adm-c1-nama').value,
-                kontak1WA: document.getElementById('adm-c1-wa').value,
-                kontak2Nama: document.getElementById('adm-c2-nama').value,
-                kontak2WA: document.getElementById('adm-c2-wa').value,
-                kontak3Nama: document.getElementById('adm-c3-nama').value,
-                kontak3WA: document.getElementById('adm-c3-wa').value
+                kuotaUnggulan: document.getElementById('adm-k-unggulan').value, kuotaICP: document.getElementById('adm-k-icp').value,
+                biayaFormulirUnggulan: document.getElementById('adm-b-unggulan').value, biayaFormulirICP: document.getElementById('adm-b-icp').value,
+                kontak1Nama: document.getElementById('adm-c1-nama').value, kontak1WA: document.getElementById('adm-c1-wa').value,
+                kontak2Nama: document.getElementById('adm-c2-nama').value, kontak2WA: document.getElementById('adm-c2-wa').value,
+                kontak3Nama: document.getElementById('adm-c3-nama').value, kontak3WA: document.getElementById('adm-c3-wa').value
             };
             applyConfigToDOM();
-            
-            if(GAS_URL) {
-                showToast("Menyimpan ke Database GAS...");
-                let success = await postToGAS("UPDATE_CONFIG", appState.config);
-                if(success) showToast("Pengaturan Berhasil Disimpan!");
-            } else {
-                showToast("Tersimpan di Memori Lokal (Beri URL GAS untuk simpan permanen)");
-            }
+            if(GAS_URL) { showToast("Menyimpan ke Database GAS..."); let success = await postToGAS("UPDATE_CONFIG", appState.config); if(success) showToast("Pengaturan Berhasil Disimpan!"); } else { showToast("Tersimpan di Memori Lokal"); }
         }
 
-        // --- 8. INIT (JALANKAN SAAT MULAI) ---
-        applyConfigToDOM(); 
-        // Aktifkan Flatpickr Kalender
+        // DATABASE EXPORT IMPORT (BACKUP & SYNC)
+        function manualTarikData() {
+            showToast("Meminta data dari Cloud...");
+            fetchFromGAS();
+        }
+
+        async function manualKirimData() {
+            if(!confirm("PERINGATAN: Tindakan ini akan menimpa seluruh data di Google Sheet dengan data yang ada di aplikasi saat ini. Lanjutkan?")) return;
+            showToast("Mengirim seluruh data ke Cloud...");
+            let success = await postToGAS("SYNC_ALL", appState);
+            if(success) showToast("Sukses menimpa database Cloud!");
+            else showToast("Gagal mengirim data!");
+        }
+
+        function downloadJSON() {
+            const dataStr = JSON.stringify(appState, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `Backup_PSB_${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("File Template/Backup berhasil diunduh.");
+        }
+
+        function uploadJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedState = JSON.parse(e.target.result);
+                    if(importedState && importedState.config && importedState.pendaftar !== undefined) {
+                        appState = importedState;
+                        applyConfigToDOM();
+                        renderAdminList();
+                        populateAdminConfigFields();
+                        showToast("Data dari file berhasil dimuat ke lokal!");
+                        document.getElementById('upload-json').value = ""; // Reset input
+                    } else {
+                        showToast("Format file JSON tidak valid.");
+                    }
+                } catch(err) {
+                    showToast("Gagal membaca file JSON.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // INIT
+        const yearSelectForm = document.getElementById('inp-tahun'); for(let i = new Date().getFullYear(); i <= 2040; i++) { yearSelectForm.innerHTML += `<option value="${i}/${i+1}">${i}/${i+1}</option>`; }
+        
         flatpickr(".flatpickr-date", { 
             locale: "id", altInput: true, altFormat: "j F Y", dateFormat: "Y-m-d", disableMobile: "true",
-            onReady: function(s, d, instance) {
-                const yearInput = instance.yearElements[0];
-                if (yearInput && !instance.yearSelect) {
-                    yearInput.closest('.numInputWrapper').style.display = 'none';
-                    const select = document.createElement('select'); select.className = 'flatpickr-year-dropdown';
-                    for (let y = instance.currentYear + 5; y >= 1990; y--) {
-                        let opt = document.createElement('option'); opt.value = y; opt.textContent = y;
-                        if (y === instance.currentYear) opt.selected = true; select.appendChild(opt);
+            onReady: function(selectedDates, dateStr, instance) {
+                const cal = instance.calendarContainer;
+                if(cal && !instance.yearSelect) {
+                    const sel = document.createElement('select'); sel.className = 'flatpickr-year-dropdown';
+                    for(let y = instance.currentYear + 5; y >= 1990; y--) { const opt = document.createElement('option'); opt.value = y; opt.textContent = y; if(y === instance.currentYear) opt.selected = true; sel.appendChild(opt); }
+                    sel.addEventListener('change', (e) => instance.changeYear(parseInt(e.target.value)));
+                    const cm = cal.querySelector('.flatpickr-current-month');
+                    if(cm) {
+                        const nw = cm.querySelector('.numInputWrapper'); if(nw) nw.style.display = 'none';
+                        cm.appendChild(sel);
                     }
-                    select.addEventListener('change', (e) => instance.changeYear(parseInt(e.target.value)));
-                    instance.calendarContainer.querySelector('.flatpickr-current-month').appendChild(select);
-                    instance.yearSelect = select;
+                    instance.yearSelect = sel;
                 }
             },
-            onYearChange: function(s, d, i) { if (i.yearSelect) i.yearSelect.value = i.currentYear; },
-            onMonthChange: function(s, d, i) { if (i.yearSelect) i.yearSelect.value = i.currentYear; }
+            onYearChange: function(sd, ds, ins) { if (ins.yearSelect) ins.yearSelect.value = ins.currentYear; },
+            onMonthChange: function(sd, ds, ins) { if (ins.yearSelect) ins.yearSelect.value = ins.currentYear; }
         });
-        
-        // Panggil GAS di awal (jika URL terisi hardcode nantinya)
-        fetchFromGAS();
+
+        applyConfigToDOM(); 
+        fetchFromGAS(); // Auto-pull on load
     </script>
 </body>
 </html>
