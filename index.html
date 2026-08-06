@@ -37,10 +37,10 @@
                         modalPop: { '0%': { opacity: '0', transform: 'scale(0.95) translateY(10px)' }, '100%': { opacity: '1', transform: 'scale(1) translateY(0)' } },
                         shake: { '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' }, '20%, 80%': { transform: 'translate3d(2px, 0, 0)' }, '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' }, '40%, 60%': { transform: 'translate3d(4px, 0, 0)' } },
                         pulseGlow: { '0%, 100%': { opacity: '1', textShadow: '0 0 15px rgba(30,64,175,0.6)' }, '50%': { opacity: '0.8', textShadow: '0 0 5px rgba(30,64,175,0.2)' } },
-                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(30px) scale(0.9)' }, '100%': { opacity: '1', transform: 'translateY(0) scale(1)' } },
                         float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        flyRight: { '0%': { transform: 'translateX(-50px) scaleX(1)' }, '100%': { transform: 'translateX(400px) scaleX(1)' } },
-                        flyLeft: { '0%': { transform: 'translateX(400px) scaleX(-1)' }, '100%': { transform: 'translateX(-50px) scaleX(-1)' } },
+                        flyRight: { '0%': { transform: 'translateX(-100px) scaleX(1) translateY(0)' }, '50%': { transform: 'translateX(200px) scaleX(1) translateY(-20px)' }, '100%': { transform: 'translateX(500px) scaleX(1) translateY(0)' } },
+                        flyLeft: { '0%': { transform: 'translateX(500px) scaleX(-1) translateY(0)' }, '50%': { transform: 'translateX(200px) scaleX(-1) translateY(20px)' }, '100%': { transform: 'translateX(-100px) scaleX(-1) translateY(0)' } },
                         waveMove: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
                     }
                 }
@@ -49,7 +49,7 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@900&family=Rye&display=swap');
         
         :root { --theme-color: #1e40af; --theme-glow: 0 0 16px -2px rgba(30, 64, 175, 0.6), inset 0 0 8px rgba(30, 64, 175, 0.15); }
         body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #e2e8f0; }
@@ -121,7 +121,6 @@
 
     <div class="w-full max-w-[420px] bg-[#f8fafc] h-full relative shadow-[0_0_50px_rgba(0,0,0,0.15)] flex flex-col border-x border-slate-300">
 
-        <!-- Global Modals -->
         <div id="toast" class="absolute top-16 right-[-100%] transition-all duration-300 z-[9999] bg-slate-900/95 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 text-[11px] font-medium border border-slate-700 opacity-0">
             <i class="ph-fill ph-info text-blue-400 text-lg"></i><span id="toast-msg">Pesan</span>
         </div>
@@ -172,6 +171,7 @@
         <nav id="main-nav" class="w-full z-[500] bg-white border-b border-slate-200/60 shadow-sm shrink-0">
             <div class="px-4 h-14 flex justify-between items-center">
                 <div class="flex items-center cursor-pointer" onclick="handleLogoClick()">
+                    <!-- LOGO GITHUB -->
                     <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto object-contain drop-shadow-sm">
                 </div>
                 <button onclick="showToast('Tekan Logo 3x Cepat untuk masuk Admin!')" class="text-slate-500 hover:text-primary bg-slate-100 px-2.5 py-1.5 rounded-lg text-[10px] font-bold"><i class="ph-bold ph-lock-key"></i></button>
@@ -180,8 +180,8 @@
 
         <div id="app-content" class="w-full flex-1 overflow-y-auto overflow-x-hidden flex flex-col relative focus:outline-none" tabindex="0">
 
-            <!-- 1. HALAMAN BERANDA -->
             <section id="view-home" class="page-section flex-1 w-full flex flex-col items-center justify-start animate-fade-in pb-10">
+                <!-- RASIO 16:9 DAN POSTER TANPA ANIMASI -->
                 <div class="w-full relative aspect-video bg-slate-900 overflow-hidden shadow-sm shrink-0">
                     <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/poster.png" alt="Ilustrasi Gedung" class="w-full h-full object-cover">
                     <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#f8fafc] to-transparent pointer-events-none"></div>
@@ -193,10 +193,10 @@
                     </div>
                 </div>
 
+                <!-- JUDUL DINAMIS (FONT RYE) -->
                 <div class="text-center w-full z-30 flex flex-col items-center mt-2 mb-6 px-4">
-                    <h1 class="text-[40px] font-black text-primary tracking-[0.4em] mb-0 leading-none drop-shadow-sm animate-pulse-glow">P S B</h1>
-                    <h2 class="text-[13px] font-black text-secondary tracking-[0.15em] mb-1 uppercase drop-shadow-sm">Penerimaan Siswa Baru</h2>
-                    <p class="text-[9px] font-bold text-slate-600 uppercase tracking-widest bg-white/50 backdrop-blur-sm px-3 py-1 rounded-full border border-slate-200" id="dyn-tahun-ajaran">SDIT Muhammadiyah Al Kautsar</p>
+                    <h1 id="dyn-judul-web" class="text-[64px] text-primary tracking-[0.15em] mb-0 leading-none drop-shadow-lg animate-pulse-glow ml-3" style="font-family: 'Rye', serif; font-weight: normal;">P S B</h1>
+                    <h2 id="dyn-sub-judul" class="text-[13px] font-black text-secondary tracking-[0.15em] uppercase drop-shadow-sm">Penerimaan Siswa Baru</h2>
                 </div>
 
                 <div class="px-4 w-full mb-6">
@@ -205,9 +205,9 @@
                             <div class="absolute -right-4 -bottom-4 opacity-10"><i class="ph-fill ph-trophy text-[70px]"></i></div>
                             <h4 class="font-black text-[12px] mb-2 flex items-center z-10"><div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-1.5"><i class="ph-fill ph-trophy text-yellow-300 text-sm"></i></div> Kelas Unggulan</h4>
                             <ul class="text-[9px] font-medium space-y-1 z-10 mb-3 flex-1 opacity-90 leading-tight">
-                                <li class="flex items-start"><i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> Tahfidz 3 Juz</li>
-                                <li class="flex items-start"><i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> Tahsin Al-Qur'an</li>
-                                <li class="flex items-start"><i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> Karakter Islami</li>
+                                <li id="dyn-fu1" class="flex items-start"><i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> Tahfidz 3 Juz</li>
+                                <li id="dyn-fu2" class="flex items-start"><i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> Tahsin Al-Qur'an</li>
+                                <li id="dyn-fu3" class="flex items-start"><i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> Karakter Islami</li>
                             </ul>
                             <!-- INDIKATOR KUOTA DINAMIS -->
                             <div class="z-10 bg-white/20 backdrop-blur-md rounded-lg px-2 py-1.5 text-center flex flex-col items-center">
@@ -221,9 +221,9 @@
                             <div class="absolute -right-4 -bottom-4 opacity-10"><i class="ph-fill ph-globe text-[70px]"></i></div>
                             <h4 class="font-black text-[12px] mb-2 flex items-center z-10"><div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-1.5"><i class="ph-fill ph-globe text-yellow-200 text-sm"></i></div> Program ICP</h4>
                             <ul class="text-[9px] font-medium space-y-1 z-10 mb-3 flex-1 opacity-90 leading-tight">
-                                <li class="flex items-start"><i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> Cambridge Class</li>
-                                <li class="flex items-start"><i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> English Daily</li>
-                                <li class="flex items-start"><i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> Global Mindset</li>
+                                <li id="dyn-fi1" class="flex items-start"><i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> Cambridge Class</li>
+                                <li id="dyn-fi2" class="flex items-start"><i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> English Daily</li>
+                                <li id="dyn-fi3" class="flex items-start"><i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> Global Mindset</li>
                             </ul>
                             <!-- INDIKATOR KUOTA DINAMIS -->
                             <div class="z-10 bg-white/20 backdrop-blur-md rounded-lg px-2 py-1.5 text-center flex flex-col items-center">
@@ -250,34 +250,34 @@
                 <div class="px-4 w-full mb-8">
                     <div class="bg-white rounded-[1.25rem] p-3.5 shadow-sm border border-slate-200">
                         <h3 class="font-black text-slate-800 text-[12px] mb-3 flex items-center"><i class="ph-fill ph-headset text-green-500 mr-1.5 text-lg"></i> Layanan Kontak Panitia</h3>
+                        <!-- KONTAK ADMIN SEJAJAR FORMAT YANG BARU (3 VARIABEL TERPISAH) -->
                         <div class="grid grid-cols-3 gap-2">
-                            <div class="flex flex-col items-center justify-between p-2.5 bg-blue-50/50 rounded-xl border border-blue-100 text-center shadow-sm h-full">
-                                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex justify-center items-center mb-2"><i class="ph-fill ph-user text-base"></i></div>
-                                <div><span class="block text-[9px] font-black text-slate-800 mb-0.5">Unggulan</span><span id="dyn-kontak1-nama" class="block text-[8px] font-medium text-slate-500 leading-tight mb-2 h-[20px]">Loading...</span></div>
-                                <button onclick="hubungiWA(1)" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center mt-auto focus:outline-none focus:ring-2 focus:ring-green-400"><i class="ph-bold ph-whatsapp-logo text-sm"></i></button>
+                            <div class="flex flex-col items-center justify-between p-2.5 bg-blue-50/50 rounded-xl border border-blue-100 text-center shadow-sm h-full relative overflow-hidden group">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex justify-center items-center mb-2 relative z-10"><i class="ph-fill ph-user text-base"></i></div>
+                                <div class="relative z-10"><span id="dyn-kontak1-divisi" class="block text-[9px] font-black text-slate-800 mb-0.5">Unggulan 1</span><span id="dyn-kontak1-nama" class="block text-[8px] font-medium text-slate-500 leading-tight mb-2 h-[20px]">Loading...</span></div>
+                                <button id="btn-wa-kontak1" onclick="hubungiWA('kontak1')" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center mt-auto relative z-10 hover:bg-[#1da851] transition-colors"><i class="ph-bold ph-whatsapp-logo text-sm"></i></button>
                             </div>
-                            <div class="flex flex-col items-center justify-between p-2.5 bg-blue-50/50 rounded-xl border border-blue-100 text-center shadow-sm h-full">
-                                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex justify-center items-center mb-2"><i class="ph-fill ph-user text-base"></i></div>
-                                <div><span class="block text-[9px] font-black text-slate-800 mb-0.5">Unggulan</span><span id="dyn-kontak2-nama" class="block text-[8px] font-medium text-slate-500 leading-tight mb-2 h-[20px]">Loading...</span></div>
-                                <button onclick="hubungiWA(2)" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center mt-auto focus:outline-none focus:ring-2 focus:ring-green-400"><i class="ph-bold ph-whatsapp-logo text-sm"></i></button>
+                            <div class="flex flex-col items-center justify-between p-2.5 bg-blue-50/50 rounded-xl border border-blue-100 text-center shadow-sm h-full relative overflow-hidden group">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex justify-center items-center mb-2 relative z-10"><i class="ph-fill ph-user text-base"></i></div>
+                                <div class="relative z-10"><span id="dyn-kontak2-divisi" class="block text-[9px] font-black text-slate-800 mb-0.5">Unggulan 2</span><span id="dyn-kontak2-nama" class="block text-[8px] font-medium text-slate-500 leading-tight mb-2 h-[20px]">Loading...</span></div>
+                                <button id="btn-wa-kontak2" onclick="hubungiWA('kontak2')" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center mt-auto relative z-10 hover:bg-[#1da851] transition-colors"><i class="ph-bold ph-whatsapp-logo text-sm"></i></button>
                             </div>
-                            <div class="flex flex-col items-center justify-between p-2.5 bg-orange-50/50 rounded-xl border border-orange-100 text-center shadow-sm h-full">
-                                <div class="w-8 h-8 rounded-full bg-orange-200 text-orange-600 flex justify-center items-center mb-2"><i class="ph-fill ph-globe text-base"></i></div>
-                                <div><span class="block text-[9px] font-black text-slate-800 mb-0.5">Program ICP</span><span id="dyn-kontak3-nama" class="block text-[8px] font-medium text-slate-500 leading-tight mb-2 h-[20px]">Loading...</span></div>
-                                <button onclick="hubungiWA(3)" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center mt-auto focus:outline-none focus:ring-2 focus:ring-green-400"><i class="ph-bold ph-whatsapp-logo text-sm"></i></button>
+                            <div class="flex flex-col items-center justify-between p-2.5 bg-orange-50/50 rounded-xl border border-orange-100 text-center shadow-sm h-full relative overflow-hidden group">
+                                <div class="w-8 h-8 rounded-full bg-orange-200 text-orange-600 flex justify-center items-center mb-2 relative z-10"><i class="ph-fill ph-globe text-base"></i></div>
+                                <div class="relative z-10"><span id="dyn-kontak3-divisi" class="block text-[9px] font-black text-slate-800 mb-0.5">Program ICP</span><span id="dyn-kontak3-nama" class="block text-[8px] font-medium text-slate-500 leading-tight mb-2 h-[20px]">Loading...</span></div>
+                                <button id="btn-wa-kontak3" onclick="hubungiWA('kontak3')" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center mt-auto relative z-10 hover:bg-[#1da851] transition-colors"><i class="ph-bold ph-whatsapp-logo text-sm"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 2. TIMELINE (GAME MAP) -->
             <section id="view-timeline" class="page-section hidden flex-1 w-full flex flex-col relative overflow-hidden bg-gradient-to-b from-sky-300 to-sky-100">
                 <!-- Animasi Lingkungan Game -->
                 <i class="ph-fill ph-cloud absolute top-[10%] left-[5%] text-white/90 text-[80px] animate-float z-0" style="animation-duration: 4s;"></i>
-                <i class="ph-fill ph-cloud absolute top-[30%] right-[-10%] text-white/80 text-[100px] animate-float z-0" style="animation-delay: 1.5s; animation-duration: 5s;"></i>
-                <i class="ph-fill ph-cloud absolute top-[60%] left-[10%] text-white/70 text-[60px] animate-float z-0" style="animation-delay: 0.5s; animation-duration: 6s;"></i>
-                <i class="ph-fill ph-cloud absolute bottom-[10%] right-[15%] text-white/90 text-[75px] animate-float z-0" style="animation-delay: 2s; animation-duration: 4.5s;"></i>
+                <i class="ph-fill ph-cloud absolute top-[30%] right-[-10%] text-white/80 text-[100px] animate-float-slow z-0" style="animation-delay: 1.5s;"></i>
+                <i class="ph-fill ph-cloud absolute top-[60%] left-[10%] text-white/70 text-[60px] animate-float z-0" style="animation-delay: 0.5s;"></i>
+                <i class="ph-fill ph-cloud absolute bottom-[10%] right-[15%] text-white/90 text-[75px] animate-float-slow z-0" style="animation-delay: 2s;"></i>
                 <i class="ph-fill ph-bird absolute top-[15%] text-slate-800/40 text-[24px] animate-fly-right z-0"></i>
                 <i class="ph-fill ph-bird absolute top-[45%] text-slate-800/40 text-[28px] animate-fly-left z-0"></i>
                 <div class="absolute top-[25%] left-[15%] animate-bounce z-0" style="animation-duration: 2s;"><i class="ph-fill ph-star text-yellow-300 drop-shadow-md text-[28px]"></i></div>
@@ -301,7 +301,6 @@
                 </div>
             </section>
 
-            <!-- 3. HASIL SELEKSI (PREMIUM VIP CARD) -->
             <section id="view-hasil" class="page-section hidden flex-1 w-full flex flex-col bg-slate-50">
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
@@ -340,14 +339,12 @@
                                 <div class="mb-3 border-b border-slate-700/50 pb-2"><span class="block text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">Program Diterima</span><span id="cert-program" class="block text-[14px] font-black text-emerald-400 leading-none">-</span></div>
                                 <div><span class="block text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">No. Pendaftaran</span><span id="cert-reg" class="block text-[12px] font-mono text-amber-300 font-bold leading-none">-</span></div>
                             </div>
-                            <div class="text-center relative z-10"><span id="cert-tahun" class="inline-block px-3 py-1 bg-slate-800 text-slate-500 text-[8px] rounded-full font-bold border border-slate-700">Tahun Ajaran 2027/2028</span></div>
                         </div>
                         <button id="btn-download-cert" onclick="downloadCertificate()" class="w-full mt-6 py-3.5 bg-gradient-to-r from-slate-800 to-slate-900 text-white text-[12px] font-bold rounded-xl flex items-center justify-center shadow-lg border border-slate-700 hover:bg-slate-800 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500 hidden"><i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh Surat Kelulusan</button>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. SYARAT -->
             <section id="view-syarat" class="page-section hidden flex-1 w-full flex flex-col bg-[#f8fafc]">
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
@@ -373,18 +370,32 @@
                 </div>
             </section>
 
-            <!-- 5. BROSUR -->
+            <!-- BROSUR DENGAN 3 GAMBAR (9:16) -->
             <section id="view-brosur" class="page-section hidden flex-1 w-full flex flex-col bg-slate-900 relative">
                 <div class="absolute top-4 left-4 z-50"><button onclick="navigate('home')" class="w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 shadow-lg active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-white"><i class="ph-bold ph-arrow-left text-lg"></i></button></div>
-                <div class="flex-1 w-full overflow-y-auto flex items-center justify-center p-4">
-                    <img id="dyn-brosur-img" src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur.png" alt="Brosur PSB" class="w-full h-auto rounded-xl shadow-2xl border border-white/10" onerror="this.src='https://placehold.co/800x1200/1e40af/ffffff?text=Brosur+Belum+Tersedia'">
-                </div>
-                <div class="p-5 pb-8 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent shrink-0">
-                    <button onclick="downloadBrosur()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-black text-[13px] shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center justify-center active:scale-95 focus:outline-none focus:ring-4 focus:ring-orange-300"><i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh Brosur</button>
+                <div class="flex-1 w-full overflow-y-auto flex flex-col items-center p-5 gap-8 pt-20 pb-16">
+                    
+                    <!-- Brosur 1 -->
+                    <div class="w-full flex flex-col items-center">
+                        <img id="dyn-brosur-img-1" src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur1.png" alt="Brosur 1" class="w-full aspect-[9/16] object-cover rounded-2xl shadow-2xl border border-white/20" onerror="this.src='https://placehold.co/720x1280/1e40af/ffffff?text=Brosur+1+Belum+Tersedia'">
+                        <button onclick="downloadBrosur(1)" class="w-full mt-4 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-black text-[13px] shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center justify-center active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-orange-300"><i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh Brosur 1</button>
+                    </div>
+
+                    <!-- Brosur 2 -->
+                    <div class="w-full flex flex-col items-center">
+                        <img id="dyn-brosur-img-2" src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur2.png" alt="Brosur 2" class="w-full aspect-[9/16] object-cover rounded-2xl shadow-2xl border border-white/20" onerror="this.src='https://placehold.co/720x1280/1e40af/ffffff?text=Brosur+2+Belum+Tersedia'">
+                        <button onclick="downloadBrosur(2)" class="w-full mt-4 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-black text-[13px] shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center justify-center active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-orange-300"><i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh Brosur 2</button>
+                    </div>
+
+                    <!-- Brosur 3 -->
+                    <div class="w-full flex flex-col items-center">
+                        <img id="dyn-brosur-img-3" src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur3.png" alt="Brosur 3" class="w-full aspect-[9/16] object-cover rounded-2xl shadow-2xl border border-white/20" onerror="this.src='https://placehold.co/720x1280/1e40af/ffffff?text=Brosur+3+Belum+Tersedia'">
+                        <button onclick="downloadBrosur(3)" class="w-full mt-4 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-black text-[13px] shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center justify-center active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-orange-300"><i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh Brosur 3</button>
+                    </div>
+                    
                 </div>
             </section>
 
-            <!-- 6. BIAYA (TABLE PREMIUM BIAYA) -->
             <section id="view-biaya" class="page-section hidden flex-1 w-full flex flex-col bg-slate-50">
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
@@ -394,7 +405,6 @@
                 <div class="p-4 flex-1 overflow-y-auto pb-10">
                     <!-- Premium Table Match from Image -->
                     <div class="bg-[#0f172a] rounded-2xl p-1 mb-4 shadow-xl border-2 border-[#1e3a8a] relative overflow-hidden">
-                        <!-- Ornamen -->
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-200 via-yellow-500 to-amber-200"></div>
                         
                         <div class="bg-slate-900 rounded-xl overflow-x-auto p-2">
@@ -418,17 +428,13 @@
                     <!-- Catatan INDENT Section -->
                     <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-red-500">
                         <h3 class="font-black text-red-600 text-[14px] italic mb-2 flex items-center"><i class="ph-fill ph-warning-circle mr-1.5"></i> Catatan :</h3>
-                        <ol class="list-decimal list-outside ml-4 text-[10px] text-slate-700 font-medium leading-relaxed space-y-1.5 marker:font-bold marker:text-red-500">
-                            <li><b class="text-slate-900">Indent</b> mendapat potongan DPS <b class="text-slate-900">Rp. 1.000.000</b> dan SPP <b class="text-slate-900">Rp. 50.000</b> (Batas Indent sampai dengan 30 Agustus 2026).</li>
-                            <li>Uang seragam yang tertera di atas adalah untuk siswa putra, jika siswa putri ada tambahan <b class="text-slate-900">Rp. 200.000</b>.</li>
-                            <li>Khusus kelas ICP ada uang Daftar Ulang <b class="text-slate-900">Rp. 1.000.000</b> setiap naik ke kelas berikutnya.</li>
-                            <li>SPP ICP sudah termasuk Pembelajaran selama 1 minggu di Kampung Inggris Kediri dan Edutrip ke Malaysia dan Singapura selama 1 minggu.</li>
+                        <ol id="dyn-catatan-biaya" class="list-decimal list-outside ml-4 text-[10px] text-slate-700 font-medium leading-relaxed space-y-1.5 marker:font-bold marker:text-red-500">
+                            <!-- Diisi oleh JS dari Excel Keuangan (Kolom Catatan Tambahan) -->
                         </ol>
                     </div>
                 </div>
             </section>
 
-            <!-- 7. FORM PENDAFTARAN KOMPLIT -->
             <section id="view-register" class="page-section hidden w-full relative h-full flex flex-col">
                 <div class="w-full h-full flex flex-col">
                     <div id="form-container" class="bg-white rounded-t-[1.5rem] shadow-xl h-full flex flex-col relative z-10">
@@ -590,7 +596,6 @@
                 </div>
             </section>
 
-            <!-- 8. ADMIN DASHBOARD -->
             <section id="view-admin-dashboard" class="page-section hidden w-full h-full flex flex-col bg-slate-100 absolute inset-0 z-[1000]">
                 <div id="admin-login-area" class="flex flex-col items-center justify-center h-full p-6 bg-slate-900">
                     <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-md w-full border border-white/20 text-center shadow-2xl">
@@ -610,6 +615,7 @@
                     
                     <div class="flex bg-white shadow-sm border-b border-slate-200 shrink-0 overflow-x-auto">
                         <button onclick="switchAdminTab('pendaftar')" id="tab-pendaftar" class="flex-1 min-w-[80px] py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600 focus:outline-none">Pendaftar</button>
+                        <button onclick="switchAdminTab('editor')" id="tab-editor" class="flex-1 min-w-[80px] py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent focus:outline-none">Edit Konten</button>
                         <button onclick="switchAdminTab('database')" id="tab-database" class="flex-1 min-w-[80px] py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent focus:outline-none">Database</button>
                     </div>
 
@@ -623,7 +629,10 @@
                             <div id="list-pendaftar" class="space-y-3"></div>
                         </div>
 
-                        <!-- Panel Database Export Import (EXCEL FULL 5 SHEET) -->
+                        <!-- Panel Edit Konten UI -->
+                        <div id="panel-editor" class="hidden relative pb-20"></div>
+
+                        <!-- Panel Database Export Import -->
                         <div id="panel-database" class="hidden space-y-4">
                             <div class="bg-blue-50 p-4 rounded-2xl shadow-sm border border-blue-200">
                                 <h4 class="font-bold text-[12px] text-blue-800 mb-3 border-b border-blue-200 pb-2"><i class="ph-fill ph-cloud-sync mr-1 text-lg"></i> Sinkronisasi Master (GAS)</h4>
@@ -635,7 +644,7 @@
                             </div>
                             <div class="bg-emerald-50 p-4 rounded-2xl shadow-sm border border-emerald-200">
                                 <h4 class="font-bold text-[12px] text-emerald-800 mb-3 border-b border-emerald-200 pb-2"><i class="ph-fill ph-microsoft-excel-logo mr-1 text-lg"></i> Manajemen Data Excel Komplit</h4>
-                                <p class="text-[9px] text-emerald-600 mb-3 font-medium">Download seluruh Pengaturan (Biaya, Kuota, Syarat, Timeline) & Pendaftar ke 5 Sheet Excel, edit, lalu Upload kembali untuk update massal!</p>
+                                <p class="text-[9px] text-emerald-600 mb-3 font-medium">Download seluruh Pengaturan & Pendaftar ke 5 Sheet Excel, edit lebarnya rapi, lalu Upload kembali!</p>
                                 <div class="space-y-2">
                                     <button onclick="downloadExcel()" class="w-full py-3 bg-emerald-600 text-white rounded-xl text-[11px] font-bold hover:bg-emerald-700 transition-all flex justify-center items-center shadow-md focus:outline-none"><i class="ph-bold ph-download mr-1.5 text-lg"></i> Download Full Template (.xlsx)</button>
                                     <label tabindex="0" class="w-full py-3 bg-white text-emerald-700 border-2 border-dashed border-emerald-400 rounded-xl text-[11px] font-bold hover:bg-emerald-100 transition-all flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-300">
@@ -659,20 +668,25 @@
         // GLOBAL STATE 5 SHEET
         let appState = {
             config: {
-                Tahun_Ajaran: "2027/2028",
+                Judul_Web: "P S B",
+                Sub_Judul: "Penerimaan Siswa Baru",
                 Kuota_Unggulan: "45", Kuota_ICP: "20",
-                Kontak1_Nama: "Ust. Mulyadi, M.Pd.", Kontak1_WA: "6281234567890",
-                Kontak2_Nama: "Ustz. Heni Daryati", Kontak2_WA: "6281298765432",
-                Kontak3_Nama: "Ust. Wildan", Kontak3_WA: "6285612341234",
-                URL_Brosur: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur.png"
+                Fitur_U1: "Tahfidz 3 Juz", Fitur_U2: "Tahsin Al-Qur'an", Fitur_U3: "Karakter Islami",
+                Fitur_I1: "Cambridge Class", Fitur_I2: "English Daily", Fitur_I3: "Global Mindset",
+                Kontak1_Divisi: "Unggulan 1", Kontak1_Nama: "Ust. Mulyadi, M.Pd.", Kontak1_WA: "6281234567890",
+                Kontak2_Divisi: "Unggulan 2", Kontak2_Nama: "Ustz. Heni Daryati", Kontak2_WA: "6281298765432",
+                Kontak3_Divisi: "Program ICP", Kontak3_Nama: "Ust. Ahmad Wildan", Kontak3_WA: "6287737781880",
+                URL_Brosur1: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur1.png",
+                URL_Brosur2: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur2.png",
+                URL_Brosur3: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur3.png"
             },
             pendaftar: [],
             keuangan: [
-                { ID: "K1", Mata_Anggaran: "Uang Pendaftaran", Gel_1: "Rp. 350.000", Gel_2: "Rp. 350.000", ICP: "Rp. 350.000" },
-                { ID: "K2", Mata_Anggaran: "Dana Pengembangan Sekolah (DPS)", Gel_1: "Rp. 6.500.000", Gel_2: "Rp. 7.000.000", ICP: "Rp. 9.500.000" },
-                { ID: "K3", Mata_Anggaran: "SPP per Bulan", Gel_1: "Rp. 600.000", Gel_2: "Rp. 650.000", ICP: "Rp. 1.150.000" },
-                { ID: "K4", Mata_Anggaran: "Uang Seragam", Gel_1: "Rp. 1.450.000", Gel_2: "Rp. 1.450.000", ICP: "Rp. 1.500.000" },
-                { ID: "K5", Mata_Anggaran: "Uang Makan per Bulan", Gel_1: "Rp. 130.000", Gel_2: "Rp. 130.000", ICP: "Rp. 130.000" }
+                { ID: "K1", Mata_Anggaran: "Uang Pendaftaran", Gel_1: "Rp. 350.000", Gel_2: "Rp. 350.000", ICP: "Rp. 350.000", Catatan_Tambahan: "Indent mendapat potongan DPS Rp. 1.000.000 dan SPP Rp. 50.000 (Batas Indent sampai dengan 30 Agustus 2026)." },
+                { ID: "K2", Mata_Anggaran: "Dana Pengembangan Sekolah (DPS)", Gel_1: "Rp. 6.500.000", Gel_2: "Rp. 7.000.000", ICP: "Rp. 9.500.000", Catatan_Tambahan: "Uang seragam yang tertera di atas adalah untuk siswa putra, jika siswa putri ada tambahan Rp. 200.000." },
+                { ID: "K3", Mata_Anggaran: "SPP per Bulan", Gel_1: "Rp. 600.000", Gel_2: "Rp. 650.000", ICP: "Rp. 1.150.000", Catatan_Tambahan: "Khusus kelas ICP ada uang Daftar Ulang Rp. 1.000.000 setiap naik ke kelas berikutnya." },
+                { ID: "K4", Mata_Anggaran: "Uang Seragam", Gel_1: "Rp. 1.450.000", Gel_2: "Rp. 1.450.000", ICP: "Rp. 1.500.000", Catatan_Tambahan: "SPP ICP sudah termasuk Pembelajaran selama 1 minggu di Kampung Inggris Kediri dan Edutrip ke Malaysia dan Singapura selama 1 minggu." },
+                { ID: "K5", Mata_Anggaran: "Uang Makan per Bulan", Gel_1: "Rp. 130.000", Gel_2: "Rp. 130.000", ICP: "Rp. 130.000", Catatan_Tambahan: "" }
             ],
             timeline: [
                 { ID: "T1", Tanggal: "1 Sep - 30 Nov 2026", Judul: "Pendaftaran Gel 1", Deskripsi: "Pengisian formulir online dan unggah berkas dasar." },
@@ -691,26 +705,40 @@
 
         // --- RENDER FUNGSI ---
         function applyConfigToDOM() {
-            // Tahun Ajaran
-            if(document.getElementById('dyn-tahun-ajaran')) document.getElementById('dyn-tahun-ajaran').innerText = `Tahun Ajaran ${appState.config.Tahun_Ajaran || '2027/2028'}`;
-            if(document.getElementById('cert-tahun')) document.getElementById('cert-tahun').innerText = `Tahun Ajaran ${appState.config.Tahun_Ajaran || '2027/2028'}`;
-            
-            // Kuota Dinamis
+            if(document.getElementById('dyn-judul-web')) document.getElementById('dyn-judul-web').innerText = appState.config.Judul_Web || "P S B";
+            if(document.getElementById('dyn-sub-judul')) document.getElementById('dyn-sub-judul').innerText = appState.config.Sub_Judul || "Penerimaan Siswa Baru";
+
+            if(document.getElementById('dyn-fu1')) document.getElementById('dyn-fu1').innerHTML = `<i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> ${appState.config.Fitur_U1 || '-'}`;
+            if(document.getElementById('dyn-fu2')) document.getElementById('dyn-fu2').innerHTML = `<i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> ${appState.config.Fitur_U2 || '-'}`;
+            if(document.getElementById('dyn-fu3')) document.getElementById('dyn-fu3').innerHTML = `<i class="ph-bold ph-check text-green-300 mr-1 mt-[1px]"></i> ${appState.config.Fitur_U3 || '-'}`;
+            if(document.getElementById('dyn-fi1')) document.getElementById('dyn-fi1').innerHTML = `<i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> ${appState.config.Fitur_I1 || '-'}`;
+            if(document.getElementById('dyn-fi2')) document.getElementById('dyn-fi2').innerHTML = `<i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> ${appState.config.Fitur_I2 || '-'}`;
+            if(document.getElementById('dyn-fi3')) document.getElementById('dyn-fi3').innerHTML = `<i class="ph-bold ph-check text-green-200 mr-1 mt-[1px]"></i> ${appState.config.Fitur_I3 || '-'}`;
+
             let terisiU = appState.pendaftar.filter(p => p.Program === 'UNGGULAN').length;
             let terisiI = appState.pendaftar.filter(p => p.Program === 'ICP').length;
-            
             if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerText = appState.config.Kuota_Unggulan || "45";
             if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerText = terisiU;
             if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerText = appState.config.Kuota_ICP || "20";
             if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerText = terisiI;
 
-            // Kontak Admin
-            if(document.getElementById('dyn-kontak1-nama')) document.getElementById('dyn-kontak1-nama').innerText = appState.config.Kontak1_Nama || "-";
-            if(document.getElementById('dyn-kontak2-nama')) document.getElementById('dyn-kontak2-nama').innerText = appState.config.Kontak2_Nama || "-";
-            if(document.getElementById('dyn-kontak3-nama')) document.getElementById('dyn-kontak3-nama').innerText = appState.config.Kontak3_Nama || "-";
+            // Render Kontak
+            if(document.getElementById('dyn-kontak1-divisi')) document.getElementById('dyn-kontak1-divisi').innerText = appState.config.Kontak1_Divisi || '-';
+            if(document.getElementById('dyn-kontak1-nama')) document.getElementById('dyn-kontak1-nama').innerText = appState.config.Kontak1_Nama || '-';
+            if(document.getElementById('btn-wa-kontak1')) document.getElementById('btn-wa-kontak1').setAttribute('data-wa', appState.config.Kontak1_WA || '0');
 
-            // Brosur URL
-            if(document.getElementById('dyn-brosur-img')) document.getElementById('dyn-brosur-img').src = appState.config.URL_Brosur || "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur.png";
+            if(document.getElementById('dyn-kontak2-divisi')) document.getElementById('dyn-kontak2-divisi').innerText = appState.config.Kontak2_Divisi || '-';
+            if(document.getElementById('dyn-kontak2-nama')) document.getElementById('dyn-kontak2-nama').innerText = appState.config.Kontak2_Nama || '-';
+            if(document.getElementById('btn-wa-kontak2')) document.getElementById('btn-wa-kontak2').setAttribute('data-wa', appState.config.Kontak2_WA || '0');
+
+            if(document.getElementById('dyn-kontak3-divisi')) document.getElementById('dyn-kontak3-divisi').innerText = appState.config.Kontak3_Divisi || '-';
+            if(document.getElementById('dyn-kontak3-nama')) document.getElementById('dyn-kontak3-nama').innerText = appState.config.Kontak3_Nama || '-';
+            if(document.getElementById('btn-wa-kontak3')) document.getElementById('btn-wa-kontak3').setAttribute('data-wa', appState.config.Kontak3_WA || '0');
+
+            // Render 3 Brosur Images
+            if(document.getElementById('dyn-brosur-img-1')) document.getElementById('dyn-brosur-img-1').src = appState.config.URL_Brosur1 || "https://placehold.co/720x1280/1e40af/ffffff?text=Brosur+1+Belum+Tersedia";
+            if(document.getElementById('dyn-brosur-img-2')) document.getElementById('dyn-brosur-img-2').src = appState.config.URL_Brosur2 || "https://placehold.co/720x1280/1e40af/ffffff?text=Brosur+2+Belum+Tersedia";
+            if(document.getElementById('dyn-brosur-img-3')) document.getElementById('dyn-brosur-img-3').src = appState.config.URL_Brosur3 || "https://placehold.co/720x1280/1e40af/ffffff?text=Brosur+3+Belum+Tersedia";
 
             renderTimeline();
             renderSyarat();
@@ -719,11 +747,12 @@
 
         function renderKeuangan() {
             const tbody = document.getElementById('dyn-keuangan-tbody');
-            if(!tbody) return;
-            tbody.innerHTML = '';
+            const catatanList = document.getElementById('dyn-catatan-biaya');
+            if(!tbody || !catatanList) return;
+            tbody.innerHTML = ''; catatanList.innerHTML = '';
+            
             appState.keuangan.forEach((k, i) => {
                 const tr = document.createElement('tr');
-                // Warna khusus untuk baris "Jumlah" (biasanya ditaruh terakhir atau diberi tanda)
                 if(k.Mata_Anggaran.toLowerCase().includes('jumlah')) tr.className = "total-row";
                 tr.innerHTML = `
                     <td class="text-center">${i + 1}</td>
@@ -733,6 +762,10 @@
                     <td class="text-right whitespace-nowrap font-bold">${k.ICP}</td>
                 `;
                 tbody.appendChild(tr);
+
+                if(k.Catatan_Tambahan && k.Catatan_Tambahan.trim() !== "") {
+                    catatanList.innerHTML += `<li>${k.Catatan_Tambahan}</li>`;
+                }
             });
         }
 
@@ -751,13 +784,13 @@
                 let c = colors[i % colors.length];
                 let isRight = i % 2 !== 0;
                 let transformClass = isRight ? 'translate-x-6' : '-translate-x-6';
-                let roundedClass = isRight ? 'rounded-tr-md' : 'rounded-tl-md';
+                let roundedClass = isRight ? 'rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-md rounded-br-md' : 'rounded-tl-[2rem] rounded-br-[2rem] rounded-tr-md rounded-bl-md';
                 
                 let el = document.createElement('div');
                 el.className = `w-full flex flex-col items-center transform ${transformClass} animate-slide-up`;
                 el.style.animationDelay = `${(i+1)*0.1}s`;
 
-                if(c.isFinal) {
+                if(i === appState.timeline.length - 1) { 
                     el.innerHTML = `
                         <div class="w-20 h-20 bg-gradient-to-b ${c.bg} rounded-[1.2rem] rotate-45 border-4 border-white shadow-[8px_8px_0_${c.shadow}] flex items-center justify-center text-white relative z-20 mb-[-25px] hover:rotate-90 transition-all duration-500"><i class="ph-fill ${c.icon} text-4xl -rotate-45 animate-float" style="animation-delay: 1.5s;"></i></div>
                         <div class="bg-gradient-to-br from-indigo-900 to-purple-900 p-5 rounded-[2.5rem] shadow-2xl border-4 ${c.border} text-center w-[100%] relative z-10 pt-10">
@@ -770,7 +803,7 @@
                 } else {
                     el.innerHTML = `
                         <div class="w-16 h-16 bg-gradient-to-b ${c.bg} rounded-[1.2rem] ${isRight ? '' : 'rotate-3'} border-4 border-white shadow-[0_8px_0_${c.shadow}] flex items-center justify-center text-white relative z-20 mb-[-15px] hover:rotate-0 hover:scale-105 transition-transform"><i class="ph-fill ${c.icon} text-3xl animate-float" style="animation-delay: ${i*0.5}s;"></i></div>
-                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[2rem] ${roundedClass} shadow-xl border-4 ${c.border} text-center w-[95%] relative z-10 pt-7">
+                        <div class="bg-white/90 backdrop-blur-md p-4 ${roundedClass} shadow-xl border-4 ${c.border} text-center w-[95%] relative z-10 pt-7">
                             <h3 class="font-black text-[14px] ${c.text} mb-1">${t.Judul}</h3>
                             <span class="${c.badgeBg} ${c.badgeText} text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest mb-2 inline-block shadow-sm border ${c.border}">Level ${i+1}</span>
                             <p class="text-[9px] font-bold text-slate-500 block mb-1">${t.Tanggal}</p>
@@ -796,7 +829,7 @@
 
         // --- GLOBAL LOGIC ---
         let toastTimeout; 
-        function showToast(msg) { 
+        window.showToast = function(msg) { 
             const toast = document.getElementById('toast'); 
             document.getElementById('toast-msg').innerText = msg; 
             toast.style.right = '16px'; toast.classList.remove('opacity-0');
@@ -814,9 +847,10 @@
         function openModal() { document.getElementById('type-modal').classList.remove('hidden'); document.getElementById('type-modal').classList.add('flex'); document.getElementById('btn-baru').focus(); }
         function closeModal() { document.getElementById('type-modal').classList.add('hidden'); document.getElementById('type-modal').classList.remove('flex'); }
         
-        function hubungiWA(no) {
-            let hp = no === 1 ? appState.config.Kontak1_WA : (no === 2 ? appState.config.Kontak2_WA : appState.config.Kontak3_WA);
-            if(!hp) hp = "0";
+        function hubungiWA(idStr) {
+            const btn = document.getElementById(`btn-wa-${idStr}`);
+            let hp = btn ? btn.getAttribute('data-wa') : "";
+            if(!hp || hp === "-") hp = "0";
             hp = hp.replace(/^0+/, '62');
             window.open(`https://wa.me/${hp}?text=Halo%20Panitia%20PSB%20Al-Kautsar`, '_blank');
         }
@@ -828,18 +862,23 @@
             else { clearTimeout(logoTimer); logoTimer = setTimeout(() => { logoClicks = 0; }, 1000); }
         }
 
-        function downloadBrosur() {
-            const url = appState.config.URL_Brosur || "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur.png";
+        // Logic Download 3 Brosur
+        function downloadBrosur(index) {
+            let url = "";
+            let filename = "";
+            if(index === 1) { url = appState.config.URL_Brosur1 || "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur1.png"; filename = 'Brosur_1_AlKautsar.png'; }
+            else if(index === 2) { url = appState.config.URL_Brosur2 || "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur2.png"; filename = 'Brosur_2_AlKautsar.png'; }
+            else if(index === 3) { url = appState.config.URL_Brosur3 || "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur3.png"; filename = 'Brosur_3_AlKautsar.png'; }
+            
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'Brosur_PSB_AlKautsar.png';
-            a.target = '_blank'; // Fallback if download attr fails due to CORS
+            a.download = filename;
+            a.target = '_blank';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            showToast("Brosur sedang diunduh...");
+            showToast("Brosur " + index + " sedang diunduh...");
         }
-
 
         // --- FORM & API LOGIC ---
         let pendaftaranType = 'baru';
@@ -988,30 +1027,21 @@
             }
         });
 
-        // KONTROL KEYBOARD GLOBAL (Enter)
+        // KONTROL KEYBOARD GLOBAL
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                // Di Halaman Admin Login
                 if (!document.getElementById('view-admin-dashboard').classList.contains('hidden') && document.getElementById('admin-main-area').classList.contains('hidden')) {
-                    e.preventDefault();
-                    document.getElementById('btn-login-admin').click();
+                    e.preventDefault(); document.getElementById('btn-login-admin').click();
                 }
-                // Di Halaman Hasil Seleksi
                 else if (!document.getElementById('view-hasil').classList.contains('hidden')) {
-                    e.preventDefault();
-                    document.getElementById('btn-cek-hasil').click();
+                    e.preventDefault(); document.getElementById('btn-cek-hasil').click();
                 }
-                // Di Modal Validation
                 else if (!document.getElementById('validation-modal').classList.contains('hidden')) {
-                    e.preventDefault();
-                    closeValidationModal();
+                    e.preventDefault(); closeValidationModal();
                 }
-                // Di Modal Success
                 else if (!document.getElementById('success-modal').classList.contains('hidden')) {
-                    e.preventDefault();
-                    document.getElementById('btn-success-close').click();
+                    e.preventDefault(); document.getElementById('btn-success-close').click();
                 }
-                // Di Halaman Form Register (Mencegah submit otomatis bawaan HTML)
                 else if (!document.getElementById('view-register').classList.contains('hidden')) {
                     e.preventDefault();
                     if (!document.getElementById('step-1').classList.contains('hidden')) {
@@ -1092,6 +1122,16 @@
             } else { targetStep === 'submit' ? handleFormSubmit() : goToStep(targetStep); }
         }
 
+        function closeValidationModal() {
+            document.getElementById('validation-modal').classList.add('hidden'); document.getElementById('validation-modal').classList.remove('flex');
+            document.getElementById('validation-content').classList.add('scale-95');
+        }
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden'); document.getElementById('success-modal').classList.remove('flex');
+            document.getElementById('success-content').classList.add('scale-95');
+            navigate('home');
+        }
+
         async function handleFormSubmit() {
             document.getElementById('btn-submit').innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Mengirim...';
             document.getElementById('btn-submit').disabled = true;
@@ -1120,7 +1160,6 @@
             renderAdminList(); applyConfigToDOM();
         }
 
-        // HASIL & SERTIFIKAT
         function cekHasilSeleksi() {
             const input = document.getElementById('inp-cek-hasil');
             const searchVal = input.value;
@@ -1131,18 +1170,14 @@
             
             setTimeout(() => {
                 document.getElementById('hasil-loading').classList.add('hidden'); document.getElementById('hasil-loading').classList.remove('flex');
-                
                 let found = appState.pendaftar.find(p => p.NISN === searchVal || p.NIK_Anak === searchVal);
-                
                 if(found) {
                     document.getElementById('cert-nama').innerText = found.Nama_Siswa;
                     document.getElementById('cert-program').innerText = found.Program || 'Kelas Reguler';
                     document.getElementById('cert-reg').innerText = found.ID_Daftar;
-                    
                     const titleEl = document.getElementById('cert-title');
                     const iconEl = document.getElementById('cert-icon');
                     const btnDl = document.getElementById('btn-download-cert');
-                    
                     if(found.Status_Seleksi === 'Diterima') {
                         titleEl.innerText = "LULUS SELEKSI";
                         titleEl.className = "text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 tracking-widest mb-1 drop-shadow-md";
@@ -1162,12 +1197,9 @@
                         iconEl.innerHTML = '<i class="ph-bold ph-hourglass text-[40px] text-white animate-pulse"></i>';
                         btnDl.classList.add('hidden');
                     }
-                    
                     document.getElementById('hasil-result').classList.remove('hidden'); document.getElementById('hasil-result').classList.add('flex');
                     showToast("Data Ditemukan!");
-                } else {
-                    showToast("Maaf, NISN/NIK tidak ditemukan dalam sistem.");
-                }
+                } else { showToast("Maaf, NISN/NIK tidak ditemukan dalam sistem."); }
             }, 1200);
         }
 
@@ -1224,11 +1256,212 @@
         
         function switchAdminTab(tab) {
             document.getElementById('tab-pendaftar').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent focus:outline-none";
+            document.getElementById('tab-editor').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent focus:outline-none";
             document.getElementById('tab-database').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold text-slate-500 border-b-2 border-transparent focus:outline-none";
-            document.getElementById('panel-pendaftar').classList.add('hidden'); document.getElementById('panel-database').classList.add('hidden');
             
-            if(tab === 'pendaftar') { document.getElementById('tab-pendaftar').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600 focus:outline-none"; document.getElementById('panel-pendaftar').classList.remove('hidden'); renderAdminList(); }
-            if(tab === 'database') { document.getElementById('tab-database').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600 focus:outline-none"; document.getElementById('panel-database').classList.remove('hidden'); }
+            document.getElementById('panel-pendaftar').classList.add('hidden'); 
+            document.getElementById('panel-editor').classList.add('hidden'); 
+            document.getElementById('panel-database').classList.add('hidden');
+            
+            if(tab === 'pendaftar') { 
+                document.getElementById('tab-pendaftar').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600 focus:outline-none"; 
+                document.getElementById('panel-pendaftar').classList.remove('hidden'); 
+                renderAdminList(); 
+            }
+            if(tab === 'editor') { 
+                document.getElementById('tab-editor').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600 focus:outline-none"; 
+                document.getElementById('panel-editor').classList.remove('hidden'); 
+                renderEditorPanel(); 
+            }
+            if(tab === 'database') { 
+                document.getElementById('tab-database').className = "flex-1 min-w-[80px] py-3 text-[11px] font-bold border-b-2 border-blue-600 text-blue-600 focus:outline-none"; 
+                document.getElementById('panel-database').classList.remove('hidden'); 
+            }
+        }
+
+        // --- EDITOR KONTEN IN-APP ADMIN ---
+        function renderEditorPanel() {
+            const panel = document.getElementById('panel-editor');
+            let html = `
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                <h3 class="font-bold text-xs text-slate-800 mb-3 flex items-center border-b pb-2"><i class="ph-fill ph-gear text-blue-500 mr-1.5 text-lg"></i> Pengaturan Umum</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[9px] font-bold text-slate-500">Judul Web (Atas)</label><input type="text" id="ed-judul" value="${appState.config.Judul_Web || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium focus:border-blue-500 outline-none"></div>
+                    <div><label class="text-[9px] font-bold text-slate-500">Sub Judul</label><input type="text" id="ed-sub" value="${appState.config.Sub_Judul || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium focus:border-blue-500 outline-none"></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="text-[9px] font-bold text-slate-500">Max Kuota Unggulan</label><input type="number" id="ed-kuota-u" value="${appState.config.Kuota_Unggulan || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium outline-none"></div>
+                        <div><label class="text-[9px] font-bold text-slate-500">Max Kuota ICP</label><input type="number" id="ed-kuota-i" value="${appState.config.Kuota_ICP || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium outline-none"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mt-4">
+                <h3 class="font-bold text-xs text-slate-800 mb-3 flex items-center border-b pb-2"><i class="ph-fill ph-image text-pink-500 mr-1.5 text-lg"></i> URL Brosur (3 Gambar)</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[9px] font-bold text-slate-500">URL Gambar Brosur 1</label><input type="text" id="ed-brosur1" value="${appState.config.URL_Brosur1 || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium outline-none"></div>
+                    <div><label class="text-[9px] font-bold text-slate-500">URL Gambar Brosur 2</label><input type="text" id="ed-brosur2" value="${appState.config.URL_Brosur2 || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium outline-none"></div>
+                    <div><label class="text-[9px] font-bold text-slate-500">URL Gambar Brosur 3</label><input type="text" id="ed-brosur3" value="${appState.config.URL_Brosur3 || ''}" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium outline-none"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mt-4">
+                <h3 class="font-bold text-xs text-slate-800 mb-3 flex items-center border-b pb-2"><i class="ph-fill ph-phone text-green-500 mr-1.5 text-lg"></i> Kontak Panitia (Format Sejajar)</h3>
+                <div class="space-y-4">
+                    <div class="bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <span class="text-[9px] font-bold text-slate-500 block mb-1">Kontak 1</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <input type="text" id="ed-k1-divisi" value="${appState.config.Kontak1_Divisi || ''}" class="col-span-1 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="Divisi">
+                            <input type="text" id="ed-k1-nama" value="${appState.config.Kontak1_Nama || ''}" class="col-span-2 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="Nama">
+                            <input type="text" id="ed-k1-wa" value="${appState.config.Kontak1_WA || ''}" class="col-span-3 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="No WA (Cth: 62812...)">
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <span class="text-[9px] font-bold text-slate-500 block mb-1">Kontak 2</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <input type="text" id="ed-k2-divisi" value="${appState.config.Kontak2_Divisi || ''}" class="col-span-1 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="Divisi">
+                            <input type="text" id="ed-k2-nama" value="${appState.config.Kontak2_Nama || ''}" class="col-span-2 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="Nama">
+                            <input type="text" id="ed-k2-wa" value="${appState.config.Kontak2_WA || ''}" class="col-span-3 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="No WA (Cth: 62812...)">
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <span class="text-[9px] font-bold text-slate-500 block mb-1">Kontak 3</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <input type="text" id="ed-k3-divisi" value="${appState.config.Kontak3_Divisi || ''}" class="col-span-1 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="Divisi">
+                            <input type="text" id="ed-k3-nama" value="${appState.config.Kontak3_Nama || ''}" class="col-span-2 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="Nama">
+                            <input type="text" id="ed-k3-wa" value="${appState.config.Kontak3_WA || ''}" class="col-span-3 w-full border border-slate-200 rounded-lg p-2 text-[10px] focus:border-green-400 outline-none" placeholder="No WA (Cth: 62812...)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mt-4">
+                <div class="flex justify-between items-center border-b pb-2 mb-3">
+                    <h3 class="font-bold text-xs text-slate-800 flex items-center"><i class="ph-fill ph-calendar text-purple-500 mr-1.5 text-lg"></i> Timeline / Jadwal</h3>
+                    <button onclick="addEdTimeline()" class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-[9px] font-bold">+ Tambah</button>
+                </div>
+                <div id="ed-list-timeline" class="space-y-3">`;
+            
+            appState.timeline.forEach((t) => { html += getTimelineHTML(t.Tanggal, t.Judul, t.Deskripsi); });
+
+            html += `</div></div>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mt-4">
+                <div class="flex justify-between items-center border-b pb-2 mb-3">
+                    <h3 class="font-bold text-xs text-slate-800 flex items-center"><i class="ph-fill ph-wallet text-amber-500 mr-1.5 text-lg"></i> Rincian Biaya (Dengan Catatan)</h3>
+                    <button onclick="addEdKeuangan()" class="bg-amber-100 text-amber-700 px-2 py-1 rounded text-[9px] font-bold">+ Tambah</button>
+                </div>
+                <div id="ed-list-keuangan" class="space-y-3">`;
+            
+            appState.keuangan.forEach((k) => { html += getKeuanganHTML(k.Mata_Anggaran, k.Gel_1, k.Gel_2, k.ICP, k.Catatan_Tambahan); });
+            
+            html += `</div></div>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mt-4 mb-20">
+                <div class="flex justify-between items-center border-b pb-2 mb-3">
+                    <h3 class="font-bold text-xs text-slate-800 flex items-center"><i class="ph-fill ph-check-square-offset text-rose-500 mr-1.5 text-lg"></i> Syarat Pendaftaran</h3>
+                    <button onclick="addEdSyarat()" class="bg-rose-100 text-rose-700 px-2 py-1 rounded text-[9px] font-bold">+ Tambah</button>
+                </div>
+                <div id="ed-list-syarat" class="space-y-2">`;
+            
+            appState.syarat.forEach((s) => { html += getSyaratHTML(s.Teks_Syarat); });
+
+            html += `</div></div>
+            <div class="fixed bottom-4 left-4 right-4 z-50 md:max-w-[388px] md:mx-auto">
+                <button onclick="saveAllEditor()" class="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold text-[12px] shadow-lg shadow-blue-500/50 flex justify-center items-center gap-2 hover:-translate-y-1 transition-all">
+                    <i class="ph-bold ph-floppy-disk text-lg"></i> Simpan Semua Perubahan
+                </button>
+            </div>`;
+
+            panel.innerHTML = html;
+        }
+
+        function getTimelineHTML(tgl = "", jud = "", des = "") {
+            return `<div class="ed-item-timeline bg-slate-50 p-2.5 rounded-xl border border-slate-200 relative group">
+                <button onclick="this.parentElement.remove()" class="absolute top-2 right-2 text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 p-1.5 rounded-lg transition-colors"><i class="ph-bold ph-trash"></i></button>
+                <input type="text" class="ed-t-tgl w-[85%] border border-slate-200 rounded-lg p-2 text-[10px] mb-2 focus:border-purple-400 outline-none" placeholder="Tanggal (Cth: 1 Sep - 30 Nov 2026)" value="${tgl}">
+                <input type="text" class="ed-t-jud w-[85%] border border-slate-200 rounded-lg p-2 text-[10px] mb-2 focus:border-purple-400 outline-none" placeholder="Judul (Cth: Pendaftaran Gel 1)" value="${jud}">
+                <textarea class="ed-t-des w-full border border-slate-200 rounded-lg p-2 text-[10px] h-16 resize-none focus:border-purple-400 outline-none" placeholder="Deskripsi Singkat">${des}</textarea>
+            </div>`;
+        }
+
+        function getKeuanganHTML(mata = "", g1 = "", g2 = "", icp = "", catatan = "") {
+            return `<div class="ed-item-keuangan bg-slate-50 p-2.5 rounded-xl border border-slate-200 relative">
+                <button onclick="this.parentElement.remove()" class="absolute top-2 right-2 text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 p-1.5 rounded-lg transition-colors"><i class="ph-bold ph-trash"></i></button>
+                <input type="text" class="ed-k-mata w-[85%] border border-slate-200 rounded-lg p-2 text-[10px] font-bold mb-2 focus:border-amber-400 outline-none" placeholder="Mata Anggaran (Cth: Uang Seragam)" value="${mata}">
+                <div class="grid grid-cols-3 gap-2">
+                    <div><span class="text-[8px] font-bold text-slate-500 block mb-0.5">Gel 1</span><input type="text" class="ed-k-g1 w-full border border-slate-200 rounded-md p-1.5 text-[9px] focus:border-amber-400 outline-none" placeholder="Rp..." value="${g1}"></div>
+                    <div><span class="text-[8px] font-bold text-slate-500 block mb-0.5">Gel 2</span><input type="text" class="ed-k-g2 w-full border border-slate-200 rounded-md p-1.5 text-[9px] focus:border-amber-400 outline-none" placeholder="Rp..." value="${g2}"></div>
+                    <div><span class="text-[8px] font-bold text-slate-500 block mb-0.5">ICP</span><input type="text" class="ed-k-icp w-full border border-slate-200 rounded-md p-1.5 text-[9px] focus:border-amber-400 outline-none" placeholder="Rp..." value="${icp}"></div>
+                </div>
+                <input type="text" class="ed-k-catatan w-full border border-slate-200 rounded-lg p-2 text-[10px] mt-2 focus:border-amber-400 outline-none" placeholder="Catatan Tambahan di bawah tabel (Opsional)..." value="${catatan}">
+            </div>`;
+        }
+
+        function getSyaratHTML(teks = "") {
+            return `<div class="ed-item-syarat flex items-center gap-2">
+                <input type="text" class="ed-s-teks flex-1 border border-slate-200 rounded-lg p-2 text-[10px] focus:border-rose-400 outline-none" placeholder="Tuliskan syarat..." value="${teks}">
+                <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors"><i class="ph-bold ph-trash"></i></button>
+            </div>`;
+        }
+
+        function addEdTimeline() { document.getElementById('ed-list-timeline').insertAdjacentHTML('beforeend', getTimelineHTML()); }
+        function addEdKeuangan() { document.getElementById('ed-list-keuangan').insertAdjacentHTML('beforeend', getKeuanganHTML()); }
+        function addEdSyarat() { document.getElementById('ed-list-syarat').insertAdjacentHTML('beforeend', getSyaratHTML()); }
+
+        async function saveAllEditor() {
+            document.querySelector('.fixed.bottom-4 button').innerHTML = '<i class="ph-bold ph-spinner animate-spin text-lg"></i> Menyimpan...';
+            showToast("Menyimpan konfigurasi... Mohon tunggu.");
+            
+            appState.config.Judul_Web = document.getElementById('ed-judul').value;
+            appState.config.Sub_Judul = document.getElementById('ed-sub').value;
+            appState.config.Kuota_Unggulan = document.getElementById('ed-kuota-u').value;
+            appState.config.Kuota_ICP = document.getElementById('ed-kuota-i').value;
+            
+            appState.config.URL_Brosur1 = document.getElementById('ed-brosur1').value;
+            appState.config.URL_Brosur2 = document.getElementById('ed-brosur2').value;
+            appState.config.URL_Brosur3 = document.getElementById('ed-brosur3').value;
+            
+            appState.config.Kontak1_Divisi = document.getElementById('ed-k1-divisi').value;
+            appState.config.Kontak1_Nama = document.getElementById('ed-k1-nama').value;
+            appState.config.Kontak1_WA = document.getElementById('ed-k1-wa').value;
+
+            appState.config.Kontak2_Divisi = document.getElementById('ed-k2-divisi').value;
+            appState.config.Kontak2_Nama = document.getElementById('ed-k2-nama').value;
+            appState.config.Kontak2_WA = document.getElementById('ed-k2-wa').value;
+
+            appState.config.Kontak3_Divisi = document.getElementById('ed-k3-divisi').value;
+            appState.config.Kontak3_Nama = document.getElementById('ed-k3-nama').value;
+            appState.config.Kontak3_WA = document.getElementById('ed-k3-wa').value;
+
+            appState.timeline = Array.from(document.querySelectorAll('.ed-item-timeline')).map((el, i) => ({
+                ID: "T" + (i + 1),
+                Tanggal: el.querySelector('.ed-t-tgl').value,
+                Judul: el.querySelector('.ed-t-jud').value,
+                Deskripsi: el.querySelector('.ed-t-des').value
+            }));
+
+            appState.keuangan = Array.from(document.querySelectorAll('.ed-item-keuangan')).map((el, i) => ({
+                ID: "K" + (i + 1),
+                Mata_Anggaran: el.querySelector('.ed-k-mata').value,
+                Gel_1: el.querySelector('.ed-k-g1').value,
+                Gel_2: el.querySelector('.ed-k-g2').value,
+                ICP: el.querySelector('.ed-k-icp').value,
+                Catatan_Tambahan: el.querySelector('.ed-k-catatan').value
+            }));
+
+            appState.syarat = Array.from(document.querySelectorAll('.ed-item-syarat')).map((el, i) => ({
+                ID: "S" + (i + 1),
+                Teks_Syarat: el.querySelector('.ed-s-teks').value
+            }));
+
+            applyConfigToDOM();
+            
+            if(GAS_URL) {
+                let success = await postToGAS("SYNC_ALL", appState);
+                if(success) showToast("Sukses tersimpan di Cloud Database!");
+                else showToast("Gagal menyimpan ke Cloud. Cek koneksi.");
+            } else {
+                showToast("Perubahan Disimpan (Local Mode)");
+            }
+            document.querySelector('.fixed.bottom-4 button').innerHTML = '<i class="ph-bold ph-floppy-disk text-lg"></i> Simpan Semua Perubahan';
         }
 
         function renderAdminList() {
@@ -1263,7 +1496,6 @@
             renderAdminList(); applyConfigToDOM(); showToast("Data Dihapus"); if(GAS_URL) await postToGAS("DELETE_PENDAFTAR", {id: id});
         }
 
-        // --- DATABASE EXPORT IMPORT (EXCEL 5 SHEET) ---
         function manualTarikData() { showToast("Meminta data dari Cloud..."); fetchFromGAS(); }
 
         async function manualKirimData() {
@@ -1278,18 +1510,23 @@
             const wb = XLSX.utils.book_new();
             
             const wsPendaftar = XLSX.utils.json_to_sheet(appState.pendaftar.length > 0 ? appState.pendaftar : [{ID_Daftar:"", Waktu_Daftar:"", Jalur:"", Program:"", Nama_Siswa:"", NISN:"", NIK_Anak:"", No_KK:"", Tgl_Lahir:"", Nama_Ayah:"", Nama_Ibu:"", No_WA:"", Status_Seleksi:""}]);
+            wsPendaftar['!cols'] = [{wch: 15}, {wch: 20}, {wch: 15}, {wch: 15}, {wch: 25}, {wch: 15}, {wch: 20}, {wch: 20}, {wch: 15}, {wch: 25}, {wch: 25}, {wch: 15}, {wch: 15}];
             XLSX.utils.book_append_sheet(wb, wsPendaftar, "Data_Pendaftar");
             
             const wsPengaturan = XLSX.utils.json_to_sheet(Object.keys(appState.config).map(k => ({ Key: k, Value: appState.config[k] })));
+            wsPengaturan['!cols'] = [{wch: 25}, {wch: 60}];
             XLSX.utils.book_append_sheet(wb, wsPengaturan, "Pengaturan");
 
             const wsKeuangan = XLSX.utils.json_to_sheet(appState.keuangan);
+            wsKeuangan['!cols'] = [{wch: 5}, {wch: 35}, {wch: 15}, {wch: 15}, {wch: 15}, {wch: 80}]; 
             XLSX.utils.book_append_sheet(wb, wsKeuangan, "Keuangan");
 
             const wsTimeline = XLSX.utils.json_to_sheet(appState.timeline);
+            wsTimeline['!cols'] = [{wch: 5}, {wch: 25}, {wch: 30}, {wch: 60}];
             XLSX.utils.book_append_sheet(wb, wsTimeline, "Timeline");
 
             const wsSyarat = XLSX.utils.json_to_sheet(appState.syarat);
+            wsSyarat['!cols'] = [{wch: 5}, {wch: 60}];
             XLSX.utils.book_append_sheet(wb, wsSyarat, "Syarat");
             
             XLSX.writeFile(wb, `Master_Database_AlKautsar_${new Date().toISOString().slice(0,10)}.xlsx`);
