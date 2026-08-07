@@ -36,6 +36,20 @@
                         'wave-fast': 'waveMove 8s linear infinite',
                         'wave-slow': 'waveMove 12s linear infinite reverse',
                         'box-glow': 'boxGlow 2.5s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        modalPop: { '0%': { opacity: '0', transform: 'scale(0.95) translateY(10px)' }, '100%': { opacity: '1', transform: 'scale(1) translateY(0)' } },
+                        shake: { '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' }, '20%, 80%': { transform: 'translate3d(2px, 0, 0)' }, '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' }, '40%, 60%': { transform: 'translate3d(4px, 0, 0)' } },
+                        pulseGlow: { '0%, 100%': { opacity: '1', textShadow: '0 0 15px rgba(30,64,175,0.6)' }, '50%': { opacity: '0.8', textShadow: '0 0 5px rgba(30,64,175,0.2)' } },
+                        pulseGlowOrange: { '0%, 100%': { boxShadow: '0 0 15px rgba(234,88,12,0.5)' }, '50%': { boxShadow: '0 0 5px rgba(234,88,12,0.2)' } },
+                        pulseGlowRed: { '0%, 100%': { boxShadow: '0 0 15px rgba(239,68,68,0.5)' }, '50%': { boxShadow: '0 0 5px rgba(239,68,68,0.1)' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(30px) scale(0.9)' }, '100%': { opacity: '1', transform: 'translateY(0) scale(1)' } },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        flyRight: { '0%': { transform: 'translateX(-100px) scaleX(1) translateY(0)' }, '50%': { transform: 'translateX(200px) scaleX(1) translateY(-20px)' }, '100%': { transform: 'translateX(500px) scaleX(1) translateY(0)' } },
+                        flyLeft: { '0%': { transform: 'translateX(500px) scaleX(-1) translateY(0)' }, '50%': { transform: 'translateX(200px) scaleX(-1) translateY(20px)' }, '100%': { transform: 'translateX(-100px) scaleX(-1) translateY(0)' } },
+                        waveMove: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+                        boxGlow: { '0%, 100%': { boxShadow: '0 0 18px rgba(239,68,68,0.5)', borderColor: 'rgba(248,113,113,1)' }, '50%': { boxShadow: '0 0 5px rgba(239,68,68,0.1)', borderColor: 'rgba(248,113,113,0.5)' } }
                     }
                 }
             }
@@ -102,27 +116,27 @@
 
         /* Biaya Table Styles - FULL COLOR & 1 SCREEN FIT */
         .premium-table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); background-color: white; }
-        .premium-table thead th { font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; padding: 7px 4px; vertical-align: middle; line-height: 1.1; text-align: center; border-right: 1px solid rgba(255,255,255,0.2); }
+        .premium-table thead th { font-size: 8.5px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; padding: 7px 4px; vertical-align: middle; line-height: 1.1; text-align: center; border-right: 1px solid rgba(255,255,255,0.2); }
         
-        /* HEADER UTAMA */
-        .premium-table thead tr:first-child th:first-child, .premium-table thead tr:first-child th:nth-child(2) { background-color: #f8fafc; color: #475569; border-bottom: 2px solid #e2e8f0; }
-        .premium-table thead tr:first-child th:first-child { border-top-left-radius: 12px; }
-        .premium-table thead tr:first-child th:nth-child(3) { background: linear-gradient(to bottom, #1e3a8a, #1e40af); color: #ffffff; letter-spacing: 1.5px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+        /* SUPER HEADER UNGGULAN */
+        .premium-table thead tr:first-child th:first-child { background-color: #f8fafc; color: #475569; border-top-left-radius: 12px; border-bottom: 2px solid #e2e8f0; }
+        .premium-table thead tr:first-child th:nth-child(2) { background: linear-gradient(to bottom, #1e3a8a, #1e40af); color: #ffffff; letter-spacing: 1.5px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
         .premium-table thead tr:first-child th:last-child { background: linear-gradient(to bottom, #ea580c, #f97316); color: #ffffff; border-top-right-radius: 12px; letter-spacing: 1px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
         
         /* SUB HEADER GELOMBANG */
-        .premium-table thead tr:last-child th:nth-child(1) { background-color: #eff6ff; color: #1d4ed8; font-size: 7px; border-bottom: 2px solid #bfdbfe; }
-        .premium-table thead tr:last-child th:nth-child(2) { background-color: #ecfdf5; color: #047857; font-size: 7px; border-bottom: 2px solid #a7f3d0; }
+        .premium-table thead tr:last-child th:nth-child(1) { background-color: #eff6ff; color: #1d4ed8; font-size: 7.5px; border-bottom: 2px solid #bfdbfe; }
+        .premium-table thead tr:last-child th:nth-child(2) { background-color: #ecfdf5; color: #047857; font-size: 7.5px; border-bottom: 2px solid #a7f3d0; }
 
         /* ISI TABEL COMPACT ZEBRA MULTI-COLOR */
         .premium-table tbody td { font-size: 8.5px; font-weight: 700; padding: 6.5px 4px; letter-spacing: -0.2px; line-height: 1.1; border-bottom: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; }
         
-        /* No & Mata Anggaran */
-        .premium-table tbody tr:nth-child(odd) td:first-child, .premium-table tbody tr:nth-child(odd) td:nth-child(2) { background-color: #ffffff; color: #1e293b; }
-        .premium-table tbody tr:nth-child(even) td:first-child, .premium-table tbody tr:nth-child(even) td:nth-child(2) { background-color: #f8fafc; color: #1e293b; }
+        /* Nomor Urut */
         .premium-table tbody td:first-child { text-align: center; color: #64748b; font-weight: 900; }
-        .premium-table tbody td:nth-child(2) { padding-left: 6px; }
-
+        
+        /* Mata Anggaran */
+        .premium-table tbody tr:nth-child(odd) td:nth-child(2) { background-color: #ffffff; color: #1e293b; padding-left: 8px; }
+        .premium-table tbody tr:nth-child(even) td:nth-child(2) { background-color: #f8fafc; color: #1e293b; padding-left: 8px; }
+        
         /* Gel 1 (Biru Pastel Zebra) */
         .premium-table tbody tr:nth-child(odd) td:nth-child(3) { text-align: right; background-color: #f0f9ff; color: #1e40af; }
         .premium-table tbody tr:nth-child(even) td:nth-child(3) { text-align: right; background-color: #e0f2fe; color: #1e40af; }
@@ -136,8 +150,9 @@
         .premium-table tbody tr:nth-child(even) td:last-child { text-align: right; background-color: #ffedd5; color: #9a3412; }
 
         /* BARIS JUMLAH PREMIUM */
-        .premium-table tr.total-row td { background: linear-gradient(to right, #0f172a, #1e293b) !important; font-weight: 900; color: #fbbf24 !important; font-size: 8.5px; border-top: 3px solid #fbbf24; border-bottom: 2px solid #0f172a; border-left: none !important; border-right: none !important; padding: 7px 4px; white-space: nowrap; text-align: right; }
-        .premium-table tr.total-row td:first-child { border-bottom-left-radius: 12px; text-align: right !important; padding-right: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .premium-table tr.total-row td { background: linear-gradient(to right, #0f172a, #1e293b) !important; font-weight: 900; color: #fbbf24 !important; font-size: 8.5px; border-top: 3px solid #fbbf24; border-bottom: 2px solid #0f172a; border-left: none !important; border-right: none !important; padding: 7px 4px; white-space: nowrap; }
+        .premium-table tr.total-row td:nth-child(2) { text-align: center !important; text-transform: uppercase; letter-spacing: 1px; color: #fbbf24 !important; }
+        .premium-table tr.total-row td:first-child { border-bottom-left-radius: 12px; }
         .premium-table tr.total-row td:last-child { border-bottom-right-radius: 12px; }
 
     </style>
@@ -147,11 +162,7 @@
 
     <div class="w-full max-w-[420px] bg-[#f8fafc] h-full relative shadow-[0_0_50px_rgba(0,0,0,0.15)] flex flex-col border-x border-slate-300">
 
-        <!-- Modals & Toasts -->
-        <div id="toast" class="absolute top-16 right-[-100%] transition-all duration-300 z-[9999] bg-slate-900/95 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 text-[11px] font-medium border border-slate-700 opacity-0">
-            <i class="ph-fill ph-info text-blue-400 text-lg"></i><span id="toast-msg">Pesan</span>
-        </div>
-
+        <!-- MODALS & TOAST -->
         <div id="validation-modal" class="absolute inset-0 z-[900] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm">
             <div id="validation-content" class="bg-white/95 backdrop-blur-xl rounded-[1.5rem] p-6 shadow-2xl w-[85%] text-center transform scale-95 transition-transform duration-300">
                 <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce"><i class="ph-fill ph-warning-circle text-4xl text-amber-500"></i></div>
@@ -207,14 +218,14 @@
                     <div class="bg-blue-50/80 border-[3px] border-blue-200 rounded-2xl p-4 relative overflow-hidden shadow-sm">
                         <div class="absolute -right-4 -bottom-4 text-blue-100/50"><i class="ph-fill ph-trophy text-[90px]"></i></div>
                         <h4 class="font-black text-[13px] text-blue-800 mb-2 flex items-center border-b border-blue-200 pb-2 relative z-10"><div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2"><i class="ph-fill ph-trophy text-white text-[12px]"></i></div> Kelas Unggulan</h4>
-                        <p id="dyn-desc-unggulan" class="text-[10px] text-slate-600 mb-3 italic leading-relaxed border-l-[3px] border-blue-400 pl-2 bg-white/50 py-1.5 pr-2 rounded-r-md relative z-10"></p>
+                        <p id="dyn-desc-unggulan" class="text-[10px] text-slate-600 mb-3 italic leading-relaxed border-l-[3px] border-blue-400 pl-2 bg-white/50 py-1.5 pr-2 rounded-r-md relative z-10 text-justify"></p>
                         <ul id="dyn-unggulan-full" class="relative z-10 space-y-1.5"></ul>
                     </div>
                     
                     <div class="bg-orange-50/80 border-[3px] border-orange-200 rounded-2xl p-4 relative overflow-hidden shadow-sm">
                         <div class="absolute -right-4 -bottom-4 text-orange-100/50"><i class="ph-fill ph-globe text-[90px]"></i></div>
                         <h4 class="font-black text-[13px] text-orange-700 mb-2 flex items-center border-b border-orange-200 pb-2 relative z-10"><div class="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-2"><i class="ph-fill ph-globe text-white text-[12px]"></i></div> Program ICP</h4>
-                        <p id="dyn-desc-icp" class="text-[10px] text-slate-600 mb-3 italic leading-relaxed border-l-[3px] border-orange-400 pl-2 bg-white/50 py-1.5 pr-2 rounded-r-md relative z-10"></p>
+                        <p id="dyn-desc-icp" class="text-[10px] text-slate-600 mb-3 italic leading-relaxed border-l-[3px] border-orange-400 pl-2 bg-white/50 py-1.5 pr-2 rounded-r-md relative z-10 text-justify"></p>
                         <ul id="dyn-icp-full" class="relative z-10 space-y-1.5"></ul>
                     </div>
                 </div>
@@ -224,12 +235,16 @@
             </div>
         </div>
 
-        <nav id="main-nav" class="w-full z-[500] bg-white border-b border-slate-200/60 shadow-sm shrink-0">
-            <div class="px-4 h-14 flex justify-between items-center">
+        <nav id="main-nav" class="w-full z-[500] bg-white border-b border-slate-200/60 shadow-sm shrink-0 relative">
+            <div class="px-4 h-14 flex justify-between items-center relative">
                 <div class="flex items-center cursor-pointer" onclick="handleLogoClick()">
                     <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto object-contain drop-shadow-sm">
                 </div>
-                <button onclick="showToast('Tekan Logo 3x Cepat untuk masuk Admin!')" class="text-slate-500 hover:text-primary bg-slate-100 px-2.5 py-1.5 rounded-lg text-[10px] font-bold"><i class="ph-bold ph-lock-key"></i></button>
+                
+                <!-- Kapsul Notifikasi Melayang -->
+                <div id="toast" class="absolute right-4 transition-all duration-300 z-[9999] bg-emerald-50/95 backdrop-blur-md text-emerald-800 px-3 py-2 rounded-full shadow-sm flex items-center space-x-1.5 text-[10px] font-bold border border-emerald-200 opacity-0 pointer-events-none transform -translate-y-2">
+                    <i id="toast-icon" class="ph-fill ph-check-circle text-emerald-500 text-sm"></i><span id="toast-msg">Pesan</span>
+                </div>
             </div>
         </nav>
 
@@ -293,16 +308,18 @@
                     </div>
                 </div>
 
+                <!-- UPDATE KONTAK GRID 2 KOLOM -->
                 <div class="px-4 w-full mb-8">
                     <div class="bg-white rounded-[1.25rem] p-4 shadow-sm border border-slate-200">
-                        <h3 class="font-black text-slate-800 text-[12px] mb-3 flex items-center"><i class="ph-fill ph-headset text-green-500 mr-1.5 text-lg"></i> Layanan Kontak Panitia</h3>
-                        <div id="dyn-kontak-container" class="grid grid-cols-2 gap-2.5">
-                            <!-- Diisi Otomatis oleh JavaScript dengan 2 kolom Grid -->
+                        <h3 class="font-black text-slate-800 text-[13px] mb-4 flex items-center"><i class="ph-fill ph-headset text-green-500 mr-2 text-lg"></i> Layanan Kontak Panitia</h3>
+                        <div id="dyn-kontak-container" class="grid grid-cols-2 gap-3 h-auto">
+                            <!-- Diisi Otomatis oleh JavaScript -->
                         </div>
                     </div>
                 </div>
             </section>
 
+            <!-- UPDATE TIMELINE SVG & TANGGAL -->
             <section id="view-timeline" class="page-section hidden flex-1 w-full flex flex-col relative overflow-hidden bg-gradient-to-b from-sky-300 to-sky-100">
                 <i class="ph-fill ph-cloud absolute top-[10%] left-[5%] text-white/90 text-[80px] animate-float z-0" style="animation-duration: 4s;"></i>
                 <i class="ph-fill ph-cloud absolute top-[30%] right-[-10%] text-white/80 text-[100px] animate-float-slow z-0" style="animation-delay: 1.5s;"></i>
@@ -319,13 +336,13 @@
                     <div class="w-[70px]"></div>
                 </div>
                 
-                <div class="flex-1 overflow-y-auto w-full pt-8 pb-16 px-4 scroll-smooth">
-                    <div class="relative max-w-[320px] mx-auto">
-                        <svg class="absolute top-0 left-1/2 -translate-x-1/2 w-[180px] h-full pointer-events-none opacity-40 z-0 drop-shadow-md" viewBox="0 0 100 1000" preserveAspectRatio="none">
-                            <path class="map-line-dash" d="M 50,20 Q 120,120 50,240 T 50,460 T 50,680 T 50,900 T 50,1120" fill="none" stroke="#4f46e5" stroke-width="6" stroke-linecap="round"/>
+                <div class="flex-1 overflow-y-auto relative w-full pt-8 pb-16 px-4 scroll-smooth">
+                    <div class="absolute top-0 left-0 w-full h-[150%] z-0 flex justify-center pointer-events-none">
+                        <svg class="w-[180px] h-full opacity-40 drop-shadow-md" viewBox="0 0 100 800" preserveAspectRatio="none">
+                            <path class="map-line-dash" d="M 50,20 Q 120,120 50,240 T 50,460 T 50,680 T 50,820" fill="none" stroke="#4f46e5" stroke-width="6" stroke-linecap="round"/>
                         </svg>
-                        <div id="dyn-timeline-container" class="flex flex-col items-center space-y-10 relative z-10 w-full"></div>
                     </div>
+                    <div id="dyn-timeline-container" class="flex flex-col items-center space-y-10 relative z-10 max-w-[320px] mx-auto"></div>
                 </div>
             </section>
 
@@ -395,7 +412,6 @@
                 </div>
             </section>
 
-            <!-- BROSUR UPDATE STICKY HEADER -->
             <section id="view-brosur" class="page-section hidden flex-1 w-full flex flex-col bg-slate-900">
                 <div class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-300 font-bold flex items-center bg-slate-800 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-600"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
@@ -430,8 +446,8 @@
                         <table class="premium-table">
                             <thead>
                                 <tr>
-                                    <th rowspan="2" class="w-[8%]">No.</th>
-                                    <th rowspan="2" class="w-[28%]">Mata Anggaran</th>
+                                    <th rowspan="2" class="w-[8%] text-center">No</th>
+                                    <th rowspan="2" class="w-[28%] text-left pl-2">Mata Anggaran</th>
                                     <th colspan="2" class="w-[42%]">Kelas UNGGULAN</th>
                                     <th rowspan="2" class="w-[22%]">Program ICP</th>
                                 </tr>
@@ -441,7 +457,7 @@
                                 </tr>
                             </thead>
                             <tbody id="dyn-keuangan-tbody">
-                                <!-- Diisi JS Auto-Sum -->
+                                <!-- Diisi JS -->
                             </tbody>
                         </table>
                     </div>
@@ -661,7 +677,6 @@
 
                     </div>
                     
-                    <!-- FLOATING SAVE BUTTON DIKURUNG DI DALAM AREA ADMIN -->
                     <div id="floating-save-btn" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-[2000] hidden w-full px-4">
                         <button onclick="saveAllEditor()" class="w-full py-3.5 bg-slate-900/90 backdrop-blur-md text-white rounded-[1.25rem] font-bold text-[12px] shadow-[0_10px_25px_rgba(15,23,42,0.4)] flex justify-center items-center gap-2 hover:bg-slate-900 active:scale-95 transition-all focus:outline-none border border-slate-700/50">
                             <i class="ph-bold ph-floppy-disk text-lg text-emerald-400"></i> Simpan Semua Perubahan
@@ -703,7 +718,7 @@
             if(viewId === 'admin-dashboard' && document.getElementById('admin-main-area').classList.contains('hidden')) { document.getElementById('admin-pwd').focus(); }
             
             const saveBtn = document.getElementById('floating-save-btn');
-            if(saveBtn) saveBtn.classList.add('hidden'); // Selalu sembunyikan tombol melayang jika pindah menu
+            if(saveBtn) saveBtn.classList.add('hidden');
             
             if(pushToHistory) history.pushState({ view: viewId }, viewId, '#' + viewId);
         }
@@ -740,13 +755,13 @@
                 { ID: "K6", Mata_Anggaran: "Uang Buku 1 Tahun", Gel_1: "Rp. 1.400.000", Gel_2: "Rp. 1.400.000", ICP: "Rp. 2.900.000" },
                 { ID: "K7", Mata_Anggaran: "Uang Kegiatan 1 Tahun", Gel_1: "Rp. 2.900.000", Gel_2: "Rp. 2.900.000", ICP: "Rp. 3.000.000" },
                 { ID: "K8", Mata_Anggaran: "Masta dan Awalussanah", Gel_1: "Rp. 400.000", Gel_2: "Rp. 400.000", ICP: "Rp. 400.000" },
-                { ID: "K9", Mata_Anggaran: "Dana Sarana dan Prasarana", Gel_1: "Rp. 300.000", Gel_2: "Rp. 300.000", ICP: "-" }
+                { ID: "K9", Mata_Anggaran: "Dana Sarana dan Prasarana", Gel_1: "Rp. 300.000", Gel_2: "Rp. 300.000", ICP: "Rp. 0" }
             ],
             catatanBiaya: [
-                { ID: "CB1", Teks_Catatan: "Indent mendapat potongan DPS Rp. 1.000.000 dan SPP Rp. 50.000 (Batas Indent sampai dengan 30 Agustus 2026)." },
-                { ID: "CB2", Teks_Catatan: "Uang seragam yang tertera di atas adalah untuk siswa putra, jika siswa putri ada tambahan Rp. 200.000." },
-                { ID: "CB3", Teks_Catatan: "Khusus kelas ICP ada uang Daftar Ulang Rp. 1.000.000 setiap naik ke kelas berikutnya." },
-                { ID: "CB4", Teks_Catatan: "SPP ICP sudah termasuk Pembelajaran selama 1 minggu di Kampung Inggris Kediri dan Edutrip ke Malaysia dan Singapura selama 1 minggu." }
+                { ID: "CB1", Teks_Catatan: "Program Indent: Pendaftaran melalui Program Indent mendapatkan keuntungan berupa potongan biaya: DPS sebesar Rp1.000.000. SPP sebesar Rp50.000 per bulan. Periode Program Indent berlaku sampai 30 Agustus 2026." },
+                { ID: "CB2", Teks_Catatan: "Biaya Seragam: Biaya seragam pada tabel berlaku untuk siswa putra. Untuk siswa putri, dikenakan tambahan biaya sebesar Rp200.000." },
+                { ID: "CB3", Teks_Catatan: "Daftar Ulang Kelas ICP: Khusus peserta didik Kelas ICP, dikenakan biaya daftar ulang sebesar Rp1.000.000 pada setiap kenaikan kelas." },
+                { ID: "CB4", Teks_Catatan: "Benefit Kelas ICP: SPP Kelas ICP telah mencakup program unggulan berupa:\n• Pembelajaran intensif selama 1 minggu di Kampung Inggris, Kediri.\n• Edutrip internasional ke Malaysia dan Singapura selama 1 minggu." }
             ],
             timeline: [
                 { ID: "T1", Tanggal: "1 Sep 2026 - 30 Nov 2026", Judul: "Pendaftaran Gel 1", Deskripsi: "Pengisian formulir online dan unggah berkas dasar." },
@@ -762,6 +777,9 @@
                 { ID: "S5", Teks_Syarat: "NISN (Jika Ada)" }
             ]
         };
+
+        function parseCurrency(str) { let num = String(str).replace(/[^0-9]/g, ''); return num ? parseInt(num, 10) : 0; }
+        function formatCurrency(num) { return num === 0 ? "-" : "Rp. " + num.toLocaleString('id-ID'); }
 
         function applyConfigToDOM() {
             try {
@@ -804,19 +822,20 @@
                     kontakContainer.innerHTML = '';
                     if (appState.kontak && appState.kontak.length > 0) {
                         appState.kontak.forEach((k) => {
-                            let isUnggulan = String(k.Divisi).toLowerCase().includes('unggulan');
-                            let color = isUnggulan ? 'blue' : 'orange';
-                            let icon = isUnggulan ? 'ph-user' : 'ph-globe';
+                            let divName = (k.Divisi || '').toLowerCase();
+                            let isBlue = divName.includes('unggulan') || divName.includes('reguler');
+                            let color = isBlue ? 'blue' : 'orange';
+                            let icon = isBlue ? 'ph-user' : 'ph-globe';
                             kontakContainer.innerHTML += `
-                                <div class="flex flex-col p-2.5 bg-${color}-50/50 rounded-xl border border-${color}-100 shadow-sm relative overflow-hidden group">
-                                    <div class="flex items-center mb-2">
-                                        <div class="w-7 h-7 rounded-full bg-${color}-100 text-${color}-600 flex justify-center items-center shrink-0 mr-2"><i class="ph-fill ${icon} text-sm"></i></div>
-                                        <div class="flex-1 min-w-0">
-                                            <span class="block text-[10px] font-black text-slate-800 leading-none mb-0.5 truncate">${k.Divisi || '-'}</span>
-                                            <span class="block text-[8px] font-medium text-slate-500 leading-tight truncate">${k.Nama || '-'}</span>
+                                <div class="flex flex-col p-3 bg-${color}-50/50 rounded-[1rem] border border-${color}-200 shadow-sm relative overflow-hidden group">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-${color}-200 text-${color}-700 flex justify-center items-center shrink-0 mr-2.5 relative z-10"><i class="ph-fill ${icon} text-xl"></i></div>
+                                        <div class="relative z-10 flex-1 truncate">
+                                            <span class="block text-[11px] font-black text-slate-800 leading-tight truncate">${k.Divisi || '-'}</span>
+                                            <span class="block text-[9px] font-medium text-slate-500 truncate">${k.Nama || '-'}</span>
                                         </div>
                                     </div>
-                                    <button onclick="window.open('https://wa.me/${String(k.No_WA || '0').replace(/[^0-9]/g, '').replace(/^0+/, '62')}?text=Halo%20Panitia%20PSB%20Al-Kautsar', '_blank')" class="w-full py-1.5 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center hover:bg-[#1da851] transition-colors"><i class="ph-bold ph-whatsapp-logo text-[12px] mr-1.5"></i><span class="text-[9px] font-bold">Chat WA</span></button>
+                                    <button onclick="window.open('https://wa.me/${String(k.No_WA || '0').replace(/^0+/, '62')}?text=Halo%20Panitia%20PSB%20Al-Kautsar', '_blank')" class="w-full py-2 bg-[#25D366] text-white rounded-lg shadow-sm flex items-center justify-center relative z-10 hover:bg-[#1da851] active:scale-95 transition-all"><i class="ph-bold ph-whatsapp-logo text-sm mr-1.5"></i><span class="text-[10px] font-bold tracking-wide">Chat WA</span></button>
                                 </div>
                             `;
                         });
@@ -846,47 +865,39 @@
             
             if(!appState.keuangan || !Array.isArray(appState.keuangan)) appState.keuangan = [];
             
-            let totalG1 = 0, totalG2 = 0, totalICP = 0;
-            let counter = 1;
-
-            appState.keuangan.forEach((k) => {
-                if(String(k.Mata_Anggaran).toLowerCase().includes('jumlah')) return; // Abaikan baris manual dengan kata "jumlah"
+            let filteredKeuangan = appState.keuangan.filter(k => !k.Mata_Anggaran.toLowerCase().includes('jumlah'));
+            
+            let totalG1 = 0; let totalG2 = 0; let totalICP = 0;
+            
+            filteredKeuangan.forEach((k, i) => {
+                totalG1 += parseCurrency(k.Gel_1);
+                totalG2 += parseCurrency(k.Gel_2);
+                totalICP += parseCurrency(k.ICP);
                 
-                const parseRp = (str) => {
-                    if(!str || String(str).trim() === '-' || String(str).trim() === '') return 0;
-                    let num = String(str).replace(/[^0-9]/g, '');
-                    return num ? parseInt(num, 10) : 0;
-                };
-
-                totalG1 += parseRp(k.Gel_1);
-                totalG2 += parseRp(k.Gel_2);
-                totalICP += parseRp(k.ICP);
-
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${counter++}</td><td>${k.Mata_Anggaran}</td><td>${k.Gel_1}</td><td>${k.Gel_2}</td><td>${k.ICP}</td>`;
+                tr.innerHTML = `<td>${i+1}</td><td>${k.Mata_Anggaran}</td><td>${k.Gel_1}</td><td>${k.Gel_2}</td><td>${k.ICP}</td>`;
                 tbody.appendChild(tr);
             });
 
-            // Auto-Append Baris Jumlah Terakhir
-            const formatRp = (num) => num === 0 ? '-' : 'Rp. ' + num.toLocaleString('id-ID');
             const trTotal = document.createElement('tr');
             trTotal.className = "total-row";
-            trTotal.innerHTML = `<td colspan="2">Jumlah Total Biaya</td><td>${formatRp(totalG1)}</td><td>${formatRp(totalG2)}</td><td>${formatRp(totalICP)}</td>`;
+            trTotal.innerHTML = `<td></td><td>JUMLAH TOTAL BIAYA</td><td>${formatCurrency(totalG1)}</td><td>${formatCurrency(totalG2)}</td><td>${formatCurrency(totalICP)}</td>`;
             tbody.appendChild(trTotal);
 
             if(!appState.catatanBiaya || !Array.isArray(appState.catatanBiaya)) appState.catatanBiaya = [];
             appState.catatanBiaya.forEach((cb) => {
                 if(cb.Teks_Catatan && String(cb.Teks_Catatan).trim() !== "") {
                     let highlightedText = String(cb.Teks_Catatan)
-                        .replace(/\n/g, "<br>")
                         .replace(/(Rp\.\s*[\d\.]+)/g, "<b class='text-red-600 font-black'>$1</b>")
+                        .replace(/(Rp\s*[\d\.]+)/g, "<b class='text-red-600 font-black'>$1</b>")
                         .replace(/\b(Indent)\b/gi, "<b class='text-blue-700 bg-blue-100 px-1 rounded-sm border border-blue-200'>$1</b>")
                         .replace(/\b(ICP)\b/g, "<b class='text-orange-700 bg-orange-100 px-1 rounded-sm border border-orange-200'>$1</b>")
-                        .replace(/(\d{1,2}\s+(?:Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\s+\d{4})/gi, "<b class='text-red-600 underline decoration-red-400 decoration-[1.5px]'>$1</b>");
+                        .replace(/(\d{1,2}\s+(?:Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\s+\d{4})/gi, "<b class='text-red-600 underline decoration-red-400 decoration-[1.5px]'>$1</b>")
+                        .replace(/\n/g, "<br>");
                     catatanList.innerHTML += `<li>${highlightedText}</li>`;
                 }
             });
-            if(appState.catatanBiaya.length === 0) catatanList.innerHTML = "<li class='list-none text-slate-400 text-[10px]'>Tidak ada catatan khusus.</li>";
+            if(appState.catatanBiaya.length === 0) catatanList.innerHTML = "<li class='list-none text-slate-400 text-[10px] text-center'>Tidak ada catatan khusus.</li>";
         }
 
         function renderTimeline() {
@@ -940,15 +951,31 @@
         }
 
         let toastTimeout; 
-        window.showToast = function(msg) { 
-            const toast = document.getElementById('toast'); document.getElementById('toast-msg').innerText = msg; toast.style.right = '16px'; toast.classList.remove('opacity-0');
-            clearTimeout(toastTimeout); toastTimeout = setTimeout(() => { toast.style.right = '-100%'; toast.classList.add('opacity-0'); }, 3000); 
+        window.showToast = function(msg, isError = false) { 
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            document.getElementById('toast-msg').innerHTML = msg;
+            
+            if(isError) {
+                toast.className = "absolute right-4 transition-all duration-300 z-[9999] bg-red-50/95 backdrop-blur-md text-red-800 px-3 py-2 rounded-full shadow-sm flex items-center space-x-1.5 text-[10px] font-bold border border-red-200 opacity-100 pointer-events-none transform translate-y-0";
+                icon.className = "ph-fill ph-warning-circle text-red-500 text-sm";
+            } else {
+                toast.className = "absolute right-4 transition-all duration-300 z-[9999] bg-emerald-50/95 backdrop-blur-md text-emerald-800 px-3 py-2 rounded-full shadow-sm flex items-center space-x-1.5 text-[10px] font-bold border border-emerald-200 opacity-100 pointer-events-none transform translate-y-0";
+                if(msg.includes("spin") || msg.includes("spinner")) { icon.className = "hidden"; } 
+                else { icon.className = "ph-fill ph-check-circle text-emerald-500 text-sm"; }
+            }
+            
+            clearTimeout(toastTimeout); 
+            toastTimeout = setTimeout(() => { 
+                toast.classList.remove('opacity-100', 'translate-y-0'); 
+                toast.classList.add('opacity-0', '-translate-y-2'); 
+            }, 3000); 
         }
 
-        function openModal() { document.getElementById('type-modal').classList.remove('hidden'); document.getElementById('type-modal').classList.add('flex'); document.getElementById('btn-baru').focus(); }
+        function openModal() { document.getElementById('type-modal').classList.remove('hidden'); document.getElementById('type-modal').classList.add('flex'); document.getElementById('btn-baru').focus(); history.pushState({ view: 'home', modal: true }, '', '#pilih-jalur'); }
         function closeModal() { document.getElementById('type-modal').classList.add('hidden'); document.getElementById('type-modal').classList.remove('flex'); }
 
-        function openProgramModal() { document.getElementById('program-modal').classList.remove('hidden'); document.getElementById('program-modal').classList.add('flex'); }
+        function openProgramModal() { document.getElementById('program-modal').classList.remove('hidden'); document.getElementById('program-modal').classList.add('flex'); history.pushState({ view: 'home', modal: true }, '', '#detail-program'); }
         function closeProgramModal() { document.getElementById('program-modal').classList.add('hidden'); document.getElementById('program-modal').classList.remove('flex'); }
 
         let logoClicks = 0; let logoTimer;
@@ -1127,7 +1154,7 @@
         async function fetchFromGAS() {
             if(!GAS_URL) return;
             try {
-                showToast("Menyinkronkan Data Cloud...");
+                showToast("<i class='ph-bold ph-spinner animate-spin mr-1 text-emerald-600 text-sm'></i> Menyinkronkan Data Cloud...");
                 let res = await fetch(GAS_URL);
                 let text = await res.text();
                 try {
@@ -1291,11 +1318,8 @@
                 <div id="ed-list-keuangan" class="space-y-3">`;
             
             if(!appState.keuangan) appState.keuangan = [];
-            appState.keuangan.forEach((k, index) => { 
-                if(!String(k.Mata_Anggaran).toLowerCase().includes('jumlah')) {
-                    html += getKeuanganHTML(k.Mata_Anggaran, k.Gel_1, k.Gel_2, k.ICP, index); 
-                }
-            });
+            let filteredBiaya = appState.keuangan.filter(k => !k.Mata_Anggaran.toLowerCase().includes('jumlah'));
+            filteredBiaya.forEach((k, index) => { html += getKeuanganHTML(k.Mata_Anggaran, k.Gel_1, k.Gel_2, k.ICP, index); });
             
             html += `</div></div>
             
