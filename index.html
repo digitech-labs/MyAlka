@@ -319,11 +319,13 @@
                     <div class="w-[70px]"></div>
                 </div>
                 
-                <div class="flex-1 overflow-y-auto relative w-full pt-8 pb-16 px-4 scroll-smooth">
-                    <svg class="absolute top-0 left-1/2 -translate-x-1/2 w-[180px] h-[95%] pointer-events-none opacity-40 z-0 drop-shadow-md" viewBox="0 0 100 800" preserveAspectRatio="none">
-                        <path class="map-line-dash" d="M 50,20 Q 120,120 50,240 T 50,460 T 50,680 T 50,820" fill="none" stroke="#4f46e5" stroke-width="6" stroke-linecap="round"/>
-                    </svg>
-                    <div id="dyn-timeline-container" class="flex flex-col items-center space-y-10 relative z-10 max-w-[320px] mx-auto"></div>
+                <div class="flex-1 overflow-y-auto w-full pt-8 pb-16 px-4 scroll-smooth">
+                    <div class="relative max-w-[320px] mx-auto">
+                        <svg class="absolute top-0 left-1/2 -translate-x-1/2 w-[180px] h-full pointer-events-none opacity-40 z-0 drop-shadow-md" viewBox="0 0 100 1000" preserveAspectRatio="none">
+                            <path class="map-line-dash" d="M 50,20 Q 120,120 50,240 T 50,460 T 50,680 T 50,900 T 50,1120" fill="none" stroke="#4f46e5" stroke-width="6" stroke-linecap="round"/>
+                        </svg>
+                        <div id="dyn-timeline-container" class="flex flex-col items-center space-y-10 relative z-10 w-full"></div>
+                    </div>
                 </div>
             </section>
 
@@ -447,7 +449,7 @@
                     <div class="bg-white rounded-2xl p-4 shadow-sm border border-red-200 relative animate-pulse-glow-red overflow-hidden">
                         <div class="absolute -left-4 -bottom-4 opacity-[0.03]"><i class="ph-fill ph-warning-circle text-[100px]"></i></div>
                         <h3 class="font-black text-red-600 text-[12px] italic mb-3 flex items-center relative z-10"><i class="ph-fill ph-warning-circle mr-1.5 text-lg"></i> Catatan Biaya :</h3>
-                        <ol id="dyn-catatan-biaya" class="list-decimal list-outside ml-4 text-[10px] text-slate-700 font-medium leading-relaxed space-y-3 marker:font-black marker:text-red-500 relative z-10 text-justify">
+                        <ol id="dyn-catatan-biaya" class="list-decimal list-outside ml-5 text-[10px] text-slate-700 font-medium leading-relaxed space-y-2.5 marker:font-black marker:text-red-500 relative z-10 text-justify">
                             <!-- Diisi oleh JS -->
                         </ol>
                     </div>
@@ -878,7 +880,6 @@
                     let highlightedText = String(cb.Teks_Catatan)
                         .replace(/\n/g, "<br>")
                         .replace(/(Rp\.\s*[\d\.]+)/g, "<b class='text-red-600 font-black'>$1</b>")
-                        .replace(/(Rp\s*[\d\.]+)/g, "<b class='text-red-600 font-black'>$1</b>")
                         .replace(/\b(Indent)\b/gi, "<b class='text-blue-700 bg-blue-100 px-1 rounded-sm border border-blue-200'>$1</b>")
                         .replace(/\b(ICP)\b/g, "<b class='text-orange-700 bg-orange-100 px-1 rounded-sm border border-orange-200'>$1</b>")
                         .replace(/(\d{1,2}\s+(?:Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\s+\d{4})/gi, "<b class='text-red-600 underline decoration-red-400 decoration-[1.5px]'>$1</b>");
@@ -907,7 +908,7 @@
                 let el = document.createElement('div'); el.className = `w-full flex flex-col items-center transform ${transformClass} animate-slide-up`;
                 el.style.animationDelay = `${(i+1)*0.1}s`;
 
-                let finalDateDisplay = String(t.Tanggal || '').replace(" - ", " - <br/>");
+                let finalDateDisplay = String(t.Tanggal || '');
 
                 if(i === appState.timeline.length - 1) { 
                     el.innerHTML = `
