@@ -344,10 +344,10 @@
                     <div class="bg-emerald-600 p-5 rounded-[1.5rem] text-white shadow-[0_10px_20px_rgba(5,150,105,0.3)] mb-6 relative overflow-hidden shrink-0">
                         <div class="absolute -right-4 -top-4 opacity-10"><i class="ph-fill ph-magnifying-glass text-[100px]"></i></div>
                         <h3 class="font-black text-[14px] mb-1 relative z-10">Status Penerimaan</h3>
-                        <p class="text-[10px] text-emerald-100 font-medium mb-4 relative z-10">Masukkan NISN atau NIK Ananda untuk melihat hasil seleksi.</p>
-                        <div class="relative z-10 flex">
-                            <input type="text" id="inp-cek-hasil" class="flex-1 py-3 pl-4 pr-4 rounded-l-xl text-slate-800 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-emerald-300" placeholder="Ketik NISN / NIK..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                            <button id="btn-cek-hasil" onclick="cekHasilSeleksi()" class="w-14 bg-slate-900 hover:bg-slate-800 rounded-r-xl flex items-center justify-center transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-slate-500"><i class="ph-bold ph-arrow-right text-white text-lg"></i></button>
+                        <p class="text-[10px] text-emerald-100 font-medium mb-4 relative z-10">Masukkan 16 Digit NIK Ananda untuk melihat hasil seleksi.</p>
+                        <div class="relative z-10 flex shadow-inner">
+                            <input type="text" id="inp-cek-hasil" maxlength="16" class="flex-1 py-3.5 pl-4 pr-4 rounded-l-xl text-slate-800 text-[13px] font-black focus:outline-none focus:ring-2 focus:ring-emerald-300" placeholder="Ketik 16 Digit NIK..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <button id="btn-cek-hasil" onclick="cekHasilSeleksi()" class="w-16 bg-slate-900 hover:bg-slate-800 rounded-r-xl flex items-center justify-center transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-slate-500"><i class="ph-bold ph-arrow-right text-white text-xl"></i></button>
                         </div>
                     </div>
 
@@ -357,21 +357,29 @@
                     </div>
 
                     <div id="hasil-result" class="hidden flex-col items-center animate-modal-pop w-full pb-8">
-                        <div id="certificate-card" class="bg-slate-900 w-full rounded-[2rem] p-6 shadow-2xl relative overflow-hidden border-[6px] border-slate-800 shrink-0">
-                            <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-amber-200 via-yellow-500 to-amber-200"></div>
-                            <div class="absolute -right-12 -bottom-12 opacity-[0.03]"><i class="ph-fill ph-seal-check text-[200px] text-white"></i></div>
-                            <div class="text-center relative z-10 mb-5">
-                                <div id="cert-icon" class="w-20 h-20 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 border-[4px] border-slate-900 shadow-[0_0_25px_rgba(52,211,153,0.5)]"><i class="ph-bold ph-check text-[40px] text-white"></i></div>
-                                <h2 id="cert-title" class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 tracking-widest mb-1 drop-shadow-md">LULUS SELEKSI</h2>
-                                <p class="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-bold">SDIT Muhammadiyah Al Kautsar</p>
+                        <div id="certificate-card" class="bg-slate-900 w-full rounded-[2rem] p-7 shadow-2xl relative overflow-hidden border-[6px] border-slate-800 shrink-0">
+                            <div id="cert-bg-glow" class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-amber-200 via-yellow-500 to-amber-200"></div>
+                            <div class="absolute -right-8 -bottom-8 opacity-[0.04]"><i id="cert-bg-icon" class="ph-fill ph-seal-check text-[200px] text-white"></i></div>
+                            
+                            <div class="text-center relative z-10 mb-6">
+                                <div id="cert-icon" class="w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(52,211,153,0.5)]"><i class="ph-bold ph-check text-[50px] text-white"></i></div>
+                                <h2 id="cert-title" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 tracking-widest mb-1 drop-shadow-md">LULUS</h2>
+                                <p class="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-bold mt-1">SDIT Muhammadiyah Al Kautsar</p>
                             </div>
-                            <div class="bg-slate-800/80 rounded-xl p-4 border border-slate-700 backdrop-blur-md relative z-10 mb-4">
-                                <div class="mb-3 border-b border-slate-700/50 pb-2"><span class="block text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">Nama Calon Siswa</span><span id="cert-nama" class="block text-[14px] font-black text-white leading-none">-</span></div>
-                                <div class="mb-3 border-b border-slate-700/50 pb-2"><span class="block text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">Program Diterima</span><span id="cert-program" class="block text-[14px] font-black text-emerald-400 leading-none">-</span></div>
-                                <div><span class="block text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">No. Pendaftaran</span><span id="cert-reg" class="block text-[12px] font-mono text-amber-300 font-bold leading-none">-</span></div>
+
+                            <div id="cert-message-box" class="bg-white/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-white/10 text-center">
+                                <p id="cert-message" class="text-[11px] text-white font-medium leading-relaxed italic">
+                                    <!-- Pesan Injeksi Javascript -->
+                                </p>
+                            </div>
+
+                            <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 backdrop-blur-md relative z-10">
+                                <div class="mb-4 border-b border-slate-700/50 pb-3"><span class="block text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1">Nama Calon Siswa</span><span id="cert-nama" class="block text-[15px] font-black text-white leading-none">-</span></div>
+                                <div class="mb-4 border-b border-slate-700/50 pb-3"><span class="block text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1">Program Diterima</span><span id="cert-program" class="block text-[15px] font-black text-emerald-400 leading-none">-</span></div>
+                                <div><span class="block text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1">No. Pendaftaran</span><span id="cert-reg" class="block text-[13px] font-mono text-amber-300 font-bold leading-none">-</span></div>
                             </div>
                         </div>
-                        <button id="btn-download-cert" onclick="downloadCertificate()" class="w-full mt-6 py-3.5 bg-gradient-to-r from-slate-800 to-slate-900 text-white text-[12px] font-bold rounded-xl flex items-center justify-center shadow-lg border border-slate-700 hover:bg-slate-800 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500 hidden"><i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh Surat Kelulusan</button>
+                        <button id="btn-download-cert" onclick="downloadCertificate()" class="w-full mt-6 py-4 bg-gradient-to-r from-slate-800 to-slate-900 text-white text-[13px] font-bold rounded-2xl flex items-center justify-center shadow-xl border border-slate-700 hover:bg-slate-800 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500 hidden"><i class="ph-bold ph-download-simple mr-2 text-xl"></i> Unduh Hasil Kelulusan</button>
                     </div>
                 </div>
             </section>
@@ -1446,19 +1454,80 @@
 
         function cekHasilSeleksi() {
             const searchVal = document.getElementById('inp-cek-hasil').value;
-            if(searchVal.length < 5) { showToast("Masukkan minimal 5 angka NISN/NIK!", true); return; }
-            document.getElementById('hasil-result').classList.add('hidden'); document.getElementById('hasil-loading').classList.remove('hidden'); document.getElementById('hasil-loading').classList.add('flex');
+            if(searchVal.length !== 16) { showToast("Masukkan 16 Digit NIK Ananda dengan lengkap!", true); return; }
+            
+            document.getElementById('hasil-result').classList.add('hidden'); 
+            document.getElementById('hasil-loading').classList.remove('hidden'); 
+            document.getElementById('hasil-loading').classList.add('flex');
+            
             setTimeout(() => {
-                document.getElementById('hasil-loading').classList.add('hidden'); document.getElementById('hasil-loading').classList.remove('flex');
-                let found = appState.pendaftar.find(p => p.NISN === searchVal || p.NIK_Anak === searchVal);
+                document.getElementById('hasil-loading').classList.add('hidden'); 
+                document.getElementById('hasil-loading').classList.remove('flex');
+                
+                let found = appState.pendaftar.find(p => p.NIK_Anak === searchVal);
+                
                 if(found) {
-                    document.getElementById('cert-nama').innerText = found.Nama_Siswa; document.getElementById('cert-program').innerText = found.Program || 'Kelas Reguler'; document.getElementById('cert-reg').innerText = found.ID_Daftar;
-                    const titleEl = document.getElementById('cert-title'); const iconEl = document.getElementById('cert-icon'); const btnDl = document.getElementById('btn-download-cert');
-                    if(found.Status_Seleksi === 'Diterima') { titleEl.innerText = "LULUS SELEKSI"; titleEl.className = "text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 tracking-widest mb-1 drop-shadow-md"; iconEl.className = "w-20 h-20 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 border-[4px] border-slate-900 shadow-[0_0_25px_rgba(52,211,153,0.5)]"; iconEl.innerHTML = '<i class="ph-bold ph-check text-[40px] text-white"></i>'; btnDl.classList.remove('hidden'); } 
-                    else if (found.Status_Seleksi === 'Ditolak') { titleEl.innerText = "TIDAK LULUS"; titleEl.className = "text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 tracking-widest mb-1 drop-shadow-md"; iconEl.className = "w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4 border-[4px] border-slate-900 shadow-[0_0_25px_rgba(239,68,68,0.5)]"; iconEl.innerHTML = '<i class="ph-bold ph-x text-[40px] text-white"></i>'; btnDl.classList.add('hidden'); } 
-                    else { titleEl.innerText = "PROSES SELEKSI"; titleEl.className = "text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 tracking-widest mb-1 drop-shadow-md"; iconEl.className = "w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 border-[4px] border-slate-900 shadow-[0_0_25px_rgba(59,130,246,0.5)]"; iconEl.innerHTML = '<i class="ph-bold ph-hourglass text-[40px] text-white animate-pulse"></i>'; btnDl.classList.add('hidden'); }
-                    document.getElementById('hasil-result').classList.remove('hidden'); document.getElementById('hasil-result').classList.add('flex'); showToast("Data Ditemukan!");
-                } else { showToast("Maaf, NISN/NIK tidak ditemukan dalam sistem.", true); }
+                    document.getElementById('cert-nama').innerText = found.Nama_Siswa; 
+                    document.getElementById('cert-program').innerText = found.Program || 'Kelas Reguler'; 
+                    document.getElementById('cert-reg').innerText = found.ID_Daftar;
+                    
+                    const titleEl = document.getElementById('cert-title'); 
+                    const iconEl = document.getElementById('cert-icon'); 
+                    const btnDl = document.getElementById('btn-download-cert');
+                    const msgBox = document.getElementById('cert-message-box');
+                    const msgText = document.getElementById('cert-message');
+                    const bgGlow = document.getElementById('cert-bg-glow');
+                    const bgIcon = document.getElementById('cert-bg-icon');
+                    
+                    if(found.Status_Seleksi === 'Diterima') { 
+                        titleEl.innerText = "SELAMAT! LULUS"; 
+                        titleEl.className = "text-[26px] font-black text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-500 tracking-widest mb-1 drop-shadow-md leading-tight"; 
+                        iconEl.className = "w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(52,211,153,0.6)]"; 
+                        iconEl.innerHTML = '<i class="ph-bold ph-check text-[50px] text-white"></i>'; 
+                        bgGlow.className = "absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-emerald-300 via-green-500 to-emerald-300";
+                        bgIcon.className = "ph-fill ph-confetti text-[200px] text-white";
+                        
+                        msgBox.className = "bg-green-500/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-green-500/20 text-center";
+                        msgText.className = "text-[11.5px] text-green-100 font-medium leading-relaxed italic";
+                        msgText.innerHTML = "🎉 <b>Ahlan wa Sahlan!</b> Selamat bergabung di keluarga besar SDIT Muhammadiyah Al Kautsar. Mari bersama melangkah maju, mencetak generasi Qur'ani yang cerdas, berakhlak mulia, dan siap memimpin masa depan!";
+                        
+                        btnDl.classList.remove('hidden'); 
+                    } 
+                    else if (found.Status_Seleksi === 'Ditolak') { 
+                        titleEl.innerText = "TIDAK LULUS"; 
+                        titleEl.className = "text-[26px] font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-red-600 tracking-widest mb-1 drop-shadow-md leading-tight"; 
+                        iconEl.className = "w-24 h-24 bg-gradient-to-br from-rose-400 to-red-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(225,29,72,0.6)]"; 
+                        iconEl.innerHTML = '<i class="ph-bold ph-x text-[50px] text-white"></i>'; 
+                        bgGlow.className = "absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-rose-400 via-red-500 to-rose-400";
+                        bgIcon.className = "ph-fill ph-warning-circle text-[200px] text-white";
+                        
+                        msgBox.className = "bg-red-500/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-red-500/20 text-center";
+                        msgText.className = "text-[11.5px] text-rose-100 font-medium leading-relaxed italic";
+                        msgText.innerHTML = "🌟 <b>Jangan Patah Semangat!</b> Mohon maaf, saat ini Ananda belum rezekinya bergabung dengan kami. Yakinlah rencana Allah selalu yang terbaik. Teruslah bersinar dan raih mimpimu di tempat yang hebat lainnya!";
+                        
+                        btnDl.classList.add('hidden'); 
+                    } 
+                    else { 
+                        titleEl.innerText = "PROSES SELEKSI"; 
+                        titleEl.className = "text-[26px] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600 tracking-widest mb-1 drop-shadow-md leading-tight"; 
+                        iconEl.className = "w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(59,130,246,0.6)]"; 
+                        iconEl.innerHTML = '<i class="ph-bold ph-hourglass text-[50px] text-white animate-pulse"></i>'; 
+                        bgGlow.className = "absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-blue-300 via-indigo-500 to-blue-300";
+                        bgIcon.className = "ph-fill ph-hourglass-high text-[200px] text-white";
+                        
+                        msgBox.className = "bg-blue-500/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-blue-500/20 text-center";
+                        msgText.className = "text-[11.5px] text-blue-100 font-medium leading-relaxed italic";
+                        msgText.innerHTML = "⏳ <b>Harap Bersabar!</b> Data Ananda saat ini sedang dalam tahap seleksi dan verifikasi oleh tim panitia. Silakan cek kembali secara berkala ya.";
+                        
+                        btnDl.classList.add('hidden'); 
+                    }
+                    
+                    document.getElementById('hasil-result').classList.remove('hidden'); 
+                    document.getElementById('hasil-result').classList.add('flex'); 
+                    showToast("Data Ditemukan!");
+                } else { 
+                    showToast("Maaf, NIK tidak ditemukan dalam sistem.", true); 
+                }
             }, 1200);
         }
 
@@ -1833,35 +1902,137 @@
             if(btnSimpan) btnSimpan.innerHTML = '<i class="ph-bold ph-floppy-disk text-lg text-emerald-400"></i> Simpan Semua Perubahan';
         }
 
-        function renderAdminList() {
-            const list = document.getElementById('list-pendaftar'); list.innerHTML = "";
-            if(!appState.pendaftar) appState.pendaftar = [];
-            if(appState.pendaftar.length === 0) { list.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs font-bold bg-white rounded-xl">Belum ada pendaftar</div>`; return; }
-            appState.pendaftar.forEach((p, i) => {
-                let statusColor = p.Status_Seleksi === 'Diterima' ? 'text-green-600 bg-green-100 border-green-200' : (p.Status_Seleksi === 'Ditolak' ? 'text-red-600 bg-red-100 border-red-200' : 'text-orange-600 bg-orange-100 border-orange-200');
-                let el = document.createElement('div'); el.className = "bg-white p-4 rounded-2xl shadow-sm border border-slate-200";
-                
-                let selectStatus = `
-                    <select onchange="updateStatus(${i}, this.value)" class="px-2 py-1 rounded border font-bold text-[10px] outline-none cursor-pointer ${statusColor}">
-                        <option value="Menunggu" ${p.Status_Seleksi === 'Menunggu' ? 'selected' : ''}>Menunggu</option>
-                        <option value="Diterima" ${p.Status_Seleksi === 'Diterima' ? 'selected' : ''}>Diterima</option>
-                        <option value="Ditolak" ${p.Status_Seleksi === 'Ditolak' ? 'selected' : ''}>Ditolak</option>
-                    </select>
-                `;
+        let adminFilter = { search: '', program: 'ALL', sort: 'NEW' };
 
-                el.innerHTML = `<div class="flex justify-between items-start mb-2 border-b border-slate-100 pb-2"><div><span class="text-[9px] font-black bg-blue-100 text-blue-700 px-2 py-0.5 rounded mr-1">${p.Jalur}</span><span class="text-[9px] font-black bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded mr-1">${p.Program || '-'}</span><span class="text-[9px] font-bold text-slate-400">${p.Waktu_Daftar}</span></div> ${selectStatus} </div><div class="mb-3"><h4 class="font-black text-slate-800 text-[13px] leading-tight">${p.Nama_Siswa}</h4><p class="text-[10px] text-slate-500 font-medium mt-0.5"><i class="ph-fill ph-whatsapp-logo text-green-500"></i> ${p.No_WA} - Ayah: ${p.Nama_Ayah}</p></div><div class="flex gap-2"><button type="button" onclick="deletePendaftar(${i})" class="w-full bg-slate-100 text-slate-500 rounded-lg py-2 text-[10px] font-bold hover:bg-red-100 hover:text-red-600 transition-colors focus:outline-none flex items-center justify-center gap-1.5"><i class="ph-bold ph-trash"></i> Hapus Data</button></div>`; list.appendChild(el);
+        function renderAdminList() {
+            const panel = document.getElementById('panel-pendaftar');
+            
+            // BIKIN UI PENCARIAN & FILTER JIKA BELUM ADA
+            if (!document.getElementById('admin-search-bar')) {
+                panel.innerHTML = `
+                    <div class="mb-4 flex flex-col gap-2 bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+                        <div class="relative">
+                            <input type="text" id="admin-search-bar" placeholder="Cari nama atau NIK..." class="w-full pl-9 pr-3 py-2.5 text-[11px] font-bold border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 bg-slate-50" oninput="adminFilter.search = this.value; renderAdminListItems();">
+                            <i class="ph-bold ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        </div>
+                        <div class="flex gap-2">
+                            <select class="flex-1 text-[10px] font-bold border border-slate-200 rounded-lg p-2.5 focus:outline-none bg-white" onchange="adminFilter.program = this.value; renderAdminListItems();">
+                                <option value="ALL">Semua Program</option>
+                                <option value="UNGGULAN">Unggulan</option>
+                                <option value="ICP">ICP</option>
+                            </select>
+                            <select class="flex-1 text-[10px] font-bold border border-slate-200 rounded-lg p-2.5 focus:outline-none bg-white" onchange="adminFilter.sort = this.value; renderAdminListItems();">
+                                <option value="NEW">Paling Baru</option>
+                                <option value="AZ">Nama A - Z</option>
+                                <option value="ZA">Nama Z - A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="list-pendaftar-items" class="space-y-2"></div>
+                `;
+            }
+            renderAdminListItems();
+        }
+
+        function renderAdminListItems() {
+            const list = document.getElementById('list-pendaftar-items');
+            list.innerHTML = "";
+            let data = [...(appState.pendaftar || [])];
+
+            // 1. Proses Filter Pencarian
+            if(adminFilter.search) {
+                let q = adminFilter.search.toLowerCase();
+                data = data.filter(p => (p.Nama_Siswa && p.Nama_Siswa.toLowerCase().includes(q)) || (p.NIK_Anak && p.NIK_Anak.includes(q)));
+            }
+            // 2. Proses Filter Program
+            if(adminFilter.program !== 'ALL') {
+                data = data.filter(p => p.Program === adminFilter.program);
+            }
+            // 3. Proses Sorting
+            if(adminFilter.sort === 'AZ') data.sort((a,b) => (a.Nama_Siswa || "").localeCompare(b.Nama_Siswa || ""));
+            else if(adminFilter.sort === 'ZA') data.sort((a,b) => (b.Nama_Siswa || "").localeCompare(a.Nama_Siswa || ""));
+            else data.reverse(); // Default: Paling Baru (dibalik urutannya)
+
+            if(data.length === 0) { list.innerHTML = `<div class="p-4 text-center text-slate-400 text-[10px] font-bold bg-white rounded-xl border border-slate-200">Tidak ada data ditemukan</div>`; return; }
+
+            // RENDER KARTU KOMPAK & ELEGAN
+            data.forEach((p) => {
+                let isDiterima = p.Status_Seleksi === 'Diterima';
+                let isDitolak = p.Status_Seleksi === 'Ditolak';
+                
+                // WARNAI SELURUH KARTU SESUAI STATUS!
+                let cardColor = isDiterima ? 'bg-green-50 border-green-300' : (isDitolak ? 'bg-red-50 border-red-300' : 'bg-white border-slate-200 hover:border-blue-300');
+                // WARNA KHUSUS DROPDOWN
+                let statusColor = isDiterima ? 'text-green-800 bg-green-200 border-green-400' : (isDitolak ? 'text-red-800 bg-red-200 border-red-400' : 'text-slate-700 bg-slate-100 border-slate-300');
+                
+                let el = document.createElement('div');
+                el.className = `p-3 rounded-xl shadow-sm border flex flex-col gap-2 transition-colors duration-300 ${cardColor}`;
+                el.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex flex-wrap gap-1 mt-0.5">
+                            <span class="text-[8px] font-black bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded uppercase">${p.Jalur}</span>
+                            <span class="text-[8px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase">${p.Program || '-'}</span>
+                            <span class="text-[8px] font-bold text-slate-400 ml-1">${(p.Waktu_Daftar || '').split(' pukul')[0]}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <select onchange="updateStatusById('${p.ID_Daftar}', this.value)" class="px-2 py-1 rounded-md border font-black text-[9px] outline-none cursor-pointer ${statusColor}">
+                                <option value="Menunggu" ${p.Status_Seleksi === 'Menunggu' ? 'selected' : ''}>Menunggu</option>
+                                <option value="Diterima" ${p.Status_Seleksi === 'Diterima' ? 'selected' : ''}>Diterima</option>
+                                <option value="Ditolak" ${p.Status_Seleksi === 'Ditolak' ? 'selected' : ''}>Ditolak</option>
+                            </select>
+                            <button type="button" onclick="deletePendaftarById('${p.ID_Daftar}')" class="w-6 h-6 bg-white border border-red-200 text-red-500 rounded flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm"><i class="ph-bold ph-trash text-[11px]"></i></button>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <h4 class="font-black text-slate-800 text-[12px] leading-tight truncate">${p.Nama_Siswa}</h4>
+                        <p class="text-[9.5px] text-slate-600 font-medium truncate mt-0.5"><i class="ph-fill ph-whatsapp-logo text-green-600"></i> ${p.No_WA} <span class="mx-1 text-slate-300">|</span> NIK: ${p.NIK_Anak}</p>
+                    </div>
+                `;
+                list.appendChild(el);
             });
         }
-        async function updateStatus(index, newStatus) { let id = appState.pendaftar[index].ID_Daftar; appState.pendaftar[index].Status_Seleksi = newStatus; renderAdminList(); showToast("Status Diubah"); if(GAS_URL) await postToGAS("UPDATE_STATUS", {id: id, newStatus: newStatus}); }
-        function deletePendaftar(index) { 
+
+        // FUNGSI UPDATE BERDASARKAN ID (AGAR FILTER TIDAK ERROR)
+        async function updateStatusById(id, newStatus) { 
+            let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
+            if(index !== -1) {
+                appState.pendaftar[index].Status_Seleksi = newStatus; 
+                renderAdminListItems(); 
+                showToast("Menyimpan status ke Cloud..."); 
+                if(GAS_URL) {
+                    let success = await postToGAS("UPDATE_STATUS", {id: id, newStatus: newStatus});
+                    if(success) showToast("Sukses tersimpan di Cloud!");
+                    else showToast("Gagal terkoneksi ke Cloud!", true);
+                }
+            }
+        }
+
+        // FUNGSI HAPUS BERDASARKAN ID
+        function deletePendaftarById(id) { 
             showConfirm("Yakin ingin menghapus data calon siswa ini secara permanen?", async () => {
-                let id = appState.pendaftar[index].ID_Daftar; 
-                appState.pendaftar.splice(index, 1); 
-                renderAdminList(); 
-                applyConfigToDOM(); 
-                showToast("Data berhasil dihapus!"); 
-                if(GAS_URL) await postToGAS("DELETE_PENDAFTAR", {id: id});
-            });
+                let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
+                if(index !== -1) {
+                    appState.pendaftar.splice(index, 1); 
+                    renderAdminListItems(); 
+                    applyConfigToDOM(); 
+                    showToast("Data dihapus. Mengupdate Cloud..."); 
+                    if(GAS_URL) await postToGAS("DELETE_PENDAFTAR", {id: id});
+                }
+            }); 
+        }
+
+        // FIX BUG CORS: UBAH CONTENT-TYPE MENJADI text/plain
+        async function postToGAS(action, data) {
+            if(!GAS_URL) return true;
+            try { 
+                await fetch(GAS_URL, { 
+                    method: 'POST', 
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'text/plain' }, 
+                    body: JSON.stringify({ action: action, data: data }) 
+                }); 
+                return true; 
+            } catch(e) { return false; }
         }
 
         function manualTarikData() { showToast("Meminta data dari Cloud..."); fetchFromGAS(); }
