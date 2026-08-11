@@ -122,18 +122,18 @@
         .premium-table thead tr:first-child th:last-child { background: linear-gradient(to bottom, #ea580c, #f97316); color: #ffffff; border-top-right-radius: 12px; letter-spacing: 1px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
         .premium-table thead tr:last-child th:nth-child(1) { background-color: #eff6ff; color: #1d4ed8; font-size: 7.5px; border-bottom: 2px solid #bfdbfe; }
         .premium-table thead tr:last-child th:nth-child(2) { background-color: #ecfdf5; color: #047857; font-size: 7.5px; border-bottom: 2px solid #a7f3d0; }
-        .premium-table tbody td { font-size: 8.5px; font-weight: 700; padding: 6.5px 4px; letter-spacing: -0.2px; line-height: 1.1; border-bottom: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; }
-        .premium-table tbody tr:nth-child(odd) td:first-child { background-color: #ffffff; color: #1e293b; padding-left: 8px; }
-        .premium-table tbody tr:nth-child(even) td:first-child { background-color: #f8fafc; color: #1e293b; padding-left: 8px; }
-        .premium-table tbody tr:nth-child(odd) td:nth-child(2) { text-align: right; background-color: #f0f9ff; color: #1e40af; }
-        .premium-table tbody tr:nth-child(even) td:nth-child(2) { text-align: right; background-color: #e0f2fe; color: #1e40af; }
-        .premium-table tbody tr:nth-child(odd) td:nth-child(3) { text-align: right; background-color: #f0fdf4; color: #166534; }
-        .premium-table tbody tr:nth-child(even) td:nth-child(3) { text-align: right; background-color: #dcfce7; color: #166534; }
+        .premium-table tbody td { font-size: 8.5px; font-weight: 700; padding: 6.5px 6px; letter-spacing: -0.2px; line-height: 1.1; border-bottom: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; }
+        .premium-table tbody tr:nth-child(odd) td:first-child { text-align: center; background-color: #ffffff; color: #1e293b; }
+        .premium-table tbody tr:nth-child(even) td:first-child { text-align: center; background-color: #f8fafc; color: #1e293b; }
+        .premium-table tbody tr:nth-child(odd) td:nth-child(2) { text-align: left; background-color: #f0f9ff; color: #1e40af; }
+        .premium-table tbody tr:nth-child(even) td:nth-child(2) { text-align: left; background-color: #e0f2fe; color: #1e40af; }
+        .premium-table tbody tr:nth-child(odd) td:nth-child(3), .premium-table tbody tr:nth-child(odd) td:nth-child(4) { text-align: right; background-color: #f0fdf4; color: #166534; }
+        .premium-table tbody tr:nth-child(even) td:nth-child(3), .premium-table tbody tr:nth-child(even) td:nth-child(4) { text-align: right; background-color: #dcfce7; color: #166534; }
         .premium-table tbody tr:nth-child(odd) td:last-child { text-align: right; background-color: #fff7ed; color: #9a3412; }
         .premium-table tbody tr:nth-child(even) td:last-child { text-align: right; background-color: #ffedd5; color: #9a3412; }
-        .premium-table tr.total-row td { background: linear-gradient(to right, #0f172a, #1e293b) !important; font-weight: 900; color: #fbbf24 !important; font-size: 8.5px; border-top: 3px solid #fbbf24; border-bottom: 2px solid #0f172a; border-left: none !important; border-right: none !important; padding: 6px 4px; white-space: nowrap; }
+        .premium-table tr.total-row td { background: linear-gradient(to right, #0f172a, #1e293b) !important; font-weight: 900; color: #fbbf24 !important; font-size: 8.5px; border-top: 3px solid #fbbf24; border-bottom: 2px solid #0f172a; border-left: none !important; border-right: none !important; padding: 6px 6px; white-space: nowrap; }
         .premium-table tr.total-row td:first-child { border-bottom-left-radius: 12px; text-align: right !important; text-transform: uppercase; letter-spacing: 1px; padding-right: 8px; }
-        .premium-table tr.total-row td:last-child { border-bottom-right-radius: 12px; }
+        .premium-table tr.total-row td:last-child { border-bottom-right-radius: 12px; text-align: right !important; }
     </style>
 </head>
 
@@ -145,6 +145,57 @@
         <div id="toast" class="absolute top-4 right-[-100%] transition-all duration-500 z-[9999] bg-slate-900/80 backdrop-blur-xl text-white px-4 py-3 rounded-full shadow-2xl flex items-center space-x-2.5 text-[11px] font-bold border border-white/20 opacity-0 max-w-[90%] pointer-events-none">
             <div class="w-6 h-6 bg-blue-500/30 rounded-full flex items-center justify-center shrink-0"><i class="ph-fill ph-info text-blue-300 text-sm"></i></div>
             <span id="toast-msg" class="leading-tight drop-shadow-sm truncate">Pesan</span>
+        </div>
+
+        <!-- MODAL EDIT SISWA -->
+        <div id="edit-modal" onclick="if(event.target === this) closeEditModal()" class="absolute inset-0 z-[2000] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+            <div class="bg-white rounded-2xl w-full max-w-[350px] p-5 shadow-2xl animate-modal-pop flex flex-col">
+                <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                    <h3 class="font-black text-slate-800 text-[13px] flex items-center"><i class="ph-bold ph-pencil-simple text-blue-600 mr-2 text-lg"></i> Edit Data Siswa</h3>
+                    <button onclick="closeEditModal()" class="text-slate-400 hover:text-red-500"><i class="ph-bold ph-x"></i></button>
+                </div>
+                <div class="space-y-3 flex-1 overflow-y-auto pr-1">
+                    <input type="hidden" id="edit-id">
+                    <div>
+                        <label class="text-[9px] font-bold text-slate-600 mb-1 block">Nama Lengkap</label>
+                        <input type="text" id="edit-nama" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-600 mb-1 block">NIK Anak</label>
+                            <input type="text" id="edit-nik" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-600 mb-1 block">NISN</label>
+                            <input type="text" id="edit-nisn" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-600 mb-1 block">No. WhatsApp</label>
+                            <input type="text" id="edit-wa" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-600 mb-1 block">Program</label>
+                            <select id="edit-program" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none"><option value="UNGGULAN">UNGGULAN</option><option value="ICP">ICP</option></select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-600 mb-1 block">Nama Ayah</label>
+                            <input type="text" id="edit-ayah" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-600 mb-1 block">Nama Ibu</label>
+                            <input type="text" id="edit-ibu" class="w-full border border-slate-300 rounded-lg p-2 text-[11px] font-bold text-slate-800 focus:border-blue-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 mt-2 border-t border-slate-200 flex justify-end gap-2">
+                    <button onclick="closeEditModal()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-lg text-[10px]">Batal</button>
+                    <button onclick="simpanEditPendaftar()" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg text-[10px] shadow-md flex items-center"><i class="ph-bold ph-floppy-disk mr-1.5"></i> Simpan</button>
+                </div>
+            </div>
         </div>
 
         <div id="validation-modal" onclick="if(event.target === this) closeValidationModal()" class="absolute inset-0 z-[900] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm">
@@ -235,8 +286,10 @@
         <nav id="main-nav" class="w-full z-[500] bg-white border-b border-slate-200/60 shadow-sm shrink-0">
             <div class="px-4 h-14 flex justify-between items-center">
                 <div class="flex items-center cursor-pointer" onclick="handleLogoClick()">
-                    <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto object-contain drop-shadow-sm">
+                <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto object-contain drop-shadow-sm">
                 </div>
+                <!-- MINI BADGE STATUS GAS -->
+                <div id="gas-status-mini" class="hidden text-[9px] font-bold px-2.5 py-1 rounded-full flex items-center shadow-sm"></div>
             </div>
         </nav>
 
@@ -244,7 +297,7 @@
 
             <section id="view-home" class="page-section flex-1 w-full flex flex-col items-center justify-start animate-fade-in pb-10">
                 <div class="w-full relative aspect-video bg-slate-900 overflow-hidden shadow-sm shrink-0">
-                    <img src="https://raw.githubusercontent.com/nashrulaziz7/PSB/main/poster.png" alt="Ilustrasi Gedung" class="w-full h-full object-cover">
+                    <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/poster.png" alt="Ilustrasi Gedung" class="w-full h-full object-cover">
                     <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#f8fafc] to-transparent pointer-events-none"></div>
 
                     <div class="wave-container z-20">
@@ -697,11 +750,9 @@
                     </div>
 
                     <div class="flex-1 overflow-y-auto p-4 relative bg-slate-50">
-                        <div id="gas-status" class="bg-green-100 text-green-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-green-200 shadow-sm">
-                            <i class="ph-fill ph-check-circle text-green-500 mr-2 text-lg"></i> Sistem Terhubung ke Database Cloud (GAS)
-                        </div>
 
                         <div id="panel-pendaftar"><div id="list-pendaftar" class="space-y-3"></div></div>
+
                         <div id="panel-editor" class="hidden relative pb-24"></div>
 
                         <div id="panel-database" class="hidden space-y-4">
@@ -771,6 +822,15 @@
         }
 
         function navigate(viewId, pushToHistory = true) {
+            // --- FITUR AUTO-RESET HALAMAN PENGUMUMAN ---
+            let inpCek = document.getElementById('inp-cek-hasil');
+            let resCek = document.getElementById('hasil-result');
+            let loadCek = document.getElementById('hasil-loading');
+            if(inpCek) inpCek.value = '';
+            if(resCek) { resCek.classList.add('hidden'); resCek.classList.remove('flex'); }
+            if(loadCek) { loadCek.classList.add('hidden'); loadCek.classList.remove('flex'); }
+            // -------------------------------------------
+
             document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden')); 
             document.getElementById('view-' + viewId).classList.remove('hidden');
             
@@ -798,8 +858,8 @@
                 List_ICP_Depan: "Global English Excellence\nCambridge Class\nEnglish Daily\nGlobal Mindset\nEdutrip",
                 Desc_ICP_Popup: "Mempersiapkan generasi global dengan kemampuan bahasa Inggris aktif, pemahaman kurikulum internasional, dan wawasan global.",
                 List_ICP_Popup: "Cambridge Class\nEnglish Daily Habit\nGlobal Mindset Concept\nNative Speaker Interaction\nEdutrip International\nScience & Math in English\nInternational Student Exchange Prep",
-                URL_Brosur1: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur1.png",
-                URL_Brosur2: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur2.png",
+                URL_Brosur1: "https://raw.githubusercontent.com/digitech-labs/PSB/main/brosur1.png",
+                URL_Brosur2: "https://raw.githubusercontent.com/digitech-labs/PSB/main/brosur2.png",
                 URL_Brosur3: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur3.png",
                 Opt_Pendidikan: "D1\nD2\nD3\nD4\nInformal\nLainnya\nNon Formal\nPaket A\nPaket B\nPaket C\nPAUD\nProfesi\nPutus SD\nS1\nS2\nS2 Terapan\nS3\nS3 Terapan\nSD/Sederajat\nSMP/Sederajat\nSMA/Sederajat\nSP1\nSP2\nTidak Sekolah\nTK Sederajat",
                 Opt_Pekerjaan: "Buruh\nKaryawan Swasta\nLainnya\nNelayan\nPedagang Besar\nPedagang Kecil\nPensiunan\nPetani\nPeternak\nPNS/TNI/Polri\nSudah meninggal\nTenaga Kerja Indonesia\nTidak bekerja\nTidak dapat diterapkan\nWirausaha\nWiraswasta",
@@ -994,6 +1054,19 @@
             });
         }
 
+        function formatRpStylized(val) {
+            if (val === undefined || val === null || val === '' || val === '-') return '-';
+            let num = parseInt(String(val).replace(/[^0-9]/g, ''));
+            if (isNaN(num)) return val;
+            let str = num.toLocaleString('id-ID');
+            let parts = str.split('.');
+            if(parts.length > 1) {
+                let lastPart = parts.pop();
+                return `Rp ${parts.join('.')} <span class="opacity-40">.${lastPart}</span>`;
+            }
+            return 'Rp ' + str;
+        }
+
         function renderKeuangan() {
             const tbody = document.getElementById('dyn-keuangan-tbody');
             if(!tbody) return;
@@ -1014,33 +1087,36 @@
                 let tr = document.createElement('tr');
                 tr.className = i % 2 === 0 ? 'bg-white' : 'bg-slate-50/50';
                 tr.innerHTML = `
-                    <td class="p-2 border border-slate-200 text-center text-[9px] font-black text-slate-500">${i + 1}</td>
-                    <td class="p-2 border border-slate-200 text-left text-[9px] font-bold text-slate-700">${namaAnggaran}</td>
-                    <td class="p-2 border border-slate-200 text-center text-[9px] font-bold text-blue-600">${formatRp(k.Gel_1)}</td>
-                    <td class="p-2 border border-slate-200 text-center text-[9px] font-bold text-teal-600">${formatRp(k.Gel_2)}</td>
-                    <td class="p-2 border border-slate-200 text-center text-[9px] font-bold text-amber-700">${k.ICP ? formatRp(k.ICP) : '-'}</td>
+                    <td class="p-2 border border-slate-200 text-[9px] font-black text-slate-500">${i + 1}</td>
+                    <td class="p-2 border border-slate-200 text-[9px] font-bold text-slate-700">${namaAnggaran}</td>
+                    <td class="p-2 border border-slate-200 text-[9px] font-bold text-blue-600">${formatRpStylized(k.Gel_1)}</td>
+                    <td class="p-2 border border-slate-200 text-[9px] font-bold text-teal-600">${formatRpStylized(k.Gel_2)}</td>
+                    <td class="p-2 border border-slate-200 text-[9px] font-bold text-amber-700">${k.ICP ? formatRpStylized(k.ICP) : '-'}</td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            document.getElementById('tot-u1').innerText = formatRp(totU1);
-            document.getElementById('tot-u2').innerText = formatRp(totU2);
-            document.getElementById('tot-icp').innerText = formatRp(totICP);
+            document.getElementById('tot-u1').innerHTML = formatRpStylized(totU1);
+            document.getElementById('tot-u2').innerHTML = formatRpStylized(totU2);
+            document.getElementById('tot-icp').innerHTML = formatRpStylized(totICP);
 
             const cttContainer = document.getElementById('dyn-catatan-biaya');
             if(cttContainer && appState.catatanBiaya) {
                 cttContainer.innerHTML = '';
-                appState.catatanBiaya.forEach(c => {
+                appState.catatanBiaya.forEach((c, i) => {
                     let text = c.Teks_Catatan || '';
                     text = text.replace(/^([^:]+):/i, function(match, p1) {
                         return `<span class="inline-block bg-red-100 text-red-700 font-black px-2.5 py-1 rounded-full text-[10px] tracking-wide border border-red-200 mr-1 mb-1.5 shadow-sm">${p1}</span> :<br>`;
                     });
-                    text = text.replace(/Indent/gi, '<span class="bg-blue-100 text-blue-600 px-1 rounded font-bold">Indent</span>');
-                    text = text.replace(/ICP/gi, '<span class="bg-amber-100 text-amber-600 px-1 rounded font-bold">ICP</span>');
+                    text = text.replace(/Indent/gi, '<span class="bg-blue-100 text-blue-600 px-1 rounded font-bold shadow-sm">Indent</span>');
+                    text = text.replace(/ICP/gi, '<span class="bg-amber-100 text-amber-600 px-1 rounded font-bold shadow-sm">ICP</span>');
 
-                    let p = document.createElement('p');
-                    p.className = 'text-[9.5px] text-slate-600 leading-relaxed mb-3 pb-3 border-b border-slate-100 last:border-0 last:mb-0 last:pb-0';
-                    p.innerHTML = text;
+                    let p = document.createElement('div');
+                    p.className = 'flex items-start mb-3 pb-3 border-b border-slate-200/60 last:border-0 last:mb-0 last:pb-0';
+                    p.innerHTML = `
+                        <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] shrink-0 mr-2.5 shadow-sm border border-red-600">${i + 1}</div>
+                        <div class="flex-1 text-[9.5px] text-slate-600 leading-relaxed mt-0.5">${text}</div>
+                    `;
                     cttContainer.appendChild(p);
                 });
             }
@@ -1538,10 +1614,225 @@
             });
         }
 
+        let adminFilter = { search: '', program: 'ALL', sort: 'NEW' };
+
+        function renderAdminList() {
+            const panel = document.getElementById('panel-pendaftar');
+            
+            if (!document.getElementById('admin-search-bar')) {
+                panel.innerHTML = `
+                    <div class="flex flex-col gap-2 mb-3">
+                        <div class="flex gap-2">
+                            <div class="relative flex-1">
+                                <input type="text" id="admin-search-bar" placeholder="Cari nama/NIK..." class="w-full pl-7 pr-2 py-1.5 text-[10px] font-bold border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 bg-white shadow-sm" oninput="adminFilter.search = this.value; renderAdminListItems();">
+                                <i class="ph-bold ph-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            </div>
+                            <button onclick="terimaYangDipilih()" class="bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white px-2.5 py-1.5 rounded-lg text-[9px] font-bold transition-all flex items-center border border-emerald-200 whitespace-nowrap shadow-sm"><i class="ph-bold ph-check-square-offset mr-1"></i> Terima</button>
+                            <button id="btn-simpan-cloud" onclick="simpanKeCloud()" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1.5 rounded-lg text-[9px] font-bold shadow-sm transition-all flex items-center whitespace-nowrap"><i class="ph-bold ph-cloud-arrow-up mr-1"></i> Simpan</button>
+                        </div>
+                        <div class="flex gap-2">
+                            <select class="flex-1 text-[9px] font-bold border border-slate-200 rounded-lg p-1.5 focus:outline-none bg-white shadow-sm" onchange="adminFilter.program = this.value; renderAdminListItems();">
+                                <option value="ALL">Semua Program</option>
+                                <option value="UNGGULAN">Unggulan</option>
+                                <option value="ICP">ICP</option>
+                            </select>
+                            <select class="flex-1 text-[9px] font-bold border border-slate-200 rounded-lg p-1.5 focus:outline-none bg-white shadow-sm" onchange="adminFilter.sort = this.value; renderAdminListItems();">
+                                <option value="NEW">Paling Baru</option>
+                                <option value="AZ">Nama A - Z</option>
+                                <option value="ZA">Nama Z - A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden bg-white rounded-xl shadow-sm border border-slate-200 w-full">
+                        <table class="w-full text-left table-fixed">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2 w-8 text-center border-r border-slate-200"><input type="checkbox" id="check-all" onclick="toggleAllChecks(this)" class="w-3 h-3 rounded border-slate-300 text-blue-600 cursor-pointer"></th>
+                                    <th class="p-2 w-[45%] text-[9px] font-black text-slate-500 uppercase border-r border-slate-200">Siswa & Program</th>
+                                    <th class="p-2 w-[30%] text-[9px] font-black text-slate-500 uppercase text-center border-r border-slate-200">Status</th>
+                                    <th class="p-2 w-10 text-[9px] font-black text-slate-500 uppercase text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="list-pendaftar-tbody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            renderAdminListItems();
+        }
+
+        function renderAdminListItems() {
+            const tbody = document.getElementById('list-pendaftar-tbody');
+            tbody.innerHTML = "";
+            let data = [...(appState.pendaftar || [])];
+
+            if(adminFilter.search) {
+                let q = adminFilter.search.toLowerCase();
+                data = data.filter(p => (p.Nama_Siswa && p.Nama_Siswa.toLowerCase().includes(q)) || (p.NIK_Anak && p.NIK_Anak.includes(q)));
+            }
+            if(adminFilter.program !== 'ALL') {
+                data = data.filter(p => p.Program === adminFilter.program);
+            }
+            if(adminFilter.sort === 'AZ') data.sort((a,b) => (a.Nama_Siswa || "").localeCompare(b.Nama_Siswa || ""));
+            else if(adminFilter.sort === 'ZA') data.sort((a,b) => (b.Nama_Siswa || "").localeCompare(a.Nama_Siswa || ""));
+            else data.reverse(); 
+
+            if(data.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 text-[10px] font-bold">Tidak ada data ditemukan</td></tr>`; return; }
+
+            data.forEach((p) => {
+                let isDiterima = p.Status_Seleksi === 'Diterima';
+                let isDitolak = p.Status_Seleksi === 'Ditolak';
+                
+                let cardColor = isDiterima ? 'bg-green-50/50' : (isDitolak ? 'bg-red-50/50' : 'bg-white hover:bg-slate-50');
+                let statusColor = isDiterima ? 'text-green-700 bg-green-100 border-green-300' : (isDitolak ? 'text-red-700 bg-red-100 border-red-300' : 'text-slate-700 bg-slate-100 border-slate-300');
+                
+                let tr = document.createElement('tr');
+                tr.className = `transition-colors duration-300 ${cardColor}`;
+                tr.innerHTML = `
+                    <td class="p-2 text-center align-middle border-r border-slate-100">
+                        <input type="checkbox" class="row-checkbox w-3 h-3 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer" value="${p.ID_Daftar}">
+                    </td>
+                    <td class="p-2 align-middle overflow-hidden border-r border-slate-100">
+                        <button type="button" onclick="editPendaftar('${p.ID_Daftar}')" class="text-left font-black text-blue-600 hover:text-blue-800 hover:underline text-[10px] leading-tight truncate w-full" title="Klik untuk edit data ${p.Nama_Siswa}">${p.Nama_Siswa}</button>
+                        <div class="flex flex-wrap gap-1 mt-1">
+                            <span class="text-[7px] font-bold bg-blue-100 text-blue-700 px-1 rounded uppercase">${p.Jalur}</span>
+                            <span class="text-[7px] font-bold bg-amber-100 text-amber-700 px-1 rounded uppercase">${p.Program || '-'}</span>
+                        </div>
+                    </td>
+                    <td class="p-2 text-center align-middle border-r border-slate-100 px-1">
+                        <select onchange="updateStatusById('${p.ID_Daftar}', this.value)" class="w-full px-1 py-1 rounded border font-bold text-[9px] outline-none cursor-pointer ${statusColor}">
+                            <option value="Menunggu" ${p.Status_Seleksi === 'Menunggu' ? 'selected' : ''}>Menunggu</option>
+                            <option value="Diterima" ${p.Status_Seleksi === 'Diterima' ? 'selected' : ''}>Diterima</option>
+                            <option value="Ditolak" ${p.Status_Seleksi === 'Ditolak' ? 'selected' : ''}>Ditolak</option>
+                        </select>
+                    </td>
+                    <td class="p-2 text-center align-middle">
+                        <button type="button" onclick="deletePendaftarById('${p.ID_Daftar}')" class="text-slate-400 hover:text-red-500 hover:bg-red-50 w-6 h-6 mx-auto rounded flex justify-center items-center transition-all shadow-sm border border-transparent hover:border-red-200"><i class="ph-bold ph-trash text-sm"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function toggleAllChecks(source) {
+            let checkboxes = document.querySelectorAll('.row-checkbox');
+            checkboxes.forEach(cb => cb.checked = source.checked);
+        }
+
+        // ==========================================
+        // FUNGSI EDIT SISWA ADMIN
+        // ==========================================
+        let currentEditStudentId = null;
+
+        window.openEditStudentModal = function(id) {
+            currentEditStudentId = id;
+            let student = appState.pendaftar.find(p => p.ID_Daftar === id);
+            if(!student) return;
+            
+            document.getElementById('ed-siswa-nama').value = student.Nama_Siswa || '';
+            document.getElementById('ed-siswa-nik').value = student.NIK_Anak || '';
+            document.getElementById('ed-siswa-nisn').value = student.NISN || '';
+            document.getElementById('ed-siswa-wa').value = student.No_WA || '';
+            document.getElementById('ed-siswa-ayah').value = student.Nama_Ayah || '';
+            document.getElementById('ed-siswa-ibu').value = student.Nama_Ibu || '';
+            
+            document.getElementById('edit-student-modal').classList.remove('hidden');
+            document.getElementById('edit-student-modal').classList.add('flex');
+            setTimeout(() => document.getElementById('edit-student-content').classList.remove('scale-95'), 10);
+        }
+
+        window.closeEditStudentModal = function() {
+            document.getElementById('edit-student-modal').classList.add('hidden');
+            document.getElementById('edit-student-modal').classList.remove('flex');
+            document.getElementById('edit-student-content').classList.add('scale-95');
+            currentEditStudentId = null;
+        }
+
+        window.saveEditedStudent = async function() {
+            if(!currentEditStudentId) return;
+            let index = appState.pendaftar.findIndex(p => p.ID_Daftar === currentEditStudentId);
+            if(index !== -1) {
+                appState.pendaftar[index].Nama_Siswa = document.getElementById('ed-siswa-nama').value;
+                appState.pendaftar[index].NIK_Anak = document.getElementById('ed-siswa-nik').value;
+                appState.pendaftar[index].NISN = document.getElementById('ed-siswa-nisn').value;
+                appState.pendaftar[index].No_WA = document.getElementById('ed-siswa-wa').value;
+                appState.pendaftar[index].Nama_Ayah = document.getElementById('ed-siswa-ayah').value;
+                appState.pendaftar[index].Nama_Ibu = document.getElementById('ed-siswa-ibu').value;
+                
+                renderAdminListItems();
+                closeEditStudentModal();
+                showToast("Data siswa diperbarui. Menyimpan ke Cloud...");
+                
+                if(GAS_URL) {
+                    let success = await postToGAS("SYNC_ALL", appState);
+                    if(success) showToast("Sukses tersimpan di Cloud!");
+                    else showToast("Gagal terkoneksi ke Cloud!", true);
+                }
+            }
+        }
+
+        function terimaYangDipilih() {
+            let checkboxes = document.querySelectorAll('.row-checkbox:checked');
+            let count = 0;
+            let ids = [];
+            checkboxes.forEach(cb => {
+                let id = cb.value;
+                let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
+                if(index !== -1) {
+                    appState.pendaftar[index].Status_Seleksi = 'Diterima';
+                    ids.push(id);
+                    count++;
+                }
+            });
+            if(count > 0) {
+                renderAdminListItems();
+                if(GAS_URL) postToGAS("BULK_UPDATE_STATUS", {ids: ids, newStatus: "Diterima"});
+            } else {
+                showToast("Centang kotak siswa minimal 1 dulu!", true);
+            }
+        }
+
+        async function simpanKeCloud() {
+            const btn = document.getElementById('btn-simpan-cloud');
+            if(btn) btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin mr-1"></i> Proses...';
+            if(GAS_URL) {
+                await postToGAS("SYNC_ALL", appState);
+                showToast("Sinkronisasi manual selesai!");
+            }
+            if(btn) btn.innerHTML = '<i class="ph-bold ph-cloud-arrow-up mr-1"></i> Simpan';
+        }
+
+        function updateStatusById(id, newStatus) { 
+            let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
+            if(index !== -1) {
+                appState.pendaftar[index].Status_Seleksi = newStatus; 
+                renderAdminListItems(); 
+                if(GAS_URL) postToGAS("UPDATE_STATUS", {id: id, newStatus: newStatus}); 
+            }
+        }
+
+        function deletePendaftarById(id) { 
+            showConfirm("Yakin hapus permanen data ini?", () => {
+                let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
+                if(index !== -1) {
+                    appState.pendaftar.splice(index, 1); 
+                    renderAdminListItems(); 
+                    applyConfigToDOM(); 
+                    if(GAS_URL) postToGAS("DELETE_PENDAFTAR", {id: id}); 
+                }
+            }); 
+        }
+
         async function fetchFromGAS() {
             if(!GAS_URL) return;
+            const gasBadge = document.getElementById('gas-status-mini');
+            if(gasBadge) {
+                gasBadge.classList.remove('hidden');
+                gasBadge.className = "text-[9px] font-bold px-2 py-1 rounded-full flex items-center bg-blue-50 text-blue-600 border border-blue-200";
+                gasBadge.innerHTML = '<i class="ph-bold ph-spinner animate-spin mr-1"></i> Sync...';
+            }
+
             try {
-                showToast("Menyinkronkan Data Cloud...");
                 let res = await fetch(GAS_URL);
                 let text = await res.text();
                 try {
@@ -1555,24 +1846,33 @@
                         if(json.kontak && json.kontak.length > 0) appState.kontak = json.kontak;
                         if(json.catatanBiaya && json.catatanBiaya.length > 0) appState.catatanBiaya = json.catatanBiaya;
                         
-                        applyConfigToDOM(); renderAdminList(); showToast("Sinkronisasi Berhasil");
+                        applyConfigToDOM(); renderAdminList(); 
+                        
+                        if(gasBadge) {
+                            gasBadge.className = "text-[9px] font-bold px-2 py-1 rounded-full flex items-center bg-emerald-50 text-emerald-600 border border-emerald-200 cursor-help";
+                            gasBadge.innerHTML = '<i class="ph-fill ph-cloud-check mr-1 text-sm"></i> Online';
+                            gasBadge.title = "Sistem Normal (Terhubung ke Cloud)";
+                        }
                     } else throw new Error("Format Invalid");
                 } catch(jsonErr) {
-                    console.warn("GAS belum public / Minta Login. Pindah Mode Lokal.");
-                    document.getElementById('gas-status').innerHTML = '<i class="ph-fill ph-warning text-amber-500 mr-2 text-lg"></i> Berjalan di Mode Lokal (Script GAS Belum Publik!)';
-                    document.getElementById('gas-status').className = 'bg-amber-100 text-amber-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-amber-200 shadow-sm';
-                    showToast("Mode Lokal (GAS minta Akses)", true);
+                    if(gasBadge) {
+                        gasBadge.className = "text-[9px] font-bold px-2 py-1 rounded-full flex items-center bg-amber-50 text-amber-600 border border-amber-200 cursor-help";
+                        gasBadge.innerHTML = '<i class="ph-fill ph-warning mr-1 text-sm"></i> Local';
+                        gasBadge.title = "Mode Lokal (GAS Belum Publik)";
+                    }
                 }
             } catch(e) { 
-                console.error("Network Error:", e); showToast("Koneksi Cloud Terputus.", true); 
-                document.getElementById('gas-status').innerHTML = '<i class="ph-fill ph-wifi-slash text-red-500 mr-2 text-lg"></i> Gagal terhubung ke Cloud (Koneksi Terputus)';
-                document.getElementById('gas-status').className = 'bg-red-100 text-red-800 p-2.5 rounded-xl text-[10px] font-bold mb-4 flex items-center border border-red-200 shadow-sm';
+                if(gasBadge) {
+                    gasBadge.className = "text-[9px] font-bold px-2 py-1 rounded-full flex items-center bg-red-50 text-red-600 border border-red-200 cursor-help";
+                    gasBadge.innerHTML = '<i class="ph-fill ph-wifi-slash mr-1 text-sm"></i> Offline';
+                    gasBadge.title = "Koneksi Internet Terputus";
+                }
             }
         }
 
         async function postToGAS(action, data) {
             if(!GAS_URL) return true;
-            try { await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: action, data: data }) }); return true; } catch(e) { return false; }
+            try { await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ action: action, data: data }) }); return true; } catch(e) { return false; }
         }
 
         function loginAdmin() { let pwd = document.getElementById('admin-pwd').value; if(pwd === "admin") { document.getElementById('admin-login-area').classList.add('hidden'); document.getElementById('admin-main-area').classList.remove('hidden'); document.getElementById('admin-pwd').value = ""; renderAdminList(); } else { showToast("PIN Salah!", true); } }
@@ -1581,7 +1881,7 @@
             document.getElementById('admin-main-area').classList.add('hidden'); 
             document.getElementById('admin-login-area').classList.remove('hidden'); 
             const saveBtn = document.getElementById('floating-save-btn');
-            if(saveBtn) saveBtn.classList.add('hidden');
+            if(saveBtn) saveBtn.classList.add('hidden'); 
             navigate('home'); 
         }
         
@@ -1595,7 +1895,7 @@
             document.getElementById('panel-database').classList.add('hidden');
             
             const saveBtn = document.getElementById('floating-save-btn');
-            if(saveBtn) saveBtn.classList.add('hidden');
+            if(saveBtn) saveBtn.classList.add('hidden'); 
             
             if(tab === 'pendaftar') { 
                 document.getElementById('tab-pendaftar').className = "flex-1 min-w-[80px] py-3.5 text-[11px] font-bold border-b-[3px] border-blue-600 text-blue-600 focus:outline-none transition-colors"; 
@@ -1902,143 +2202,10 @@
             if(btnSimpan) btnSimpan.innerHTML = '<i class="ph-bold ph-floppy-disk text-lg text-emerald-400"></i> Simpan Semua Perubahan';
         }
 
-        let adminFilter = { search: '', program: 'ALL', sort: 'NEW' };
-
-        function renderAdminList() {
-            const panel = document.getElementById('panel-pendaftar');
-            
-            // BIKIN UI PENCARIAN & FILTER JIKA BELUM ADA
-            if (!document.getElementById('admin-search-bar')) {
-                panel.innerHTML = `
-                    <div class="mb-4 flex flex-col gap-2 bg-white p-3 rounded-xl shadow-sm border border-slate-200">
-                        <div class="relative">
-                            <input type="text" id="admin-search-bar" placeholder="Cari nama atau NIK..." class="w-full pl-9 pr-3 py-2.5 text-[11px] font-bold border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 bg-slate-50" oninput="adminFilter.search = this.value; renderAdminListItems();">
-                            <i class="ph-bold ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        </div>
-                        <div class="flex gap-2">
-                            <select class="flex-1 text-[10px] font-bold border border-slate-200 rounded-lg p-2.5 focus:outline-none bg-white" onchange="adminFilter.program = this.value; renderAdminListItems();">
-                                <option value="ALL">Semua Program</option>
-                                <option value="UNGGULAN">Unggulan</option>
-                                <option value="ICP">ICP</option>
-                            </select>
-                            <select class="flex-1 text-[10px] font-bold border border-slate-200 rounded-lg p-2.5 focus:outline-none bg-white" onchange="adminFilter.sort = this.value; renderAdminListItems();">
-                                <option value="NEW">Paling Baru</option>
-                                <option value="AZ">Nama A - Z</option>
-                                <option value="ZA">Nama Z - A</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="list-pendaftar-items" class="space-y-2"></div>
-                `;
-            }
-            renderAdminListItems();
-        }
-
-        function renderAdminListItems() {
-            const list = document.getElementById('list-pendaftar-items');
-            list.innerHTML = "";
-            let data = [...(appState.pendaftar || [])];
-
-            // 1. Proses Filter Pencarian
-            if(adminFilter.search) {
-                let q = adminFilter.search.toLowerCase();
-                data = data.filter(p => (p.Nama_Siswa && p.Nama_Siswa.toLowerCase().includes(q)) || (p.NIK_Anak && p.NIK_Anak.includes(q)));
-            }
-            // 2. Proses Filter Program
-            if(adminFilter.program !== 'ALL') {
-                data = data.filter(p => p.Program === adminFilter.program);
-            }
-            // 3. Proses Sorting
-            if(adminFilter.sort === 'AZ') data.sort((a,b) => (a.Nama_Siswa || "").localeCompare(b.Nama_Siswa || ""));
-            else if(adminFilter.sort === 'ZA') data.sort((a,b) => (b.Nama_Siswa || "").localeCompare(a.Nama_Siswa || ""));
-            else data.reverse(); // Default: Paling Baru (dibalik urutannya)
-
-            if(data.length === 0) { list.innerHTML = `<div class="p-4 text-center text-slate-400 text-[10px] font-bold bg-white rounded-xl border border-slate-200">Tidak ada data ditemukan</div>`; return; }
-
-            // RENDER KARTU KOMPAK & ELEGAN
-            data.forEach((p) => {
-                let isDiterima = p.Status_Seleksi === 'Diterima';
-                let isDitolak = p.Status_Seleksi === 'Ditolak';
-                
-                // WARNAI SELURUH KARTU SESUAI STATUS!
-                let cardColor = isDiterima ? 'bg-green-50 border-green-300' : (isDitolak ? 'bg-red-50 border-red-300' : 'bg-white border-slate-200 hover:border-blue-300');
-                // WARNA KHUSUS DROPDOWN
-                let statusColor = isDiterima ? 'text-green-800 bg-green-200 border-green-400' : (isDitolak ? 'text-red-800 bg-red-200 border-red-400' : 'text-slate-700 bg-slate-100 border-slate-300');
-                
-                let el = document.createElement('div');
-                el.className = `p-3 rounded-xl shadow-sm border flex flex-col gap-2 transition-colors duration-300 ${cardColor}`;
-                el.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div class="flex flex-wrap gap-1 mt-0.5">
-                            <span class="text-[8px] font-black bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded uppercase">${p.Jalur}</span>
-                            <span class="text-[8px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase">${p.Program || '-'}</span>
-                            <span class="text-[8px] font-bold text-slate-400 ml-1">${(p.Waktu_Daftar || '').split(' pukul')[0]}</span>
-                        </div>
-                        <div class="flex items-center gap-1.5 shrink-0">
-                            <select onchange="updateStatusById('${p.ID_Daftar}', this.value)" class="px-2 py-1 rounded-md border font-black text-[9px] outline-none cursor-pointer ${statusColor}">
-                                <option value="Menunggu" ${p.Status_Seleksi === 'Menunggu' ? 'selected' : ''}>Menunggu</option>
-                                <option value="Diterima" ${p.Status_Seleksi === 'Diterima' ? 'selected' : ''}>Diterima</option>
-                                <option value="Ditolak" ${p.Status_Seleksi === 'Ditolak' ? 'selected' : ''}>Ditolak</option>
-                            </select>
-                            <button type="button" onclick="deletePendaftarById('${p.ID_Daftar}')" class="w-6 h-6 bg-white border border-red-200 text-red-500 rounded flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm"><i class="ph-bold ph-trash text-[11px]"></i></button>
-                        </div>
-                    </div>
-                    <div class="mt-1">
-                        <h4 class="font-black text-slate-800 text-[12px] leading-tight truncate">${p.Nama_Siswa}</h4>
-                        <p class="text-[9.5px] text-slate-600 font-medium truncate mt-0.5"><i class="ph-fill ph-whatsapp-logo text-green-600"></i> ${p.No_WA} <span class="mx-1 text-slate-300">|</span> NIK: ${p.NIK_Anak}</p>
-                    </div>
-                `;
-                list.appendChild(el);
-            });
-        }
-
-        // FUNGSI UPDATE BERDASARKAN ID (AGAR FILTER TIDAK ERROR)
-        async function updateStatusById(id, newStatus) { 
-            let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
-            if(index !== -1) {
-                appState.pendaftar[index].Status_Seleksi = newStatus; 
-                renderAdminListItems(); 
-                showToast("Menyimpan status ke Cloud..."); 
-                if(GAS_URL) {
-                    let success = await postToGAS("UPDATE_STATUS", {id: id, newStatus: newStatus});
-                    if(success) showToast("Sukses tersimpan di Cloud!");
-                    else showToast("Gagal terkoneksi ke Cloud!", true);
-                }
-            }
-        }
-
-        // FUNGSI HAPUS BERDASARKAN ID
-        function deletePendaftarById(id) { 
-            showConfirm("Yakin ingin menghapus data calon siswa ini secara permanen?", async () => {
-                let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
-                if(index !== -1) {
-                    appState.pendaftar.splice(index, 1); 
-                    renderAdminListItems(); 
-                    applyConfigToDOM(); 
-                    showToast("Data dihapus. Mengupdate Cloud..."); 
-                    if(GAS_URL) await postToGAS("DELETE_PENDAFTAR", {id: id});
-                }
-            }); 
-        }
-
-        // FIX BUG CORS: UBAH CONTENT-TYPE MENJADI text/plain
-        async function postToGAS(action, data) {
-            if(!GAS_URL) return true;
-            try { 
-                await fetch(GAS_URL, { 
-                    method: 'POST', 
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'text/plain' }, 
-                    body: JSON.stringify({ action: action, data: data }) 
-                }); 
-                return true; 
-            } catch(e) { return false; }
-        }
-
         function manualTarikData() { showToast("Meminta data dari Cloud..."); fetchFromGAS(); }
-        function manualKirimData() { 
-            showConfirm("PERINGATAN: Ini akan menimpa seluruh sheet di Cloud dengan data aplikasi saat ini. Yakin?", async () => {
-                showToast("Mengirim data ke Cloud..."); 
+        async function manualKirimData() { 
+            showConfirm("PERINGATAN: Tindakan ini akan menimpa seluruh data di Google Sheet dengan data yang ada di aplikasi saat ini. Lanjutkan?", async () => {
+                showToast("Mengirim seluruh data ke Cloud..."); 
                 let success = await postToGAS("SYNC_ALL", appState); 
                 if(success) showToast("Sukses menimpa database Cloud!"); 
                 else showToast("Gagal mengirim data!", true); 
@@ -2089,6 +2256,50 @@
         flatpickr(".flatpickr-date", { locale: "id", altInput: true, altFormat: "j F Y", dateFormat: "Y-m-d", disableMobile: "true", onReady: function(sd, ds, instance) { const yearInput = instance.yearElements[0]; if (yearInput && !instance.yearSelect) { const numInputWrapper = yearInput.closest('.numInputWrapper'); if (numInputWrapper) { numInputWrapper.style.display = 'none'; } const currentYear = instance.currentYear; const select = document.createElement('select'); select.className = 'flatpickr-year-dropdown ml-1'; for (let y = currentYear + 5; y >= 1990; y--) { const opt = document.createElement('option'); opt.value = y; opt.textContent = y; if (y === currentYear) opt.selected = true; select.appendChild(opt); } select.value = currentYear; select.addEventListener('change', function(e) { instance.changeYear(parseInt(e.target.value)); }); const currentMonthDiv = instance.calendarContainer.querySelector('.flatpickr-current-month'); if (currentMonthDiv) { currentMonthDiv.appendChild(select); } instance.yearSelect = select; } }, onYearChange: function(sd, ds, ins) { if (ins.yearSelect) ins.yearSelect.value = ins.currentYear; }, onMonthChange: function(sd, ds, ins) { if (ins.yearSelect) ins.yearSelect.value = ins.currentYear; } });
         
         applyConfigToDOM(); fetchFromGAS();
+
+        // FUNGSI MUNCULKAN POPUP EDIT
+        function editPendaftar(id) {
+            let p = appState.pendaftar.find(x => x.ID_Daftar === id);
+            if(!p) return;
+            document.getElementById('edit-id').value = p.ID_Daftar;
+            document.getElementById('edit-nama').value = p.Nama_Siswa;
+            document.getElementById('edit-nik').value = p.NIK_Anak;
+            document.getElementById('edit-nisn').value = p.NISN || '';
+            document.getElementById('edit-program').value = p.Program || 'UNGGULAN';
+            document.getElementById('edit-wa').value = p.No_WA;
+            document.getElementById('edit-ayah').value = p.Nama_Ayah;
+            document.getElementById('edit-ibu').value = p.Nama_Ibu || '';
+            
+            document.getElementById('edit-modal').classList.remove('hidden');
+            document.getElementById('edit-modal').classList.add('flex');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+            document.getElementById('edit-modal').classList.remove('flex');
+        }
+
+        async function simpanEditPendaftar() {
+            let id = document.getElementById('edit-id').value;
+            let idx = appState.pendaftar.findIndex(x => x.ID_Daftar === id);
+            if(idx !== -1) {
+                appState.pendaftar[idx].Nama_Siswa = document.getElementById('edit-nama').value;
+                appState.pendaftar[idx].NIK_Anak = document.getElementById('edit-nik').value;
+                appState.pendaftar[idx].NISN = document.getElementById('edit-nisn').value;
+                appState.pendaftar[idx].Program = document.getElementById('edit-program').value;
+                appState.pendaftar[idx].No_WA = document.getElementById('edit-wa').value;
+                appState.pendaftar[idx].Nama_Ayah = document.getElementById('edit-ayah').value;
+                appState.pendaftar[idx].Nama_Ibu = document.getElementById('edit-ibu').value;
+                
+                renderAdminListItems();
+                closeEditModal();
+                
+                // MURNI SENYAP DAN REAL-TIME! TANPA TOAST GANGGUAN.
+                if(GAS_URL) {
+                    postToGAS("EDIT_PENDAFTAR", appState.pendaftar[idx]);
+                }
+            }
+        }
     </script>
 </body>
 </html>
