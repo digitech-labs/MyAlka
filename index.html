@@ -288,8 +288,11 @@
                 <div class="flex items-center cursor-pointer" onclick="handleLogoClick()">
                 <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto object-contain drop-shadow-sm">
                 </div>
-                <!-- MINI BADGE STATUS GAS -->
-                <div id="gas-status-mini" class="hidden text-[9px] font-bold px-2.5 py-1 rounded-full flex items-center shadow-sm"></div>
+                <div class="flex items-center gap-2">
+                    <button onclick="showToast('Menarik data terbaru dari server...'); fetchFromGAS();" class="w-7 h-7 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-200 active:scale-95 transition-all shadow-sm border border-blue-200" title="Refresh Data Server"><i class="ph-bold ph-arrows-clockwise"></i></button>
+                    <!-- MINI BADGE STATUS GAS -->
+                    <div id="gas-status-mini" class="hidden text-[9px] font-bold px-2.5 py-1 rounded-full flex items-center shadow-sm"></div>
+                </div>
             </div>
         </nav>
 
@@ -376,7 +379,9 @@
                 <div class="sticky top-0 z-40 bg-white/40 backdrop-blur-md rounded-b-[1.5rem] border-b border-white/50 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-700 font-bold flex items-center bg-white/80 px-3 py-2 rounded-xl active:scale-95 transition-all shadow-sm border border-white focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
                     <h2 class="text-[13px] font-black text-indigo-900 tracking-tight flex items-center drop-shadow-sm"><i class="ph-fill ph-map-trifold mr-1.5 text-lg"></i> Peta Perjalanan</h2>
-                    <div class="w-[70px]"></div>
+                    <div class="w-[70px] flex justify-end">
+    <button onclick="showToast('Menarik data terbaru dari server...'); fetchFromGAS();" class="w-8 h-8 bg-white/80 backdrop-blur-md text-blue-600 rounded-full flex items-center justify-center shadow-sm border border-blue-200 hover:bg-blue-100 active:scale-95 transition-all focus:outline-none" title="Refresh Data Server"><i class="ph-bold ph-arrows-clockwise text-[15px]"></i></button>
+</div>
                 </div>
                 
                 <div class="flex-1 overflow-y-auto relative w-full pt-8 pb-16 px-4 scroll-smooth">
@@ -390,7 +395,9 @@
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
                     <h2 class="text-[13px] font-black text-emerald-700 tracking-tight flex items-center"><i class="ph-fill ph-medal mr-1.5 text-lg"></i> Cek Kelulusan</h2>
-                    <div class="w-[70px]"></div>
+                    <div class="w-[70px] flex justify-end">
+    <button onclick="showToast('Menarik data terbaru dari server...'); fetchFromGAS();" class="w-8 h-8 bg-white/80 backdrop-blur-md text-blue-600 rounded-full flex items-center justify-center shadow-sm border border-blue-200 hover:bg-blue-100 active:scale-95 transition-all focus:outline-none" title="Refresh Data Server"><i class="ph-bold ph-arrows-clockwise text-[15px]"></i></button>
+</div>
                 </div>
                 
                 <div class="p-5 flex-1 overflow-y-auto flex flex-col">
@@ -410,26 +417,83 @@
                     </div>
 
                     <div id="hasil-result" class="hidden flex-col items-center animate-modal-pop w-full pb-8">
-                        <div id="certificate-card" class="bg-slate-900 w-full rounded-[2rem] p-7 shadow-2xl relative overflow-hidden border-[6px] border-slate-800 shrink-0">
-                            <div id="cert-bg-glow" class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-amber-200 via-yellow-500 to-amber-200"></div>
-                            <div class="absolute -right-8 -bottom-8 opacity-[0.04]"><i id="cert-bg-icon" class="ph-fill ph-seal-check text-[200px] text-white"></i></div>
+                    <div id="certificate-card" class="bg-slate-50 w-full rounded-[2rem] p-0 shadow-2xl relative overflow-hidden border border-slate-200 shrink-0">
+                            <!-- Efek Cahaya Latar -->
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-3xl -mr-20 -mt-20 z-0"></div>
+                            <div class="absolute top-40 left-0 w-48 h-48 bg-orange-50 rounded-full blur-3xl -ml-20 z-0"></div>
                             
-                            <div class="text-center relative z-10 mb-6">
-                                <div id="cert-icon" class="w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(52,211,153,0.5)]"><i class="ph-bold ph-check text-[50px] text-white"></i></div>
-                                <h2 id="cert-title" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 tracking-widest mb-1 drop-shadow-md">LULUS</h2>
-                                <p class="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-bold mt-1">SDIT Muhammadiyah Al Kautsar</p>
-                            </div>
+                            <div class="relative z-10 p-5 pt-8">
+                                <!-- Header Logo -->
+                                <div class="text-center mb-6">
+                                    <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Al Kautsar" class="h-10 w-auto mx-auto drop-shadow-sm">
+                                </div>
 
-                            <div id="cert-message-box" class="bg-white/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-white/10 text-center">
-                                <p id="cert-message" class="text-[11px] text-white font-medium leading-relaxed italic">
-                                    <!-- Pesan Injeksi Javascript -->
-                                </p>
-                            </div>
+                                <!-- Status Section (Warna & Bingkai akan berubah sesuai status via JS) -->
+                                <div id="cert-status-box" class="bg-white rounded-[2rem] pt-6 pb-5 px-4 text-center shadow-lg relative z-10 border-[3px] border-slate-200 transition-colors duration-500">
+                                    <!-- Pita Label -->
+                                    <div id="cert-ribbon" class="bg-gradient-to-r from-slate-700 to-slate-500 text-white font-black italic px-8 py-1.5 inline-block rounded-sm shadow-md mb-2 transform -skew-x-12">
+                                        <span id="cert-ribbon-text" class="transform skew-x-12 block text-sm tracking-wider">STATUS</span>
+                                    </div>
+                                    <p id="cert-subtitle" class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Anda Dinyatakan</p>
+                                    <h2 id="cert-title" class="text-3xl font-black text-slate-800 uppercase tracking-wide mb-1 drop-shadow-sm leading-tight">PROSES</h2>
+                                    <div id="cert-line" class="w-full h-[2px] bg-slate-200/60 my-3"></div>
+                                    <p class="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-1.5">Penerimaan Siswa Baru</p>
+                                    <span id="cert-badge" class="inline-block bg-slate-800 text-white rounded-full px-3.5 py-1 text-[8px] font-bold tracking-wider shadow-inner">TAHUN AJARAN <span id="dyn-cert-tahun">2026/2027</span></span>
+                                </div>
 
-                            <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 backdrop-blur-md relative z-10">
-                                <div class="mb-4 border-b border-slate-700/50 pb-3"><span class="block text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1">Nama Calon Siswa</span><span id="cert-nama" class="block text-[15px] font-black text-white leading-none">-</span></div>
-                                <div class="mb-4 border-b border-slate-700/50 pb-3"><span class="block text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1">Program Diterima</span><span id="cert-program" class="block text-[15px] font-black text-emerald-400 leading-none">-</span></div>
-                                <div><span class="block text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1">No. Pendaftaran</span><span id="cert-reg" class="block text-[13px] font-mono text-amber-300 font-bold leading-none">-</span></div>
+                                <!-- Message & Details Box (Kotak Bawah) -->
+                                <div id="cert-bottom-box" class="bg-[#0f172a] rounded-[2rem] p-5 mt-4 relative z-10 shadow-xl border-b-4 border-slate-600 flex flex-col items-center">
+                                    
+                                    <!-- Tempat Animasi Pak Pos / Terompet -->
+                                    <div id="cert-anim-container" class="mb-3 mt-1 h-14 flex items-center justify-center w-full">
+                                        <!-- Diisi Javascript -->
+                                    </div>
+
+                                    <!-- Sambutan Tengah & Paragraf Rata Kanan-Kiri (Justify) -->
+                                    <div class="w-full mb-6">
+                                        <h3 id="cert-greeting" class="text-center font-black text-[18px] mb-2.5 drop-shadow-sm text-white tracking-wide">Ahlan wa Sahlan!</h3>
+                                        <p id="cert-message" class="text-[10.5px] text-slate-300 font-medium leading-relaxed text-justify px-1">
+                                            <!-- Pesan via Javascript -->
+                                        </p>
+                                    </div>
+
+                                    <!-- Detail Siswa (Kotak Putih Kecil) -->
+                                    <div class="bg-white/95 rounded-2xl p-4 shadow-inner w-full">
+                                        <div class="flex items-center gap-3 border-b border-slate-200 pb-3 mb-3">
+                                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0"><i class="ph-bold ph-user text-blue-600 text-sm"></i></div>
+                                            <div>
+                                                <span class="block text-[8px] font-bold text-slate-500 uppercase tracking-widest">Nama Calon Siswa</span>
+                                                <span id="cert-nama" class="block text-[13px] font-black text-slate-800 leading-none mt-1">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3 border-b border-slate-200 pb-3 mb-3">
+                                            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center shrink-0"><i class="ph-bold ph-book-open text-orange-500 text-sm"></i></div>
+                                            <div>
+                                                <span class="block text-[8px] font-bold text-slate-500 uppercase tracking-widest">Program Diterima</span>
+                                                <span id="cert-program" class="block text-[13px] font-black text-orange-600 leading-none mt-1">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0"><i class="ph-bold ph-clipboard-text text-slate-600 text-sm"></i></div>
+                                            <div>
+                                                <span class="block text-[8px] font-bold text-slate-500 uppercase tracking-widest">No. Pendaftaran</span>
+                                                <span id="cert-reg" class="block text-[13px] font-black text-slate-800 leading-none mt-1 uppercase">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Footer Info Kaligrafi -->
+                                    <div class="mt-5 w-full flex items-center justify-between px-1">
+                                        <div class="flex items-center gap-2">
+                                            <i class="ph-fill ph-hands-praying text-yellow-400 text-xl animate-pulse"></i>
+                                            <p class="text-[7px] text-slate-300 leading-tight font-medium">Semoga Allah mudahkan setiap langkah<br>dan jadikan ilmu sebagai cahaya.</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-[14px] font-black text-yellow-400 font-serif" style="font-family: 'Rye', serif;">جَزَاكُمُ اللَّهُ خَيْرًا</p>
+                                            <p class="text-[7px] text-yellow-400/80 font-bold mt-1">Jazakumullahu Khairan</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <button id="btn-download-cert" onclick="downloadCertificate()" class="w-full mt-6 py-4 bg-gradient-to-r from-slate-800 to-slate-900 text-white text-[13px] font-bold rounded-2xl flex items-center justify-center shadow-xl border border-slate-700 hover:bg-slate-800 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500 hidden"><i class="ph-bold ph-download-simple mr-2 text-xl"></i> Unduh Hasil Kelulusan</button>
@@ -441,7 +505,9 @@
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
                     <h2 class="text-[13px] font-black text-rose-700 tracking-tight flex items-center"><i class="ph-fill ph-check-square-offset mr-1.5 text-lg"></i> Syarat Pendaftaran</h2>
-                    <div class="w-[70px]"></div>
+                    <div class="w-[70px] flex justify-end">
+    <button onclick="showToast('Menarik data terbaru dari server...'); fetchFromGAS();" class="w-8 h-8 bg-white/80 backdrop-blur-md text-blue-600 rounded-full flex items-center justify-center shadow-sm border border-blue-200 hover:bg-blue-100 active:scale-95 transition-all focus:outline-none" title="Refresh Data Server"><i class="ph-bold ph-arrows-clockwise text-[15px]"></i></button>
+</div>
                 </div>
                 <div class="p-5 flex-1 overflow-y-auto pb-10">
                     <div class="bg-white rounded-[1.5rem] p-5 shadow-sm border border-slate-100 mb-4">
@@ -464,7 +530,9 @@
                 <div class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-300 font-bold flex items-center bg-slate-800 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-600"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
                     <h2 class="text-[13px] font-black text-white tracking-tight flex items-center"><i class="ph-fill ph-images mr-1.5 text-lg"></i> Galeri Brosur</h2>
-                    <div class="w-[70px]"></div>
+                    <div class="w-[70px] flex justify-end">
+    <button onclick="showToast('Menarik data terbaru dari server...'); fetchFromGAS();" class="w-8 h-8 bg-white/80 backdrop-blur-md text-blue-600 rounded-full flex items-center justify-center shadow-sm border border-blue-200 hover:bg-blue-100 active:scale-95 transition-all focus:outline-none" title="Refresh Data Server"><i class="ph-bold ph-arrows-clockwise text-[15px]"></i></button>
+</div>
                 </div>
                 <div class="flex-1 w-full overflow-y-auto flex flex-col items-center p-5 gap-8 pb-16">
                     <div class="w-full flex flex-col items-center">
@@ -486,7 +554,9 @@
                 <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl rounded-t-[1.5rem] border-b border-slate-200 shadow-sm pt-3 pb-3 px-3 flex items-center justify-between shrink-0">
                     <button onclick="navigate('home')" class="text-[11px] text-slate-600 font-bold flex items-center bg-slate-100 px-3 py-2 rounded-xl active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400"><i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Kembali</button>
                     <h2 class="text-[13px] font-black text-blue-900 tracking-tight flex items-center"><i class="ph-fill ph-wallet mr-1.5 text-lg"></i> Rincian Biaya</h2>
-                    <div class="w-[70px]"></div>
+                    <div class="w-[70px] flex justify-end">
+    <button onclick="showToast('Menarik data terbaru dari server...'); fetchFromGAS();" class="w-8 h-8 bg-white/80 backdrop-blur-md text-blue-600 rounded-full flex items-center justify-center shadow-sm border border-blue-200 hover:bg-blue-100 active:scale-95 transition-all focus:outline-none" title="Refresh Data Server"><i class="ph-bold ph-arrows-clockwise text-[15px]"></i></button>
+</div>
                 </div>
                 
                 <div class="p-3 flex-1 overflow-y-auto pb-8">
@@ -538,7 +608,9 @@
                                     <i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Batal
                                 </button>
                                 <h2 id="big-title" class="text-[14px] font-black text-slate-800 tracking-tight text-center">Biodata Siswa Baru</h2>
-                                <div class="w-[70px]"></div>
+                                <div class="w-[70px] flex justify-end">
+                                    <button type="button" onclick="autoFillTest()" class="bg-indigo-100 text-indigo-700 px-2.5 py-1.5 rounded-lg text-[9px] font-black shadow-sm border border-indigo-200 hover:bg-indigo-200 transition-all flex items-center focus:outline-none" title="Isi Semua Kolom Otomatis (Khusus Admin)"><i class="ph-bold ph-lightning mr-1 text-xs"></i> TEST</button>
+                                </div>
                             </div>
 
                             <div class="flex items-center justify-center mt-3 mb-2">
@@ -578,15 +650,33 @@
 
                                         <div id="area-baru" class="col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-blue-50/50 rounded-[1rem] border-2 border-blue-200 shadow-sm mt-1">
                                             <div class="col-span-2 mb-[-3px]"><h4 class="text-[10px] font-black text-blue-900 uppercase tracking-wider flex items-center"><i class="ph-bold ph-identification-badge mr-1.5 text-sm"></i> Biodata KK</h4></div>
+                                            
+                                            <!-- 1. NISN -->
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor NISN <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nisn-baru" data-name="NISN" class="custom-input" placeholder="0 jika tak ada" required maxlength="10" data-target="10"><i class="ph ph-identification-card absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 2. NIK -->
                                             <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor NIK Anak <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nik" data-name="NIK Anak" class="custom-input" placeholder="16 Digit NIK Sesuai KK" required maxlength="16" data-target="16"><i class="ph ph-fingerprint absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 3. NAMA -->
                                             <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nama Lengkap Anak <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-nama-baru" data-name="Nama Lengkap" class="custom-input" placeholder="Ketik nama lengkap..." required><i class="ph ph-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 4. JENIS KELAMIN -->
                                             <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Jenis Kelamin <span class="text-red-500">*</span></label><div class="relative"><select id="inp-jk" data-name="Kelamin" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="L">Laki-laki</option><option value="P">Perempuan</option></select><i class="ph ph-gender-intersex absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor NISN <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nisn-baru" data-name="NISN" class="custom-input" placeholder="0 jika tak ada" required maxlength="10" data-target="10"><i class="ph ph-identification-card absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor Kartu Keluarga (KK) <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nokk" data-name="No KK" class="custom-input" placeholder="16 Digit Nomor KK" required maxlength="16" data-target="16"><i class="ph ph-files absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
-                                            <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tanggal KK <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tgl-kk" data-name="Tgl KK" class="custom-input flatpickr-date bg-transparent cursor-pointer" placeholder="Pilih..." required><i class="ph ph-calendar-check absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 5. ANAK KE- -->
                                             <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Anak Ke- <span class="text-red-500">*</span></label><div class="relative"><select id="inp-anak-ke" data-name="Anak Ke" class="custom-input cursor-pointer" required><option value="" disabled selected>Pilih...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select><i class="ph ph-list-numbers absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 6. TEMPAT LAHIR -->
                                             <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tempat Lahir <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tempat-lahir" data-name="Tempat Lahir" class="custom-input" placeholder="Kota lahir..." required><i class="ph ph-map-pin absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 7. TANGGAL LAHIR -->
                                             <div><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tanggal Lahir <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tgl-lahir" data-name="Tanggal Lahir" class="custom-input flatpickr-date bg-transparent cursor-pointer" placeholder="Pilih..." required><i class="ph ph-calendar-blank absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 8. NOMOR KK -->
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Nomor Kartu Keluarga (KK) <span class="text-red-500">*</span></label><div class="relative"><input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inp-nokk" data-name="No KK" class="custom-input" placeholder="16 Digit Nomor KK" required maxlength="16" data-target="16"><i class="ph ph-files absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
+                                            
+                                            <!-- 9. TANGGAL KK -->
+                                            <div class="col-span-2"><label class="block text-[9px] font-bold text-slate-700 mb-1 ml-1">Tanggal KK <span class="text-red-500">*</span></label><div class="relative"><input type="text" id="inp-tgl-kk" data-name="Tgl KK" class="custom-input flatpickr-date bg-transparent cursor-pointer" placeholder="Pilih..." required><i class="ph ph-calendar-check absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none icon-input"></i></div></div>
                                         </div>
 
                                         <div id="area-mutasi" class="hidden col-span-2 grid grid-cols-2 gap-x-3 gap-y-3 p-3.5 bg-teal-50/50 rounded-[1rem] border-2 border-teal-200 shadow-sm mt-1">
@@ -846,7 +936,7 @@
             if(pushToHistory) history.pushState({ view: viewId }, viewId, '#' + viewId);
         }
 
-        let GAS_URL = "https://script.google.com/macros/s/AKfycbydjXUgcX1vjjZKU-U0NWLQ7RY9hH6eRgCz9yBXTCf4S7-26cEpyK7u4bjhhYaRcjBv/exec"; 
+        let GAS_URL = "https://script.google.com/macros/s/AKfycbyEUFE2bkoAarezxR3x63KznrJM6xodtQgpsKGy1GLi4qZWlk1prBay7HIK8QWWaFva/exec"; 
         
         let appState = {
             config: {
@@ -1454,25 +1544,69 @@
                 return;
             }
 
-            showToast("Memproses " + label + "...");
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64 = e.target.result;
-                uploadedFiles[type] = {
-                    name: file.name,
-                    mimeType: file.type,
-                    data: base64.split(',')[1] 
+            showToast("Mengompres & Memproses " + label + "...");
+            
+            // JIKA FILE BERUPA GAMBAR (FOTO) -> DIKOMPRES BIAR UPLOAD NGEBUT!
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const MAX_SIZE = 800; // Ukuran resolusi maksimal (Makin kecil makin cepat)
+                        
+                        if (width > height && width > MAX_SIZE) {
+                            height *= MAX_SIZE / width;
+                            width = MAX_SIZE;
+                        } else if (height > MAX_SIZE) {
+                            width *= MAX_SIZE / height;
+                            height = MAX_SIZE;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // Kompres kualitas gambar jadi 60% (Sangat kecil tapi tetap jelas)
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6); 
+                        
+                        uploadedFiles[type] = {
+                            name: file.name,
+                            mimeType: 'image/jpeg',
+                            data: compressedBase64.split(',')[1] 
+                        };
+                        selesaiProsesFile(type, label);
+                    };
+                    img.src = e.target.result;
                 };
-                
-                document.getElementById('box-' + type).className = "flex flex-col items-center justify-center w-full h-14 border-2 border-blue-500 rounded-xl cursor-pointer bg-blue-50 transition-all";
-                document.getElementById('icon-' + type).className = "ph-fill ph-check-circle text-xl text-blue-600 mb-0.5";
-                document.getElementById('text-' + type).className = "text-[8px] font-black text-blue-700 text-center leading-tight";
-                document.getElementById('text-' + type).innerText = "Tersimpan";
-                
-                showPreviewFromCache(type, label);
-                showToast(label + " siap diunggah!");
-            };
-            reader.readAsDataURL(file);
+                reader.readAsDataURL(file);
+            } 
+            // JIKA FILE BERUPA PDF -> LANGSUNG PROSES TANPA KOMPRES
+            else {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedFiles[type] = {
+                        name: file.name,
+                        mimeType: file.type,
+                        data: e.target.result.split(',')[1] 
+                    };
+                    selesaiProsesFile(type, label);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function selesaiProsesFile(type, label) {
+            document.getElementById('box-' + type).className = "flex flex-col items-center justify-center w-full h-14 border-2 border-blue-500 rounded-xl cursor-pointer bg-blue-50 transition-all";
+            document.getElementById('icon-' + type).className = "ph-fill ph-check-circle text-xl text-blue-600 mb-0.5";
+            document.getElementById('text-' + type).className = "text-[8px] font-black text-blue-700 text-center leading-tight";
+            document.getElementById('text-' + type).innerText = "Tersimpan";
+            
+            showPreviewFromCache(type, label);
+            showToast(label + " siap diunggah!");
         }
 
         function closeValidationModal() { document.getElementById('validation-modal').classList.add('hidden'); document.getElementById('validation-modal').classList.remove('flex'); document.getElementById('validation-content').classList.add('scale-95'); }
@@ -1547,53 +1681,82 @@
                     document.getElementById('cert-program').innerText = found.Program || 'Kelas Reguler'; 
                     document.getElementById('cert-reg').innerText = found.ID_Daftar;
                     
-                    const titleEl = document.getElementById('cert-title'); 
-                    const iconEl = document.getElementById('cert-icon'); 
-                    const btnDl = document.getElementById('btn-download-cert');
-                    const msgBox = document.getElementById('cert-message-box');
+                    // --- TAUTAN KE ELEMEN DESAIN BARU ---
+                    const statusBox = document.getElementById('cert-status-box');
+                    const ribbonEl = document.getElementById('cert-ribbon');
+                    const ribbonText = document.getElementById('cert-ribbon-text');
+                    const subtitleEl = document.getElementById('cert-subtitle');
+                    const titleEl = document.getElementById('cert-title');
+                    const lineEl = document.getElementById('cert-line');
+                    const badgeEl = document.getElementById('cert-badge');
+                    
+                    const bottomBox = document.getElementById('cert-bottom-box');
+                    const animContainer = document.getElementById('cert-anim-container');
+                    const greetingEl = document.getElementById('cert-greeting');
                     const msgText = document.getElementById('cert-message');
-                    const bgGlow = document.getElementById('cert-bg-glow');
-                    const bgIcon = document.getElementById('cert-bg-icon');
+                    const btnDl = document.getElementById('btn-download-cert');
+                    
+                    document.getElementById('dyn-cert-tahun').innerText = found.Tahun_Ajaran || '2026/2027';
                     
                     if(found.Status_Seleksi === 'Diterima') { 
-                        titleEl.innerText = "SELAMAT! LULUS"; 
-                        titleEl.className = "text-[26px] font-black text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-500 tracking-widest mb-1 drop-shadow-md leading-tight"; 
-                        iconEl.className = "w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(52,211,153,0.6)]"; 
-                        iconEl.innerHTML = '<i class="ph-bold ph-check text-[50px] text-white"></i>'; 
-                        bgGlow.className = "absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-emerald-300 via-green-500 to-emerald-300";
-                        bgIcon.className = "ph-fill ph-confetti text-[200px] text-white";
+                        statusBox.className = "bg-green-50/90 rounded-[2rem] pt-6 pb-5 px-4 text-center shadow-lg relative z-10 border-[3px] border-green-300 transition-all duration-500";
+                        ribbonEl.className = "bg-gradient-to-r from-emerald-600 to-green-500 text-white font-black italic px-8 py-1.5 inline-block rounded-sm shadow-md mb-2 transform -skew-x-12";
+                        ribbonText.innerText = "SELAMAT!";
+                        subtitleEl.className = "text-[10px] font-bold text-green-700 uppercase tracking-widest mt-1";
+                        titleEl.innerText = "LULUS SELEKSI";
+                        titleEl.className = "text-3xl font-black text-green-600 uppercase tracking-wide mb-1 drop-shadow-sm leading-tight";
+                        lineEl.className = "w-full h-[2px] bg-green-200 my-3";
+                        badgeEl.className = "inline-block bg-green-700 text-white rounded-full px-3.5 py-1 text-[8px] font-bold tracking-wider shadow-inner";
                         
-                        msgBox.className = "bg-green-500/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-green-500/20 text-center";
-                        msgText.className = "text-[11.5px] text-green-100 font-medium leading-relaxed italic";
-                        msgText.innerHTML = "🎉 <b>Ahlan wa Sahlan!</b> Selamat bergabung di keluarga besar SDIT Muhammadiyah Al Kautsar. Mari bersama melangkah maju, mencetak generasi Qur'ani yang cerdas, berakhlak mulia, dan siap memimpin masa depan!";
+                        bottomBox.className = "bg-[#0f172a] rounded-[2rem] p-5 mt-4 relative z-10 shadow-xl border-b-4 border-emerald-500 flex flex-col items-center";
+                        
+                        // Animasi Terompet Kemerdekaan
+                        animContainer.innerHTML = '<div class="flex items-center justify-center relative w-16 h-12"><i class="ph-fill ph-party-pennant text-[50px] text-yellow-400 origin-bottom-left animate-shake"></i><i class="ph-fill ph-confetti text-[40px] text-orange-400 absolute top-0 -right-2 animate-pulse"></i></div>';
+                        
+                        greetingEl.innerText = "Ahlan wa Sahlan!";
+                        greetingEl.className = "text-center font-black text-[18px] text-yellow-400 mb-2.5 drop-shadow-sm tracking-wide";
+                        msgText.innerHTML = "Selamat bergabung di keluarga besar SDIT Muhammadiyah Al Kautsar. Mari bersama melangkah maju, mencetak generasi Qur'ani yang cerdas, berakhlak mulia, dan siap memimpin masa depan!";
                         
                         btnDl.classList.remove('hidden'); 
                     } 
                     else if (found.Status_Seleksi === 'Ditolak') { 
-                        titleEl.innerText = "TIDAK LULUS"; 
-                        titleEl.className = "text-[26px] font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-red-600 tracking-widest mb-1 drop-shadow-md leading-tight"; 
-                        iconEl.className = "w-24 h-24 bg-gradient-to-br from-rose-400 to-red-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(225,29,72,0.6)]"; 
-                        iconEl.innerHTML = '<i class="ph-bold ph-x text-[50px] text-white"></i>'; 
-                        bgGlow.className = "absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-rose-400 via-red-500 to-rose-400";
-                        bgIcon.className = "ph-fill ph-warning-circle text-[200px] text-white";
+                        statusBox.className = "bg-red-50/90 rounded-[2rem] pt-6 pb-5 px-4 text-center shadow-lg relative z-10 border-[3px] border-red-300 transition-all duration-500";
+                        ribbonEl.className = "bg-gradient-to-r from-red-700 to-rose-500 text-white font-black italic px-8 py-1.5 inline-block rounded-sm shadow-md mb-2 transform -skew-x-12";
+                        ribbonText.innerText = "MOHON MAAF";
+                        subtitleEl.className = "text-[10px] font-bold text-red-700 uppercase tracking-widest mt-1";
+                        titleEl.innerText = "TIDAK LULUS";
+                        titleEl.className = "text-3xl font-black text-red-600 uppercase tracking-wide mb-1 drop-shadow-sm leading-tight";
+                        lineEl.className = "w-full h-[2px] bg-red-200 my-3";
+                        badgeEl.className = "inline-block bg-red-700 text-white rounded-full px-3.5 py-1 text-[8px] font-bold tracking-wider shadow-inner";
                         
-                        msgBox.className = "bg-red-500/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-red-500/20 text-center";
-                        msgText.className = "text-[11.5px] text-rose-100 font-medium leading-relaxed italic";
-                        msgText.innerHTML = "🌟 <b>Jangan Patah Semangat!</b> Mohon maaf, saat ini Ananda belum rezekinya bergabung dengan kami. Yakinlah rencana Allah selalu yang terbaik. Teruslah bersinar dan raih mimpimu di tempat yang hebat lainnya!";
+                        bottomBox.className = "bg-[#1e1e2f] rounded-[2rem] p-5 mt-4 relative z-10 shadow-xl border-b-4 border-red-600 flex flex-col items-center";
+                        
+                        animContainer.innerHTML = '<div class="flex items-center justify-center"><i class="ph-fill ph-warning-circle text-[55px] text-red-400 animate-pulse"></i></div>';
+                        
+                        greetingEl.innerText = "Jangan Patah Semangat!";
+                        greetingEl.className = "text-center font-black text-[17px] text-rose-400 mb-2.5 drop-shadow-sm tracking-wide";
+                        msgText.innerHTML = "Mohon maaf, saat ini Ananda belum rezekinya bergabung dengan kami. Yakinlah rencana Allah selalu yang terbaik. Teruslah bersinar dan raih mimpimu di tempat yang hebat lainnya!";
                         
                         btnDl.classList.add('hidden'); 
                     } 
                     else { 
-                        titleEl.innerText = "PROSES SELEKSI"; 
-                        titleEl.className = "text-[26px] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600 tracking-widest mb-1 drop-shadow-md leading-tight"; 
-                        iconEl.className = "w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-slate-900 shadow-[0_0_35px_rgba(59,130,246,0.6)]"; 
-                        iconEl.innerHTML = '<i class="ph-bold ph-hourglass text-[50px] text-white animate-pulse"></i>'; 
-                        bgGlow.className = "absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-blue-300 via-indigo-500 to-blue-300";
-                        bgIcon.className = "ph-fill ph-hourglass-high text-[200px] text-white";
+                        statusBox.className = "bg-blue-50/90 rounded-[2rem] pt-6 pb-5 px-4 text-center shadow-lg relative z-10 border-[3px] border-blue-300 transition-all duration-500";
+                        ribbonEl.className = "bg-gradient-to-r from-blue-700 to-sky-500 text-white font-black italic px-8 py-1.5 inline-block rounded-sm shadow-md mb-2 transform -skew-x-12";
+                        ribbonText.innerText = "TUNGGU YA";
+                        subtitleEl.className = "text-[10px] font-bold text-blue-700 uppercase tracking-widest mt-1";
+                        titleEl.innerText = "PROSES SELEKSI";
+                        titleEl.className = "text-3xl font-black text-blue-600 uppercase tracking-wide mb-1 drop-shadow-sm leading-tight";
+                        lineEl.className = "w-full h-[2px] bg-blue-200 my-3";
+                        badgeEl.className = "inline-block bg-blue-700 text-white rounded-full px-3.5 py-1 text-[8px] font-bold tracking-wider shadow-inner";
                         
-                        msgBox.className = "bg-blue-500/10 rounded-2xl p-4 mb-6 backdrop-blur-sm border border-blue-500/20 text-center";
-                        msgText.className = "text-[11.5px] text-blue-100 font-medium leading-relaxed italic";
-                        msgText.innerHTML = "⏳ <b>Harap Bersabar!</b> Data Ananda saat ini sedang dalam tahap seleksi dan verifikasi oleh tim panitia. Silakan cek kembali secara berkala ya.";
+                        bottomBox.className = "bg-[#0f172a] rounded-[2rem] p-5 mt-4 relative z-10 shadow-xl border-b-4 border-sky-500 flex flex-col items-center";
+                        
+                        // Animasi Pak Pos Ngantar Surat
+                        animContainer.innerHTML = '<div class="flex justify-center relative w-16 h-12 mt-2"><i class="ph-duotone ph-mailbox text-[45px] text-slate-400 absolute bottom-0 left-0"></i><i class="ph-fill ph-paper-plane-right text-[35px] text-sky-400 absolute -top-4 -right-4 animate-bounce"></i></div>';
+                        
+                        greetingEl.innerText = "Harap Bersabar!";
+                        greetingEl.className = "text-center font-black text-[18px] text-sky-400 mb-2.5 drop-shadow-sm tracking-wide";
+                        msgText.innerHTML = "Surat pengumuman Ananda sedang disiapkan oleh tim panitia. Data saat ini masih dalam tahap seleksi dan verifikasi kelengkapan berkas. Silakan cek hasil kelulusan secara berkala di halaman ini.";
                         
                         btnDl.classList.add('hidden'); 
                     }
@@ -1831,6 +1994,14 @@
                 gasBadge.className = "text-[9px] font-bold px-2 py-1 rounded-full flex items-center bg-blue-50 text-blue-600 border border-blue-200";
                 gasBadge.innerHTML = '<i class="ph-bold ph-spinner animate-spin mr-1"></i> Sync...';
             }
+
+            // --- ANIMASI LOADING ANGKA KUOTA (BIAR WALI MURID GAK PANIK) ---
+            const spinnerHtml = '<i class="ph-bold ph-spinner animate-spin text-[12px] opacity-70"></i>';
+            if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerHTML = spinnerHtml;
+            if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerHTML = spinnerHtml;
+            if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerHTML = spinnerHtml;
+            if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerHTML = spinnerHtml;
+            // ---------------------------------------------------------------
 
             try {
                 let res = await fetch(GAS_URL);
@@ -2256,6 +2427,37 @@
         flatpickr(".flatpickr-date", { locale: "id", altInput: true, altFormat: "j F Y", dateFormat: "Y-m-d", disableMobile: "true", onReady: function(sd, ds, instance) { const yearInput = instance.yearElements[0]; if (yearInput && !instance.yearSelect) { const numInputWrapper = yearInput.closest('.numInputWrapper'); if (numInputWrapper) { numInputWrapper.style.display = 'none'; } const currentYear = instance.currentYear; const select = document.createElement('select'); select.className = 'flatpickr-year-dropdown ml-1'; for (let y = currentYear + 5; y >= 1990; y--) { const opt = document.createElement('option'); opt.value = y; opt.textContent = y; if (y === currentYear) opt.selected = true; select.appendChild(opt); } select.value = currentYear; select.addEventListener('change', function(e) { instance.changeYear(parseInt(e.target.value)); }); const currentMonthDiv = instance.calendarContainer.querySelector('.flatpickr-current-month'); if (currentMonthDiv) { currentMonthDiv.appendChild(select); } instance.yearSelect = select; } }, onYearChange: function(sd, ds, ins) { if (ins.yearSelect) ins.yearSelect.value = ins.currentYear; }, onMonthChange: function(sd, ds, ins) { if (ins.yearSelect) ins.yearSelect.value = ins.currentYear; } });
         
         applyConfigToDOM(); fetchFromGAS();
+
+// FUNGSI ISI OTOMATIS UNTUK UJI COBA (AUTO-FILL)
+        window.autoFillTest = function() {
+            const dummyData = {
+                'inp-tahun': '2026/2027', 'inp-program': 'UNGGULAN',
+                'inp-nik': '3372000000000001', 'inp-nama-baru': 'Siswa Uji Coba', 'inp-jk': 'L',
+                'inp-nisn-baru': '0012345678', 'inp-nokk': '3372000000000099', 'inp-tgl-kk': '10 Agustus 2026', 'inp-anak-ke': '1',
+                'inp-tempat-lahir': 'Surakarta', 'inp-tgl-lahir': '17 Agustus 2018',
+                'inp-ayah-nama': 'Bapak Uji Coba', 'inp-ayah-nik': '3372000000000002', 'inp-ayah-thn': '1985',
+                'inp-ayah-pend': 'S1', 'inp-ayah-pek': 'Wiraswasta', 'inp-ayah-peng': 'Rp. 5.000.000 - Rp. 20.000.000',
+                'inp-ibu-nama': 'Ibu Uji Coba', 'inp-ibu-nik': '3372000000000003', 'inp-ibu-thn': '1988',
+                'inp-ibu-pend': 'S1', 'inp-ibu-pek': 'PNS/TNI/Polri', 'inp-ibu-peng': 'Rp. 5.000.000 - Rp. 20.000.000',
+                'inp-wa': '081234567890',
+                'inp-provinsi': 'JAWA TENGAH', 'inp-kabkota': 'KOTA SURAKARTA', 'inp-kecamatan': 'BANJARSARI',
+                'inp-desa': 'BANYUANYAR', 'inp-alamat': 'Jl. Uji Coba No. 99', 'inp-rt': '001', 'inp-rw': '002'
+            };
+
+            for(let id in dummyData) {
+                let el = document.getElementById(id);
+                if(el) {
+                    if(el.tagName === 'SELECT') {
+                        let exists = Array.from(el.options).some(o => o.value === dummyData[id]);
+                        if(!exists) { let opt = document.createElement('option'); opt.value = dummyData[id]; opt.text = dummyData[id]; el.appendChild(opt); }
+                    }
+                    el.value = dummyData[id];
+                    el.classList.add('filled');
+                    el.classList.remove('input-error');
+                }
+            }
+            showToast("✅ Auto-Fill Uji Coba Aktif! Silakan upload file.");
+        };
 
         // FUNGSI MUNCULKAN POPUP EDIT
         function editPendaftar(id) {
