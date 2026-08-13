@@ -383,9 +383,7 @@
                 </div>
                 
                 <div class="flex-1 overflow-y-auto relative w-full pt-8 pb-16 px-4 scroll-smooth">
-                    <!-- GARIS PUTUS-PUTUS OTOMATIS -->
-                    <div class="absolute top-10 bottom-24 left-1/2 -translate-x-1/2 w-1.5 border-l-[5px] border-dashed border-indigo-300 z-0 opacity-70"></div>
-                    <div id="dyn-timeline-container" class="flex flex-col items-center space-y-10 relative z-10 max-w-[320px] mx-auto"></div>
+                    <div id="dyn-timeline-container" class="flex flex-col items-center relative z-10 max-w-[340px] mx-auto w-full"></div>
                 </div>
             </section>
 
@@ -597,9 +595,9 @@
                                 <button onclick="navigate('home')" class="text-[11px] text-white font-bold flex items-center bg-gradient-to-r from-rose-500 to-red-600 px-4 py-2.5 rounded-xl shadow-md shadow-red-500/30 active:scale-95 transition-all z-50 border border-red-400 focus:outline-none focus:ring-2 focus:ring-red-300">
                                     <i class="ph-bold ph-arrow-left mr-1.5 text-[14px]"></i> Batal
                                 </button>
-                                <h2 id="big-title" class="text-[14px] font-black text-slate-800 tracking-tight text-center">Biodata Siswa Baru</h2>
-                                <div class="w-[70px] flex justify-end">
-                                    <button type="button" onclick="autoFillTest()" class="bg-indigo-100 text-indigo-700 px-2.5 py-1.5 rounded-lg text-[9px] font-black shadow-sm border border-indigo-200 hover:bg-indigo-200 transition-all flex items-center focus:outline-none" title="Isi Semua Kolom Otomatis (Khusus Admin)"><i class="ph-bold ph-lightning mr-1 text-xs"></i> TEST</button>
+                                <h2 id="big-title" ondblclick="toggleTestMode()" class="text-[14px] font-black text-slate-800 tracking-tight text-center cursor-pointer select-none" title="Klik 2x untuk Mode Admin">Biodata Siswa Baru</h2>
+                                <div id="box-tombol-test" class="w-[70px] flex justify-end hidden">
+                                   <button type="button" onclick="autoFillTest()" class="bg-indigo-100 text-indigo-700 px-2.5 py-1.5 rounded-lg text-[9px] font-black shadow-sm border border-indigo-200 hover:bg-indigo-200 transition-all flex items-center focus:outline-none" title="Isi Semua Kolom Otomatis (Khusus Admin)"><i class="ph-bold ph-lightning mr-1 text-xs"></i> TEST</button>
                                 </div>
                             </div>
 
@@ -901,6 +899,19 @@
             return 'Rp ' + num.toLocaleString('id-ID');
         }
 
+        function formatRpStylized(val) {
+            if (val === undefined || val === null || val === '' || val === '-') return '-';
+            let num = parseInt(String(val).replace(/[^0-9]/g, ''));
+            if (isNaN(num)) return val;
+            let str = num.toLocaleString('id-ID');
+            let parts = str.split('.');
+            if(parts.length > 1) {
+                let lastPart = parts.pop();
+                return `Rp ${parts.join('.')} <span class="opacity-40">.${lastPart}</span>`;
+            }
+            return 'Rp ' + str;
+        }
+
         function navigate(viewId, pushToHistory = true) {
             // --- FITUR AUTO-RESET HALAMAN PENGUMUMAN ---
             let inpCek = document.getElementById('inp-cek-hasil');
@@ -1090,61 +1101,106 @@
                 container.innerHTML = '<p class="text-center text-slate-500 text-sm mt-10">Data timeline belum tersedia.</p>';
                 return;
             }
+
+            // Merombak Wadah Container menjadi Rata Tengah
+            container.className = "relative z-10 mx-auto w-full max-w-[400px] pt-4 pb-12 px-1";
             
-            const colors = [
-                {bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-700', icon: 'ph-target', iconBg: 'bg-amber-400', badge: 'bg-amber-100 text-amber-600'},
-                {bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700', icon: 'ph-medal', iconBg: 'bg-emerald-400', badge: 'bg-emerald-100 text-emerald-600'},
-                {bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-700', icon: 'ph-rocket-launch', iconBg: 'bg-blue-400', badge: 'bg-blue-100 text-blue-600'}
+            // --- GARIS VERTIKAL UTAMA ---
+            const lineBg = document.createElement('div');
+            lineBg.className = "absolute left-1/2 top-8 bottom-12 w-[2px] bg-slate-300/80 -translate-x-1/2 z-0";
+            container.appendChild(lineBg);
+
+            // --- TEMA WARNA, IKON, DAN BACKGROUND KOTAK TEKS ---
+            const themes = [
+                { textHead: 'text-orange-600', bgCard: 'bg-orange-50/95', accent: 'bg-orange-400', c1: '#3b82f6', c2: '#f97316', bgShape: 'bg-blue-500', iconSmall: 'ph-calendar-blank', iconBig: 'ph-trend-up' },
+                { textHead: 'text-blue-600', bgCard: 'bg-blue-50/95', accent: 'bg-blue-400', c1: '#f97316', c2: '#3b82f6', bgShape: 'bg-orange-500', iconSmall: 'ph-chart-bar', iconBig: 'ph-laptop' },
+                { textHead: 'text-emerald-600', bgCard: 'bg-emerald-50/95', accent: 'bg-emerald-400', c1: '#10b981', c2: '#3b82f6', bgShape: 'bg-emerald-500', iconSmall: 'ph-student', iconBig: 'ph-certificate' },
+                { textHead: 'text-purple-600', bgCard: 'bg-purple-50/95', accent: 'bg-purple-400', c1: '#3b82f6', c2: '#a855f7', bgShape: 'bg-purple-500', iconSmall: 'ph-users-three', iconBig: 'ph-handshake' },
+                { textHead: 'text-rose-600', bgCard: 'bg-rose-50/95', accent: 'bg-rose-400', c1: '#f43f5e', c2: '#f97316', bgShape: 'bg-rose-500', iconSmall: 'ph-flag-checkered', iconBig: 'ph-medal' }
             ];
 
             appState.timeline.forEach((t, i) => {
-                let isLast = i === appState.timeline.length - 1;
-                let c = isLast ? {bg: 'bg-purple-50', border: 'border-purple-400', text: 'text-purple-800', icon: 'ph-treasure-chest', iconBg: 'bg-purple-500', badge: 'bg-purple-200 text-purple-700'} : colors[i % colors.length]; 
-                
-                let isRight = i % 2 !== 0; 
-                let transformClass = isRight ? 'translate-x-5' : '-translate-x-5';
-                let roundedClass = isRight ? 'rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-xl rounded-br-xl' : 'rounded-tl-[2rem] rounded-br-[2rem] rounded-tr-xl rounded-bl-xl';
+                let isEven = i % 2 === 0; // Penentu Kanan / Kiri
+                let c = themes[i % themes.length]; 
                 
                 let el = document.createElement('div'); 
-                el.className = `w-full flex flex-col items-center transform ${transformClass} animate-slide-up relative z-10`;
-                el.style.animationDelay = `${(i+1)*0.1}s`;
+                el.className = "relative flex justify-between items-center w-full mb-8 group opacity-0 animate-slide-up";
+                el.style.animationDelay = `${(i+1)*0.15}s`;
 
                 let rawDate = String(t.Tanggal || '');
                 if (rawDate.includes('T') && rawDate.includes('Z')) {
-                    try { 
-                        let d = new Date(rawDate); 
-                        rawDate = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }); 
-                    } catch(e) {}
+                    try { let d = new Date(rawDate); rawDate = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }); } catch(e) {}
                 }
 
-                let extraBadge = isLast ? 'FINAL QUEST' : `LEVEL ${i+1}`;
-
-                el.innerHTML = `
-                    <div class="w-12 h-12 rounded-full ${c.iconBg} border-4 border-white shadow-lg flex items-center justify-center z-20 mb-[-24px] relative">
-                        <i class="ph-fill ${c.icon} text-white text-2xl"></i>
-                    </div>
-                    <div class="${c.bg} ${c.border} border-2 ${roundedClass} p-4 pt-8 shadow-sm w-[90%] text-center relative z-10">
-                        <h4 class="font-black ${c.text} text-[13px] mb-1.5 uppercase tracking-wide">${t.Judul || 'Tahapan'}</h4>
-                        <span class="inline-block px-2.5 py-0.5 rounded-full ${c.badge} text-[8px] font-black tracking-wider mb-2">${extraBadge}</span>
-                        <p class="text-[9.5px] font-bold text-slate-700 mb-1">${rawDate}</p>
-                        <p class="text-[9px] text-slate-600 leading-relaxed font-medium">${t.Deskripsi || ''}</p>
+                // --- DESAIN TEKS DENGAN BACKGROUND KOTAK WARNA ---
+                let alignText = isEven ? 'text-right' : 'text-left';
+                let flexAlign = isEven ? 'items-end' : 'items-start';
+                let linePos = isEven ? 'right-0' : 'left-0';
+                
+                let textHTML = `
+                    <div class="flex flex-col ${flexAlign} w-full transition-transform duration-300 group-hover:-translate-y-1">
+                        <div class="${c.bgCard} ${alignText} border border-white shadow-sm rounded-2xl p-3.5 w-full relative overflow-hidden group-hover:shadow-md transition-all">
+                            <!-- Aksen garis warna tegas di sisi dalam kotak -->
+                            <div class="absolute top-0 bottom-0 w-1.5 ${c.accent} ${linePos} opacity-90"></div>
+                            
+                            <!-- Label Tanggal dibungkus rapi ala Badge -->
+                            <span class="inline-block ${c.textHead} text-[8.5px] font-black uppercase tracking-wider mb-2 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-sm border border-slate-100">${rawDate}</span>
+                            
+                            <h4 class="font-black text-slate-800 text-[12px] mb-1.5 leading-tight">${t.Judul || 'Tahapan'}</h4>
+                            <p class="text-[9.5px] text-slate-600 leading-relaxed font-medium">${t.Deskripsi || ''}</p>
+                        </div>
                     </div>
                 `;
+
+                // --- DESAIN IKON / ILUSTRASI RAKSASA ---
+                let justifyImg = isEven ? 'justify-start' : 'justify-end';
+                let imgHTML = `
+                    <div class="w-full flex ${justifyImg} relative group-hover:scale-110 transition-transform duration-500">
+                        <div class="relative w-16 h-16 flex items-center justify-center">
+                            <div class="absolute inset-0 ${c.bgShape} rounded-full opacity-20 scale-125 transform -rotate-12 blur-sm"></div>
+                            <div class="absolute inset-0 ${c.bgShape} rounded-[1.2rem] transform rotate-12 shadow-lg z-0"></div>
+                            <i class="ph-duotone ${c.iconBig} text-[38px] text-white z-10 drop-shadow-md"></i>
+                        </div>
+                    </div>
+                `;
+
+                // --- CINCIN TENGAH (DONAT TERBELAH 2 WARNA TEGAS) ---
+                let centerNodeHTML = `
+                    <div class="absolute left-1/2 -translate-x-1/2 w-[34px] h-[34px] rounded-full shadow-md z-20 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-180 group-hover:scale-125" style="background: linear-gradient(to right, ${c.c1} 50%, ${c.c2} 50%);">
+                        <div class="w-[20px] h-[20px] rounded-full bg-white flex items-center justify-center shadow-inner transform transition-transform duration-500 group-hover:-rotate-180">
+                            <i class="ph-bold ${c.iconSmall} text-slate-400 text-[10px]"></i>
+                        </div>
+                    </div>
+                `;
+
+                // LOGIKA PENEMPATAN KANAN / KIRI
+                if (isEven) {
+                    el.innerHTML = `
+                        <div class="w-[42%] relative pr-1">${textHTML}</div>
+                        ${centerNodeHTML}
+                        <div class="w-[42%] relative pl-5">${imgHTML}</div>
+                    `;
+                } else {
+                    el.innerHTML = `
+                        <div class="w-[42%] relative pr-5">${imgHTML}</div>
+                        ${centerNodeHTML}
+                        <div class="w-[42%] relative pl-1">${textHTML}</div>
+                    `;
+                }
+
                 container.appendChild(el);
             });
-        }
 
-        function formatRpStylized(val) {
-            if (val === undefined || val === null || val === '' || val === '-') return '-';
-            let num = parseInt(String(val).replace(/[^0-9]/g, ''));
-            if (isNaN(num)) return val;
-            let str = num.toLocaleString('id-ID');
-            let parts = str.split('.');
-            if(parts.length > 1) {
-                let lastPart = parts.pop();
-                return `Rp ${parts.join('.')} <span class="opacity-40">.${lastPart}</span>`;
-            }
-            return 'Rp ' + str;
+            // --- LOGO AL KAUTSAR DI UJUNG BAWAH TIMELINE ---
+            let endLogo = document.createElement('div');
+            endLogo.className = "relative z-20 w-full flex justify-center mt-4 animate-slide-up";
+            endLogo.style.animationDelay = `${(appState.timeline.length + 1) * 0.15}s`;
+            endLogo.innerHTML = `
+                <div class="bg-white p-3 rounded-2xl shadow-[0_5px_15px_rgba(0,0,0,0.05)] border-2 border-blue-100 flex items-center justify-center transform hover:scale-110 transition-transform duration-500">
+                    <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Al Kautsar" class="h-9 w-auto drop-shadow-sm">
+                </div>
+            `;
+            container.appendChild(endLogo);
         }
 
         function renderKeuangan() {
@@ -1995,15 +2051,37 @@
                 gasBadge.classList.remove('hidden');
                 gasBadge.className = "text-[9px] font-bold px-2 py-1 rounded-full flex items-center bg-blue-50 text-blue-600 border border-blue-200";
                 gasBadge.innerHTML = '<i class="ph-bold ph-spinner animate-spin mr-1"></i> Sync...';
+            // === 2. SIMPAN HASIL TARIKAN SERVER TERBARU KE CACHE ===
+            setTimeout(() => {
+                localStorage.setItem('psb_cache_kuota', JSON.stringify({
+                    kuota_unggulan: document.getElementById('dyn-kuota-unggulan') ? document.getElementById('dyn-kuota-unggulan').innerText : '0',
+                    terisi_unggulan: document.getElementById('dyn-terisi-unggulan') ? document.getElementById('dyn-terisi-unggulan').innerText : '0',
+                    kuota_icp: document.getElementById('dyn-kuota-icp') ? document.getElementById('dyn-kuota-icp').innerText : '0',
+                    terisi_icp: document.getElementById('dyn-terisi-icp') ? document.getElementById('dyn-terisi-icp').innerText : '0'
+                }));
+            }, 1000); // Dijeda 1 detik agar angka dari server sudah tercetak di layar
             }
 
-            // --- ANIMASI LOADING ANGKA KUOTA (BIAR WALI MURID GAK PANIK) ---
-            const spinnerHtml = '<i class="ph-bold ph-spinner animate-spin text-[12px] opacity-70"></i>';
-            if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerHTML = spinnerHtml;
-            if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerHTML = spinnerHtml;
-            if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerHTML = spinnerHtml;
-            if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerHTML = spinnerHtml;
-            // ---------------------------------------------------------------
+            // === 1. SISTEM CACHE NGEBUT (TAMPIL 0 DETIK) ===
+            let cacheData = localStorage.getItem('psb_cache_kuota');
+            if (cacheData) {
+                try {
+                    let c = JSON.parse(cacheData);
+                    // Langsung cetak angka terakhir kali dilihat (0 Detik!)
+                    if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerText = c.kuota_unggulan || '0';
+                    if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerText = c.terisi_unggulan || '0';
+                    if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerText = c.kuota_icp || '0';
+                    if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerText = c.terisi_icp || '0';
+                } catch(e) {}
+            } else {
+                // Tampilkan Ikon Loading Spinner HANYA JIKA pengunjung baru pertama kali buka web
+                const spinnerHtml = '<i class="ph-bold ph-spinner animate-spin text-[12px] opacity-70"></i>';
+                if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerHTML = spinnerHtml;
+                if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerHTML = spinnerHtml;
+                if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerHTML = spinnerHtml;
+                if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerHTML = spinnerHtml;
+            }
+            // ===============================================
 
             try {
                 let res = await fetch(GAS_URL);
@@ -2504,6 +2582,114 @@
                 }
             }
         }
+
+// --- SAKELAR RAHASIA TOMBOL TEST ADMIN ---
+        function toggleTestMode() {
+            let isAktif = localStorage.getItem('mode_test') === 'aktif';
+            if (isAktif) {
+                localStorage.removeItem('mode_test');
+                showToast("❌ Mode Uji Coba DIMATIKAN! Tombol TEST Hilang.");
+            } else {
+                localStorage.setItem('mode_test', 'aktif');
+                showToast("✅ Mode Uji Coba AKTIF! Tombol TEST Muncul.");
+            }
+            cekStatusTest();
+        }
+
+        function cekStatusTest() {
+            let boxTest = document.getElementById('box-tombol-test');
+            if (boxTest) {
+                if (localStorage.getItem('mode_test') === 'aktif') {
+                    boxTest.classList.remove('hidden');
+                } else {
+                    boxTest.classList.add('hidden');
+                }
+            }
+        }
+
+        // Jalankan pengecekan otomatis saat web pertama kali dibuka
+        document.addEventListener('DOMContentLoaded', cekStatusTest);
+
     </script>
+    <!-- ================= FITUR INSTALL APLIKASI (PWA) ================= -->
+<div id="box-install-app" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] hidden">
+    <button id="btn-install-app" class="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-5 py-3 rounded-full font-black text-[12px] shadow-[0_8px_25px_rgba(16,185,129,0.5)] border-2 border-emerald-300 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all w-max">
+        <i class="ph-bold ph-download-simple text-lg animate-bounce"></i> PASANG APLIKASI KE HP
+    </button>
+</div>
+
+<script>
+(function() {
+    // 1. SUNTIK MANIFEST OTOMATIS (Syarat Wajib PWA Chrome)
+    const manifestJSON = {
+        "name": "PSB Al Kautsar",
+        "short_name": "PSB",
+        "start_url": window.location.href,
+        "display": "standalone",
+        "background_color": "#f8fafc",
+        "theme_color": "#1e3a8a",
+        "icons": [{
+            "src": "https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }]
+    };
+    const manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    manifestLink.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifestJSON));
+    document.head.appendChild(manifestLink);
+
+    // 2. SUNTIK SERVICE WORKER OTOMATIS (Mesin latar belakang PWA)
+    if ('serviceWorker' in navigator) {
+        const swBlob = new Blob(["self.addEventListener('fetch', e => {});"], {type: 'application/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+    }
+
+    // 3. KECERDASAN MENGHINDARI KURUNGAN GOOGLE IFRAME
+    // (Google Script selalu mengurung web di dalam Iframe, Browser HP menolak install PWA di dalam iframe)
+    const boxInstall = document.getElementById('box-install-app');
+    const btnInstall = document.getElementById('btn-install-app');
+    const inIframe = window.top !== window.self;
+    let deferredPrompt;
+
+    if (inIframe) {
+        // Jika masih di dalam Iframe Google, tombol muncul.
+        // Saat diklik, dia akan "mendobrak" keluar dari Iframe ke link asli agar bisa diinstall
+        boxInstall.classList.remove('hidden');
+        btnInstall.addEventListener('click', () => {
+            showToast("Menyiapkan Sistem Pemasangan...");
+            setTimeout(() => {
+                window.top.location.href = window.location.href; // Dobrak keluar iframe!
+            }, 1000);
+        });
+    } else {
+        // Jika sudah di luar iframe, tangkap sinyal Install resmi dari Browser HP
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            boxInstall.classList.remove('hidden'); // Munculkan tombol
+        });
+
+        btnInstall.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt(); // Memicu popup dialog Install Android bawaan
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    boxInstall.classList.add('hidden');
+                }
+                deferredPrompt = null;
+            }
+        });
+    }
+
+    // Otomatis hilangkan tombol kalau aplikasi sudah berhasil terpasang di HP
+    window.addEventListener('appinstalled', () => {
+        boxInstall.classList.add('hidden');
+        showToast("🎉 Aplikasi Berhasil Terpasang di Layar HP!");
+    });
+})();
+</script>
+<!-- ================================================================ -->
 </body>
 </html>
