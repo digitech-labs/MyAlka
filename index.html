@@ -139,6 +139,44 @@
 
 <body class="bg-slate-200 antialiased flex justify-center text-slate-800 h-[100dvh] overflow-hidden">
 
+<!-- === SPLASH SCREEN MODERN DENGAN ANIMASI & QUOTES LUCU === -->
+<div id="splash-screen-baru" class="fixed inset-0 bg-slate-50 z-[9999] flex flex-col items-center justify-center transition-all duration-700 opacity-100 visible">
+    
+    <!-- Animasi CSS Khusus Layar Loading -->
+    <style>
+        @keyframes floatApp {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.02); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+        .animate-float { animation: floatApp 3.5s ease-in-out infinite; }
+    </style>
+
+    <!-- Wadah Logo Bebas Sudut Hitam + Melayang -->
+    <div class="relative w-32 h-32 mb-8">
+        <!-- Efek Cahaya Glow Berdenyut di Belakang Logo -->
+        <div class="absolute inset-0 bg-blue-500 rounded-[2.2rem] blur-2xl opacity-40 animate-pulse mt-2"></div>
+        
+        <!-- Logo Pemotong Sudut Hitam (Pisau Bedah CSS) -->
+        <div class="relative w-full h-full bg-white rounded-[2.2rem] shadow-[0_10px_30px_rgba(0,0,0,0.15)] overflow-hidden animate-float border-[3px] border-white">
+            <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/icon.png" alt="Logo PSB" class="w-full h-full object-cover">
+        </div>
+    </div>
+
+    <!-- Area Teks Sambutan & Loading -->
+    <div class="px-6 text-center max-w-[300px]">
+        <div class="flex justify-center mb-3">
+            <i class="ph-bold ph-spinner animate-spin text-[28px] text-blue-500 drop-shadow-sm"></i>
+        </div>
+        <h2 class="text-xl font-black text-slate-800 mb-1.5 tracking-tight">Assalamu'alaikum!</h2>
+        <div class="bg-blue-100/50 p-3 rounded-2xl border border-blue-200">
+            <p id="splash-quotes" class="text-[11.5px] font-bold text-blue-800 leading-relaxed italic">
+                Menyiapkan sistem...
+            </p>
+        </div>
+    </div>
+</div>
+
     <div class="w-full max-w-[420px] bg-[#f8fafc] h-full relative shadow-[0_0_50px_rgba(0,0,0,0.15)] flex flex-col border-x border-slate-300">
 
         <!-- Modals & Toasts -->
@@ -899,17 +937,34 @@
             return 'Rp ' + num.toLocaleString('id-ID');
         }
 
-        function formatRpStylized(val) {
-            if (val === undefined || val === null || val === '' || val === '-') return '-';
+        // Tambahkan parameter isTotal untuk mendeteksi baris gelap
+        function formatRpStylized(val, isTotal = false) {
+            if (val === undefined || val === null || val === '' || val === '-') {
+                return `<div class="text-center w-full ${isTotal ? 'text-slate-400' : 'text-slate-300'} font-bold">-</div>`;
+            }
+            
             let num = parseInt(String(val).replace(/[^0-9]/g, ''));
             if (isNaN(num)) return val;
+            
             let str = num.toLocaleString('id-ID');
             let parts = str.split('.');
-            if(parts.length > 1) {
-                let lastPart = parts.pop();
-                return `Rp ${parts.join('.')} <span class="opacity-40">.${lastPart}</span>`;
+            let numHtml = '';
+            
+            // PILIHAN WARNA: Jutaan disulap jadi MERAH PASTEL yang jelas & elegan!
+            let cJuta = isTotal ? 'text-amber-300' : 'text-rose-600';  // Merah Pastel / Rose-600
+            let cRibu = isTotal ? 'text-white' : 'text-slate-800';      // Ribuan
+            let cRatus = isTotal ? 'text-slate-300' : 'text-slate-500'; // Ratusan & Titik
+            
+            if (parts.length === 3) {
+                numHtml = `<span class="${cJuta} font-black">${parts[0]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRibu} font-bold">${parts[1]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRatus} font-medium">${parts[2]}</span>`;
+            } else if (parts.length === 2) {
+                numHtml = `<span class="${cRibu} font-bold">${parts[0]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRatus} font-medium">${parts[1]}</span>`;
+            } else {
+                numHtml = `<span class="${cRatus} font-medium">${parts[0]}</span>`;
             }
-            return 'Rp ' + str;
+            
+            let cRp = isTotal ? 'text-amber-400/70' : 'text-rose-400/80';
+            return `<div class="flex justify-between items-center w-full px-1"><span class="text-[7.5px] font-bold ${cRp}">Rp</span><span class="text-right flex-1 tracking-tight">${numHtml}</span></div>`;
         }
 
         function navigate(viewId, pushToHistory = true) {
@@ -1232,29 +1287,57 @@
                 tbody.appendChild(tr);
             });
 
-            document.getElementById('tot-u1').innerHTML = formatRpStylized(totU1);
-            document.getElementById('tot-u2').innerHTML = formatRpStylized(totU2);
-            document.getElementById('tot-icp').innerHTML = formatRpStylized(totICP);
+            document.getElementById('tot-u1').innerHTML = formatRpStylized(totU1, true);
+            document.getElementById('tot-u2').innerHTML = formatRpStylized(totU2, true);
+            document.getElementById('tot-icp').innerHTML = formatRpStylized(totICP, true);
 
             const cttContainer = document.getElementById('dyn-catatan-biaya');
             if(cttContainer && appState.catatanBiaya) {
                 cttContainer.innerHTML = '';
                 appState.catatanBiaya.forEach((c, i) => {
-                    let text = c.Teks_Catatan || '';
-                    text = text.replace(/^([^:]+):/i, function(match, p1) {
-                        return `<span class="inline-block bg-red-100 text-red-700 font-black px-2.5 py-1 rounded-full text-[10px] tracking-wide border border-red-200 mr-1 mb-1.5 shadow-sm">${p1}</span> :<br>`;
-                    });
-                    text = text.replace(/Indent/gi, '<span class="bg-blue-100 text-blue-600 px-1 rounded font-bold shadow-sm">Indent</span>');
-                    text = text.replace(/ICP/gi, '<span class="bg-amber-100 text-amber-600 px-1 rounded font-bold shadow-sm">ICP</span>');
+            let text = String(c.Teks_Catatan || '');
+            if (!text.trim()) return;
 
-                    let p = document.createElement('div');
-                    p.className = 'flex items-start mb-3 pb-3 border-b border-slate-200/60 last:border-0 last:mb-0 last:pb-0';
-                    p.innerHTML = `
-                        <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] shrink-0 mr-2.5 shadow-sm border border-red-600">${i + 1}</div>
-                        <div class="flex-1 text-[9.5px] text-slate-600 leading-relaxed mt-0.5">${text}</div>
-                    `;
-                    cttContainer.appendChild(p);
-                });
+            let lines = text.split('\n');
+            let title = lines[0].trim(); 
+            let descHtml = '';
+
+            for (let j = 1; j < lines.length; j++) {
+                let line = lines[j].trim();
+                if (!line) continue;
+
+                if (line.startsWith('•') || line.startsWith('-')) {
+                    let cleanText = line.substring(1).trim();
+                    descHtml += `<div class="flex items-start mt-2"><i class="ph-fill ph-check-circle text-emerald-500 mt-[3px] mr-2.5 shrink-0 text-[13px]"></i><span class="text-[10.5px] text-slate-600 leading-relaxed">${cleanText}</span></div>`;
+                } else {
+                    descHtml += `<p class="text-[10.5px] text-slate-600 leading-relaxed mt-2">${line}</p>`;
+                }
+            }
+
+            const highlight = (str) => {
+                return str
+                    .replace(/(Rp\s?\d{1,3}(?:\.\d{3})*)/gi, '<span class="text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 shadow-sm mx-0.5 whitespace-nowrap">$1</span>')
+                    .replace(/(\d{1,2}\s+(?:Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\s+\d{4})/gi, '<span class="text-purple-600 font-bold bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200 shadow-sm mx-0.5 whitespace-nowrap"><i class="ph-bold ph-calendar-blank mr-1"></i>$1</span>')
+                    .replace(/ICP/g, '<span class="bg-yellow-100 text-yellow-700 px-1.5 py-0.5 rounded shadow-sm font-black mx-0.5">ICP</span>')
+                    .replace(/Indent/gi, '<span class="bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded shadow-sm font-black mx-0.5">Indent</span>');
+            };
+
+            let el = document.createElement('div');
+            el.className = "flex items-start gap-3.5 mb-7 last:mb-0 group w-full";
+            el.innerHTML = `
+                <div class="w-7 h-7 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-black text-[12px] shrink-0 shadow-sm border border-rose-200 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">${i + 1}</div>
+                <div class="flex-1 pt-0.5 w-full">
+                    <h4 class="text-[12px] font-black text-slate-800 mb-1.5 tracking-tight block leading-normal">${highlight(title)}</h4>
+                    <div class="border-l-[3px] border-slate-200 pl-3.5 ml-1 mt-2 flex flex-col w-full pr-2">
+                        ${highlight(descHtml)}
+                    </div>
+                </div>
+            `;
+            
+            if (typeof cttContainer !== 'undefined' && cttContainer) {
+                cttContainer.appendChild(el);
+            }
+        });
             }
         }
 
@@ -2689,7 +2772,94 @@
         showToast("🎉 Aplikasi Berhasil Terpasang di Layar HP!");
     });
 })();
+
+// --- MESIN SPLASH SCREEN & PENGACAK QUOTES LUCU ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const salamQuotes = [
+                "Sebentar ya Ayah/Bunda, kami sedang merapikan karpet merah... 🚀",
+                "Tahan napas sebentar, aplikasi lagi pemanasan... 🏃💨",
+                "Ciee yang sebentar lagi masuk SD! Siap-siap ya... 🎒✨",
+                "Ngopi dulu bentar Bunda, mesin lagi dihidupkan... ☕⚙️",
+                "Orang sabar disayang Allah. Sat set sat set... 😇✨",
+                "Sedang menyusun rapi berkas masa depan Ananda. Bismillah... 🌟",
+                "Sambil nunggu, jangan lupa tersenyum hari ini! 😊",
+                "Sstt... Panitia lagi sibuk nyiapin aplikasi nih! 🤫📋",
+                "Tenang, loadingnya nggak selama nunggu kepastian kok! Eh... 🙊"
+            ];
+            
+            // 1. Pilih kalimat lucu secara acak
+            let kalimatAcak = salamQuotes[Math.floor(Math.random() * salamQuotes.length)];
+            let quoteEl = document.getElementById('splash-quotes');
+            if(quoteEl) quoteEl.innerText = kalimatAcak;
+
+            // 2. DOBRAK MASUK SAT SET! (Cuma 0.8 Detik)
+            setTimeout(() => {
+                let splash = document.getElementById('splash-screen-baru');
+                if(splash) {
+                    // Tambahkan pointer-events-none agar tidak memblokir klik saat memudar
+                    splash.classList.remove('opacity-100', 'visible');
+                    splash.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+                    
+                    // Buang total dari HTML setelah 0.5 detik memudar
+                    setTimeout(() => splash.remove(), 500); 
+                }
+            }, 800); // 800 milidetik = Kurang dari 1 detik langsung masuk!
+        });
+
+// === SISTEM PINTAR TOMBOL BACK HP (ANTI KELUAR APLIKASI) ===
+        document.addEventListener('DOMContentLoaded', () => {
+            let isPopupOpen = false;
+            let isBackButtonPressed = false;
+
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class') {
+                        const el = mutation.target;
+                        
+                        // Ciri-ciri Popup/Modal Bapak: posisi 'fixed' dan 'inset-0' (menutupi layar)
+                        if (el.classList.contains('fixed') && el.classList.contains('inset-0')) {
+                            
+                            // KONDISI 1: POPUP DIBUKA (Class 'hidden' dihilangkan)
+                            if (!el.classList.contains('hidden') && !isPopupOpen) {
+                                isPopupOpen = true;
+                                // Pasang "Jebakan" History agar tombol Back HP tertahan
+                                history.pushState({ popup_terbuka: true }, "");
+                            } 
+                            // KONDISI 2: POPUP DITUTUP MANUAL (Diklik tombol X / Tutup)
+                            else if (el.classList.contains('hidden') && isPopupOpen) {
+                                isPopupOpen = false;
+                                // Bersihkan jebakan history jika ditutup pakai tombol X (bukan tombol Back)
+                                if (!isBackButtonPressed && history.state && history.state.popup_terbuka) {
+                                    history.back();
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Pantau pergerakan seluruh elemen di halaman
+            observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+
+            // TANGKAP SAAT TOMBOL BACK HP DITEKAN
+            window.addEventListener('popstate', (e) => {
+                if (isPopupOpen) {
+                    isBackButtonPressed = true; // Tandai bahwa ini murni eksekusi dari tombol back HP
+                    
+                    // Cari SEMUA popup yang sedang tampil, lalu PAKSA TUTUP!
+                    let openPopups = document.querySelectorAll('.fixed.inset-0:not(.hidden)');
+                    openPopups.forEach(popup => {
+                        popup.classList.add('hidden');
+                        popup.classList.remove('flex'); // Jaga-jaga agar tata letak tidak berantakan
+                    });
+                    
+                    isPopupOpen = false; // Kembalikan status
+                    
+                    // Matikan penanda setelah selesai
+                    setTimeout(() => { isBackButtonPressed = false; }, 100);
+                }
+            });
+        });
 </script>
-<!-- ================================================================ -->
 </body>
 </html>
