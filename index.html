@@ -948,20 +948,21 @@
             let cRibu = isTotal ? 'text-white' : 'text-slate-800';
             let cRatus = isTotal ? 'text-slate-300' : 'text-slate-500';
             
+            // Jarak titik dirapatkan (dihapus marginnya) agar sangat ramah layar HP sempit
             if (parts.length === 3) {
-                numHtml = `<span class="${cJuta} font-black">${parts[0]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRibu} font-bold">${parts[1]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRatus} font-medium">${parts[2]}</span>`;
+                numHtml = `<span class="${cJuta} font-black">${parts[0]}</span><span class="${cRatus}">.</span><span class="${cRibu} font-bold">${parts[1]}</span><span class="${cRatus}">.</span><span class="${cRatus} font-medium">${parts[2]}</span>`;
             } else if (parts.length === 2) {
-                numHtml = `<span class="${cRibu} font-bold">${parts[0]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRatus} font-medium">${parts[1]}</span>`;
+                numHtml = `<span class="${cRibu} font-bold">${parts[0]}</span><span class="${cRatus}">.</span><span class="${cRatus} font-medium">${parts[1]}</span>`;
             } else {
                 numHtml = `<span class="${cRatus} font-medium">${parts[0]}</span>`;
             }
             
             let cRp = isTotal ? 'text-amber-400/70' : 'text-rose-400/80';
             
-            // JURUS ANTI TABRAK: Lebar minimal 95px, dan "Rp" dikunci di kiri dengan lebar 18px!
-            return `<div class="flex items-center w-full min-w-[95px] whitespace-nowrap px-1">
-                <span class="text-[7.5px] font-bold ${cRp} text-left w-[18px] shrink-0">Rp</span>
-                <span class="text-right flex-1 tracking-tight">${numHtml}</span>
+            // JURUS DEWA TERAKHIR: Lebar w-full mengikuti tabel, justify-between untuk pisahkan Kiri-Kanan, dan gap-1 sbg batas aman anti tabrak!
+            return `<div class="flex justify-between items-center w-full gap-1">
+                <span class="text-[7.5px] font-bold ${cRp} shrink-0">Rp</span>
+                <span class="text-right whitespace-nowrap tracking-tighter">${numHtml}</span>
             </div>`;
         }
 
