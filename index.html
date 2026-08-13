@@ -140,30 +140,24 @@
 <body class="bg-slate-200 antialiased flex justify-center text-slate-800 h-[100dvh] overflow-hidden">
 
 <!-- === SPLASH SCREEN MODERN DENGAN ANIMASI & QUOTES LUCU === -->
-<div id="splash-screen-baru" class="fixed inset-0 bg-slate-50 z-[9999] flex flex-col items-center justify-center transition-all duration-700 opacity-100 visible">
+<!-- (Ditambahkan style inline background-color agar milidetik pertama layar tidak hitam) -->
+<div id="splash-screen-baru" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-all duration-700 opacity-100 visible" style="background-color: #f8fafc;">
     
-    <!-- Animasi CSS Khusus Layar Loading -->
     <style>
-        @keyframes floatApp {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-15px) scale(1.02); }
-            100% { transform: translateY(0px) scale(1); }
-        }
+        @keyframes floatApp { 0% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } 100% { transform: translateY(0px) scale(1); } }
         .animate-float { animation: floatApp 3.5s ease-in-out infinite; }
     </style>
 
-    <!-- Wadah Logo Bebas Sudut Hitam + Melayang -->
-    <div class="relative w-32 h-32 mb-8">
-        <!-- Efek Cahaya Glow Berdenyut di Belakang Logo -->
+    <!-- Wadah Logo dengan INLINE CSS (Pemotong Sudut Instan Tanpa Menunggu CSS Load) -->
+    <div class="relative mb-8" style="width: 120px; height: 120px;">
         <div class="absolute inset-0 bg-blue-500 rounded-[2.2rem] blur-2xl opacity-40 animate-pulse mt-2"></div>
         
-        <!-- Logo Pemotong Sudut Hitam (Pisau Bedah CSS) -->
-        <div class="relative w-full h-full bg-white rounded-[2.2rem] shadow-[0_10px_30px_rgba(0,0,0,0.15)] overflow-hidden animate-float border-[3px] border-white">
-            <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/icon.png" alt="Logo PSB" class="w-full h-full object-cover">
+        <div class="relative w-full h-full shadow-[0_10px_30px_rgba(0,0,0,0.15)] overflow-hidden animate-float border-[3px] border-white" style="border-radius: 2.2rem; background-color: #ffffff;">
+            <!-- Tag Img diberi style paksa agar putih sejak awal -->
+            <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/icon.png" alt="Logo PSB" class="w-full h-full object-cover" style="border-radius: 2.2rem; background-color: #ffffff;">
         </div>
     </div>
 
-    <!-- Area Teks Sambutan & Loading -->
     <div class="px-6 text-center max-w-[300px]">
         <div class="flex justify-center mb-3">
             <i class="ph-bold ph-spinner animate-spin text-[28px] text-blue-500 drop-shadow-sm"></i>
@@ -950,10 +944,9 @@
             let parts = str.split('.');
             let numHtml = '';
             
-            // PILIHAN WARNA: Jutaan disulap jadi MERAH PASTEL yang jelas & elegan!
-            let cJuta = isTotal ? 'text-amber-300' : 'text-rose-600';  // Merah Pastel / Rose-600
-            let cRibu = isTotal ? 'text-white' : 'text-slate-800';      // Ribuan
-            let cRatus = isTotal ? 'text-slate-300' : 'text-slate-500'; // Ratusan & Titik
+            let cJuta = isTotal ? 'text-amber-300' : 'text-rose-600';
+            let cRibu = isTotal ? 'text-white' : 'text-slate-800';
+            let cRatus = isTotal ? 'text-slate-300' : 'text-slate-500';
             
             if (parts.length === 3) {
                 numHtml = `<span class="${cJuta} font-black">${parts[0]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRibu} font-bold">${parts[1]}</span><span class="${cRatus} mx-[1px]">.</span><span class="${cRatus} font-medium">${parts[2]}</span>`;
@@ -964,7 +957,12 @@
             }
             
             let cRp = isTotal ? 'text-amber-400/70' : 'text-rose-400/80';
-            return `<div class="flex justify-between items-center w-full px-1"><span class="text-[7.5px] font-bold ${cRp}">Rp</span><span class="text-right flex-1 tracking-tight">${numHtml}</span></div>`;
+            
+            // JURUS GRID: "Rp" diborgol paksa di kolom kiri, Angka diborgol paksa di kanan!
+            return `<div class="grid grid-cols-[auto_1fr] gap-1.5 w-full min-w-[70px] px-1 items-center">
+                <span class="text-[7.5px] font-bold ${cRp} text-left">Rp</span>
+                <span class="text-right tracking-tight">${numHtml}</span>
+            </div>`;
         }
 
         function navigate(viewId, pushToHistory = true) {
