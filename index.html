@@ -958,10 +958,10 @@
             
             let cRp = isTotal ? 'text-amber-400/70' : 'text-rose-400/80';
             
-            // JURUS GRID: "Rp" diborgol paksa di kolom kiri, Angka diborgol paksa di kanan!
-            return `<div class="grid grid-cols-[auto_1fr] gap-1.5 w-full min-w-[70px] px-1 items-center">
-                <span class="text-[7.5px] font-bold ${cRp} text-left">Rp</span>
-                <span class="text-right tracking-tight">${numHtml}</span>
+            // JURUS ANTI TABRAK: Lebar minimal 95px, dan "Rp" dikunci di kiri dengan lebar 18px!
+            return `<div class="flex items-center w-full min-w-[95px] whitespace-nowrap px-1">
+                <span class="text-[7.5px] font-bold ${cRp} text-left w-[18px] shrink-0">Rp</span>
+                <span class="text-right flex-1 tracking-tight">${numHtml}</span>
             </div>`;
         }
 
@@ -1292,7 +1292,7 @@
             const cttContainer = document.getElementById('dyn-catatan-biaya');
             if(cttContainer && appState.catatanBiaya) {
                 cttContainer.innerHTML = '';
-                appState.catatanBiaya.forEach((c, i) => {
+        appState.catatanBiaya.forEach((c, i) => {
             let text = String(c.Teks_Catatan || '');
             if (!text.trim()) return;
 
@@ -1306,9 +1306,10 @@
 
                 if (line.startsWith('•') || line.startsWith('-')) {
                     let cleanText = line.substring(1).trim();
-                    descHtml += `<div class="flex items-start mt-2"><i class="ph-fill ph-check-circle text-emerald-500 mt-[3px] mr-2.5 shrink-0 text-[13px]"></i><span class="text-[10.5px] text-slate-600 leading-relaxed">${cleanText}</span></div>`;
+                    // Tambahkan text-left untuk menolak text-justify bawaan template
+                    descHtml += `<div class="flex items-start mt-2 text-left"><i class="ph-fill ph-check-circle text-emerald-500 mt-[3px] mr-2.5 shrink-0 text-[13px]"></i><span class="text-[10.5px] text-slate-600 leading-relaxed flex-1">${cleanText}</span></div>`;
                 } else {
-                    descHtml += `<p class="text-[10.5px] text-slate-600 leading-relaxed mt-2">${line}</p>`;
+                    descHtml += `<p class="text-[10.5px] text-slate-600 leading-relaxed mt-2 text-left">${line}</p>`;
                 }
             }
 
@@ -1321,12 +1322,12 @@
             };
 
             let el = document.createElement('div');
-            el.className = "flex items-start gap-3.5 mb-7 last:mb-0 group w-full";
+            el.className = "flex items-start gap-3.5 mb-7 last:mb-0 group w-full text-left";
             el.innerHTML = `
                 <div class="w-7 h-7 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-black text-[12px] shrink-0 shadow-sm border border-rose-200 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">${i + 1}</div>
                 <div class="flex-1 pt-0.5 w-full">
-                    <h4 class="text-[12px] font-black text-slate-800 mb-1.5 tracking-tight block leading-normal">${highlight(title)}</h4>
-                    <div class="border-l-[3px] border-slate-200 pl-3.5 ml-1 mt-2 flex flex-col w-full pr-2">
+                    <h4 class="text-[12px] font-black text-slate-800 mb-1.5 tracking-tight block leading-normal text-left">${highlight(title)}</h4>
+                    <div class="border-l-[3px] border-slate-200 pl-3.5 ml-1 mt-2 flex flex-col w-full pr-2 text-left">
                         ${highlight(descHtml)}
                     </div>
                 </div>
@@ -2801,7 +2802,7 @@
                     // Buang total dari HTML setelah 0.5 detik memudar
                     setTimeout(() => splash.remove(), 500); 
                 }
-            }, 4000);
+            }, 4000); // <--- Ganti jadi 4000 (4 detik) agar pantun terbaca santai
         });
 
 // === SISTEM PINTAR TOMBOL BACK HP (ANTI KELUAR APLIKASI) ===
