@@ -353,10 +353,8 @@
                             <div class="absolute -right-4 -bottom-4 opacity-10"><i class="ph-fill ph-trophy text-[70px]"></i></div>
                             <h4 class="font-black text-[12px] mb-2 flex items-center z-10"><div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-1.5"><i class="ph-fill ph-trophy text-yellow-300 text-sm"></i></div> Kelas Unggulan</h4>
                             <ul id="dyn-unggulan-front" class="text-[9.5px] font-medium space-y-1 z-10 mb-3 flex-1 opacity-90 leading-tight"></ul>
-                            <div class="z-10 bg-white/20 backdrop-blur-md rounded-lg px-2 py-1.5 text-center flex flex-col items-center mt-auto">
-                                <span class="text-[9px] font-bold">MAX KUOTA: <span id="dyn-kuota-unggulan" class="text-yellow-300 font-black text-[11px]">0</span></span>
-                                <div class="w-full h-[1px] bg-white/30 my-0.5"></div>
-                                <span class="text-[9px] font-bold">TERISI: <span id="dyn-terisi-unggulan" class="text-white font-black text-[11px]">0</span></span>
+                            <div id="dyn-tabel-unggulan" class="z-10 bg-white/20 backdrop-blur-md rounded-lg p-1.5 w-full mt-auto overflow-hidden">
+                                <!-- Tabel Diisi JS -->
                             </div>
                         </div>
 
@@ -364,10 +362,8 @@
                             <div class="absolute -right-4 -bottom-4 opacity-10"><i class="ph-fill ph-globe text-[70px]"></i></div>
                             <h4 class="font-black text-[12px] mb-2 flex items-center z-10"><div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-1.5"><i class="ph-fill ph-globe text-yellow-200 text-sm"></i></div> Program ICP</h4>
                             <ul id="dyn-icp-front" class="text-[9.5px] font-medium space-y-1 z-10 mb-3 flex-1 opacity-90 leading-tight"></ul>
-                            <div class="z-10 bg-white/20 backdrop-blur-md rounded-lg px-2 py-1.5 text-center flex flex-col items-center mt-auto">
-                                <span class="text-[9px] font-bold">MAX KUOTA: <span id="dyn-kuota-icp" class="text-yellow-200 font-black text-[11px]">0</span></span>
-                                <div class="w-full h-[1px] bg-white/30 my-0.5"></div>
-                                <span class="text-[9px] font-bold">TERISI: <span id="dyn-terisi-icp" class="text-white font-black text-[11px]">0</span></span>
+                            <div id="dyn-tabel-icp" class="z-10 bg-white/20 backdrop-blur-md rounded-lg p-1.5 w-full mt-auto overflow-hidden">
+                                <!-- Tabel Diisi JS -->
                             </div>
                         </div>
                     </div>
@@ -866,6 +862,34 @@
                         <div id="panel-editor" class="hidden relative pb-24"></div>
 
                         <div id="panel-database" class="hidden space-y-4">
+
+                                 
+
+                            <!-- === PUSAT KENDALI DATA (JALAN PINTAS GOOGLE DRIVE) === -->
+                            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 rounded-2xl shadow-lg border border-blue-500 mb-2 flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up relative overflow-hidden">
+                                <!-- Ornamen Cahaya Background -->
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl opacity-10 -mr-10 -mt-10 pointer-events-none"></div>
+
+                                <!-- Bagian Kiri: Judul & Ikon -->
+                                <div class="flex items-center gap-3 w-full sm:w-auto relative z-10">
+                                    <div class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30 shrink-0 shadow-inner">
+                                        <i class="ph-fill ph-google-drive-logo text-[22px]"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-[13px] font-black text-white tracking-tight drop-shadow-sm">Folder Master Server</h3>
+                                        <p class="text-[10px] font-medium text-blue-100 drop-shadow-sm">Akses Spreadsheet & Berkas Upload Siswa</p>
+                                    </div>
+                                </div>
+
+                                <!-- Bagian Kanan: Tombol Buka -->
+                                <div class="w-full sm:w-auto relative z-10">
+                                    <a href="https://drive.google.com/drive/u/0/folders/1Kj1spJRz3WtgcSgIJw6xg3sAlMDhhUhZ" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-blue-50 text-blue-700 px-5 py-3 rounded-xl text-[11px] font-black shadow-md hover:shadow-lg transition-all active:scale-95 group focus:outline-none focus:ring-4 focus:ring-blue-400/50 border border-transparent">
+                                        Buka Google Drive <i class="ph-bold ph-arrow-square-out text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ==================================================================== -->
+
                             <div class="bg-blue-50 p-4 rounded-2xl shadow-sm border border-blue-200">
                                 <h4 class="font-bold text-[12px] text-blue-800 mb-3 border-b border-blue-200 pb-2"><i class="ph-fill ph-cloud-sync mr-1 text-lg"></i> Sinkronisasi Master (GAS)</h4>
                                 <p class="text-[9px] text-blue-600 mb-3 font-medium">Tarik data dari Google Sheet ke HP Anda, atau Paksa Timpa Google Sheet dengan data lokal saat ini.</p>
@@ -996,7 +1020,12 @@
         let appState = {
             config: {
                 Judul_Web: "P S B", Sub_Judul: "PENERIMAAN SISWA BARU",
-                Kuota_Unggulan: "112", Kuota_ICP: "40",
+                // HAPUS Kuota_Unggulan dan Kuota_ICP lama, ganti dengan format 4 Tahun:
+                TA_1: "2026/2027", KU_1: "112", KI_1: "40",
+                TA_2: "2027/2028", KU_2: "112", KI_2: "40",
+                TA_3: "2028/2029", KU_3: "112", KI_3: "40",
+                TA_4: "2029/2030", KU_4: "112", KI_4: "40",
+                
                 List_Unggulan_Depan: "Qur’anic & Talent Excellence\nTahsin\nTahfidz\nAdab\nPrestasi\nPengembangan Talenta",
                 Desc_Unggulan_Popup: "Menumbuhkan generasi yang unggul dalam Al-Qur’an, beradab, dan berkembang sesuai potensi terbaiknya.",
                 List_Unggulan_Popup: "Tahsin Al-Qur’an\nTahfidz target 3 juz\nPembiasaan adab Islami\nPembinaan olimpiade dan akademik\nPembinaan MAPSI\nPembinaan seni\nPembinaan olahraga\nPembinaan public speaking\nPengembangan minat dan bakat\nLeadership dan organisasi siswa",
@@ -1079,12 +1108,47 @@
                 let iFull = iPopupArr.map(text => `<li class="flex items-start mb-2 bg-white rounded-lg p-2 border border-orange-100"><div class="min-w-[20px] h-[20px] bg-orange-500 rounded-full flex items-center justify-center mr-2"><i class="ph-bold ph-check text-white text-[12px]"></i></div> <span class="text-[11px] font-bold text-slate-700 leading-tight pt-0.5">${text}</span></li>`).join('');
                 if(document.getElementById('dyn-icp-full')) document.getElementById('dyn-icp-full').innerHTML = iFull;
 
-                let terisiU = appState.pendaftar.filter(p => p.Program === 'UNGGULAN').length;
-                let terisiI = appState.pendaftar.filter(p => p.Program === 'ICP').length;
-                if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerText = appState.config.Kuota_Unggulan || "112";
-                if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerText = terisiU;
-                if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerText = appState.config.Kuota_ICP || "40";
-                if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerText = terisiI;
+                // --- MESIN GENERATOR TABEL MINI 4 TAHUN AJARAN ---
+                const buildMiniTable = (prog, ta1, ta2, ta3, ta4, k1, k2, k3, k4) => {
+                    const getIsi = (pg, ta) => appState.pendaftar.filter(p => p.Program === pg && p.Tahun_Ajaran === ta).length;
+                    const sh = (ta) => ta ? "'" + ta.slice(2, 4) : "-"; // "2026/2027" -> "'26"
+                    
+                    let headColor = prog === 'UNGGULAN' ? 'text-yellow-300' : 'text-yellow-200';
+                    return `
+                        <table class="w-full text-[8.5px] text-center font-bold text-white tracking-tight border-collapse">
+                            <thead>
+                                <tr class="border-b border-white/30 ${headColor}">
+                                    <th class="text-left px-1 py-0.5 font-black w-8">TA</th>
+                                    <th class="py-0.5">${sh(ta1)}</th><th class="py-0.5">${sh(ta2)}</th><th class="py-0.5">${sh(ta3)}</th><th class="py-0.5">${sh(ta4)}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-white/10 bg-white/5">
+                                    <td class="text-left px-1 py-1 text-[7px] uppercase font-black opacity-90">MAX</td>
+                                    <td class="py-1">${k1}</td><td class="py-1">${k2}</td><td class="py-1">${k3}</td><td class="py-1">${k4}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left px-1 py-1 text-[7px] uppercase font-black opacity-90">ISI</td>
+                                    <td class="py-1">${getIsi(prog, ta1)}</td><td class="py-1">${getIsi(prog, ta2)}</td><td class="py-1">${getIsi(prog, ta3)}</td><td class="py-1">${getIsi(prog, ta4)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                };
+
+                let c = appState.config;
+                // Default fallback in case config doesn't exist yet
+                let ta1 = c.TA_1 || "2026/2027", ta2 = c.TA_2 || "2027/2028", ta3 = c.TA_3 || "2028/2029", ta4 = c.TA_4 || "2029/2030";
+                let ku1 = c.KU_1 || "112", ku2 = c.KU_2 || "112", ku3 = c.KU_3 || "112", ku4 = c.KU_4 || "112";
+                let ki1 = c.KI_1 || "40", ki2 = c.KI_2 || "40", ki3 = c.KI_3 || "40", ki4 = c.KI_4 || "40";
+
+                if(document.getElementById('dyn-tabel-unggulan')) {
+                    document.getElementById('dyn-tabel-unggulan').innerHTML = buildMiniTable('UNGGULAN', ta1, ta2, ta3, ta4, ku1, ku2, ku3, ku4);
+                }
+                if(document.getElementById('dyn-tabel-icp')) {
+                    document.getElementById('dyn-tabel-icp').innerHTML = buildMiniTable('ICP', ta1, ta2, ta3, ta4, ki1, ki2, ki3, ki4);
+                }
+                // ---------------------------------------------------
 
                 const kontakContainer = document.getElementById('dyn-kontak-container');
                 if(kontakContainer) {
@@ -1743,25 +1807,66 @@
 
         async function handleFormSubmit() {
             document.getElementById('btn-submit').innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Mengirim...'; document.getElementById('btn-submit').disabled = true;
+            
+            let d = new Date();
+            let waktuDaftar = String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear() + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+            
             let idDaftar = "REG" + new Date().getTime().toString().slice(-6);
             let namaSiswa = pendaftaranType === 'mutasi' ? document.getElementById('inp-nama-mutasi').value : document.getElementById('inp-nama-baru').value;
             let nisn = pendaftaranType === 'mutasi' ? document.getElementById('inp-nisn-mutasi-2').value : document.getElementById('inp-nisn-baru').value;
             let program = document.getElementById('inp-program').value || "UNGGULAN";
             let tahunAjaran = document.getElementById('inp-tahun').value || "";
             
-            let d = new Date();
-            let options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jakarta' };
-            let waktuDaftar = d.toLocaleDateString('id-ID', options) + ' WIB';
-
-            // Ambil tanggal lahir flatpickr dengan format id
-            let rawTglLahir = document.getElementById('inp-tgl-lahir').value || "-";
-            let finalTglLahir = rawTglLahir;
-            if (rawTglLahir !== "-") {
-                try { let t = new Date(rawTglLahir); finalTglLahir = t.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }); } catch(e){}
+            // Format Tanggal Aman
+            let inputTglLahir = document.getElementById('inp-tgl-lahir') ? document.getElementById('inp-tgl-lahir').value : "-";
+            let finalTglLahir = inputTglLahir;
+            if (inputTglLahir !== "-") {
+                try { let t = new Date(inputTglLahir); finalTglLahir = t.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }); } catch(e){}
             }
 
+            // Helper Cerdas Anti-Error: Biar nggak nabrak kalau kolom nggak diisi
+            const getVal = (id) => { const el = document.getElementById(id); return el && el.value ? el.value : "-"; };
+
             let newData = { 
-                ID_Daftar: idDaftar, Waktu_Daftar: waktuDaftar, Jalur: pendaftaranType.toUpperCase(), Tahun_Ajaran: tahunAjaran, Program: program, Nama_Siswa: namaSiswa, NISN: nisn, NIK_Anak: document.getElementById('inp-nik').value || document.getElementById('inp-nik-mutasi').value || "-", No_KK: document.getElementById('inp-nokk').value || "-", Tgl_Lahir: finalTglLahir, Nama_Ayah: document.getElementById('inp-ayah-nama').value, Nama_Ibu: document.getElementById('inp-ibu-nama').value, No_WA: document.getElementById('inp-wa').value, Status_Seleksi: "Menunggu",
+                ID_Daftar: idDaftar,
+                Waktu_Daftar: waktuDaftar,
+                Jalur: pendaftaranType.toUpperCase(),
+                Tahun_Ajaran: tahunAjaran,
+                Program: program,
+                NISN: nisn,
+                NIK_Anak: pendaftaranType === 'mutasi' ? getVal('inp-nik-mutasi') : getVal('inp-nik'),
+                Nama_Siswa: namaSiswa,
+                L_P: getVal('inp-jk'),
+                Anak_Ke: getVal('inp-anak-ke'),
+                Tempat_Lahir: getVal('inp-tempat-lahir'),
+                Tgl_Lahir: finalTglLahir,
+                Tgl_KK: getVal('inp-tgl-kk'),
+                Alamat_Provinsi: getVal('inp-provinsi'),
+                Alamat_Kabupaten: getVal('inp-kabkota'),
+                Alamat_Kecamatan: getVal('inp-kecamatan'),
+                Alamat_Desa: getVal('inp-desa'),
+                Alamat_Jalan: getVal('inp-alamat'),
+                Alamat_RT: getVal('inp-rt'),
+                Alamat_RW: getVal('inp-rw'),
+                Sekolah_Nama: getVal('inp-sekolah-search'),
+                Sekolah_NPSN: getVal('auto-npsn'),
+                Sekolah_Provinsi: getVal('auto-prov'),
+                Sekolah_Kabupaten: getVal('auto-kab'),
+                Sekolah_Kecamatan: getVal('auto-kec'),
+                Nama_Ayah: getVal('inp-ayah-nama'),
+                Ayah_NIK: getVal('inp-ayah-nik'),
+                Ayah_Tahun_Lahir: getVal('inp-ayah-thn'),
+                Ayah_Pendidikan: getVal('inp-ayah-pend'),
+                Ayah_Pekerjaan: getVal('inp-ayah-pek'),
+                Ayah_Penghasilan: getVal('inp-ayah-peng'),
+                Nama_Ibu: getVal('inp-ibu-nama'),
+                Ibu_NIK: getVal('inp-ibu-nik'),
+                Ibu_Tahun_Lahir: getVal('inp-ibu-thn'),
+                Ibu_Pendidikan: getVal('inp-ibu-pend'),
+                Ibu_Pekerjaan: getVal('inp-ibu-pek'),
+                Ibu_Penghasilan: getVal('inp-ibu-peng'),
+                No_WA: getVal('inp-wa'),
+                Status_Seleksi: "Menunggu",
                 Files: uploadedFiles
             };
             
@@ -1772,7 +1877,10 @@
 
             document.getElementById('btn-submit').innerHTML = 'Kirim Form <i class="ph-bold ph-paper-plane-right ml-1.5"></i>'; document.getElementById('btn-submit').disabled = false;
             document.getElementById('psb-form').reset(); document.querySelectorAll('.custom-input').forEach(el => el.classList.remove('filled', 'input-error'));
-            autoNpsn.value = ''; autoProv.value = ''; autoKab.value = ''; autoKec.value = '';
+            if(document.getElementById('auto-npsn')) document.getElementById('auto-npsn').value = ''; 
+            if(document.getElementById('auto-prov')) document.getElementById('auto-prov').value = ''; 
+            if(document.getElementById('auto-kab')) document.getElementById('auto-kab').value = ''; 
+            if(document.getElementById('auto-kec')) document.getElementById('auto-kec').value = '';
             
             uploadedFiles = { kk: null, akta: null, nisn: null, transfer: null };
             document.getElementById('preview-container').classList.add('hidden');
@@ -2137,10 +2245,8 @@
             // === 2. SIMPAN HASIL TARIKAN SERVER TERBARU KE CACHE ===
             setTimeout(() => {
                 localStorage.setItem('psb_cache_kuota', JSON.stringify({
-                    kuota_unggulan: document.getElementById('dyn-kuota-unggulan') ? document.getElementById('dyn-kuota-unggulan').innerText : '0',
-                    terisi_unggulan: document.getElementById('dyn-terisi-unggulan') ? document.getElementById('dyn-terisi-unggulan').innerText : '0',
-                    kuota_icp: document.getElementById('dyn-kuota-icp') ? document.getElementById('dyn-kuota-icp').innerText : '0',
-                    terisi_icp: document.getElementById('dyn-terisi-icp') ? document.getElementById('dyn-terisi-icp').innerText : '0'
+                    tabel_unggulan: document.getElementById('dyn-tabel-unggulan') ? document.getElementById('dyn-tabel-unggulan').innerHTML : '',
+                    tabel_icp: document.getElementById('dyn-tabel-icp') ? document.getElementById('dyn-tabel-icp').innerHTML : ''
                 }));
             }, 1000); // Dijeda 1 detik agar angka dari server sudah tercetak di layar
             }
@@ -2150,19 +2256,14 @@
             if (cacheData) {
                 try {
                     let c = JSON.parse(cacheData);
-                    // Langsung cetak angka terakhir kali dilihat (0 Detik!)
-                    if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerText = c.kuota_unggulan || '0';
-                    if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerText = c.terisi_unggulan || '0';
-                    if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerText = c.kuota_icp || '0';
-                    if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerText = c.terisi_icp || '0';
+                    if(document.getElementById('dyn-tabel-unggulan')) document.getElementById('dyn-tabel-unggulan').innerHTML = c.tabel_unggulan || '';
+                    if(document.getElementById('dyn-tabel-icp')) document.getElementById('dyn-tabel-icp').innerHTML = c.tabel_icp || '';
                 } catch(e) {}
             } else {
                 // Tampilkan Ikon Loading Spinner HANYA JIKA pengunjung baru pertama kali buka web
-                const spinnerHtml = '<i class="ph-bold ph-spinner animate-spin text-[12px] opacity-70"></i>';
-                if(document.getElementById('dyn-kuota-unggulan')) document.getElementById('dyn-kuota-unggulan').innerHTML = spinnerHtml;
-                if(document.getElementById('dyn-terisi-unggulan')) document.getElementById('dyn-terisi-unggulan').innerHTML = spinnerHtml;
-                if(document.getElementById('dyn-kuota-icp')) document.getElementById('dyn-kuota-icp').innerHTML = spinnerHtml;
-                if(document.getElementById('dyn-terisi-icp')) document.getElementById('dyn-terisi-icp').innerHTML = spinnerHtml;
+                const spinnerHtml = '<div class="flex justify-center p-2"><i class="ph-bold ph-spinner animate-spin text-[16px] text-white opacity-70"></i></div>';
+                if(document.getElementById('dyn-tabel-unggulan')) document.getElementById('dyn-tabel-unggulan').innerHTML = spinnerHtml;
+                if(document.getElementById('dyn-tabel-icp')) document.getElementById('dyn-tabel-icp').innerHTML = spinnerHtml;
             }
             // ===============================================
 
@@ -2250,15 +2351,47 @@
 
         function renderEditorPanel() {
             const panel = document.getElementById('panel-editor');
+            
+            let c = appState.config;
+            let ta1 = c.TA_1 || "2026/2027", ta2 = c.TA_2 || "2027/2028", ta3 = c.TA_3 || "2028/2029", ta4 = c.TA_4 || "2029/2030";
+            let ku1 = c.KU_1 || "112", ku2 = c.KU_2 || "112", ku3 = c.KU_3 || "112", ku4 = c.KU_4 || "112";
+            let ki1 = c.KI_1 || "40", ki2 = c.KI_2 || "40", ki3 = c.KI_3 || "40", ki4 = c.KI_4 || "40";
+
             let html = `
             <div class="bg-blue-600 p-4 rounded-2xl shadow-lg border-2 border-blue-400 text-white mb-5">
                 <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-blue-500 pb-2 whitespace-nowrap shrink-0"><i class="ph-fill ph-gear mr-1.5 text-lg"></i> Pengaturan Umum</h3>
                 <div class="space-y-3">
                     <div><label class="text-[10px] font-bold text-blue-200">Judul Web (Atas)</label><input type="text" id="ed-judul" value="${appState.config.Judul_Web || ''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-black text-blue-900 focus:border-blue-300 outline-none bg-white shadow-sm transition-all"></div>
                     <div><label class="text-[10px] font-bold text-blue-200">Sub Judul</label><input type="text" id="ed-sub" value="${appState.config.Sub_Judul || ''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-bold text-blue-900 focus:border-blue-300 outline-none bg-white shadow-sm transition-all"></div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div><label class="text-[10px] font-bold text-blue-200">Max Kuota Unggulan</label><input type="number" id="ed-kuota-u" value="${appState.config.Kuota_Unggulan || ''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-black text-blue-900 focus:border-blue-300 outline-none bg-white shadow-sm transition-all text-center"></div>
-                        <div><label class="text-[10px] font-bold text-blue-200">Max Kuota ICP</label><input type="number" id="ed-kuota-i" value="${appState.config.Kuota_ICP || ''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-black text-blue-900 focus:border-blue-300 outline-none bg-white shadow-sm transition-all text-center"></div>
+                    
+                    <div class="mt-4 bg-blue-800/30 p-3 rounded-xl border border-blue-500/50">
+                        <label class="text-[11px] font-black text-white block mb-2 flex items-center"><i class="ph-fill ph-table mr-1.5"></i> Kuota 4 Tahun Ajaran</label>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5 text-center">
+                            <div class="col-span-4 text-[8px] font-bold text-blue-200 uppercase">Tahun Ajaran</div>
+                            <div class="col-span-4 text-[8px] font-bold text-yellow-300 uppercase">Max Unggulan</div>
+                            <div class="col-span-4 text-[8px] font-bold text-orange-300 uppercase">Max ICP</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-1" value="${ta1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-1" value="${ku1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-1" value="${ki1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-2" value="${ta2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-2" value="${ku2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-2" value="${ki2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-3" value="${ta3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-3" value="${ku3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-3" value="${ki3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-4" value="${ta4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-4" value="${ku4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-4" value="${ki4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2501,7 +2634,13 @@
             showToast("Menyimpan konfigurasi...");
             
             appState.config.Judul_Web = document.getElementById('ed-judul').value; appState.config.Sub_Judul = document.getElementById('ed-sub').value;
-            appState.config.Kuota_Unggulan = document.getElementById('ed-kuota-u').value; appState.config.Kuota_ICP = document.getElementById('ed-kuota-i').value;
+            
+            // Simpan 4 Tahun Ajaran
+            appState.config.TA_1 = document.getElementById('ed-ta-1').value; appState.config.KU_1 = document.getElementById('ed-ku-1').value; appState.config.KI_1 = document.getElementById('ed-ki-1').value;
+            appState.config.TA_2 = document.getElementById('ed-ta-2').value; appState.config.KU_2 = document.getElementById('ed-ku-2').value; appState.config.KI_2 = document.getElementById('ed-ki-2').value;
+            appState.config.TA_3 = document.getElementById('ed-ta-3').value; appState.config.KU_3 = document.getElementById('ed-ku-3').value; appState.config.KI_3 = document.getElementById('ed-ki-3').value;
+            appState.config.TA_4 = document.getElementById('ed-ta-4').value; appState.config.KU_4 = document.getElementById('ed-ku-4').value; appState.config.KI_4 = document.getElementById('ed-ki-4').value;
+            
             appState.config.URL_Brosur1 = document.getElementById('ed-brosur1').value; appState.config.URL_Brosur2 = document.getElementById('ed-brosur2').value; appState.config.URL_Brosur3 = document.getElementById('ed-brosur3').value;
             
             appState.config.List_Unggulan_Depan = document.getElementById('ed-list-unggulan-depan').value;
@@ -2671,7 +2810,17 @@
             let isAktif = localStorage.getItem('mode_test') === 'aktif';
             if (isAktif) {
                 localStorage.removeItem('mode_test');
-                showToast("❌ Mode Uji Coba DIMATIKAN! Tombol TEST Hilang.");
+                showToast("❌ Mode Uji Coba DIMATIKAN! Formulir dibersihkan.");
+                
+                // MENGHAPUS SEMUA ISIAN FORMULIR OTOMATIS
+                document.getElementById('psb-form').reset();
+                document.querySelectorAll('.custom-input').forEach(el => el.classList.remove('filled', 'input-error'));
+                
+                // Membersihkan kolom terkunci (ReadOnly)
+                if(document.getElementById('auto-npsn')) document.getElementById('auto-npsn').value = '';
+                if(document.getElementById('auto-prov')) document.getElementById('auto-prov').value = '';
+                if(document.getElementById('auto-kab')) document.getElementById('auto-kab').value = '';
+                if(document.getElementById('auto-kec')) document.getElementById('auto-kec').value = '';
             } else {
                 localStorage.setItem('mode_test', 'aktif');
                 showToast("✅ Mode Uji Coba AKTIF! Tombol TEST Muncul.");
