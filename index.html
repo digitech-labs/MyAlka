@@ -111,15 +111,15 @@
 <body class="bg-slate-200 antialiased flex justify-center text-slate-800 h-[100dvh] overflow-hidden">
 
 <div id="splash-screen-baru" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-all duration-700 opacity-100 visible bg-[#f8fafc]">
-    <div class="relative mb-8 w-28 h-28 animate-float">
+    <div class="relative mb-6 w-32 h-32 animate-float">
         <div class="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-30 animate-pulse mt-2"></div>
         <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo" class="w-full h-full object-contain relative z-10 drop-shadow-xl">
     </div>
-    <div class="px-6 text-center max-w-[300px]">
-        <div class="flex justify-center mb-3"><i class="ph-bold ph-spinner animate-spin text-[28px] text-blue-500 drop-shadow-sm"></i></div>
-        <h2 class="text-xl font-black text-slate-800 mb-1.5 tracking-tight">Memuat Sistem...</h2>
-        <div class="bg-blue-100/50 p-3 rounded-2xl border border-blue-200">
-            <p id="splash-quotes" class="text-[11.5px] font-bold text-blue-800 leading-relaxed italic">Menyiapkan layanan terbaik...</p>
+    <div class="px-6 text-center w-full max-w-[320px]">
+        <div class="bg-white/60 backdrop-blur-xl border border-slate-200 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+            <i class="ph-fill ph-quotes text-blue-100 text-[60px] absolute -top-3 -left-3 transform -scale-x-100 z-0"></i>
+            <p id="portal-quote" class="text-[13px] font-black text-blue-900 italic leading-relaxed relative z-10">"Memuat motivasi..."</p>
+            <div class="flex justify-center mt-4"><div class="w-10 h-1.5 bg-blue-100 rounded-full overflow-hidden relative"><div class="absolute left-0 top-0 bottom-0 w-1/2 bg-blue-600 rounded-full animate-[flyRight_1s_ease-in-out_infinite]"></div></div></div>
         </div>
     </div>
 </div>
@@ -354,16 +354,15 @@
             <div class="absolute bottom-[10%] left-[-20%] w-80 h-80 bg-teal-600/20 rounded-full blur-[80px] pointer-events-none"></div>
 
             <!-- Header -->
-            <div class="pt-12 pb-6 px-6 flex flex-col items-center relative z-10 shrink-0">
+            <div class="pt-6 pb-4 px-6 flex flex-col items-center relative z-10 shrink-0">
                 <!-- Logo Sekolah Tanpa Shape Background -->
-                <div class="relative w-36 h-36 mb-4 animate-float flex justify-center items-center">
+                <div class="relative w-32 h-32 mb-3 animate-float flex justify-center items-center">
                     <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Sekolah" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
                 </div>
                 
-                <!-- Kotak Quotes Dinamis -->
-                <div class="w-full max-w-[320px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-center shadow-lg relative overflow-hidden group hover:bg-white/10 transition-colors">
-                    <i class="ph-fill ph-quotes text-white/5 text-5xl absolute -top-1 -left-2 transform -scale-x-100"></i>
-                    <p id="portal-quote" class="text-[11px] font-medium text-slate-300 italic leading-relaxed relative z-10">"Memuat kata-kata penuh makna..."</p>
+                <!-- Kotak Pantun Lucu -->
+                <div class="w-full max-w-[320px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 text-center shadow-lg relative overflow-hidden group hover:bg-white/10 transition-colors">
+                    <p class="text-[11px] font-bold text-amber-300 italic leading-relaxed relative z-10">"Jalan-jalan beli duku,<br>Eh pulangnya kesandung batu.<br>Ayo rajin baca buku,<br>Biar pinter kaya aku! 🤣"</p>
                 </div>
             </div>
 
@@ -375,86 +374,84 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-1.5 h-4 bg-blue-500 rounded-full"></div>
-                            <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Layanan Publik</h2>
+                            <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Layanan Publik</h2>
                         </div>
                         <button onclick="showToast('Menarik data terbaru...'); fetchFromGAS();" class="w-8 h-8 rounded-full bg-white/10 text-blue-300 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors border border-white/5 shadow-sm" title="Sync Server"><i class="ph-bold ph-arrows-clockwise text-sm"></i></button>
                     </div>
                     
-                    <div class="grid grid-cols-3 gap-3">
-                        <!-- Menu 1: PSB -->
-                        <button onclick="navigate('home')" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-blue-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(59,130,246,0.4)] group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-student text-[26px]"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Aplikasi<br>PSB</span>
+                    <div class="grid grid-cols-4 gap-2.5">
+                        <button onclick="navigate('home')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-blue-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(59,130,246,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-student text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Aplikasi<br>PSB</span>
                         </button>
-                        
-                        <!-- Menu 2: TINTA -->
-                        <button id="btn-portal-tinta" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-purple-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(168,85,247,0.4)] group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-drop text-[26px]"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Majalah<br>TINTA</span>
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/TINTA/', 'Majalah TINTA', 'ph-fill ph-drop text-purple-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-purple-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(168,85,247,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-drop text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Majalah<br>TINTA</span>
                         </button>
-
-                        <!-- Menu 3: AL KAUTSAR ISLAMIC -->
-                        <button id="btn-portal-islamic" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-emerald-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(16,185,129,0.4)] group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-mosque text-[26px]"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kajian<br>Islam</span>
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/ALKAUTSAR-ISLAMIC/', 'Al Kautsar Islamic', 'ph-fill ph-mosque text-emerald-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-emerald-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(16,185,129,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-mosque text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kajian<br>Islam</span>
                         </button>
                     </div>
 
-                    <!-- Additional Utilities Grid with Canvas Feature -->
                     <div class="mt-4 flex items-center gap-2 mb-2">
                         <div class="w-1.5 h-4 bg-teal-500 rounded-full"></div>
-                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Fitur Kreatif</h2>
+                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Fitur Kreatif</h2>
                     </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button onclick="openCanvasModal()" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-paint-brush text-[26px]"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Papan<br>Canvas</span>
+                    <div class="grid grid-cols-4 gap-2.5">
+                        <button onclick="openCanvasModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-paint-brush text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Papan<br>Canvas</span>
                         </button>
-                        
-                        <button onclick="openKuisModal()" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-puzzle-piece text-[26px]"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kuis<br>Edukasi</span>
+                        <button onclick="openKuisModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-puzzle-piece text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kuis<br>Edukasi</span>
                         </button>
-
-                        <button onclick="openGiziModal()" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-lime-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-lime-500 to-green-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(101,163,13,0.4)] group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-heartbeat text-[26px]"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Cek Gizi<br>Anak</span>
+                        <button onclick="openGiziModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-lime-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-lime-500 to-green-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(101,163,13,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-heartbeat text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Cek Gizi<br>Anak</span>
                         </button>
                     </div>
 
-                    <!-- Jejak Digital & Sosial Media -->
                     <div class="mt-4 flex items-center gap-2 mb-2">
-                        <div class="w-1.5 h-4 bg-rose-500 rounded-full"></div>
-                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Jejak Digital & Kontak</h2>
+                        <div class="w-1.5 h-4 bg-pink-500 rounded-full"></div>
+                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Sosial Media</h2>
                     </div>
-                    <div class="grid grid-cols-4 gap-3">
-                        <button id="btn-portal-web" class="bg-white/10 border border-white/20 rounded-2xl p-3 flex flex-col items-center group hover:bg-white/20 hover:border-slate-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                    <div class="grid grid-cols-4 gap-2.5">
+                        <button id="btn-portal-web" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-slate-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
                             <div class="w-10 h-10 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(100,116,139,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-globe text-[22px]"></i></div>
-                            <span class="text-[9px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Website</span>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Website</span>
                         </button>
-                        <button id="btn-portal-ig" class="bg-white/10 border border-white/20 rounded-2xl p-3 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                        <button id="btn-portal-fb" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-blue-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(37,99,235,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-facebook-logo text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Facebook</span>
+                        </button>
+                        <button id="btn-portal-ig" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
                             <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(236,72,153,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-instagram-logo text-[22px]"></i></div>
-                            <span class="text-[9px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Instagram</span>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Instagram</span>
                         </button>
-                        <button id="btn-portal-yt" class="bg-white/10 border border-white/20 rounded-2xl p-3 flex flex-col items-center group hover:bg-white/20 hover:border-red-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                        <button id="btn-portal-yt" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-red-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
                             <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(239,68,68,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-youtube-logo text-[22px]"></i></div>
-                            <span class="text-[9px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">YouTube</span>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">YouTube</span>
                         </button>
-                        <button id="btn-portal-wa" class="bg-white/10 border border-white/20 rounded-2xl p-3 flex flex-col items-center group hover:bg-white/20 hover:border-emerald-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                        <button id="btn-portal-tiktok" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-gray-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-gray-700 to-black rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(31,41,55,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-tiktok-logo text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">TikTok</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-4 flex items-center gap-2 mb-2">
+                        <div class="w-1.5 h-4 bg-emerald-500 rounded-full"></div>
+                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Layanan Admin</h2>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2.5">
+                        <button id="btn-portal-wa1" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-emerald-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
                             <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(16,185,129,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-whatsapp-logo text-[22px]"></i></div>
-                            <span class="text-[9px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Admin WA</span>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">WA Admin 1</span>
+                        </button>
+                        <button id="btn-portal-wa2" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-whatsapp-logo text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">WA Admin 2</span>
                         </button>
                     </div>
                 </div>
@@ -463,29 +460,29 @@
                 <div id="portal-tab-pengampu" class="w-full flex flex-col gap-4 hidden animate-slide-up">
                     <div class="flex items-center gap-2 mb-2">
                         <div class="w-1.5 h-4 bg-amber-500 rounded-full"></div>
-                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Layanan Internal</h2>
+                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Layanan Internal</h2>
                     </div>
                     
-                    <div class="grid grid-cols-3 gap-3">
-                        <button id="btn-portal-presisi" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-sky-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(14,165,233,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-crosshair text-[26px]"></i></div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">PRESISI<br>Presensi</span>
+                    <div class="grid grid-cols-4 gap-2.5">
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/PRESISI/', 'PRESISI Presensi', 'ph-fill ph-crosshair text-sky-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-sky-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(14,165,233,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-crosshair text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">PRESISI<br>Presensi</span>
                         </button>
-                        <button id="btn-portal-kates" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-orange-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(249,115,22,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-folder-open text-[26px]"></i></div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">KATES<br>Kelas</span>
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/KATES/', 'KATES Kelas', 'ph-fill ph-folder-open text-orange-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-orange-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(249,115,22,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-folder-open text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">KATES<br>Kelas</span>
                         </button>
-                        <button id="btn-portal-astaga" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-amber-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(251,191,36,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-lightning text-[26px]"></i></div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">ASTAGA<br>Tugas</span>
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/ASTAGA/', 'ASTAGA Tugas', 'ph-fill ph-lightning text-amber-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-amber-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(251,191,36,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-lightning text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">ASTAGA<br>Tugas</span>
                         </button>
-                        <button id="btn-portal-restu" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-rose-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-handshake text-[26px]"></i></div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">RESTU<br>Tamu</span>
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/RESTU/', 'RESTU Tamu', 'ph-fill ph-handshake text-rose-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-rose-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-rose-400 to-pink-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-handshake text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">RESTU<br>Tamu</span>
                         </button>
-                        <button id="btn-portal-gajiq" class="bg-white/10 border border-white/20 rounded-2xl p-4 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-emerald-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-wallet text-[26px]"></i></div>
-                            <span class="text-[10px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Gaji-Q<br>Slip</span>
+                        <button onclick="openExternalApp('https://digitech-labs.github.io/Gaji-Q/', 'Gaji-Q Slip', 'ph-fill ph-wallet text-teal-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-emerald-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-wallet text-[22px]"></i></div>
+                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Gaji-Q<br>Slip</span>
                         </button>
                     </div>
                 </div>
@@ -1191,15 +1188,20 @@
             URL_Tinta: "https://digitech-labs.github.io/TINTA/",
             URL_Islamic: "https://digitech-labs.github.io/ALKAUTSAR-ISLAMIC/",
             URL_Web: "https://sditalkautsar.sch.id",
+            URL_FB: "https://facebook.com",
             URL_IG: "https://instagram.com",
             URL_YT: "https://youtube.com",
-            URL_WA_Portal: "628123456789",
+            URL_TikTok: "https://tiktok.com",
+            URL_WA_Admin1: "628123456789",
+            URL_WA_Admin2: "628987654321",
             URL_Presisi: "https://digitech-labs.github.io/PRESISI/",
             URL_Kates: "https://digitech-labs.github.io/KATES/",
             URL_Astaga: "https://digitech-labs.github.io/ASTAGA/",
             URL_Restu: "https://digitech-labs.github.io/RESTU/",
             URL_Gajiq: "https://digitech-labs.github.io/Gaji-Q/",
             Opt_Pendidikan: "D1\nD2\nD3\nS1\nS2\nSMA/Sederajat",
+            Opt_Pekerjaan: "Karyawan Swasta\nPNS/TNI/Polri\nWirausaha",
+            Opt_Penghasilan: "Rp. 1.000.000 - Rp. 1.999.999\nRp. 2.000.000 - Rp. 4.999.999\nRp. 5.000.000 - Rp. 20.000.000"
         },
         kontak: [], pendaftar: [], keuangan: [], catatanBiaya: [], timeline: [], syarat: []
     };
@@ -1250,14 +1252,23 @@
             const btnWeb = document.getElementById('btn-portal-web');
             if(btnWeb) btnWeb.onclick = () => window.open(appState.config.URL_Web || '#', '_blank');
             
+            const btnFB = document.getElementById('btn-portal-fb');
+            if(btnFB) btnFB.onclick = () => window.open(appState.config.URL_FB || '#', '_blank');
+
             const btnIG = document.getElementById('btn-portal-ig');
             if(btnIG) btnIG.onclick = () => window.open(appState.config.URL_IG || '#', '_blank');
             
             const btnYT = document.getElementById('btn-portal-yt');
             if(btnYT) btnYT.onclick = () => window.open(appState.config.URL_YT || '#', '_blank');
             
-            const btnWAPortal = document.getElementById('btn-portal-wa');
-            if(btnWAPortal) btnWAPortal.onclick = () => window.open(`https://wa.me/${String(appState.config.URL_WA_Portal || '0').replace(/^0+/, '62')}?text=Halo%20Admin%20Sekolah`, '_blank');
+            const btnTikTok = document.getElementById('btn-portal-tiktok');
+            if(btnTikTok) btnTikTok.onclick = () => window.open(appState.config.URL_TikTok || '#', '_blank');
+
+            const btnWA1 = document.getElementById('btn-portal-wa1');
+            if(btnWA1) btnWA1.onclick = () => window.open(`https://wa.me/${String(appState.config.URL_WA_Admin1 || '0').replace(/^0+/, '62')}?text=Halo%20Admin%20Sekolah`, '_blank');
+            
+            const btnWA2 = document.getElementById('btn-portal-wa2');
+            if(btnWA2) btnWA2.onclick = () => window.open(`https://wa.me/${String(appState.config.URL_WA_Admin2 || '0').replace(/^0+/, '62')}?text=Halo%20Admin%20Sekolah`, '_blank');
             
             const btnPresisi = document.getElementById('btn-portal-presisi');
             if(btnPresisi) btnPresisi.onclick = () => openExternalApp(appState.config.URL_Presisi || 'https://digitech-labs.github.io/PRESISI/', 'PRESISI Presensi', 'ph-fill ph-crosshair text-sky-400');
@@ -1840,12 +1851,20 @@
                     </div>
                 </div>
                 <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
-                    <label class="text-[10px] font-black text-rose-300 block mb-2">Jejak Digital & Sosial Media</label>
+                    <label class="text-[10px] font-black text-rose-300 block mb-2">Sosial Media</label>
                     <div class="space-y-2">
                         <div><span class="text-[9px] font-bold text-slate-300">Website Utama</span><input type="text" id="ed-url-web" value="${c.URL_Web||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
+                        <div><span class="text-[9px] font-bold text-slate-300">Facebook</span><input type="text" id="ed-url-fb" value="${c.URL_FB||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
                         <div><span class="text-[9px] font-bold text-slate-300">Instagram</span><input type="text" id="ed-url-ig" value="${c.URL_IG||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
                         <div><span class="text-[9px] font-bold text-slate-300">YouTube</span><input type="text" id="ed-url-yt" value="${c.URL_YT||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">WhatsApp Admin (628...)</span><input type="text" id="ed-url-waportal" value="${c.URL_WA_Portal||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
+                        <div><span class="text-[9px] font-bold text-slate-300">TikTok</span><input type="text" id="ed-url-tiktok" value="${c.URL_TikTok||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
+                    </div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
+                    <label class="text-[10px] font-black text-emerald-300 block mb-2">Layanan Admin</label>
+                    <div class="space-y-2">
+                        <div><span class="text-[9px] font-bold text-slate-300">WhatsApp Admin 1 (628...)</span><input type="text" id="ed-url-wa1" value="${c.URL_WA_Admin1||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
+                        <div><span class="text-[9px] font-bold text-slate-300">WhatsApp Admin 2 (628...)</span><input type="text" id="ed-url-wa2" value="${c.URL_WA_Admin2||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
                     </div>
                 </div>
                 <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
@@ -1956,9 +1975,12 @@
         appState.config.URL_Tinta = document.getElementById('ed-url-tinta').value;
         appState.config.URL_Islamic = document.getElementById('ed-url-islamic').value;
         appState.config.URL_Web = document.getElementById('ed-url-web').value;
+        appState.config.URL_FB = document.getElementById('ed-url-fb').value;
         appState.config.URL_IG = document.getElementById('ed-url-ig').value;
         appState.config.URL_YT = document.getElementById('ed-url-yt').value;
-        appState.config.URL_WA_Portal = document.getElementById('ed-url-waportal').value;
+        appState.config.URL_TikTok = document.getElementById('ed-url-tiktok').value;
+        appState.config.URL_WA_Admin1 = document.getElementById('ed-url-wa1').value;
+        appState.config.URL_WA_Admin2 = document.getElementById('ed-url-wa2').value;
         appState.config.URL_Presisi = document.getElementById('ed-url-presisi').value;
         appState.config.URL_Kates = document.getElementById('ed-url-kates').value;
         appState.config.URL_Astaga = document.getElementById('ed-url-astaga').value;
@@ -2285,7 +2307,7 @@
     }
 
     // Boot sequence
-    setTimeout(() => { document.getElementById('splash-screen-baru').classList.add('opacity-0', 'invisible'); }, 2000);
+    setTimeout(() => { document.getElementById('splash-screen-baru').classList.add('opacity-0', 'invisible'); }, 3500);
     applyConfigToDOM(); fetchFromGAS();
 </script>
 </body>
