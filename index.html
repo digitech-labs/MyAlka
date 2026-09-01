@@ -2291,56 +2291,62 @@
     applyConfigToDOM(); fetchFromGAS();
 
     // ==========================================
-    // MESIN PWA INSTAN INSTALL (SMART GITHUB ENGINE)
+    // MESIN PWA INSTAN INSTALL (NATIVE PROMPT)
     // ==========================================
     let deferredPrompt;
     let isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-    try {
-        const manifestStr = JSON.stringify({
-            "name": "My Alka", "short_name": "My Alka",
-            "start_url": window.location.pathname || "/", "display": "standalone",
-            "background_color": "#0f172a", "theme_color": "#1e40af",
-            "icons": [{"src": "https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png", "sizes": "512x512", "type": "image/png"}]
-        });
-        document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="data:application/manifest+json;charset=utf-8,${encodeURIComponent(manifestStr)}">`);
+    // Daftarkan Service Worker (Syarat mutlak dari Google Chrome)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(() => {
+            console.log("Service Worker Active");
+        }).catch(err => console.log("SW Error:", err));
+    }
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Bypassed"));
-        }
-    } catch(err) {}
-
-    // Paksa tombol langsung tampil di GitHub jika belum standalone
-    window.addEventListener('DOMContentLoaded', () => {
-        if (!isAppInstalled) {
-            const installBtn = document.getElementById('pwa-install-btn');
-            if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
-        }
-    });
-
+    // Tangkap sinyal "SIAP INSTALL" asli dari sistem Android/Chrome
     window.addEventListener('beforeinstallprompt', (e) => {
+        // Cegah banner bawaan Chrome yang muncul di bawah layar
         e.preventDefault();
+        // Simpan sinyalnya ke variabel ini
         deferredPrompt = e;
+        
+        // Munculkan kapsul oranye
         const installBtn = document.getElementById('pwa-install-btn');
-        if(installBtn && !isAppInstalled) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
+        if (installBtn && !isAppInstalled) { 
+            installBtn.classList.remove('hidden'); 
+            installBtn.classList.add('flex'); 
+        }
     });
 
+    // Eksekusi Pop-Up Asli saat kapsul diklik
     function installPWA() {
         if (deferredPrompt) {
+            // MUNCULKAN JENDELA INSTALL ASLI BAWAAN HP
             deferredPrompt.prompt();
+            
+            // Tunggu reaksi user (Klik Install atau Batal)
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
+                    // Sembunyikan kapsul kalau sudah diinstal
                     const installBtn = document.getElementById('pwa-install-btn');
                     if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-                    showToast("Menyiapkan Instalasi My Alka...");
+                    showToast("Sedang Menginstal Aplikasi AlkaApp...");
                 }
                 deferredPrompt = null;
             });
         } else {
-            // Panduan instan jika browser menahan prompt
-            showToast("Ketuk menu browser (Titik 3) -> Pilih 'Install App' atau 'Tambahkan ke Layar Utama'.");
+            // Jika diklik tapi HP masih loading membaca file sw.js
+            showToast("Sistem sedang memuat, silakan klik lagi dalam 2 detik.");
         }
     }
+
+    // Deteksi jika instalasi sukses
+    window.addEventListener('appinstalled', () => {
+        isAppInstalled = true;
+        const installBtn = document.getElementById('pwa-install-btn');
+        if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
+        showToast("Aplikasi berhasil ditambahkan ke Layar Utama!");
+    });
 
     window.addEventListener('appinstalled', () => {
         isAppInstalled = true;
