@@ -2291,69 +2291,61 @@
     applyConfigToDOM(); fetchFromGAS();
 
     // ==========================================
-    // MESIN PWA INSTAN INSTALL (NATIVE PROMPT)
+    // MESIN PWA INSTAN INSTALL (KLONING DARI TINTA)
     // ==========================================
     let deferredPrompt;
     let isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-    // Daftarkan Service Worker (Syarat mutlak dari Google Chrome)
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').then(() => {
-            console.log("Service Worker Active");
-        }).catch(err => console.log("SW Error:", err));
-    }
+    try {
+        const manifestStr = JSON.stringify({
+            "name": "My Alka", "short_name": "My Alka",
+            "start_url": window.location.pathname || "/", "display": "standalone",
+            "background_color": "#0f172a", "theme_color": "#1e40af",
+            "icons": [{"src": "https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png", "sizes": "512x512", "type": "image/png"}]
+        });
+        document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="data:application/manifest+json;charset=utf-8,${encodeURIComponent(manifestStr)}">`);
 
-    // Tangkap sinyal "SIAP INSTALL" asli dari sistem Android/Chrome
+        // Daftarkan SW persis seperti TINTA dengan penangkap error diam (Silent Catch)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Engine Bypassed Silently"));
+        }
+    } catch(e) {}
+
+    // KUNCI UTAMA: Tangkap Sinyal Izin Install Asli Chrome
     window.addEventListener('beforeinstallprompt', (e) => {
-        // Cegah banner bawaan Chrome yang muncul di bawah layar
         e.preventDefault();
-        // Simpan sinyalnya ke variabel ini
         deferredPrompt = e;
-        
-        // Munculkan kapsul oranye
-        const installBtn = document.getElementById('pwa-install-btn');
-        if (installBtn && !isAppInstalled) { 
-            installBtn.classList.remove('hidden'); 
-            installBtn.classList.add('flex'); 
+        if (!isAppInstalled) {
+            const installBtn = document.getElementById('pwa-install-btn');
+            if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
         }
     });
 
-    // Eksekusi Pop-Up Asli saat kapsul diklik
+    // Deteksi Jika Sukses Terinstal
+    window.addEventListener('appinstalled', () => {
+        isAppInstalled = true;
+        const installBtn = document.getElementById('pwa-install-btn');
+        if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
+        showToast("My Alka berhasil diinstal ke HP Anda!");
+    });
+
+    // Fungsi Pop-Up Asli saat kapsul diklik
     function installPWA() {
         if (deferredPrompt) {
-            // MUNCULKAN JENDELA INSTALL ASLI BAWAAN HP
             deferredPrompt.prompt();
-            
-            // Tunggu reaksi user (Klik Install atau Batal)
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    // Sembunyikan kapsul kalau sudah diinstal
                     const installBtn = document.getElementById('pwa-install-btn');
                     if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-                    showToast("Sedang Menginstal Aplikasi AlkaApp...");
+                    showToast("Sedang Menginstal Aplikasi My Alka...");
                 }
                 deferredPrompt = null;
             });
         } else {
-            // Jika diklik tapi HP masih loading membaca file sw.js
-            showToast("Sistem sedang memuat, silakan klik lagi dalam 2 detik.");
+            // Fallback sama persis seperti TINTA jika file sw.js tidak terbaca browser
+            alert("⚠️ INSTALL INSTAN DIBLOKIR BROWSER!\n\nBrowser Anda menolak memunculkan jendela instalasi otomatis. Pastikan file sw.js sudah ter-upload di GitHub Pages Anda!");
         }
     }
-
-    // Deteksi jika instalasi sukses
-    window.addEventListener('appinstalled', () => {
-        isAppInstalled = true;
-        const installBtn = document.getElementById('pwa-install-btn');
-        if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-        showToast("Aplikasi berhasil ditambahkan ke Layar Utama!");
-    });
-
-    window.addEventListener('appinstalled', () => {
-        isAppInstalled = true;
-        const installBtn = document.getElementById('pwa-install-btn');
-        if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-        showToast("My Alka berhasil diinstal!");
-    });
 
 </script>
 </body>
