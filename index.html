@@ -394,17 +394,17 @@
                         <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Fitur Kreatif</h2>
                     </div>
                     <div class="grid grid-cols-4 gap-2.5">
-                        <button onclick="openCanvasModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-paint-brush text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Papan<br>Canvas</span>
+                        <button onclick="openCanvasModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-1.5 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-paint-brush text-[18px]"></i></div>
+                            <span class="text-[7.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Papan<br>Canvas</span>
                         </button>
-                        <button onclick="openKuisModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-puzzle-piece text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kuis<br>Edukasi</span>
+                        <button onclick="openKuisModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-9 h-9 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white mb-1.5 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-puzzle-piece text-[18px]"></i></div>
+                            <span class="text-[7.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kuis<br>Edukasi</span>
                         </button>
-                        <button onclick="openGiziModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-lime-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-lime-500 to-green-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(101,163,13,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-heartbeat text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Cek Gizi<br>Anak</span>
+                        <button onclick="openGiziModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2 flex flex-col items-center group hover:bg-white/20 hover:border-lime-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                            <div class="w-9 h-9 bg-gradient-to-br from-lime-500 to-green-600 rounded-full flex items-center justify-center text-white mb-1.5 shadow-[0_5px_15px_rgba(101,163,13,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-heartbeat text-[18px]"></i></div>
+                            <span class="text-[7.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Cek Gizi<br>Anak</span>
                         </button>
                     </div>
 
@@ -438,6 +438,16 @@
                 </div>
             </div>
 
+            <!-- Modal Login Admin (Overlay) -->
+            <div id="modal-admin-login" class="absolute inset-0 z-[450] hidden items-center justify-center bg-[#0f172a]/80 backdrop-blur-md px-6 pb-12 transition-all">
+                <div id="admin-login-card" class="bg-slate-800 p-6 rounded-3xl w-full max-w-[280px] border border-slate-600 text-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform scale-95 transition-transform duration-300">
+                    <i class="ph-fill ph-lock-key text-[50px] text-blue-400 mb-3 drop-shadow-md"></i>
+                    <h2 class="text-white font-black text-[14px] mb-5 tracking-wide">Akses Administrator</h2>
+                    <input type="password" id="admin-pwd" onkeypress="if(event.key === 'Enter') loginAdmin()" class="w-full py-3.5 px-4 rounded-2xl mb-5 bg-slate-900 text-white placeholder-slate-500 border border-slate-700 outline-none text-center tracking-[0.3em] font-black focus:border-blue-500 shadow-inner text-[14px]" placeholder="••••••">
+                    <button onclick="loginAdmin()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-[11px] shadow-lg shadow-blue-500/30 transition-all focus:outline-none tracking-wide">BUKA KUNCI</button>
+                </div>
+            </div>
+
             <!-- Floating Bottom Navigation -->
             <div class="absolute bottom-6 left-4 right-4 z-[500]">
                 <div class="bg-[#1e293b]/90 backdrop-blur-xl rounded-[2rem] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-1.5 relative overflow-hidden">
@@ -455,7 +465,7 @@
                             <span class="text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white">Pengampu</span>
                         </button>
                         
-                        <button id="btn-portal-admin" onclick="switchPortalTab('admin', 2); setTimeout(() => navigate('admin-dashboard', true), 350);" class="w-[33.33%] flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
+                        <button id="btn-portal-admin" onclick="switchPortalTab('admin', 2)" class="w-[33.33%] flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
                             <i class="ph-fill ph-shield-check text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-rose-400"></i>
                             <span class="text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white">Admin</span>
                         </button>
@@ -802,16 +812,6 @@
 
         <!-- === HALAMAN ADMIN PANEL === -->
         <section id="view-admin-dashboard" class="page-section hidden w-full h-full flex flex-col bg-slate-100 absolute inset-0 z-[1000]">
-            <div id="admin-login-area" class="flex flex-col items-center justify-center h-full p-6 bg-slate-900">
-                <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-md w-full border border-white/20 text-center shadow-2xl">
-                    <i class="ph-fill ph-lock-key text-5xl text-blue-400 mb-4"></i>
-                    <h2 class="text-white font-bold text-lg mb-4">Akses Administrator</h2>
-                    <input type="password" id="admin-pwd" onkeypress="if(event.key === 'Enter') loginAdmin()" class="w-full py-3 px-4 rounded-xl mb-4 bg-white/20 text-white placeholder-white/50 border border-white/10 outline-none text-center tracking-widest" placeholder="Masukkan PIN">
-                    <button id="btn-login-admin" onclick="loginAdmin()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all focus:outline-none">Buka Kunci</button>
-                    <button onclick="navigate('portal')" class="w-full mt-3 py-2 text-white/50 text-xs font-bold hover:text-white transition-colors focus:outline-none">Kembali ke Portal</button>
-                </div>
-            </div>
-
             <div id="admin-main-area" class="hidden h-full flex flex-col relative">
                 <div class="bg-[#0f172a] text-white p-4 flex justify-between items-center shrink-0 shadow-md z-10 border-b border-slate-700">
                     <h2 class="font-black text-[14px] flex items-center tracking-wide"><i class="ph-fill ph-shield-check text-emerald-400 mr-2 text-[20px]"></i> Admin Panel</h2>
@@ -825,7 +825,6 @@
                 </div>
 
                 <div class="flex-1 overflow-y-auto p-4 relative bg-slate-50">
-                    
                     <!-- TAB PENDAFTAR -->
                     <div id="panel-pendaftar">
                         <div class="flex flex-col gap-2 mb-3">
@@ -1249,44 +1248,44 @@
         const btnAdmin = document.getElementById('btn-portal-admin');
         const indicator = document.getElementById('nav-indicator');
         
-        // 1. GESER KAPSUL DENGAN LOGIKA PERSENTASE MURNI (100% Anti Error & Anti Mogok)
-        if (indicator) {
-            indicator.style.left = (index * 33.33) + '%';
-        }
+        if (indicator) indicator.style.left = (index * 33.33) + '%';
 
-        // 2. MATIKAN SEMUA WARNA TOMBOL (JADI ABU-ABU)
-        if(btnDash) {
-            btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-blue-400";
-            btnDash.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white";
-        }
-        if(btnPengampu) {
-            btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-amber-400";
-            btnPengampu.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white";
-        }
-        if(btnAdmin) {
-            btnAdmin.querySelector('i').className = "ph-fill ph-shield-check text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-rose-400";
-            btnAdmin.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white";
-        }
+        if(btnDash) { btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-blue-400"; btnDash.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white"; }
+        if(btnPengampu) { btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-amber-400"; btnPengampu.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white"; }
+        if(btnAdmin) { btnAdmin.querySelector('i').className = "ph-fill ph-shield-check text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-rose-400"; btnAdmin.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white"; }
 
-        // 3. NYALAKAN WARNA TOMBOL YANG DIPILIH SAJA
         if (tabName === 'dashboard') {
             if(tabDash) tabDash.classList.remove('hidden');
-            if(btnDash) {
-                btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)] transition-transform group-hover:scale-110";
-                btnDash.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors";
-            }
+            if(btnDash) { btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)] transition-transform group-hover:scale-110"; btnDash.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors"; }
         } else if (tabName === 'pengampu') {
             if(tabPeng) tabPeng.classList.remove('hidden');
-            if(btnPengampu) {
-                btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)] transition-transform group-hover:scale-110";
-                btnPengampu.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors";
-            }
+            if(btnPengampu) { btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)] transition-transform group-hover:scale-110"; btnPengampu.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors"; }
         } else if (tabName === 'admin') {
-            if(btnAdmin) {
-                btnAdmin.querySelector('i').className = "ph-fill ph-shield-check text-[22px] mb-1 text-rose-400 drop-shadow-[0_0_5px_rgba(244,63,94,0.5)] transition-transform group-hover:scale-110";
-                btnAdmin.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors";
-            }
+            if(btnAdmin) { btnAdmin.querySelector('i').className = "ph-fill ph-shield-check text-[22px] mb-1 text-rose-400 drop-shadow-[0_0_5px_rgba(244,63,94,0.5)] transition-transform group-hover:scale-110"; btnAdmin.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors"; }
         }
+
+        // Tampilkan/Sembunyikan Modal Admin
+        const adminModal = document.getElementById('modal-admin-login');
+        if (tabName === 'admin') {
+            if (adminModal) { adminModal.classList.remove('hidden'); adminModal.classList.add('flex'); setTimeout(() => document.getElementById('admin-login-card').classList.remove('scale-95'), 10); document.getElementById('admin-pwd').focus(); }
+        } else {
+            if (adminModal) { adminModal.classList.add('hidden'); adminModal.classList.remove('flex'); document.getElementById('admin-login-card').classList.add('scale-95'); }
+        }
+    }
+
+    function loginAdmin() { 
+        if(document.getElementById('admin-pwd').value === "admin") { 
+            document.getElementById('modal-admin-login').classList.add('hidden');
+            document.getElementById('modal-admin-login').classList.remove('flex');
+            document.getElementById('admin-pwd').value = '';
+            navigate('admin-dashboard'); 
+            renderAdminListItems(); 
+        } else showToast("PIN Salah!", true); 
+    }
+    
+    function logoutAdmin() { 
+        navigate('portal');
+        switchPortalTab('dashboard', 0); // Kembalikan indikator biru ke Dashboard
     }
   
     let GAS_URL = "https://script.google.com/macros/s/AKfycbyEUFE2bkoAarezxR3x63KznrJM6xodtQgpsKGy1GLi4qZWlk1prBay7HIK8QWWaFva/exec"; 
@@ -1396,23 +1395,33 @@
                 if(item.is_hidden) return '';
                 
                 // AUTO KOREKSI ICON GOOGLE MAPS
-                let iconClass = item.icon;
+                let iconClass = String(item.icon || '');
                 if (iconClass.includes('ph-googlemaps-logo')) iconClass = 'ph-fill ph-map-pin';
 
+                // AUTO CONVERT NO WA MENJADI LINK WHATSAPP (DENGAN PAKSAAN STRING ANTI-ERROR)
+                let finalUrl = String(item.url || '');
+                
+                if ((item.category === 'admin' || iconClass.includes('whatsapp')) && !finalUrl.includes('http')) {
+                    let cleanNum = finalUrl.replace(/[^0-9]/g, '');
+                    // Jika dimulai angka 0, ubah ke kode negara 62
+                    if (cleanNum.startsWith('0')) cleanNum = '62' + cleanNum.substring(1);
+                    if (cleanNum.length >= 10) finalUrl = 'https://wa.me/' + cleanNum;
+                }
+
                 let isIframe = item.category === 'publik' || item.category === 'internal';
-                let action = isIframe ? `openExternalApp('${item.url}', '${item.name}', '${iconClass} text-${item.color}-400')` : `window.open('${item.url}', '_blank')`;
+                let action = isIframe ? `openExternalApp('${finalUrl}', '${item.name}', '${iconClass} text-${item.color}-400')` : `window.open('${finalUrl}', '_blank')`;
                 
                 // KHUSUS MENU PSB (INTERNAL ROUTING)
-                if (item.url === 'internal:psb' || item.id === 'MENU_PSB_UTAMA') {
+                if (finalUrl === 'internal:psb' || item.id === 'MENU_PSB_UTAMA') {
                     action = "navigate('home')";
                 }
 
                 let nameLines = item.name.split(' ');
                 let fmtName = nameLines.length > 1 ? nameLines[0] + '<br>' + nameLines.slice(1).join(' ') : item.name;
 
-                return `<button onclick="${action}" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-${item.color}-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                    <div class="w-10 h-10 bg-gradient-to-br from-${item.color}-500 to-${item.color}-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform"><i class="${iconClass.includes('ph-') ? iconClass : 'ph-fill ph-globe'} text-[22px]"></i></div>
-                    <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">${fmtName}</span>
+                return `<button onclick="${action}" class="bg-white/10 border border-white/20 rounded-2xl p-2 flex flex-col items-center group hover:bg-white/20 hover:border-${item.color}-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                    <div class="w-9 h-9 bg-gradient-to-br from-${item.color}-500 to-${item.color}-700 rounded-full flex items-center justify-center text-white mb-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform"><i class="${iconClass.includes('ph-') ? iconClass : 'ph-fill ph-globe'} text-[18px]"></i></div>
+                    <span class="text-[7.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">${fmtName}</span>
                 </button>`;
             };
 
@@ -1719,9 +1728,7 @@
     function downloadCertificate() { showToast('Merender gambar...'); html2canvas(document.getElementById('certificate-card'), { scale: 3 }).then(c => { const a = document.createElement('a'); a.download = 'Surat_Kelulusan.png'; a.href = c.toDataURL('image/png'); a.click(); showToast('Diunduh!'); }); }
 
     let adminFilter = { search: '', program: 'ALL', sort: 'NEW', tahun: 'ALL' };
-    function loginAdmin() { if(document.getElementById('admin-pwd').value === "admin") { document.getElementById('admin-login-area').classList.add('hidden'); document.getElementById('admin-main-area').classList.remove('hidden'); renderAdminListItems(); } else showToast("PIN Salah!", true); }
-    function logoutAdmin() { document.getElementById('admin-main-area').classList.add('hidden'); document.getElementById('admin-login-area').classList.remove('hidden'); navigate('portal'); }
-    
+   
     function switchAdminTab(tab) { 
         ['pendaftar','editor','database'].forEach(t => { 
             document.getElementById('tab-'+t).className="flex-1 min-w-[80px] py-3.5 text-[11px] font-bold border-b-[3px] border-transparent text-slate-500 focus:outline-none transition-colors"; 
@@ -2158,11 +2165,17 @@
 
     function getPortalLinkHTML(item) {
         let isPSB = item.url === 'internal:psb' || item.id === 'MENU_PSB_UTAMA';
+        let isAdminCat = item.category === 'admin';
         let idVal = item.id || ('PL' + new Date().getTime() + Math.random().toString(36).substr(2,5));
         
         let trashBtn = isPSB ? `<div class="absolute -top-2.5 -right-2.5 text-white bg-slate-400 w-6 h-6 rounded-full flex justify-center items-center shadow-md z-10" title="Menu Sistem Tidak Bisa Dihapus"><i class="ph-bold ph-lock-key"></i></div>` : `<button type="button" onclick="this.parentElement.remove()" class="absolute -top-2.5 -right-2.5 text-white bg-red-500 w-6 h-6 rounded-full flex justify-center items-center hover:bg-red-600 transition-all shadow-md z-10"><i class="ph-bold ph-trash"></i></button>`;
         
-        let urlInput = isPSB ? `<input type="text" class="pl-url w-full rounded-lg p-2 text-[10px] outline-none text-slate-500 bg-slate-200 font-bold border border-slate-300" value="internal:psb" readonly title="URL Sistem Paten">` : `<input type="text" class="pl-url w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.url}">`;
+        let labelUrl = isAdminCat ? 'Nomor WA (Cukup ketik 08...)' : 'URL / Link';
+        let placeHolderUrl = isAdminCat ? 'Contoh: 08123456789' : 'https://...';
+
+        let urlInput = isPSB 
+            ? `<input type="text" class="pl-url w-full rounded-lg p-2 text-[10px] outline-none text-slate-500 bg-slate-200 font-bold border border-slate-300" value="internal:psb" readonly title="URL Sistem Paten">` 
+            : `<input type="text" class="pl-url w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.url}" placeholder="${placeHolderUrl}">`;
 
         return `
         <div class="ed-portal-link bg-white/10 p-3 rounded-xl border border-white/30 relative shadow-sm flex flex-col gap-2">
@@ -2173,7 +2186,7 @@
                 <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">Nama Menu</span><input type="text" class="pl-name w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.name}"></div>
                 <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">Icon (Phosphor)</span><input type="text" class="pl-icon w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.icon}" placeholder="ph-fill ph-globe"></div>
             </div>
-            <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">URL / Link ${isPSB ? '<span class="text-amber-300">(Paten Sistem)</span>' : ''}</span>${urlInput}</div>
+            <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">${labelUrl} ${isPSB ? '<span class="text-amber-300">(Paten Sistem)</span>' : ''}</span>${urlInput}</div>
             <div class="grid grid-cols-2 gap-2 items-center">
                 <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">Warna Tombol</span>
                     <select class="pl-color w-full rounded-lg p-2 text-[10px] outline-none text-slate-800 font-bold">
@@ -2278,12 +2291,11 @@
     applyConfigToDOM(); fetchFromGAS();
 
     // ==========================================
-    // MESIN PWA INSTAN INSTALL (ADAPTASI TINTA)
+    // MESIN PWA INSTAN INSTALL (SMART GITHUB ENGINE)
     // ==========================================
     let deferredPrompt;
     let isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-    // 1. Suntik Manifest Dinamis (Rahasia TINTA)
     try {
         const manifestStr = JSON.stringify({
             "name": "My Alka", "short_name": "My Alka",
@@ -2293,48 +2305,48 @@
         });
         document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="data:application/manifest+json;charset=utf-8,${encodeURIComponent(manifestStr)}">`);
 
-        // 2. Pancing Service Worker Bawaan Browser
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Engine Bypassed Silently"));
+            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Bypassed"));
         }
-    } catch(e) {}
+    } catch(err) {}
 
-    // Tangkap Sinyal Izin Install dari Chrome
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        // Munculkan kapsul hanya jika aplikasi belum diinstal
+    // Paksa tombol langsung tampil di GitHub jika belum standalone
+    window.addEventListener('DOMContentLoaded', () => {
         if (!isAppInstalled) {
             const installBtn = document.getElementById('pwa-install-btn');
             if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
         }
     });
 
-    // Fungsi Saat Kapsul Diklik
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const installBtn = document.getElementById('pwa-install-btn');
+        if(installBtn && !isAppInstalled) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
+    });
+
     function installPWA() {
         if (deferredPrompt) {
-            // Panggil Jendela Instalasi Asli Android/Chrome
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
                     const installBtn = document.getElementById('pwa-install-btn');
                     if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-                    showToast("Menyiapkan Instalasi...");
+                    showToast("Menyiapkan Instalasi My Alka...");
                 }
                 deferredPrompt = null;
             });
         } else {
-            // Fallback Peringatan jika diblokir oleh Canvas/Live Preview
-            alert("⚠️ INSTALL INSTAN DIBLOKIR BROWSER!\n\nKarena Anda membuka aplikasi ini di dalam Editor/Canvas, sistem keamanan Chrome menolak memunculkan jendela instalasi.\n\nSistem ini akan bekerja 100% otomatis seperti aplikasi asli setelah file HTML ini Anda Upload ke GitHub Pages.");
+            // Panduan instan jika browser menahan prompt
+            showToast("Ketuk menu browser (Titik 3) -> Pilih 'Install App' atau 'Tambahkan ke Layar Utama'.");
         }
     }
 
-    // Deteksi Jika Sukses Terinstal
-    window.addEventListener('appinstalled', (evt) => {
+    window.addEventListener('appinstalled', () => {
         isAppInstalled = true;
         const installBtn = document.getElementById('pwa-install-btn');
         if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-        showToast("AlkaApp berhasil diinstal!");
+        showToast("My Alka berhasil diinstal!");
     });
 
 </script>
