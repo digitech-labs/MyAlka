@@ -354,15 +354,14 @@
             <div class="absolute bottom-[10%] left-[-20%] w-80 h-80 bg-teal-600/20 rounded-full blur-[80px] pointer-events-none"></div>
 
             <!-- Header -->
-            <div class="pt-6 pb-4 px-6 flex flex-col items-center relative z-10 shrink-0">
-                <!-- Logo Sekolah Tanpa Shape Background -->
-                <div class="relative w-32 h-32 mb-3 animate-float flex justify-center items-center">
+            <div class="pt-12 pb-6 px-6 flex flex-col items-center relative z-10 shrink-0">
+                <div class="relative w-36 h-36 mb-4 animate-float flex justify-center items-center">
                     <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Sekolah" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
                 </div>
                 
-                <!-- Kotak Pantun Lucu -->
-                <div class="w-full max-w-[320px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 text-center shadow-lg relative overflow-hidden group hover:bg-white/10 transition-colors">
-                    <p class="text-[11px] font-bold text-amber-300 italic leading-relaxed relative z-10">"Jalan-jalan beli duku,<br>Eh pulangnya kesandung batu.<br>Ayo rajin baca buku,<br>Biar pinter kaya aku! 🤣"</p>
+                <div class="w-full max-w-[320px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-center shadow-lg relative overflow-hidden group hover:bg-white/10 transition-colors">
+                    <i class="ph-fill ph-quotes text-white/5 text-5xl absolute -top-1 -left-2 transform -scale-x-100"></i>
+                    <p id="portal-quote" class="text-[11px] font-medium text-slate-300 italic leading-relaxed relative z-10">"Memuat kata-kata penuh makna..."</p>
                 </div>
             </div>
 
@@ -374,29 +373,18 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-1.5 h-4 bg-blue-500 rounded-full"></div>
-                            <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Layanan Publik</h2>
+                            <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Layanan Publik</h2>
                         </div>
                         <button onclick="showToast('Menarik data terbaru...'); fetchFromGAS();" class="w-8 h-8 rounded-full bg-white/10 text-blue-300 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors border border-white/5 shadow-sm" title="Sync Server"><i class="ph-bold ph-arrows-clockwise text-sm"></i></button>
                     </div>
                     
-                    <div class="grid grid-cols-4 gap-2.5">
-                        <button onclick="navigate('home')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-blue-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(59,130,246,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-student text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Aplikasi<br>PSB</span>
-                        </button>
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/TINTA/', 'Majalah TINTA', 'ph-fill ph-drop text-purple-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-purple-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(168,85,247,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-drop text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Majalah<br>TINTA</span>
-                        </button>
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/ALKAUTSAR-ISLAMIC/', 'Al Kautsar Islamic', 'ph-fill ph-mosque text-emerald-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-emerald-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(16,185,129,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-mosque text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Kajian<br>Islam</span>
-                        </button>
+                    <div class="grid grid-cols-4 gap-2.5" id="dyn-portal-publik">
+                        <!-- Menu Publik Dinamis akan dirender JS di sini -->
                     </div>
 
                     <div class="mt-4 flex items-center gap-2 mb-2">
                         <div class="w-1.5 h-4 bg-teal-500 rounded-full"></div>
-                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Fitur Kreatif</h2>
+                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Fitur Kreatif</h2>
                     </div>
                     <div class="grid grid-cols-4 gap-2.5">
                         <button onclick="openCanvasModal()" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
@@ -415,44 +403,18 @@
 
                     <div class="mt-4 flex items-center gap-2 mb-2">
                         <div class="w-1.5 h-4 bg-pink-500 rounded-full"></div>
-                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Sosial Media</h2>
+                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Sosial Media</h2>
                     </div>
-                    <div class="grid grid-cols-4 gap-2.5">
-                        <button id="btn-portal-web" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-slate-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(100,116,139,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-globe text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Website</span>
-                        </button>
-                        <button id="btn-portal-fb" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-blue-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(37,99,235,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-facebook-logo text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Facebook</span>
-                        </button>
-                        <button id="btn-portal-ig" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-pink-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(236,72,153,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-instagram-logo text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Instagram</span>
-                        </button>
-                        <button id="btn-portal-yt" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-red-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(239,68,68,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-youtube-logo text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">YouTube</span>
-                        </button>
-                        <button id="btn-portal-tiktok" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-gray-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-gray-700 to-black rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(31,41,55,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-tiktok-logo text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">TikTok</span>
-                        </button>
+                    <div class="grid grid-cols-4 gap-2.5" id="dyn-portal-sosmed">
+                        <!-- Menu Sosmed Dinamis akan dirender JS di sini -->
                     </div>
 
                     <div class="mt-4 flex items-center gap-2 mb-2">
                         <div class="w-1.5 h-4 bg-emerald-500 rounded-full"></div>
-                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Layanan Admin</h2>
+                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Layanan Admin</h2>
                     </div>
-                    <div class="grid grid-cols-4 gap-2.5">
-                        <button id="btn-portal-wa1" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-emerald-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(16,185,129,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-whatsapp-logo text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">WA Admin 1</span>
-                        </button>
-                        <button id="btn-portal-wa2" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-whatsapp-logo text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">WA Admin 2</span>
-                        </button>
+                    <div class="grid grid-cols-4 gap-2.5" id="dyn-portal-admin">
+                        <!-- Menu Admin Dinamis akan dirender JS di sini -->
                     </div>
                 </div>
 
@@ -460,30 +422,11 @@
                 <div id="portal-tab-pengampu" class="w-full flex flex-col gap-4 hidden animate-slide-up">
                     <div class="flex items-center gap-2 mb-2">
                         <div class="w-1.5 h-4 bg-amber-500 rounded-full"></div>
-                        <h2 class="text-white text-[11px] font-black tracking-widest uppercase">Layanan Internal</h2>
+                        <h2 class="text-white text-[12px] font-black tracking-widest uppercase">Layanan Internal</h2>
                     </div>
                     
-                    <div class="grid grid-cols-4 gap-2.5">
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/PRESISI/', 'PRESISI Presensi', 'ph-fill ph-crosshair text-sky-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-sky-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(14,165,233,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-crosshair text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">PRESISI<br>Presensi</span>
-                        </button>
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/KATES/', 'KATES Kelas', 'ph-fill ph-folder-open text-orange-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-orange-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(249,115,22,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-folder-open text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">KATES<br>Kelas</span>
-                        </button>
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/ASTAGA/', 'ASTAGA Tugas', 'ph-fill ph-lightning text-amber-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-amber-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(251,191,36,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-lightning text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">ASTAGA<br>Tugas</span>
-                        </button>
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/RESTU/', 'RESTU Tamu', 'ph-fill ph-handshake text-rose-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-rose-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-rose-400 to-pink-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(244,63,94,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-handshake text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">RESTU<br>Tamu</span>
-                        </button>
-                        <button onclick="openExternalApp('https://digitech-labs.github.io/Gaji-Q/', 'Gaji-Q Slip', 'ph-fill ph-wallet text-teal-400')" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-teal-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
-                            <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-emerald-600 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(20,184,166,0.4)] group-hover:scale-110 transition-transform"><i class="ph-fill ph-wallet text-[22px]"></i></div>
-                            <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">Gaji-Q<br>Slip</span>
-                        </button>
+                    <div class="grid grid-cols-4 gap-2.5" id="dyn-portal-internal">
+                        <!-- Menu Internal Dinamis akan dirender JS di sini -->
                     </div>
                 </div>
             </div>
@@ -1080,6 +1023,141 @@
         showToast("Gambar berhasil diunduh!");
     }
 
+    // --- KUIS EDUKASI SCRIPT IMPLEMENTATION ---
+    const kuisData = [
+        { q: "Apa nama rukun Islam yang pertama?", opts: ["Salat", "Zakat", "Syahadat", "Puasa"], ans: 2 },
+        { q: "Siapakah rasul dan nabi terakhir dalam Islam?", opts: ["Nabi Musa", "Nabi Isa", "Nabi Ibrahim", "Nabi Muhammad"], ans: 3 },
+        { q: "Berapa jumlah rakaat salat Maghrib?", opts: ["2 Rakaat", "3 Rakaat", "4 Rakaat", "5 Rakaat"], ans: 1 },
+        { q: "Kitab suci yang diturunkan kepada Nabi Muhammad adalah?", opts: ["Taurat", "Zabur", "Injil", "Al-Qur'an"], ans: 3 },
+        { q: "Malaikat yang bertugas menyampaikan wahyu adalah?", opts: ["Malaikat Jibril", "Malaikat Mikail", "Malaikat Israfil", "Malaikat Izrail"], ans: 0 }
+    ];
+    let kuisCurrent = 0;
+    let kuisScore = 0;
+
+    function openKuisModal() {
+        document.getElementById('kuis-modal').classList.remove('hidden');
+        document.getElementById('kuis-modal').classList.add('flex');
+        startKuis();
+    }
+
+    function closeKuisModal() {
+        document.getElementById('kuis-modal').classList.add('hidden');
+        document.getElementById('kuis-modal').classList.remove('flex');
+    }
+
+    function startKuis() {
+        kuisCurrent = 0;
+        kuisScore = 0;
+        document.getElementById('kuis-arena').classList.remove('hidden');
+        document.getElementById('kuis-arena').classList.add('flex');
+        document.getElementById('kuis-result').classList.add('hidden');
+        document.getElementById('kuis-result').classList.remove('flex');
+        renderKuis();
+    }
+
+    function renderKuis() {
+        if (kuisCurrent >= kuisData.length) {
+            tampilkanHasilKuis();
+            return;
+        }
+        const data = kuisData[kuisCurrent];
+        document.getElementById('kuis-counter').innerText = `Pertanyaan ${kuisCurrent + 1} / ${kuisData.length}`;
+        document.getElementById('kuis-question').innerText = data.q;
+        
+        let optsHtml = '';
+        data.opts.forEach((opt, idx) => {
+            optsHtml += `<button onclick="jawabKuis(${idx})" class="w-full text-left p-3.5 bg-white border-2 border-rose-100 hover:border-rose-400 rounded-xl font-bold text-[11px] text-slate-700 shadow-sm transition-all focus:outline-none flex items-center group"><div class="w-6 h-6 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mr-3 group-hover:bg-rose-500 group-hover:text-white transition-colors text-[10px] shadow-sm">${['A','B','C','D'][idx]}</div> <span class="flex-1">${opt}</span></button>`;
+        });
+        document.getElementById('kuis-options').innerHTML = optsHtml;
+    }
+
+    function jawabKuis(idx) {
+        if (idx === kuisData[kuisCurrent].ans) {
+            kuisScore += (100 / kuisData.length);
+        }
+        kuisCurrent++;
+        renderKuis();
+    }
+
+    function tampilkanHasilKuis() {
+        document.getElementById('kuis-arena').classList.add('hidden');
+        document.getElementById('kuis-arena').classList.remove('flex');
+        document.getElementById('kuis-result').classList.remove('hidden');
+        document.getElementById('kuis-result').classList.add('flex');
+        
+        document.getElementById('kuis-score').innerText = Math.round(kuisScore);
+        
+        let fb = "";
+        if (kuisScore >= 80) fb = "Masya Allah, hebat sekali! 🌟";
+        else if (kuisScore >= 60) fb = "Alhamdulillah, nilai yang bagus! 👍";
+        else fb = "Tetap semangat belajar ya! 💪";
+        document.getElementById('kuis-feedback').innerText = fb;
+    }
+
+    // --- CEK GIZI (BMI) SCRIPT IMPLEMENTATION ---
+    function openGiziModal() {
+        document.getElementById('gizi-modal').classList.remove('hidden');
+        document.getElementById('gizi-modal').classList.add('flex');
+        document.getElementById('gizi-bb').value = '';
+        document.getElementById('gizi-tb').value = '';
+        document.getElementById('gizi-result-area').classList.add('hidden');
+        document.getElementById('gizi-result-area').classList.remove('flex');
+    }
+
+    function closeGiziModal() {
+        document.getElementById('gizi-modal').classList.add('hidden');
+        document.getElementById('gizi-modal').classList.remove('flex');
+    }
+
+    function hitungGizi() {
+        let bb = parseFloat(document.getElementById('gizi-bb').value);
+        let tb = parseFloat(document.getElementById('gizi-tb').value);
+        
+        if (!bb || !tb || bb <= 0 || tb <= 0) {
+            showToast("Masukkan berat dan tinggi dengan benar!", true);
+            return;
+        }
+        
+        // BMI Formula = Berat Badan (kg) / (Tinggi (m) x Tinggi (m))
+        let tbm = tb / 100;
+        let bmi = bb / (tbm * tbm);
+        let score = bmi.toFixed(1);
+        
+        let status = "";
+        let desc = "";
+        let colorClass = "";
+        
+        if (bmi < 14) {
+            status = "SANGAT KURUS";
+            desc = "Berat badan Ananda sangat jauh di bawah rata-rata. Sangat disarankan untuk segera berkonsultasi dengan dokter spesialis anak atau ahli gizi.";
+            colorClass = "bg-rose-100 text-rose-600 border-rose-200";
+        } else if (bmi >= 14 && bmi < 18.5) {
+            status = "KURUS (UNDERWEIGHT)";
+            desc = "Berat badan Ananda sedikit di bawah ideal. Tingkatkan asupan kalori bernutrisi dari susu, protein hewani, dan karbohidrat kompleks secara rutin.";
+            colorClass = "bg-amber-100 text-amber-600 border-amber-200";
+        } else if (bmi >= 18.5 && bmi <= 22.9) {
+            status = "NORMAL (IDEAL)";
+            desc = "Alhamdulillah! Pertumbuhan Ananda sangat baik dan ideal. Pertahankan pola makan gizi seimbang (4 sehat 5 sempurna) dan aktivitas fisik yang ceria.";
+            colorClass = "bg-emerald-100 text-emerald-600 border-emerald-200";
+        } else if (bmi >= 23 && bmi <= 25) {
+            status = "BERESIKO OVERWEIGHT";
+            desc = "Berat badan Ananda beresiko berlebih. Mulai batasi makanan/minuman manis dan perbanyak konsumsi buah, sayur, serta tingkatkan durasi bermain aktif.";
+            colorClass = "bg-orange-100 text-orange-600 border-orange-200";
+        } else {
+            status = "OBESITAS";
+            desc = "Berat badan Ananda berlebih. Sangat penting untuk membatasi asupan gula ekstra, makanan cepat saji, dan memperbanyak gerak. Konsultasikan ke ahli jika perlu.";
+            colorClass = "bg-red-100 text-red-600 border-red-200";
+        }
+        
+        document.getElementById('gizi-score').innerText = score;
+        document.getElementById('gizi-badge').innerText = status;
+        document.getElementById('gizi-badge').className = `px-4 py-1.5 rounded-lg font-black text-[14px] uppercase tracking-wide mb-2 shadow-sm border ${colorClass}`;
+        document.getElementById('gizi-desc').innerText = desc;
+        
+        document.getElementById('gizi-result-area').classList.remove('hidden');
+        document.getElementById('gizi-result-area').classList.add('flex');
+    }
+
     function formatRpStylized(val, isTotal = false) {
         if (!val || val === '-') return `<div class="text-center w-full ${isTotal ? 'text-slate-400' : 'text-slate-300'} font-bold">-</div>`;
         let num = parseInt(String(val).replace(/[^0-9]/g, ''));
@@ -1147,22 +1225,22 @@
         const btnPengampu = document.getElementById('btn-portal-pengampu');
         const indicator = document.getElementById('nav-indicator');
         
-        if(indicator) indicator.style.transform = `translateX(calc(${index * 100}% + ${index * 4}px))`;
+        if(indicator) indicator.style.transform = `translateX(${index * 100}%)`;
 
-        btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[20px] mb-1 transition-colors text-slate-500 hover:text-slate-400";
-        btnDash.querySelector('span').className = "text-[8px] font-bold text-slate-500 tracking-wider uppercase transition-colors hover:text-slate-400";
+        btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[20px] mb-1 transition-transform text-slate-500 group-hover:text-slate-400 group-hover:scale-110";
+        btnDash.querySelector('span').className = "text-[8px] font-bold text-slate-500 tracking-wider uppercase transition-colors group-hover:text-slate-400";
 
-        btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[20px] mb-1 transition-colors text-slate-500 hover:text-slate-400";
-        btnPengampu.querySelector('span').className = "text-[8px] font-bold text-slate-500 tracking-wider uppercase transition-colors hover:text-slate-400";
+        btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[20px] mb-1 transition-transform text-slate-500 group-hover:text-slate-400 group-hover:scale-110";
+        btnPengampu.querySelector('span').className = "text-[8px] font-bold text-slate-500 tracking-wider uppercase transition-colors group-hover:text-slate-400";
 
         if(tabName === 'dashboard') {
             document.getElementById('portal-tab-dashboard').classList.remove('hidden');
-            btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[20px] mb-1 transition-colors text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)]";
-            btnDash.querySelector('span').className = "text-[8px] font-black text-white tracking-wider uppercase transition-colors";
+            btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 transition-transform text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)] group-hover:scale-110";
+            btnDash.querySelector('span').className = "text-[9px] font-black text-white tracking-wider uppercase transition-colors";
         } else if(tabName === 'pengampu') {
             document.getElementById('portal-tab-pengampu').classList.remove('hidden');
-            btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[20px] mb-1 transition-colors text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)]";
-            btnPengampu.querySelector('span').className = "text-[8px] font-black text-white tracking-wider uppercase transition-colors";
+            btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 transition-transform text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)] group-hover:scale-110";
+            btnPengampu.querySelector('span').className = "text-[9px] font-black text-white tracking-wider uppercase transition-colors";
         }
     }
 
@@ -1185,25 +1263,11 @@
             URL_Brosur1: "https://raw.githubusercontent.com/digitech-labs/PSB/main/brosur1.png",
             URL_Brosur2: "https://raw.githubusercontent.com/digitech-labs/PSB/main/brosur2.png",
             URL_Brosur3: "https://raw.githubusercontent.com/nashrulaziz7/PSB/main/brosur3.png",
-            URL_Tinta: "https://digitech-labs.github.io/TINTA/",
-            URL_Islamic: "https://digitech-labs.github.io/ALKAUTSAR-ISLAMIC/",
-            URL_Web: "https://sditalkautsar.sch.id",
-            URL_FB: "https://facebook.com",
-            URL_IG: "https://instagram.com",
-            URL_YT: "https://youtube.com",
-            URL_TikTok: "https://tiktok.com",
-            URL_WA_Admin1: "628123456789",
-            URL_WA_Admin2: "628987654321",
-            URL_Presisi: "https://digitech-labs.github.io/PRESISI/",
-            URL_Kates: "https://digitech-labs.github.io/KATES/",
-            URL_Astaga: "https://digitech-labs.github.io/ASTAGA/",
-            URL_Restu: "https://digitech-labs.github.io/RESTU/",
-            URL_Gajiq: "https://digitech-labs.github.io/Gaji-Q/",
             Opt_Pendidikan: "D1\nD2\nD3\nS1\nS2\nSMA/Sederajat",
             Opt_Pekerjaan: "Karyawan Swasta\nPNS/TNI/Polri\nWirausaha",
             Opt_Penghasilan: "Rp. 1.000.000 - Rp. 1.999.999\nRp. 2.000.000 - Rp. 4.999.999\nRp. 5.000.000 - Rp. 20.000.000"
         },
-        kontak: [], pendaftar: [], keuangan: [], catatanBiaya: [], timeline: [], syarat: []
+        portalLinks: [], kontak: [], pendaftar: [], keuangan: [], catatanBiaya: [], timeline: [], syarat: []
     };
 
     function applyConfigToDOM() {
@@ -1241,50 +1305,77 @@
             let iPopupArr = (appState.config.List_ICP_Popup || "").split('\n').filter(x => x.trim() !== '');
             let iFull = iPopupArr.map(text => `<li class="flex items-start mb-2 bg-white rounded-lg p-2 border border-orange-100"><div class="min-w-[20px] h-[20px] bg-orange-500 rounded-full flex items-center justify-center mr-2"><i class="ph-bold ph-check text-white text-[12px]"></i></div> <span class="text-[11px] font-bold text-slate-700 leading-tight pt-0.5">${text}</span></li>`).join('');
             if(document.getElementById('dyn-icp-full')) document.getElementById('dyn-icp-full').innerHTML = iFull;
-            
-            // --- PORTAL LINKS CONFIGURATION ---
-            const btnTinta = document.getElementById('btn-portal-tinta');
-            if(btnTinta) btnTinta.onclick = () => openExternalApp(appState.config.URL_Tinta || 'https://digitech-labs.github.io/TINTA/', 'Majalah TINTA', 'ph-fill ph-drop text-purple-400');
-            
-            const btnIslamic = document.getElementById('btn-portal-islamic');
-            if(btnIslamic) btnIslamic.onclick = () => openExternalApp(appState.config.URL_Islamic || 'https://digitech-labs.github.io/ALKAUTSAR-ISLAMIC/', 'Kajian Islam', 'ph-fill ph-mosque text-emerald-400');
-            
-            const btnWeb = document.getElementById('btn-portal-web');
-            if(btnWeb) btnWeb.onclick = () => window.open(appState.config.URL_Web || '#', '_blank');
-            
-            const btnFB = document.getElementById('btn-portal-fb');
-            if(btnFB) btnFB.onclick = () => window.open(appState.config.URL_FB || '#', '_blank');
 
-            const btnIG = document.getElementById('btn-portal-ig');
-            if(btnIG) btnIG.onclick = () => window.open(appState.config.URL_IG || '#', '_blank');
-            
-            const btnYT = document.getElementById('btn-portal-yt');
-            if(btnYT) btnYT.onclick = () => window.open(appState.config.URL_YT || '#', '_blank');
-            
-            const btnTikTok = document.getElementById('btn-portal-tiktok');
-            if(btnTikTok) btnTikTok.onclick = () => window.open(appState.config.URL_TikTok || '#', '_blank');
+            // MIGRATION & DEFAULT PORTAL LINKS
+            if (!appState.portalLinks || appState.portalLinks.length === 0) {
+                let c = appState.config;
+                appState.portalLinks = [
+                    { category: 'publik', name: 'Majalah TINTA', url: c.URL_Tinta||'https://digitech-labs.github.io/TINTA/', icon: 'ph-fill ph-drop', color: 'purple', is_hidden: false },
+                    { category: 'publik', name: 'Kajian Islam', url: c.URL_Islamic||'https://digitech-labs.github.io/ALKAUTSAR-ISLAMIC/', icon: 'ph-fill ph-mosque', color: 'emerald', is_hidden: false },
+                    { category: 'sosmed', name: 'Website', url: c.URL_Web||'https://sditalkautsar.sch.id', icon: 'ph-fill ph-globe', color: 'slate', is_hidden: false },
+                    { category: 'sosmed', name: 'Facebook', url: c.URL_FB||'#', icon: 'ph-fill ph-facebook-logo', color: 'blue', is_hidden: false },
+                    { category: 'sosmed', name: 'Instagram', url: c.URL_IG||'#', icon: 'ph-fill ph-instagram-logo', color: 'pink', is_hidden: false },
+                    { category: 'sosmed', name: 'YouTube', url: c.URL_YT||'#', icon: 'ph-fill ph-youtube-logo', color: 'red', is_hidden: false },
+                    { category: 'sosmed', name: 'TikTok', url: c.URL_TikTok||'#', icon: 'ph-fill ph-tiktok-logo', color: 'gray', is_hidden: false },
+                    { category: 'admin', name: 'WA Admin 1', url: c.URL_WA_Admin1 ? 'https://wa.me/' + String(c.URL_WA_Admin1).replace(/^0+/, '62') : '#', icon: 'ph-fill ph-whatsapp-logo', color: 'emerald', is_hidden: false },
+                    { category: 'admin', name: 'WA Admin 2', url: c.URL_WA_Admin2 ? 'https://wa.me/' + String(c.URL_WA_Admin2).replace(/^0+/, '62') : '#', icon: 'ph-fill ph-whatsapp-logo', color: 'teal', is_hidden: false },
+                    { category: 'internal', name: 'PRESISI Presensi', url: c.URL_Presisi||'#', icon: 'ph-fill ph-crosshair', color: 'sky', is_hidden: false },
+                    { category: 'internal', name: 'KATES Kelas', url: c.URL_Kates||'#', icon: 'ph-fill ph-folder-open', color: 'orange', is_hidden: false },
+                    { category: 'internal', name: 'ASTAGA Tugas', url: c.URL_Astaga||'#', icon: 'ph-fill ph-lightning', color: 'amber', is_hidden: false },
+                    { category: 'internal', name: 'RESTU Tamu', url: c.URL_Restu||'#', icon: 'ph-fill ph-handshake', color: 'rose', is_hidden: false },
+                    { category: 'internal', name: 'Gaji-Q Slip', url: c.URL_Gajiq||'#', icon: 'ph-fill ph-wallet', color: 'teal', is_hidden: false }
+                ];
+            }
 
-            const btnWA1 = document.getElementById('btn-portal-wa1');
-            if(btnWA1) btnWA1.onclick = () => window.open(`https://wa.me/${String(appState.config.URL_WA_Admin1 || '0').replace(/^0+/, '62')}?text=Halo%20Admin%20Sekolah`, '_blank');
-            
-            const btnWA2 = document.getElementById('btn-portal-wa2');
-            if(btnWA2) btnWA2.onclick = () => window.open(`https://wa.me/${String(appState.config.URL_WA_Admin2 || '0').replace(/^0+/, '62')}?text=Halo%20Admin%20Sekolah`, '_blank');
-            
-            const btnPresisi = document.getElementById('btn-portal-presisi');
-            if(btnPresisi) btnPresisi.onclick = () => openExternalApp(appState.config.URL_Presisi || 'https://digitech-labs.github.io/PRESISI/', 'PRESISI Presensi', 'ph-fill ph-crosshair text-sky-400');
-            
-            const btnKates = document.getElementById('btn-portal-kates');
-            if(btnKates) btnKates.onclick = () => openExternalApp(appState.config.URL_Kates || 'https://digitech-labs.github.io/KATES/', 'KATES Kelas', 'ph-fill ph-folder-open text-orange-400');
-            
-            const btnAstaga = document.getElementById('btn-portal-astaga');
-            if(btnAstaga) btnAstaga.onclick = () => openExternalApp(appState.config.URL_Astaga || 'https://digitech-labs.github.io/ASTAGA/', 'ASTAGA Tugas', 'ph-fill ph-lightning text-amber-400');
-            
-            const btnRestu = document.getElementById('btn-portal-restu');
-            if(btnRestu) btnRestu.onclick = () => openExternalApp(appState.config.URL_Restu || 'https://digitech-labs.github.io/RESTU/', 'RESTU Tamu', 'ph-fill ph-handshake text-rose-400');
-            
-            const btnGajiq = document.getElementById('btn-portal-gajiq');
-            if(btnGajiq) btnGajiq.onclick = () => openExternalApp(appState.config.URL_Gajiq || 'https://digitech-labs.github.io/Gaji-Q/', 'Gaji-Q Slip', 'ph-fill ph-wallet text-teal-400');
-            // --- END PORTAL LINKS CONFIGURATION ---
+            // PASTIKAN MENU PSB SELALU ADA DI DALAM ARRAY (AGAR BISA DIEDIT)
+            let psbExists = appState.portalLinks.some(x => x.url === 'internal:psb' || x.id === 'MENU_PSB_UTAMA');
+            if (!psbExists) {
+                appState.portalLinks.unshift({ id: 'MENU_PSB_UTAMA', category: 'publik', name: 'Aplikasi PSB', url: 'internal:psb', icon: 'ph-fill ph-student', color: 'blue', is_hidden: false });
+            }
+
+            // RENDER PORTAL LINKS DYNAMICALLY
+            const pLinks = appState.portalLinks;
+            const buildBtn = (item) => {
+                if(item.is_hidden) return '';
+                
+                // AUTO KOREKSI ICON GOOGLE MAPS
+                let iconClass = item.icon;
+                if (iconClass.includes('ph-googlemaps-logo')) iconClass = 'ph-fill ph-map-pin';
+
+                let isIframe = item.category === 'publik' || item.category === 'internal';
+                let action = isIframe ? `openExternalApp('${item.url}', '${item.name}', '${iconClass} text-${item.color}-400')` : `window.open('${item.url}', '_blank')`;
+                
+                // KHUSUS MENU PSB (INTERNAL ROUTING)
+                if (item.url === 'internal:psb' || item.id === 'MENU_PSB_UTAMA') {
+                    action = "navigate('home')";
+                }
+
+                let nameLines = item.name.split(' ');
+                let fmtName = nameLines.length > 1 ? nameLines[0] + '<br>' + nameLines.slice(1).join(' ') : item.name;
+
+                return `<button onclick="${action}" class="bg-white/10 border border-white/20 rounded-2xl p-2.5 flex flex-col items-center group hover:bg-white/20 hover:border-${item.color}-400/50 transition-all outline-none shadow-lg backdrop-blur-sm">
+                    <div class="w-10 h-10 bg-gradient-to-br from-${item.color}-500 to-${item.color}-700 rounded-full flex items-center justify-center text-white mb-2 shadow-[0_5px_15px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform"><i class="${iconClass.includes('ph-') ? iconClass : 'ph-fill ph-globe'} text-[22px]"></i></div>
+                    <span class="text-[8.5px] font-bold text-slate-200 text-center leading-tight group-hover:text-white transition-colors">${fmtName}</span>
+                </button>`;
+            };
+
+            if(document.getElementById('dyn-portal-publik')) {
+                let h = ''; 
+                pLinks.filter(x => x.category === 'publik').forEach(item => h += buildBtn(item));
+                document.getElementById('dyn-portal-publik').innerHTML = h;
+            }
+            if(document.getElementById('dyn-portal-sosmed')) {
+                let h = ''; pLinks.filter(x => x.category === 'sosmed').forEach(item => h += buildBtn(item));
+                document.getElementById('dyn-portal-sosmed').innerHTML = h;
+            }
+            if(document.getElementById('dyn-portal-admin')) {
+                let h = ''; pLinks.filter(x => x.category === 'admin').forEach(item => h += buildBtn(item));
+                document.getElementById('dyn-portal-admin').innerHTML = h;
+            }
+            if(document.getElementById('dyn-portal-internal')) {
+                let h = ''; pLinks.filter(x => x.category === 'internal').forEach(item => h += buildBtn(item));
+                document.getElementById('dyn-portal-internal').innerHTML = h;
+            }
 
             const buildMiniTable = (prog, ta1, ta2, ta3, ta4, k1, k2, k3, k4) => {
                 const getIsi = (pg, ta) => (appState.pendaftar && Array.isArray(appState.pendaftar)) ? appState.pendaftar.filter(p => p.Program === pg && p.Tahun_Ajaran === ta).length : 0;
@@ -1584,11 +1675,26 @@
         if(tab==='editor') renderEditorPanel(); 
         document.getElementById('floating-save-btn').classList.toggle('hidden', tab!=='editor'); 
     }
+
+    window.switchEditorTab = function(tab) {
+        document.getElementById('editor-psb').classList.add('hidden');
+        document.getElementById('editor-portal').classList.add('hidden');
+        document.getElementById('subtab-psb').className = "flex-1 py-2 text-slate-500 font-bold text-[11px] rounded-lg hover:text-slate-700 transition-all focus:outline-none";
+        document.getElementById('subtab-portal').className = "flex-1 py-2 text-slate-500 font-bold text-[11px] rounded-lg hover:text-slate-700 transition-all focus:outline-none";
+
+        document.getElementById('editor-'+tab).classList.remove('hidden');
+        document.getElementById('subtab-'+tab).className = "flex-1 py-2 bg-white text-blue-600 font-black text-[11px] rounded-lg shadow-sm transition-all focus:outline-none";
+    };
+
+    window.addPortalLink = function(category) {
+        let container = document.getElementById('ed-list-pl-' + category);
+        let newItem = { category: category, name: 'Menu Baru', url: 'https://', icon: 'ph-fill ph-star', color: 'blue', is_hidden: false };
+        container.insertAdjacentHTML('beforeend', getPortalLinkHTML(newItem));
+    };
     
     function renderAdminListItems() {
         const tbody = document.getElementById('list-pendaftar-tbody'); if(!tbody) return;
         
-        // Auto Generate Options Filter Tahun Ajaran
         const selTahun = document.getElementById('filter-tahun');
         if (selTahun && selTahun.options.length <= 1) {
             let c = appState.config || {};
@@ -1600,7 +1706,6 @@
             selTahun.value = currentVal;
         }
 
-        // FIX: Sanitasi ID Duplikat (Menghindari bentrok UI warna jika ada ID sama dari Excel)
         let seenIds = new Set();
         if (Array.isArray(appState.pendaftar)) {
             appState.pendaftar.forEach(p => {
@@ -1628,7 +1733,7 @@
             let badgeProg = `<span class="text-[7px] font-bold bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded uppercase">${p.Program||'-'}</span>`;
             let badgeTA = `<span class="text-[7px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded uppercase">TA ${p.Tahun_Ajaran ? p.Tahun_Ajaran.replace('20','').replace('/20','/') : '-'}</span>`;
 
-            bufferHtml += `<tr class="${cC} transition-colors"><td class="p-2 text-center border-r border-slate-100"><input type="checkbox" class="row-checkbox w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer" value="${p.ID_Daftar}" onclick="updateCheckedCount()"></td><td class="p-2 border-r border-slate-100"><button onclick="editPendaftar('${p.ID_Daftar}')" class="text-left font-black text-blue-700 hover:text-blue-500 text-[10.5px] truncate w-full leading-tight drop-shadow-sm">${p.Nama_Siswa}</button><div class="flex flex-wrap gap-1.5 items-center mt-0.5">${badgeJalur}${badgeProg}${badgeTA}</div></td><td class="p-2 text-center border-r border-slate-100"><select data-id="${p.ID_Daftar}" onchange="updateStatusById(this, '${p.ID_Daftar}', this.value)" class="status-select w-full px-1 py-1.5 rounded-lg border font-bold text-[9.5px] outline-none cursor-pointer shadow-sm ${sC}"><option value="Menunggu" ${p.Status_Seleksi==='Menunggu'?'selected':''}>Menunggu</option><option value="Diterima" ${p.Status_Seleksi==='Diterima'?'selected':''}>Diterima</option><option value="Ditolak" ${p.Status_Seleksi==='Ditolak'?'selected':''}>Ditolak</option></select></td><td class="p-2 text-center"><button onclick="deletePendaftarById('${p.ID_Daftar}')" class="text-slate-400 hover:text-red-500 w-6 h-6 mx-auto flex items-center justify-center bg-white rounded-md shadow-sm border border-slate-200 transition-colors"><i class="ph-bold ph-trash"></i></button></td></tr>`;
+            bufferHtml += `<tr class="${cC} transition-colors"><td class="p-2 text-center border-r border-slate-100"><input type="checkbox" class="row-checkbox w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer" value="${p.ID_Daftar}" onclick="updateCheckedCount()"></td><td class="p-2 border-r border-slate-100"><button onclick="editPendaftar('${p.ID_Daftar}')" class="text-left font-black text-blue-700 hover:text-blue-500 text-[10.5px] truncate w-full leading-tight drop-shadow-sm">${p.Nama_Siswa}</button><div class="flex flex-wrap gap-1.5 items-center mt-0.5">${badgeJalur}${badgeProg}${badgeTA}</div></td><td class="p-2 text-center border-r border-slate-100"><select onchange="updateStatusById(this, '${p.ID_Daftar}', this.value)" class="w-full px-1 py-1.5 rounded-lg border font-bold text-[9.5px] outline-none cursor-pointer shadow-sm ${sC}"><option value="Menunggu" ${p.Status_Seleksi==='Menunggu'?'selected':''}>Menunggu</option><option value="Diterima" ${p.Status_Seleksi==='Diterima'?'selected':''}>Diterima</option><option value="Ditolak" ${p.Status_Seleksi==='Ditolak'?'selected':''}>Ditolak</option></select></td><td class="p-2 text-center"><button onclick="deletePendaftarById('${p.ID_Daftar}')" class="text-slate-400 hover:text-red-500 w-6 h-6 mx-auto flex items-center justify-center bg-white rounded-md shadow-sm border border-slate-200 transition-colors"><i class="ph-bold ph-trash"></i></button></td></tr>`;
         });
         tbody.innerHTML = bufferHtml;
     }
@@ -1638,6 +1743,7 @@
         let bulkSelect = document.getElementById('bulk-action');
         if(count > 0) {
             if(bulkSelect && bulkSelect.options[0]) bulkSelect.options[0].text = `⚡ Eksekusi Masal (${count})`;
+            showToast(`${count} siswa dipilih.`, false);
         } else {
             if(bulkSelect && bulkSelect.options[0]) bulkSelect.options[0].text = `⚡ Eksekusi Masal`;
         }
@@ -1648,35 +1754,25 @@
         checkboxes.forEach(cb => cb.checked = source.checked);
         updateCheckedCount();
     }
-    
-    function updateStatusDOM(id, newStatus) {
-        let selectEl = document.querySelector(`.status-select[data-id="${id}"]`);
-        if(selectEl) {
-            selectEl.value = newStatus;
-            selectEl.className = `status-select w-full px-1 py-1.5 rounded-lg border font-bold text-[9.5px] outline-none cursor-pointer shadow-sm ` + 
-                (newStatus === 'Diterima' ? 'text-green-700 bg-green-100 border-green-300' : 
-                (newStatus === 'Ditolak' ? 'text-red-700 bg-red-100 border-red-300' : 
-                'text-slate-700 bg-slate-100 border-slate-300'));
-            
-            let rowEl = selectEl.closest('tr');
-            if(rowEl) {
-                rowEl.className = `transition-colors ` + 
-                    (newStatus === 'Diterima' ? 'bg-green-50/40' : 
-                    (newStatus === 'Ditolak' ? 'bg-red-50/40' : 
-                    'bg-white hover:bg-slate-50'));
-            }
-        }
-    }
 
     function ubahStatusMasal(statusBaru) {
         let checkboxes = document.querySelectorAll('.row-checkbox:checked');
-        let count = 0; let ids = [];
+        let count = 0;
         checkboxes.forEach(cb => {
             let id = cb.value;
             let index = appState.pendaftar.findIndex(p => p.ID_Daftar === id);
             if(index !== -1) { 
                 appState.pendaftar[index].Status_Seleksi = statusBaru; 
-                updateStatusDOM(id, statusBaru);
+                let selectEl = cb.closest('tr').querySelector('select');
+                if(selectEl) {
+                    selectEl.value = statusBaru;
+                    selectEl.className = `w-full px-1 py-1.5 rounded-lg border font-bold text-[9.5px] outline-none cursor-pointer shadow-sm ` + 
+                        (statusBaru === 'Diterima' ? 'text-green-700 bg-green-100 border-green-300' : 
+                        (statusBaru === 'Ditolak' ? 'text-red-700 bg-red-100 border-red-300' : 
+                        'text-slate-700 bg-slate-100 border-slate-300'));
+                    let rowEl = selectEl.closest('tr');
+                    rowEl.className = `transition-colors ` + (statusBaru === 'Diterima' ? 'bg-green-50/40' : (statusBaru === 'Ditolak' ? 'bg-red-50/40' : 'bg-white hover:bg-slate-50'));
+                }
                 cb.checked = false;
                 count++; 
             }
@@ -1685,7 +1781,7 @@
             let checkAllBtn = document.getElementById('check-all');
             if(checkAllBtn) checkAllBtn.checked = false;
             updateCheckedCount();
-            showToast(`${count} Siswa diubah ke ${statusBaru} (Lokal)! Klik Simpan untuk update Server.`);
+            showToast(`${count} Siswa diubah ke ${statusBaru} (Lokal)! Klik Simpan untuk update.`);
         } else { showToast("Pilih minimal 1 siswa!", true); }
     }
 
@@ -1727,17 +1823,13 @@
         let i = appState.pendaftar.findIndex(x => x.ID_Daftar === id); 
         if(i !== -1) { 
             appState.pendaftar[i].Status_Seleksi = s; 
-            el.className = `status-select w-full px-1 py-1.5 rounded-lg border font-bold text-[9.5px] outline-none cursor-pointer shadow-sm ` + 
+            el.className = `w-full px-1 py-1.5 rounded-lg border font-bold text-[9.5px] outline-none cursor-pointer shadow-sm ` + 
                 (s === 'Diterima' ? 'text-green-700 bg-green-100 border-green-300' : 
                 (s === 'Ditolak' ? 'text-red-700 bg-red-100 border-red-300' : 
                 'text-slate-700 bg-slate-100 border-slate-300'));
-            
             let rowEl = el.closest('tr');
             if(rowEl) {
-                rowEl.className = `transition-colors ` + 
-                    (s === 'Diterima' ? 'bg-green-50/40' : 
-                    (s === 'Ditolak' ? 'bg-red-50/40' : 
-                    'bg-white hover:bg-slate-50'));
+                rowEl.className = `transition-colors ` + (s === 'Diterima' ? 'bg-green-50/40' : (s === 'Ditolak' ? 'bg-red-50/40' : 'bg-white hover:bg-slate-50'));
             }
         } 
     }
@@ -1760,185 +1852,186 @@
     function renderEditorPanel() {
         const p = document.getElementById('panel-editor'); 
         let c = appState.config || {};
+        let pLinks = appState.portalLinks || [];
         
         let ta1 = c.TA_1 || "2026/2027", ta2 = c.TA_2 || "2027/2028", ta3 = c.TA_3 || "2028/2029", ta4 = c.TA_4 || "2029/2030";
         let ku1 = c.KU_1 || "112", ku2 = c.KU_2 || "112", ku3 = c.KU_3 || "112", ku4 = c.KU_4 || "112";
         let ki1 = c.KI_1 || "40", ki2 = c.KI_2 || "40", ki3 = c.KI_3 || "40", ki4 = c.KI_4 || "40";
 
         let html = `
-        <div class="bg-blue-600 p-4 rounded-2xl shadow-lg border-2 border-blue-400 text-white mb-5">
-            <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-blue-500 pb-2"><i class="ph-fill ph-gear mr-1.5 text-lg"></i> Pengaturan Umum</h3>
-            <div class="space-y-3">
-                <div><label class="text-[10px] font-bold text-blue-200">Judul Web (Atas)</label><input type="text" id="ed-judul" value="${c.Judul_Web||''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-black text-blue-900 outline-none bg-white"></div>
-                <div><label class="text-[10px] font-bold text-blue-200">Sub Judul</label><input type="text" id="ed-sub" value="${c.Sub_Judul||''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-bold text-blue-900 outline-none bg-white"></div>
-                <div><label class="text-[10px] font-bold text-blue-200">Quotes Portal (Baris baru = Acak)</label><textarea id="ed-quotes" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] text-blue-900 h-20 resize-none outline-none bg-white">${c.Quotes_Portal||''}</textarea></div>
-                
-                <div class="mt-4 bg-blue-800/30 p-3 rounded-xl border border-blue-500/50">
-                    <label class="text-[11px] font-black text-white block mb-2 flex items-center"><i class="ph-fill ph-table mr-1.5"></i> Kuota 4 Tahun Ajaran</label>
-                    <div class="grid grid-cols-12 gap-1.5 mb-1.5 text-center">
-                        <div class="col-span-4 text-[8px] font-bold text-blue-200 uppercase">Tahun Ajaran</div>
-                        <div class="col-span-4 text-[8px] font-bold text-yellow-300 uppercase">Max Unggulan</div>
-                        <div class="col-span-4 text-[8px] font-bold text-orange-300 uppercase">Max ICP</div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-1.5 mb-1.5">
-                        <div class="col-span-4"><input type="text" id="ed-ta-1" value="${ta1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ku-1" value="${ku1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ki-1" value="${ki1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-1.5 mb-1.5">
-                        <div class="col-span-4"><input type="text" id="ed-ta-2" value="${ta2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ku-2" value="${ku2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ki-2" value="${ki2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-1.5 mb-1.5">
-                        <div class="col-span-4"><input type="text" id="ed-ta-3" value="${ta3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ku-3" value="${ku3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ki-3" value="${ki3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-1.5">
-                        <div class="col-span-4"><input type="text" id="ed-ta-4" value="${ta4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ku-4" value="${ku4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
-                        <div class="col-span-4"><input type="number" id="ed-ki-4" value="${ki4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+        <div class="flex gap-2 mb-4 bg-slate-200 p-1.5 rounded-xl sticky top-0 z-[100] shadow-sm">
+            <button id="subtab-psb" onclick="switchEditorTab('psb')" class="flex-1 py-2.5 bg-white text-blue-600 font-black text-[11px] rounded-lg shadow-sm transition-all focus:outline-none">⚙️ Pengaturan PSB</button>
+            <button id="subtab-portal" onclick="switchEditorTab('portal')" class="flex-1 py-2.5 text-slate-500 font-bold text-[11px] rounded-lg hover:text-slate-700 transition-all focus:outline-none">📱 Pengaturan Portal</button>
+        </div>
+
+        <!-- AREA PENGATURAN PSB -->
+        <div id="editor-psb" class="space-y-5 animate-fade-in">
+            <div class="bg-blue-600 p-4 rounded-2xl shadow-lg border-2 border-blue-400 text-white">
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-blue-500 pb-2"><i class="ph-fill ph-gear mr-1.5 text-lg"></i> Info Pendaftaran Dasar</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[10px] font-bold text-blue-200">Judul Web (Atas)</label><input type="text" id="ed-judul" value="${c.Judul_Web||''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-black text-blue-900 outline-none bg-white"></div>
+                    <div><label class="text-[10px] font-bold text-blue-200">Sub Judul</label><input type="text" id="ed-sub" value="${c.Sub_Judul||''}" class="w-full border-2 border-transparent rounded-xl p-2.5 text-xs font-bold text-blue-900 outline-none bg-white"></div>
+                    
+                    <div class="mt-4 bg-blue-800/30 p-3 rounded-xl border border-blue-500/50">
+                        <label class="text-[11px] font-black text-white block mb-2 flex items-center"><i class="ph-fill ph-table mr-1.5"></i> Kuota 4 Tahun Ajaran</label>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5 text-center">
+                            <div class="col-span-4 text-[8px] font-bold text-blue-200 uppercase">Tahun Ajaran</div>
+                            <div class="col-span-4 text-[8px] font-bold text-yellow-300 uppercase">Max Unggulan</div>
+                            <div class="col-span-4 text-[8px] font-bold text-orange-300 uppercase">Max ICP</div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-1" value="${ta1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-1" value="${ku1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-1" value="${ki1}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-2" value="${ta2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-2" value="${ku2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-2" value="${ki2}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5 mb-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-3" value="${ta3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-3" value="${ku3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-3" value="${ki3}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-1.5">
+                            <div class="col-span-4"><input type="text" id="ed-ta-4" value="${ta4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ku-4" value="${ku4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                            <div class="col-span-4"><input type="number" id="ed-ki-4" value="${ki4}" class="w-full rounded p-1.5 text-[9px] font-bold text-blue-900 text-center outline-none"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="bg-indigo-600 p-4 rounded-2xl shadow-lg border-2 border-indigo-400 text-white mt-5">
-            <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-indigo-500 pb-2"><i class="ph-fill ph-student mr-1.5 text-lg"></i> 🏆 Keunggulan (UNGGULAN)</h3>
-            <div class="space-y-4">
-                <div><label class="text-[10px] font-bold text-indigo-200 block mb-1">1. Poin Depan</label><textarea id="ed-list-unggulan-depan" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-bold text-slate-800 outline-none bg-white h-20 resize-none">${c.List_Unggulan_Depan||''}</textarea></div>
-                <div><label class="text-[10px] font-bold text-indigo-200 block mb-1">2. Deskripsi Popup</label><textarea id="ed-desc-unggulan-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-16 resize-none">${c.Desc_Unggulan_Popup||''}</textarea></div>
-                <div><label class="text-[10px] font-bold text-indigo-200 block mb-1">3. Poin Popup</label><textarea id="ed-list-unggulan-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-28 resize-none">${c.List_Unggulan_Popup||''}</textarea></div>
-            </div>
-        </div>
-
-        <div class="bg-orange-600 p-4 rounded-2xl shadow-lg border-2 border-orange-400 text-white mt-5">
-            <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-orange-500 pb-2"><i class="ph-fill ph-globe mr-1.5 text-lg"></i> 🌐 Keunggulan (ICP)</h3>
-            <div class="space-y-4">
-                <div><label class="text-[10px] font-bold text-orange-200 block mb-1">1. Poin Depan</label><textarea id="ed-list-icp-depan" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-bold text-slate-800 outline-none bg-white h-20 resize-none">${c.List_ICP_Depan||''}</textarea></div>
-                <div><label class="text-[10px] font-bold text-orange-200 block mb-1">2. Deskripsi Popup</label><textarea id="ed-desc-icp-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-16 resize-none">${c.Desc_ICP_Popup||''}</textarea></div>
-                <div><label class="text-[10px] font-bold text-orange-200 block mb-1">3. Poin Popup</label><textarea id="ed-list-icp-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-28 resize-none">${c.List_ICP_Popup||''}</textarea></div>
-            </div>
-        </div>
-
-        <div class="bg-[#0e7490] p-4 rounded-2xl shadow-lg border-2 border-[#06b6d4] text-white mt-5">
-            <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-[#06b6d4] pb-2"><i class="ph-fill ph-list-dashes mr-1.5 text-lg"></i> Opsi Dropdown Formulir</h3>
-            <div class="space-y-3">
-                <div><label class="text-[10px] font-bold text-cyan-100 block mb-1">Pendidikan</label><textarea id="ed-opt-pendidikan" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-bold text-slate-800 outline-none bg-white h-24 resize-none">${c.Opt_Pendidikan||''}</textarea></div>
-                <div><label class="text-[10px] font-bold text-cyan-100 block mb-1">Pekerjaan</label><textarea id="ed-opt-pekerjaan" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-bold text-slate-800 outline-none bg-white h-24 resize-none">${c.Opt_Pekerjaan||''}</textarea></div>
-                <div><label class="text-[10px] font-bold text-cyan-100 block mb-1">Penghasilan</label><textarea id="ed-opt-penghasilan" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-bold text-slate-800 outline-none bg-white h-24 resize-none">${c.Opt_Penghasilan||''}</textarea></div>
-            </div>
-        </div>
-
-        <div class="bg-pink-600 p-4 rounded-2xl shadow-lg border-2 border-pink-400 text-white mt-5">
-            <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-pink-500 pb-2"><i class="ph-fill ph-image mr-1.5 text-lg"></i> URL Brosur</h3>
-            <div class="space-y-3">
-                <div><label class="text-[10px] font-bold text-pink-200">Brosur 1</label><input type="text" id="ed-brosur1" value="${c.URL_Brosur1||''}" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-medium text-slate-800 outline-none bg-white"></div>
-                <div><label class="text-[10px] font-bold text-pink-200">Brosur 2</label><input type="text" id="ed-brosur2" value="${c.URL_Brosur2||''}" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-medium text-slate-800 outline-none bg-white"></div>
-                <div><label class="text-[10px] font-bold text-pink-200">Brosur 3</label><input type="text" id="ed-brosur3" value="${c.URL_Brosur3||''}" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-medium text-slate-800 outline-none bg-white"></div>
-            </div>
-        </div>
-        
-        <div class="bg-slate-700 p-4 rounded-2xl shadow-lg border-2 border-slate-500 text-white mt-5">
-            <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-slate-600 pb-2"><i class="ph-fill ph-link mr-1.5 text-lg"></i> Tautan Portal & Sosmed</h3>
-            <div class="space-y-4">
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
-                    <label class="text-[10px] font-black text-blue-300 block mb-2">Aplikasi Publik</label>
-                    <div class="space-y-2">
-                        <div><span class="text-[9px] font-bold text-slate-300">Majalah TINTA</span><input type="text" id="ed-url-tinta" value="${c.URL_Tinta||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">Kajian Islam</span><input type="text" id="ed-url-islamic" value="${c.URL_Islamic||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                    </div>
-                </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
-                    <label class="text-[10px] font-black text-rose-300 block mb-2">Sosial Media</label>
-                    <div class="space-y-2">
-                        <div><span class="text-[9px] font-bold text-slate-300">Website Utama</span><input type="text" id="ed-url-web" value="${c.URL_Web||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">Facebook</span><input type="text" id="ed-url-fb" value="${c.URL_FB||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">Instagram</span><input type="text" id="ed-url-ig" value="${c.URL_IG||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">YouTube</span><input type="text" id="ed-url-yt" value="${c.URL_YT||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">TikTok</span><input type="text" id="ed-url-tiktok" value="${c.URL_TikTok||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                    </div>
-                </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
-                    <label class="text-[10px] font-black text-emerald-300 block mb-2">Layanan Admin</label>
-                    <div class="space-y-2">
-                        <div><span class="text-[9px] font-bold text-slate-300">WhatsApp Admin 1 (628...)</span><input type="text" id="ed-url-wa1" value="${c.URL_WA_Admin1||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">WhatsApp Admin 2 (628...)</span><input type="text" id="ed-url-wa2" value="${c.URL_WA_Admin2||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                    </div>
-                </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-600/50">
-                    <label class="text-[10px] font-black text-amber-300 block mb-2">Aplikasi Internal (Pengampu)</label>
-                    <div class="space-y-2">
-                        <div><span class="text-[9px] font-bold text-slate-300">PRESISI Presensi</span><input type="text" id="ed-url-presisi" value="${c.URL_Presisi||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">KATES Kelas</span><input type="text" id="ed-url-kates" value="${c.URL_Kates||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">ASTAGA Tugas</span><input type="text" id="ed-url-astaga" value="${c.URL_Astaga||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">RESTU Tamu</span><input type="text" id="ed-url-restu" value="${c.URL_Restu||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                        <div><span class="text-[9px] font-bold text-slate-300">Gaji-Q Slip</span><input type="text" id="ed-url-gajiq" value="${c.URL_Gajiq||''}" class="w-full rounded-lg p-2 text-[10px] outline-none bg-white text-slate-800"></div>
-                    </div>
+            <div class="bg-indigo-600 p-4 rounded-2xl shadow-lg border-2 border-indigo-400 text-white">
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-indigo-500 pb-2"><i class="ph-fill ph-student mr-1.5 text-lg"></i> 🏆 Keunggulan (UNGGULAN)</h3>
+                <div class="space-y-4">
+                    <div><label class="text-[10px] font-bold text-indigo-200 block mb-1">1. Poin Depan</label><textarea id="ed-list-unggulan-depan" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-bold text-slate-800 outline-none bg-white h-20 resize-none">${c.List_Unggulan_Depan||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-indigo-200 block mb-1">2. Deskripsi Popup</label><textarea id="ed-desc-unggulan-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-16 resize-none">${c.Desc_Unggulan_Popup||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-indigo-200 block mb-1">3. Poin Popup</label><textarea id="ed-list-unggulan-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-28 resize-none">${c.List_Unggulan_Popup||''}</textarea></div>
                 </div>
             </div>
-        </div>
-        
-        <div class="bg-emerald-500 p-4 rounded-2xl shadow-lg border-2 border-emerald-400 text-white mt-5">
-            <div class="flex justify-between items-center border-b border-emerald-400 pb-2 mb-4">
-                <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-phone mr-1.5 text-lg"></i> Kontak Panitia</h3>
-                <button type="button" onclick="addEdKontak()" class="bg-white text-emerald-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-emerald-50 hover:scale-105 transition-all">+ Tambah</button>
-            </div>
-            <div id="ed-list-kontak" class="space-y-3">`;
-        
-        if(!appState.kontak) appState.kontak = [];
-        appState.kontak.forEach(k => { html += getKontakHTML(k.Divisi, k.Nama, k.No_WA); });
-        
-        html += `</div></div>
-        
-        <div class="bg-purple-600 p-4 rounded-2xl shadow-lg border-2 border-purple-400 text-white mt-5">
-            <div class="flex justify-between items-center border-b border-purple-400 pb-2 mb-4">
-                <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-calendar mr-1.5 text-lg"></i> Timeline / Jadwal</h3>
-                <button type="button" onclick="addEdTimeline()" class="bg-white text-purple-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-purple-50 hover:scale-105 transition-all">+ Tambah</button>
-            </div>
-            <div id="ed-list-timeline" class="space-y-3">`;
-        
-        if(!appState.timeline) appState.timeline = [];
-        appState.timeline.forEach((t, i) => { html += getTimelineHTML(t.Tanggal, t.Judul, t.Deskripsi, i); });
-        
-        html += `</div></div>
 
-        <div class="bg-amber-500 p-4 rounded-2xl shadow-lg border-2 border-amber-400 text-white mt-5">
-            <div class="flex justify-between items-center border-b border-amber-400 pb-2 mb-4">
-                <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-wallet mr-1.5 text-lg"></i> Rincian Biaya</h3>
-                <button type="button" onclick="addEdKeuangan()" class="bg-white text-amber-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-amber-50 hover:scale-105 transition-all">+ Tambah</button>
+            <div class="bg-orange-600 p-4 rounded-2xl shadow-lg border-2 border-orange-400 text-white">
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-orange-500 pb-2"><i class="ph-fill ph-globe mr-1.5 text-lg"></i> 🌐 Keunggulan (ICP)</h3>
+                <div class="space-y-4">
+                    <div><label class="text-[10px] font-bold text-orange-200 block mb-1">1. Poin Depan</label><textarea id="ed-list-icp-depan" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-bold text-slate-800 outline-none bg-white h-20 resize-none">${c.List_ICP_Depan||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-orange-200 block mb-1">2. Deskripsi Popup</label><textarea id="ed-desc-icp-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-16 resize-none">${c.Desc_ICP_Popup||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-orange-200 block mb-1">3. Poin Popup</label><textarea id="ed-list-icp-popup" class="w-full border-2 border-transparent rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-28 resize-none">${c.List_ICP_Popup||''}</textarea></div>
+                </div>
             </div>
-            <div id="ed-list-keuangan" class="space-y-3">`;
+
+            <div class="bg-[#0e7490] p-4 rounded-2xl shadow-lg border-2 border-[#06b6d4] text-white">
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-[#06b6d4] pb-2"><i class="ph-fill ph-list-dashes mr-1.5 text-lg"></i> Opsi Dropdown Formulir</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[10px] font-bold text-cyan-100 block mb-1">Pendidikan</label><textarea id="ed-opt-pendidikan" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-bold text-slate-800 outline-none bg-white h-24 resize-none">${c.Opt_Pendidikan||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-cyan-100 block mb-1">Pekerjaan</label><textarea id="ed-opt-pekerjaan" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-bold text-slate-800 outline-none bg-white h-24 resize-none">${c.Opt_Pekerjaan||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-cyan-100 block mb-1">Penghasilan</label><textarea id="ed-opt-penghasilan" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-bold text-slate-800 outline-none bg-white h-24 resize-none">${c.Opt_Penghasilan||''}</textarea></div>
+                </div>
+            </div>
+
+            <div class="bg-pink-600 p-4 rounded-2xl shadow-lg border-2 border-pink-400 text-white">
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-pink-500 pb-2"><i class="ph-fill ph-image mr-1.5 text-lg"></i> URL Brosur</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[10px] font-bold text-pink-200">Brosur 1</label><input type="text" id="ed-brosur1" value="${c.URL_Brosur1||''}" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-medium text-slate-800 outline-none bg-white"></div>
+                    <div><label class="text-[10px] font-bold text-pink-200">Brosur 2</label><input type="text" id="ed-brosur2" value="${c.URL_Brosur2||''}" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-medium text-slate-800 outline-none bg-white"></div>
+                    <div><label class="text-[10px] font-bold text-pink-200">Brosur 3</label><input type="text" id="ed-brosur3" value="${c.URL_Brosur3||''}" class="w-full border-2 border-transparent rounded-xl p-2 text-[10px] font-medium text-slate-800 outline-none bg-white"></div>
+                </div>
+            </div>
             
-        if(!appState.keuangan) appState.keuangan = [];
-        appState.keuangan.forEach((k, i) => { html += getKeuanganHTML(k.Mata_Anggaran, k.Gel_1, k.Gel_2, k.ICP, i); });
-
-        html += `</div></div>
-
-        <div class="bg-red-500 p-4 rounded-2xl shadow-lg border-2 border-red-400 text-white mt-5">
-            <div class="flex justify-between items-center border-b border-red-400 pb-2 mb-4">
-                <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-note-pencil mr-1.5 text-lg"></i> Catatan Biaya</h3>
-                <button type="button" onclick="addEdCatatan()" class="bg-white text-red-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-red-50 hover:scale-105 transition-all">+ Tambah</button>
-            </div>
-            <div id="ed-list-catatan" class="space-y-3">`;
+            <div class="bg-emerald-500 p-4 rounded-2xl shadow-lg border-2 border-emerald-400 text-white">
+                <div class="flex justify-between items-center border-b border-emerald-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-phone mr-1.5 text-lg"></i> Kontak Panitia</h3>
+                    <button type="button" onclick="addEdKontak()" class="bg-white text-emerald-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-emerald-50 hover:scale-105 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-kontak" class="space-y-3">`;
+            if(!appState.kontak) appState.kontak = []; appState.kontak.forEach(k => { html += getKontakHTML(k.Divisi, k.Nama, k.No_WA); });
+            html += `</div></div>
             
-        if(!appState.catatanBiaya) appState.catatanBiaya = [];
-        appState.catatanBiaya.forEach((cb, i) => { html += getCatatanBiayaHTML(cb.Teks_Catatan, i); });
+            <div class="bg-purple-600 p-4 rounded-2xl shadow-lg border-2 border-purple-400 text-white">
+                <div class="flex justify-between items-center border-b border-purple-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-calendar mr-1.5 text-lg"></i> Timeline / Jadwal</h3>
+                    <button type="button" onclick="addEdTimeline()" class="bg-white text-purple-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-purple-50 hover:scale-105 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-timeline" class="space-y-3">`;
+            if(!appState.timeline) appState.timeline = []; appState.timeline.forEach((t, i) => { html += getTimelineHTML(t.Tanggal, t.Judul, t.Deskripsi, i); });
+            html += `</div></div>
 
-        html += `</div></div>
+            <div class="bg-amber-500 p-4 rounded-2xl shadow-lg border-2 border-amber-400 text-white">
+                <div class="flex justify-between items-center border-b border-amber-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-wallet mr-1.5 text-lg"></i> Rincian Biaya</h3>
+                    <button type="button" onclick="addEdKeuangan()" class="bg-white text-amber-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-amber-50 hover:scale-105 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-keuangan" class="space-y-3">`;
+            if(!appState.keuangan) appState.keuangan = []; appState.keuangan.forEach((k, i) => { html += getKeuanganHTML(k.Mata_Anggaran, k.Gel_1, k.Gel_2, k.ICP, i); });
+            html += `</div></div>
 
-        <div class="bg-rose-600 p-4 rounded-2xl shadow-lg border-2 border-rose-400 text-white mt-5">
-            <div class="flex justify-between items-center border-b border-rose-400 pb-2 mb-4">
-                <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-check-square-offset mr-1.5 text-lg"></i> Syarat Pendaftaran</h3>
-                <button type="button" onclick="addEdSyarat()" class="bg-white text-rose-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-rose-50 hover:scale-105 transition-all">+ Tambah</button>
+            <div class="bg-red-500 p-4 rounded-2xl shadow-lg border-2 border-red-400 text-white">
+                <div class="flex justify-between items-center border-b border-red-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-note-pencil mr-1.5 text-lg"></i> Catatan Biaya</h3>
+                    <button type="button" onclick="addEdCatatan()" class="bg-white text-red-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-red-50 hover:scale-105 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-catatan" class="space-y-3">`;
+            if(!appState.catatanBiaya) appState.catatanBiaya = []; appState.catatanBiaya.forEach((cb, i) => { html += getCatatanBiayaHTML(cb.Teks_Catatan, i); });
+            html += `</div></div>
+
+            <div class="bg-rose-600 p-4 rounded-2xl shadow-lg border-2 border-rose-400 text-white">
+                <div class="flex justify-between items-center border-b border-rose-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-check-square-offset mr-1.5 text-lg"></i> Syarat Pendaftaran</h3>
+                    <button type="button" onclick="addEdSyarat()" class="bg-white text-rose-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-rose-50 hover:scale-105 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-syarat" class="space-y-3">`;
+            if(!appState.syarat) appState.syarat = []; appState.syarat.forEach(s => { html += getSyaratHTML(s.Teks_Syarat); });
+            html += `</div></div>
+        </div>
+
+        <!-- AREA PENGATURAN PORTAL -->
+        <div id="editor-portal" class="hidden space-y-5 animate-fade-in">
+            <div class="bg-slate-800 p-4 rounded-2xl shadow-lg border-2 border-slate-600 text-white">
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-slate-600 pb-2"><i class="ph-fill ph-quotes mr-1.5 text-lg text-amber-400"></i> Pantun / Motivasi Portal</h3>
+                <div><label class="text-[10px] font-bold text-slate-400 mb-1 block">Tulis beberapa pantun/quotes (Pisahkan dengan baris baru untuk diacak sistem)</label><textarea id="ed-quotes" class="w-full border-2 border-slate-600 rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-24 resize-none shadow-inner">${c.Quotes_Portal||''}</textarea></div>
             </div>
-            <div id="ed-list-syarat" class="space-y-3">`;
-            
-        if(!appState.syarat) appState.syarat = [];
-        appState.syarat.forEach(s => { html += getSyaratHTML(s.Teks_Syarat); });
 
-        html += `</div></div>`;
+            <!-- Editor Menu Publik -->
+            <div class="bg-blue-600 p-4 rounded-2xl shadow-lg border-2 border-blue-400 text-white">
+                <div class="flex justify-between items-center border-b border-blue-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-app-window mr-1.5 text-lg text-blue-200"></i> Menu Layanan Publik</h3>
+                    <button type="button" onclick="addPortalLink('publik')" class="bg-white text-blue-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-blue-50 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-pl-publik" class="space-y-3">`;
+            pLinks.filter(x=>x.category==='publik').forEach(item => { html += getPortalLinkHTML(item); });
+            html += `</div></div>
+
+            <!-- Editor Menu Sosmed -->
+            <div class="bg-pink-600 p-4 rounded-2xl shadow-lg border-2 border-pink-400 text-white">
+                <div class="flex justify-between items-center border-b border-pink-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-share-network mr-1.5 text-lg text-pink-200"></i> Menu Sosial Media</h3>
+                    <button type="button" onclick="addPortalLink('sosmed')" class="bg-white text-pink-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-pink-50 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-pl-sosmed" class="space-y-3">`;
+            pLinks.filter(x=>x.category==='sosmed').forEach(item => { html += getPortalLinkHTML(item); });
+            html += `</div></div>
+
+            <!-- Editor Menu Admin -->
+            <div class="bg-emerald-600 p-4 rounded-2xl shadow-lg border-2 border-emerald-400 text-white">
+                <div class="flex justify-between items-center border-b border-emerald-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-headset mr-1.5 text-lg text-emerald-200"></i> Menu Layanan Admin</h3>
+                    <button type="button" onclick="addPortalLink('admin')" class="bg-white text-emerald-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-emerald-50 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-pl-admin" class="space-y-3">`;
+            pLinks.filter(x=>x.category==='admin').forEach(item => { html += getPortalLinkHTML(item); });
+            html += `</div></div>
+
+            <!-- Editor Menu Internal -->
+            <div class="bg-amber-600 p-4 rounded-2xl shadow-lg border-2 border-amber-400 text-white">
+                <div class="flex justify-between items-center border-b border-amber-400 pb-2 mb-4">
+                    <h3 class="font-black text-xs text-white flex items-center"><i class="ph-fill ph-users-three mr-1.5 text-lg text-amber-200"></i> Menu Layanan Internal (Pengampu)</h3>
+                    <button type="button" onclick="addPortalLink('internal')" class="bg-white text-amber-600 px-3 py-1.5 rounded-lg text-[10px] font-black shadow-md hover:bg-amber-50 transition-all">+ Tambah</button>
+                </div>
+                <div id="ed-list-pl-internal" class="space-y-3">`;
+            pLinks.filter(x=>x.category==='internal').forEach(item => { html += getPortalLinkHTML(item); });
+            html += `</div></div>
+        </div>`;
         
         p.innerHTML = html;
         initFlatpickrAdmin();
@@ -1972,20 +2065,19 @@
         appState.config.URL_Brosur2 = document.getElementById('ed-brosur2').value; 
         appState.config.URL_Brosur3 = document.getElementById('ed-brosur3').value;
 
-        appState.config.URL_Tinta = document.getElementById('ed-url-tinta').value;
-        appState.config.URL_Islamic = document.getElementById('ed-url-islamic').value;
-        appState.config.URL_Web = document.getElementById('ed-url-web').value;
-        appState.config.URL_FB = document.getElementById('ed-url-fb').value;
-        appState.config.URL_IG = document.getElementById('ed-url-ig').value;
-        appState.config.URL_YT = document.getElementById('ed-url-yt').value;
-        appState.config.URL_TikTok = document.getElementById('ed-url-tiktok').value;
-        appState.config.URL_WA_Admin1 = document.getElementById('ed-url-wa1').value;
-        appState.config.URL_WA_Admin2 = document.getElementById('ed-url-wa2').value;
-        appState.config.URL_Presisi = document.getElementById('ed-url-presisi').value;
-        appState.config.URL_Kates = document.getElementById('ed-url-kates').value;
-        appState.config.URL_Astaga = document.getElementById('ed-url-astaga').value;
-        appState.config.URL_Restu = document.getElementById('ed-url-restu').value;
-        appState.config.URL_Gajiq = document.getElementById('ed-url-gajiq').value;
+        // BACA ARRAY MURNI (TANPA DI-JSON STRINGIFY LAGI)
+        appState.portalLinks = Array.from(document.querySelectorAll('.ed-portal-link')).map((el, i) => {
+            let idEl = el.querySelector('.pl-id');
+            return {
+                id: idEl ? idEl.value : "PL" + new Date().getTime() + i,
+                category: el.querySelector('.pl-cat').value,
+                name: el.querySelector('.pl-name').value,
+                icon: el.querySelector('.pl-icon').value,
+                url: el.querySelector('.pl-url').value,
+                color: el.querySelector('.pl-color').value,
+                is_hidden: el.querySelector('.pl-hidden').checked
+            };
+        });
 
         appState.kontak = Array.from(document.querySelectorAll('.ed-item-kontak')).map((el, i) => ({ ID: "C" + (i + 1), Divisi: el.querySelector('.ed-c-divisi').value, Nama: el.querySelector('.ed-c-nama').value, No_WA: el.querySelector('.ed-c-wa').value }));
         appState.timeline = Array.from(document.querySelectorAll('.ed-item-timeline')).map((el, i) => { let start = el.querySelector('.ed-t-tgl-start').value; let end = el.querySelector('.ed-t-tgl-end').value; return { ID: "T" + (i + 1), Tanggal: start + (end ? " - " + end : ""), Judul: el.querySelector('.ed-t-jud').value, Deskripsi: el.querySelector('.ed-t-des').value }; });
@@ -2001,6 +2093,48 @@
         } else {
             showToast("Sukses tersimpan lokal!"); 
         }
+    }
+
+    function getPortalLinkHTML(item) {
+        let isPSB = item.url === 'internal:psb' || item.id === 'MENU_PSB_UTAMA';
+        let idVal = item.id || ('PL' + new Date().getTime() + Math.random().toString(36).substr(2,5));
+        
+        let trashBtn = isPSB ? `<div class="absolute -top-2.5 -right-2.5 text-white bg-slate-400 w-6 h-6 rounded-full flex justify-center items-center shadow-md z-10" title="Menu Sistem Tidak Bisa Dihapus"><i class="ph-bold ph-lock-key"></i></div>` : `<button type="button" onclick="this.parentElement.remove()" class="absolute -top-2.5 -right-2.5 text-white bg-red-500 w-6 h-6 rounded-full flex justify-center items-center hover:bg-red-600 transition-all shadow-md z-10"><i class="ph-bold ph-trash"></i></button>`;
+        
+        let urlInput = isPSB ? `<input type="text" class="pl-url w-full rounded-lg p-2 text-[10px] outline-none text-slate-500 bg-slate-200 font-bold border border-slate-300" value="internal:psb" readonly title="URL Sistem Paten">` : `<input type="text" class="pl-url w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.url}">`;
+
+        return `
+        <div class="ed-portal-link bg-white/10 p-3 rounded-xl border border-white/30 relative shadow-sm flex flex-col gap-2">
+            ${trashBtn}
+            <input type="hidden" class="pl-cat" value="${item.category}">
+            <input type="hidden" class="pl-id" value="${idVal}">
+            <div class="grid grid-cols-2 gap-2">
+                <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">Nama Menu</span><input type="text" class="pl-name w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.name}"></div>
+                <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">Icon (Phosphor)</span><input type="text" class="pl-icon w-full rounded-lg p-2 text-[10px] outline-none text-slate-800" value="${item.icon}" placeholder="ph-fill ph-globe"></div>
+            </div>
+            <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">URL / Link ${isPSB ? '<span class="text-amber-300">(Paten Sistem)</span>' : ''}</span>${urlInput}</div>
+            <div class="grid grid-cols-2 gap-2 items-center">
+                <div><span class="block text-[8px] font-bold text-blue-100 mb-0.5">Warna Tombol</span>
+                    <select class="pl-color w-full rounded-lg p-2 text-[10px] outline-none text-slate-800 font-bold">
+                        <option value="blue" ${item.color==='blue'?'selected':''}>Biru</option>
+                        <option value="purple" ${item.color==='purple'?'selected':''}>Ungu</option>
+                        <option value="emerald" ${item.color==='emerald'?'selected':''}>Hijau</option>
+                        <option value="pink" ${item.color==='pink'?'selected':''}>Pink</option>
+                        <option value="red" ${item.color==='red'?'selected':''}>Merah</option>
+                        <option value="orange" ${item.color==='orange'?'selected':''}>Orange</option>
+                        <option value="amber" ${item.color==='amber'?'selected':''}>Kuning</option>
+                        <option value="sky" ${item.color==='sky'?'selected':''}>Biru Muda</option>
+                        <option value="slate" ${item.color==='slate'?'selected':''}>Abu-abu</option>
+                        <option value="teal" ${item.color==='teal'?'selected':''}>Teal (Tosca)</option>
+                        <option value="gray" ${item.color==='gray'?'selected':''}>Hitam/Abu Gelap</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-2 mt-3 cursor-pointer" onclick="const cb=this.querySelector('.pl-hidden'); cb.checked=!cb.checked;">
+                    <input type="checkbox" class="pl-hidden w-4 h-4 rounded pointer-events-none" ${item.is_hidden ? 'checked' : ''}>
+                    <span class="text-[9px] font-bold text-rose-200">Sembunyikan Menu</span>
+                </div>
+            </div>
+        </div>`;
     }
 
     function getKontakHTML(divisi = "", nama = "", wa = "") {
@@ -2069,246 +2203,45 @@
                 if(j.syarat && Array.isArray(j.syarat)) appState.syarat = j.syarat;
                 if(j.kontak && Array.isArray(j.kontak)) appState.kontak = j.kontak;
                 if(j.catatanBiaya && Array.isArray(j.catatanBiaya)) appState.catatanBiaya = j.catatanBiaya;
+                
+                // LANGSUNG TERIMA ARRAY MURNI DARI TABEL BARU
+                if(j.portalLinks && Array.isArray(j.portalLinks) && j.portalLinks.length > 0) appState.portalLinks = j.portalLinks; 
+                
                 applyConfigToDOM(); renderAdminListItems(); showToast("Tersinkronisasi dengan Server!");
             }
         } catch(e) { console.error(e); showToast("Gagal mengambil data", true); }
     }
     
-    function manualTarikData() {
-        showToast("Menarik data terbaru dari server...");
-        fetchFromGAS();
-    }
-
-    function manualKirimData() {
-        simpanKeCloud();
-    }
-
-    // --- LOGIKA KUIS EDUKASI ANAK ---
-    const kuisData = [
-        { q: "Apa rukun Islam yang pertama?", opts: ["Sholat", "Zakat", "Membaca Syahadat", "Puasa"], ans: 2 },
-        { q: "Nabi yang mendapat mukjizat bisa berbicara dengan hewan adalah Nabi...", opts: ["Musa AS", "Ibrahim AS", "Sulaiman AS", "Sulaiman AS"], ans: 3 }, // Mengatur Sulaiman di index 3
-        { q: "Berapa hasil dari 8 + 7?", opts: ["14", "15", "16", "13"], ans: 1 },
-        { q: "Surat pertama dalam Al-Qur'an adalah...", opts: ["Al-Ikhlas", "An-Nas", "Al-Fatihah", "Al-Baqarah"], ans: 2 },
-        { q: "Hewan apa yang melindungi Nabi Muhammad SAW di Gua Tsur?", opts: ["Kucing", "Laba-laba", "Burung Merpati", "Ular"], ans: 1 } // Laba-laba
-    ];
-    // Koreksi data agar opsinya unik
-    kuisData[1].opts = ["Musa AS", "Ibrahim AS", "Yusuf AS", "Sulaiman AS"];
-    kuisData[4].opts = ["Semut", "Laba-laba", "Burung Merpati", "Unta"];
-
-    let currentQIdx = 0;
-    let kuisScore = 0;
-
-    function openKuisModal() {
-        document.getElementById('kuis-modal').classList.remove('hidden');
-        document.getElementById('kuis-modal').classList.add('flex');
-        startKuis();
-    }
-
-    function closeKuisModal() {
-        document.getElementById('kuis-modal').classList.add('hidden');
-        document.getElementById('kuis-modal').classList.remove('flex');
-    }
-
-    function startKuis() {
-        currentQIdx = 0;
-        kuisScore = 0;
-        document.getElementById('kuis-result').classList.add('hidden');
-        document.getElementById('kuis-result').classList.remove('flex');
-        document.getElementById('kuis-arena').classList.remove('hidden');
-        document.getElementById('kuis-arena').classList.add('flex');
-        renderKuisQuestion();
-    }
-
-    function renderKuisQuestion() {
-        const q = kuisData[currentQIdx];
-        document.getElementById('kuis-counter').innerText = `Pertanyaan ${currentQIdx + 1} / ${kuisData.length}`;
-        document.getElementById('kuis-question').innerText = q.q;
-        
-        const optionsContainer = document.getElementById('kuis-options');
-        optionsContainer.innerHTML = '';
-        
-        q.opts.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = "w-full text-left p-3.5 bg-white border-2 border-slate-200 rounded-xl font-bold text-[11px] text-slate-700 hover:border-rose-400 hover:bg-rose-50 transition-all focus:outline-none flex items-center shadow-sm";
-            btn.innerHTML = `<div class="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mr-3 text-[10px] font-black shrink-0">${String.fromCharCode(65 + idx)}</div> <span>${opt}</span>`;
-            btn.onclick = () => handleKuisAnswer(idx, btn);
-            optionsContainer.appendChild(btn);
-        });
-    }
-
-    function handleKuisAnswer(selectedIdx, btnEl) {
-        // Disable all buttons immediately
-        const buttons = document.getElementById('kuis-options').querySelectorAll('button');
-        buttons.forEach(b => b.disabled = true);
-
-        const correctIdx = kuisData[currentQIdx].ans;
-        const iconContainer = btnEl.querySelector('div');
-
-        if (selectedIdx === correctIdx) {
-            // Correct answer UI
-            btnEl.classList.add('border-green-500', 'bg-green-50');
-            iconContainer.classList.remove('bg-slate-100', 'text-slate-500');
-            iconContainer.classList.add('bg-green-500', 'text-white');
-            iconContainer.innerHTML = '<i class="ph-bold ph-check"></i>';
-            kuisScore += 20;
-        } else {
-            // Wrong answer UI
-            btnEl.classList.add('border-red-500', 'bg-red-50');
-            iconContainer.classList.remove('bg-slate-100', 'text-slate-500');
-            iconContainer.classList.add('bg-red-500', 'text-white');
-            iconContainer.innerHTML = '<i class="ph-bold ph-x"></i>';
-            
-            // Highlight correct answer
-            buttons[correctIdx].classList.add('border-green-500', 'bg-green-50');
-            const correctIcon = buttons[correctIdx].querySelector('div');
-            correctIcon.classList.remove('bg-slate-100', 'text-slate-500');
-            correctIcon.classList.add('bg-green-500', 'text-white');
-            correctIcon.innerHTML = '<i class="ph-bold ph-check"></i>';
-        }
-
-        // Proceed to next question or show result after short delay
-        setTimeout(() => {
-            currentQIdx++;
-            if (currentQIdx < kuisData.length) {
-                renderKuisQuestion();
-            } else {
-                showKuisResult();
-            }
-        }, 1200);
-    }
-
-    function showKuisResult() {
-        document.getElementById('kuis-arena').classList.add('hidden');
-        document.getElementById('kuis-arena').classList.remove('flex');
-        
-        document.getElementById('kuis-result').classList.remove('hidden');
-        document.getElementById('kuis-result').classList.add('flex');
-        
-        document.getElementById('kuis-score').innerText = kuisScore;
-        
-        let feedback = "";
-        if (kuisScore === 100) feedback = "Masya Allah, Sempurna! Sangat cerdas!";
-        else if (kuisScore >= 80) feedback = "Luar biasa! Pengetahuanmu sangat bagus.";
-        else if (kuisScore >= 60) feedback = "Wah hebat, sedikit lagi sempurna!";
-        else feedback = "Terus semangat belajar dan mencoba lagi ya!";
-        
-        document.getElementById('kuis-feedback').innerText = feedback;
-    }
-
-    // --- LOGIKA KALKULATOR GIZI (BMI) ---
-    function openGiziModal() {
-        document.getElementById('gizi-modal').classList.remove('hidden');
-        document.getElementById('gizi-modal').classList.add('flex');
-        document.getElementById('gizi-bb').value = '';
-        document.getElementById('gizi-tb').value = '';
-        document.getElementById('gizi-result-area').classList.add('hidden');
-        document.getElementById('gizi-result-area').classList.remove('flex');
-    }
-
-    function closeGiziModal() {
-        document.getElementById('gizi-modal').classList.add('hidden');
-        document.getElementById('gizi-modal').classList.remove('flex');
-    }
-
-    function hitungGizi() {
-        const bb = parseFloat(document.getElementById('gizi-bb').value);
-        const tb_cm = parseFloat(document.getElementById('gizi-tb').value);
-
-        if (!bb || !tb_cm || bb <= 0 || tb_cm <= 0) {
-            showToast("Masukkan berat dan tinggi dengan benar!", true);
-            return;
-        }
-
-        // Konversi cm ke meter
-        const tb_m = tb_cm / 100;
-        // Hitung BMI: Berat (kg) / (Tinggi (m) x Tinggi (m))
-        const bmi = (bb / (tb_m * tb_m)).toFixed(1);
-
-        let status = "";
-        let colorClass = "";
-        let desc = "";
-
-        // Klasifikasi Umum BMI Anak/Remaja (Disederhanakan)
-        if (bmi < 15) {
-            status = "KURUS (Underweight)";
-            colorClass = "bg-amber-100 text-amber-700 border-amber-300";
-            desc = "Berat badan Ananda kurang dari standar ideal. Perbanyak asupan makanan bergizi seimbang, protein, dan vitamin. Konsultasikan dengan dokter jika perlu.";
-        } else if (bmi >= 15 && bmi < 22) {
-            status = "NORMAL (Ideal)";
-            colorClass = "bg-emerald-100 text-emerald-700 border-emerald-300";
-            desc = "Alhamdulillah! Pertumbuhan Ananda berada pada status gizi yang baik dan ideal. Pertahankan pola makan sehat dan aktivitas fisik rutin.";
-        } else if (bmi >= 22 && bmi < 25) {
-            status = "GEMUK (Overweight)";
-            colorClass = "bg-orange-100 text-orange-700 border-orange-300";
-            desc = "Berat badan Ananda sedikit berlebih. Mari dorong Ananda untuk lebih aktif bergerak dan membatasi konsumsi makanan manis/junk food berlebih.";
-        } else {
-            status = "OBESITAS";
-            colorClass = "bg-red-100 text-red-700 border-red-300";
-            desc = "Berat badan Ananda tergolong Obesitas. Ini perlu perhatian khusus. Disarankan mengatur porsi makan, perbanyak sayur & buah, serta rutin olahraga.";
-        }
-
-        // Update UI
-        document.getElementById('gizi-score').innerText = bmi;
-        
-        const badge = document.getElementById('gizi-badge');
-        badge.className = `px-4 py-1.5 rounded-lg font-black text-[14px] uppercase tracking-wide mb-2 shadow-sm border ${colorClass}`;
-        badge.innerText = status;
-        
-        document.getElementById('gizi-desc').innerText = desc;
-
-        document.getElementById('gizi-result-area').classList.remove('hidden');
-        document.getElementById('gizi-result-area').classList.add('flex');
-    }
-
-    function downloadExcel() {
-        if (typeof XLSX === 'undefined') { showToast("Library Excel gagal dimuat!", true); return; }
-        showToast("Mengekspor ke Excel...");
-        try {
-            const wb = XLSX.utils.book_new();
-            let data = (appState.pendaftar && appState.pendaftar.length > 0) ? appState.pendaftar : [{ ID_Daftar: "REG000001", Waktu_Daftar: "01/01/2026", Jalur: "BARU", Tahun_Ajaran: "2026/2027", Program: "UNGGULAN", NISN: "0000000000", NIK_Anak: "1234567890123456", Nama_Siswa: "CONTOH NAMA SISWA", L_P: "L", Status_Seleksi: "Menunggu" }];
-            const ws = XLSX.utils.json_to_sheet(data);
-            XLSX.utils.book_append_sheet(wb, ws, "Data Pendaftar");
-            XLSX.writeFile(wb, "Data_Pendaftar_AlKautsar.xlsx");
-        } catch (error) {
-            console.error("Excel Download Error:", error);
-            showToast("Gagal membuat Excel!", true);
-        }
-    }
-
-    function uploadExcel(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        if (typeof XLSX === 'undefined') { showToast("Library Excel gagal dimuat!", true); return; }
-        
-        showToast("Membaca file Excel...");
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                const data = new Uint8Array(e.target.result);
-                const wb = XLSX.read(data, {type: 'array'});
-                const wsname = wb.SheetNames[0];
-                const ws = wb.Sheets[wsname];
-                const json = XLSX.utils.sheet_to_json(ws);
-                
-                if (json && json.length > 0) {
-                    appState.pendaftar = json;
-                    renderAdminListItems();
-                    showToast(json.length + " Data Excel dimuat!");
-                } else {
-                    showToast("File Excel kosong / format salah!", true);
-                }
-            } catch (error) {
-                console.error("Excel Upload Error:", error);
-                showToast("Gagal memproses Excel!", true);
-            }
-        };
-        reader.readAsArrayBuffer(file);
-        event.target.value = ''; // Reset input agar bisa upload file yang sama lagi
-    }
-
     // Boot sequence
     setTimeout(() => { document.getElementById('splash-screen-baru').classList.add('opacity-0', 'invisible'); }, 3500);
     applyConfigToDOM(); fetchFromGAS();
+
+    // --- PWA INSTALLATION HANDLER ---
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const installBtn = document.getElementById('pwa-install-btn');
+        if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
+    });
+
+    function installPWA() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            deferredPrompt = null;
+            const installBtn = document.getElementById('pwa-install-btn');
+            if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
+            if(choiceResult.outcome === 'accepted') showToast("Menyiapkan Instalasi...");
+        });
+    }
+
+    window.addEventListener('appinstalled', (evt) => {
+        const installBtn = document.getElementById('pwa-install-btn');
+        if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
+        showToast("AlkaApp berhasil diinstal!");
+    });
+
 </script>
 </body>
 </html>
