@@ -10,7 +10,6 @@
     <meta name="apple-mobile-web-app-title" content="My Alka">
     <meta name="theme-color" content="#1e40af">
     <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png">
-    <link rel="manifest" href='data:application/manifest+json,{"name":"My Alka","short_name":"My Alka","start_url":".","display":"standalone","background_color":"#e2e8f0","theme_color":"#1e40af","icons":[{"src":"https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png","sizes":"512x512","type":"image/png"}]}'>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -902,7 +901,7 @@
 </div>
 
 <!-- Tombol Install Aplikasi (PWA Capsule) Kanan Atas -->
-    <button id="pwa-install-btn" onclick="installPWA()" class="fixed top-5 right-4 z-[5000] flex items-center gap-2.5 bg-slate-900/90 backdrop-blur-xl px-2 py-1.5 pr-4 rounded-full shadow-2xl border border-white/10 transition-all hover:scale-105 active:scale-95 focus:outline-none group">
+    <button id="pwa-install-btn" onclick="installPWA()" class="fixed top-5 right-4 z-[5000] hidden items-center gap-2.5 bg-slate-900/90 backdrop-blur-xl px-2 py-1.5 pr-4 rounded-full shadow-2xl border border-white/10 transition-all hover:scale-105 active:scale-95 focus:outline-none group">
         <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-inner group-hover:animate-pulse shrink-0">
             <i class="ph-bold ph-download-simple text-white text-base"></i>
         </div>
@@ -2291,7 +2290,7 @@
     applyConfigToDOM(); fetchFromGAS();
 
     // ==========================================
-    // MESIN PWA INSTAN INSTALL (KLONING DARI TINTA)
+    // MESIN PWA INSTAN INSTALL (KLONING TINTA)
     // ==========================================
     let deferredPrompt;
     let isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -2305,28 +2304,42 @@
         });
         document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="data:application/manifest+json;charset=utf-8,${encodeURIComponent(manifestStr)}">`);
 
-        // Daftarkan SW persis seperti TINTA dengan penangkap error diam (Silent Catch)
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Engine Bypassed Silently"));
+            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Bypassed Silently"));
         }
-    } catch(e) {}
+    } catch(err) {}
 
-    // KUNCI UTAMA: Tangkap Sinyal Izin Install Asli Chrome
+    // KUNCI: Kapsul HANYA MUNCUL saat sistem HP / Chrome benar-benar sudah siap!
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        if (!isAppInstalled) {
-            const installBtn = document.getElementById('pwa-install-btn');
-            if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
+        const installBtn = document.getElementById('pwa-install-btn');
+        if(installBtn && !isAppInstalled) { 
+            installBtn.classList.remove('hidden'); 
+            installBtn.classList.add('flex'); 
         }
     });
 
-    // Deteksi Jika Sukses Terinstal
+    // Murni hanya memanggil jendela instalasi dari HP (TANPA ALERT/CERAMAH)
+    function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    const installBtn = document.getElementById('pwa-install-btn');
+                    if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
+                    showToast("Sedang Menginstal My Alka...");
+                }
+                deferredPrompt = null;
+            });
+        }
+    }
+
     window.addEventListener('appinstalled', () => {
         isAppInstalled = true;
         const installBtn = document.getElementById('pwa-install-btn');
         if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
-        showToast("My Alka berhasil diinstal ke HP Anda!");
+        showToast("My Alka berhasil diinstal!");
     });
 
     // Fungsi Pop-Up Asli saat kapsul diklik
