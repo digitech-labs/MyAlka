@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <script>
-        window.tailwind = window.tailwind || {};
+        window.tailwind = window.tailwind || {}
         tailwind.config = {
             theme: {
                 extend: {
@@ -891,6 +891,13 @@
         </section>
     </div>
 </div>
+
+<!-- Tombol Install Aplikasi (PWA) -->
+    <button id="pwa-install-btn" onclick="installPWA()" class="fixed bottom-24 right-5 z-[5000] flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-3 rounded-full shadow-[0_10px_25px_rgba(245,158,11,0.6)] border-2 border-white animate-bounce focus:outline-none transition-transform hover:scale-105">
+        <i class="ph-bold ph-download-simple text-xl"></i>
+        <span class="text-[11px] font-black tracking-wide">Install AlkaApp</span>
+    </button>
+
 
 <script>
     // PWA & Routing initialization
