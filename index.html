@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Super App SDIT Al-Kautsar</title>
-    
+    <!-- Konfigurasi PWA (Nama & Icon Aplikasi di Layar HP) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My Alka">
+    <meta name="theme-color" content="#1e40af">
+    <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png">
+    <link rel="manifest" href='data:application/manifest+json,{"name":"My Alka","short_name":"My Alka","start_url":".","display":"standalone","background_color":"#e2e8f0","theme_color":"#1e40af","icons":[{"src":"https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png","sizes":"192x192","type":"image/png"},{"src":"https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png","sizes":"512x512","type":"image/png"}]}'>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -354,14 +361,14 @@
             <div class="absolute bottom-[10%] left-[-20%] w-80 h-80 bg-teal-600/20 rounded-full blur-[80px] pointer-events-none"></div>
 
             <!-- Header -->
-            <div class="pt-12 pb-6 px-6 flex flex-col items-center relative z-10 shrink-0">
-                <div class="relative w-36 h-36 mb-4 animate-float flex justify-center items-center">
+            <div class="pt-6 pb-2 px-6 flex flex-col items-center relative z-10 shrink-0">
+                <div class="relative w-44 h-16 flex justify-center items-center">
                     <img src="https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/alkaspg.png" alt="Logo Sekolah" class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
                 </div>
                 
-                <div class="w-full max-w-[320px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-center shadow-lg relative overflow-hidden group hover:bg-white/10 transition-colors">
-                    <i class="ph-fill ph-quotes text-white/5 text-5xl absolute -top-1 -left-2 transform -scale-x-100"></i>
-                    <p id="portal-quote" class="text-[11px] font-medium text-slate-300 italic leading-relaxed relative z-10">"Memuat kata-kata penuh makna..."</p>
+                <div class="w-full max-w-[320px] bg-gradient-to-r from-cyan-500 to-blue-600 backdrop-blur-md border-2 border-cyan-200/50 rounded-2xl p-4 text-center shadow-[0_0_20px_rgba(6,182,212,0.4)] relative overflow-hidden group hover:scale-105 transition-transform mt-3">
+                    <i class="ph-fill ph-quotes text-white/20 text-6xl absolute -top-2 -left-2 transform -scale-x-100"></i>
+                    <p id="portal-quote" class="text-[12px] font-bold text-white italic leading-relaxed relative z-10 drop-shadow-md">"Memuat pantun lucu..."</p>
                 </div>
             </div>
 
@@ -432,24 +439,27 @@
             </div>
 
             <!-- Floating Bottom Navigation -->
-            <div class="absolute bottom-6 left-4 right-4 z-50">
-                <div class="bg-[#1e293b]/90 backdrop-blur-xl rounded-[2rem] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex justify-between items-center p-2 relative overflow-hidden">
-                    <div id="nav-indicator" class="absolute w-[calc(33.33%-4px)] h-[calc(100%-16px)] bg-blue-500/20 rounded-[1.5rem] transition-transform duration-500 ease-out left-2 top-2 pointer-events-none border border-blue-400/30"></div>
+            <div class="absolute bottom-6 left-4 right-4 z-[500]">
+                <div class="bg-[#1e293b]/90 backdrop-blur-xl rounded-[2rem] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-1.5 relative overflow-hidden">
+                    <div class="flex relative w-full h-full">
+                        <!-- Indikator Bergerak (Logika Persen Anti-Error) -->
+                        <div id="nav-indicator" class="absolute top-0 bottom-0 left-[0%] w-[33.33%] bg-blue-500/20 border border-blue-400/30 rounded-[1.5rem] transition-all duration-300 ease-out pointer-events-none"></div>
 
-                    <button onclick="switchPortalTab('dashboard', 0)" id="btn-portal-dashboard" class="flex-1 flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
-                        <i class="ph-fill ph-squares-four text-[22px] mb-1 text-blue-400 group-hover:scale-110 transition-transform drop-shadow-md"></i>
-                        <span class="text-[9px] font-black text-white tracking-wide uppercase">Dashboard</span>
-                    </button>
-                    
-                    <button onclick="switchPortalTab('pengampu', 1)" id="btn-portal-pengampu" class="flex-1 flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
-                        <i class="ph-fill ph-users-three text-[22px] mb-1 text-slate-500 group-hover:text-amber-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-[9px] font-bold text-slate-400 tracking-wide uppercase group-hover:text-white transition-colors">Pengampu</span>
-                    </button>
-                    
-                    <button onclick="navigate('admin-dashboard', true)" class="flex-1 flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
-                        <i class="ph-fill ph-shield-check text-[22px] mb-1 text-slate-500 group-hover:text-rose-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-[9px] font-bold text-slate-400 tracking-wide uppercase group-hover:text-white transition-colors">Admin</span>
-                    </button>
+                        <button id="btn-portal-dashboard" onclick="switchPortalTab('dashboard', 0)" class="w-[33.33%] flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
+                            <i class="ph-fill ph-squares-four text-[22px] mb-1 text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)] transition-transform group-hover:scale-110"></i>
+                            <span class="text-[9px] font-black text-white tracking-wide uppercase transition-colors">Dashboard</span>
+                        </button>
+                        
+                        <button id="btn-portal-pengampu" onclick="switchPortalTab('pengampu', 1)" class="w-[33.33%] flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
+                            <i class="ph-fill ph-users-three text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-amber-400"></i>
+                            <span class="text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white">Pengampu</span>
+                        </button>
+                        
+                        <button id="btn-portal-admin" onclick="switchPortalTab('admin', 2); setTimeout(() => navigate('admin-dashboard', true), 350);" class="w-[33.33%] flex flex-col items-center justify-center py-2.5 relative z-10 transition-all duration-300 group outline-none">
+                            <i class="ph-fill ph-shield-check text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-rose-400"></i>
+                            <span class="text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white">Admin</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1229,32 +1239,56 @@
     }
 
     function switchPortalTab(tabName, index) {
-        document.getElementById('portal-tab-dashboard').classList.add('hidden');
-        document.getElementById('portal-tab-pengampu').classList.add('hidden');
+        let tabDash = document.getElementById('portal-tab-dashboard');
+        let tabPeng = document.getElementById('portal-tab-pengampu');
+        if(tabDash) tabDash.classList.add('hidden');
+        if(tabPeng) tabPeng.classList.add('hidden');
         
         const btnDash = document.getElementById('btn-portal-dashboard');
         const btnPengampu = document.getElementById('btn-portal-pengampu');
+        const btnAdmin = document.getElementById('btn-portal-admin');
         const indicator = document.getElementById('nav-indicator');
         
-        if(indicator) indicator.style.transform = `translateX(${index * 100}%)`;
+        // 1. GESER KAPSUL DENGAN LOGIKA PERSENTASE MURNI (100% Anti Error & Anti Mogok)
+        if (indicator) {
+            indicator.style.left = (index * 33.33) + '%';
+        }
 
-        btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[20px] mb-1 transition-transform text-slate-500 group-hover:text-slate-400 group-hover:scale-110";
-        btnDash.querySelector('span').className = "text-[8px] font-bold text-slate-500 tracking-wider uppercase transition-colors group-hover:text-slate-400";
+        // 2. MATIKAN SEMUA WARNA TOMBOL (JADI ABU-ABU)
+        if(btnDash) {
+            btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-blue-400";
+            btnDash.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white";
+        }
+        if(btnPengampu) {
+            btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-amber-400";
+            btnPengampu.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white";
+        }
+        if(btnAdmin) {
+            btnAdmin.querySelector('i').className = "ph-fill ph-shield-check text-[22px] mb-1 text-slate-500 transition-transform group-hover:scale-110 group-hover:text-rose-400";
+            btnAdmin.querySelector('span').className = "text-[9px] font-bold text-slate-500 tracking-wide uppercase transition-colors group-hover:text-white";
+        }
 
-        btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[20px] mb-1 transition-transform text-slate-500 group-hover:text-slate-400 group-hover:scale-110";
-        btnPengampu.querySelector('span').className = "text-[8px] font-bold text-slate-500 tracking-wider uppercase transition-colors group-hover:text-slate-400";
-
-        if(tabName === 'dashboard') {
-            document.getElementById('portal-tab-dashboard').classList.remove('hidden');
-            btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 transition-transform text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)] group-hover:scale-110";
-            btnDash.querySelector('span').className = "text-[9px] font-black text-white tracking-wider uppercase transition-colors";
-        } else if(tabName === 'pengampu') {
-            document.getElementById('portal-tab-pengampu').classList.remove('hidden');
-            btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 transition-transform text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)] group-hover:scale-110";
-            btnPengampu.querySelector('span').className = "text-[9px] font-black text-white tracking-wider uppercase transition-colors";
+        // 3. NYALAKAN WARNA TOMBOL YANG DIPILIH SAJA
+        if (tabName === 'dashboard') {
+            if(tabDash) tabDash.classList.remove('hidden');
+            if(btnDash) {
+                btnDash.querySelector('i').className = "ph-fill ph-squares-four text-[22px] mb-1 text-blue-400 drop-shadow-[0_0_5px_rgba(96,165,250,0.5)] transition-transform group-hover:scale-110";
+                btnDash.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors";
+            }
+        } else if (tabName === 'pengampu') {
+            if(tabPeng) tabPeng.classList.remove('hidden');
+            if(btnPengampu) {
+                btnPengampu.querySelector('i').className = "ph-fill ph-users-three text-[22px] mb-1 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)] transition-transform group-hover:scale-110";
+                btnPengampu.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors";
+            }
+        } else if (tabName === 'admin') {
+            if(btnAdmin) {
+                btnAdmin.querySelector('i').className = "ph-fill ph-shield-check text-[22px] mb-1 text-rose-400 drop-shadow-[0_0_5px_rgba(244,63,94,0.5)] transition-transform group-hover:scale-110";
+                btnAdmin.querySelector('span').className = "text-[9px] font-black text-white tracking-wide uppercase transition-colors";
+            }
         }
     }
-
+  
     let GAS_URL = "https://script.google.com/macros/s/AKfycbyEUFE2bkoAarezxR3x63KznrJM6xodtQgpsKGy1GLi4qZWlk1prBay7HIK8QWWaFva/exec"; 
     
     let appState = {
@@ -1264,7 +1298,8 @@
             TA_2: "2027/2028", KU_2: "112", KI_2: "40",
             TA_3: "2028/2029", KU_3: "112", KI_3: "40",
             TA_4: "2029/2030", KU_4: "112", KI_4: "40",
-            Quotes_Portal: "Ilmu adalah cahaya yang menerangi jalan.\nAdab sebelum ilmu, ilmu sebelum amal.\nGenerasi tangguh berakhlak mulia.\nBelajar hari ini, memimpin esok hari.",
+            Motivasi_Splash: "Pendidikan adalah senjata paling mematikan untuk mengubah dunia.\n\nIlmu adalah cahaya yang menerangi jalan. Adab sebelum ilmu, ilmu sebelum amal.\n\nJangan pernah berhenti belajar, karena hidup tak pernah berhenti mengajarkan.\n\nMasa depan adalah milik mereka yang menyiapkan hari ini.\n\nBukan seberapa pintar kamu, tapi seberapa keras kamu mau berusaha.\n\nKesalahan adalah bukti bahwa kamu sedang mencoba. Jangan takut salah!\n\nBarangsiapa tidak mau merasakan pahitnya belajar, ia akan merasakan hinanya kebodohan sepanjang hidupnya.\n\nSetiap hari adalah kesempatan baru untuk menjadi lebih baik dari kemarin.\n\nPercayalah pada dirimu sendiri, kamu lebih pintar dari yang kamu pikirkan.\n\nGenerasi tangguh berakhlak mulia. Belajar hari ini, memimpin esok hari.",
+            Pantun_Portal: "Makan mendoan di pinggir jalan,\nHati deg-degan melihat mantan.\nBiar PR numpuk setinggi awan,\nTetap senyum hadapi kenyataan!\n\nIkan hiu makan tomat,\nI love you murid-murid terhormat!\nJangan lupa kerjakan tugas,\nBiar nilai makin gaspol!\n\nKe pasar beli buah duku,\nPulangnya mampir beli jamu.\nHai kamu yang sedang buka buku,\nSemangat terus kejar mimpimu!\n\nBeli es krim rasa stroberi,\nMakannya bareng sama si nyai.\nWalau matematika bikin ngeri,\nTetap santuy dan jangan lari!\n\nAda kucing ngejar tikus,\nTikusnya sembunyi di dalam kardus.\nBelajar itu harus fokus,\nBiar cita-cita gak putus-putus!\n\nJalan-jalan ke kota Blitar,\nJangan lupa beli rambutan.\nSiapa yang rajin dan pintar,\nPasti disayang sama teman-teman!\n\nMasak air biar matang,\nAirnya diminum sama si mamat.\nSelamat pagi, selamat datang,\nSemoga hari ini penuh berkat!\n\nAnak kancil belajar lompat,\nLompatnya jauh ke tepi empang.\nWalau tugas datang merapat,\nHati riang bikin semua gampang!\n\nBuah semangka buah manggis,\nBelinya di pasar kaget.\nDaripada kamu duduk menangis,\nMending belajar biar makin kece banget!\n\nBurung pipit burung kenari,\nHinggap sebentar di atas dahan.\nJangan lupa senyum hari ini,\nTetap semangat cari tambahan (ilmu)!",
             List_Unggulan_Depan: "Qur’anic & Talent Excellence\nTahsin\nTahfidz\nAdab",
             Desc_Unggulan_Popup: "Menumbuhkan generasi yang unggul dalam Al-Qur’an, beradab, dan berkembang sesuai potensi terbaiknya.",
             List_Unggulan_Popup: "Tahsin Al-Qur’an\nTahfidz target 3 juz\nPembiasaan adab Islami\nPembinaan olimpiade dan akademik",
@@ -1286,12 +1321,22 @@
             if(document.getElementById('dyn-judul-web')) document.getElementById('dyn-judul-web').innerText = appState.config.Judul_Web || "P S B";
             if(document.getElementById('dyn-sub-judul')) document.getElementById('dyn-sub-judul').innerText = appState.config.Sub_Judul || "Penerimaan Siswa Baru";
 
-            let quotesRaw = appState.config.Quotes_Portal || "Ilmu adalah cahaya.\nBeradab sebelum berilmu.";
-            let quotesArr = quotesRaw.split('\n').filter(q => q.trim() !== '');
-            if(quotesArr.length > 0) {
-                let randQuote = quotesArr[Math.floor(Math.random() * quotesArr.length)];
-                // Mengubah semua elemen ber-ID portal-quote sekaligus (Layar Loading & Halaman Utama)
-                document.querySelectorAll('[id="portal-quote"]').forEach(el => el.innerText = '"' + randQuote + '"');
+            // Pisahkan Motivasi (Layar Splash) dan Pantun (Layar Portal)
+            let motRaw = appState.config.Motivasi_Splash || "Adab sebelum ilmu, ilmu sebelum amal.";
+            let panRaw = appState.config.Pantun_Portal || "Ikan hiu makan tomat,\nJangan lupa kerjakan tugas!";
+            
+            let motArr = motRaw.split(/\n\s*\n/).filter(q => q.trim() !== '');
+            let panArr = panRaw.split(/\n\s*\n/).filter(q => q.trim() !== '');
+            
+            if(motArr.length > 0) {
+                let randSplash = motArr[Math.floor(Math.random() * motArr.length)];
+                let splashEl = document.querySelector('#splash-screen-baru [id="portal-quote"]');
+                if(splashEl) splashEl.innerHTML = '"' + randSplash.replace(/\n/g, '<br>') + '"';
+            }
+            if(panArr.length > 0) {
+                let randPortal = panArr[Math.floor(Math.random() * panArr.length)];
+                let portalEl = document.querySelector('#view-portal [id="portal-quote"]');
+                if(portalEl) portalEl.innerHTML = '"' + randPortal.replace(/\n/g, '<br>') + '"';
             }
 
             let uDepanArr = (appState.config.List_Unggulan_Depan || "").split('\n').filter(x => x.trim() !== '').slice(0, 4);
@@ -2000,8 +2045,11 @@
         <!-- AREA PENGATURAN PORTAL -->
         <div id="editor-portal" class="hidden space-y-5 animate-fade-in">
             <div class="bg-slate-800 p-4 rounded-2xl shadow-lg border-2 border-slate-600 text-white">
-                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-slate-600 pb-2"><i class="ph-fill ph-quotes mr-1.5 text-lg text-amber-400"></i> Pantun / Motivasi Portal</h3>
-                <div><label class="text-[10px] font-bold text-slate-400 mb-1 block">Tulis beberapa pantun/quotes (Pisahkan dengan baris baru untuk diacak sistem)</label><textarea id="ed-quotes" class="w-full border-2 border-slate-600 rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-24 resize-none shadow-inner">${c.Quotes_Portal||''}</textarea></div>
+                <h3 class="font-black text-xs text-white mb-3 flex items-center border-b border-slate-600 pb-2"><i class="ph-fill ph-quotes mr-1.5 text-lg text-amber-400"></i> Motivasi & Pantun</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[10px] font-bold text-slate-400 mb-1 block">Motivasi Splash Screen (Pisahkan tiap poin dengan Enter 2x)</label><textarea id="ed-motivasi" class="w-full border-2 border-slate-600 rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-24 resize-none shadow-inner">${c.Motivasi_Splash||''}</textarea></div>
+                    <div><label class="text-[10px] font-bold text-slate-400 mb-1 block">Pantun Lucu Portal (Pisahkan tiap pantun dengan Enter 2x)</label><textarea id="ed-pantun" class="w-full border-2 border-slate-600 rounded-xl p-2.5 text-[11px] font-medium text-slate-800 outline-none bg-white h-24 resize-none shadow-inner">${c.Pantun_Portal||''}</textarea></div>
+                </div>
             </div>
 
             <!-- Editor Menu Publik -->
@@ -2054,8 +2102,9 @@
         
         appState.config.Judul_Web = document.getElementById('ed-judul').value; 
         appState.config.Sub_Judul = document.getElementById('ed-sub').value; 
-        appState.config.Quotes_Portal = document.getElementById('ed-quotes').value; 
-        
+        appState.config.Motivasi_Splash = document.getElementById('ed-motivasi').value; 
+        appState.config.Pantun_Portal = document.getElementById('ed-pantun').value;
+
         appState.config.TA_1 = document.getElementById('ed-ta-1').value; appState.config.KU_1 = document.getElementById('ed-ku-1').value; appState.config.KI_1 = document.getElementById('ed-ki-1').value;
         appState.config.TA_2 = document.getElementById('ed-ta-2').value; appState.config.KU_2 = document.getElementById('ed-ku-2').value; appState.config.KI_2 = document.getElementById('ed-ki-2').value;
         appState.config.TA_3 = document.getElementById('ed-ta-3').value; appState.config.KU_3 = document.getElementById('ed-ku-3').value; appState.config.KI_3 = document.getElementById('ed-ki-3').value;
@@ -2228,42 +2277,61 @@
     setTimeout(() => { document.getElementById('splash-screen-baru').classList.add('opacity-0', 'invisible'); }, 3500);
     applyConfigToDOM(); fetchFromGAS();
 
-    // --- PWA INSTALLATION HANDLER ---
+    // ==========================================
+    // MESIN PWA INSTAN INSTALL (ADAPTASI TINTA)
+    // ==========================================
     let deferredPrompt;
+    let isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+    // 1. Suntik Manifest Dinamis (Rahasia TINTA)
+    try {
+        const manifestStr = JSON.stringify({
+            "name": "My Alka", "short_name": "My Alka",
+            "start_url": window.location.pathname || "/", "display": "standalone",
+            "background_color": "#0f172a", "theme_color": "#1e40af",
+            "icons": [{"src": "https://cdn.jsdelivr.net/gh/digitech-labs/PSB@main/MyAlka.png", "sizes": "512x512", "type": "image/png"}]
+        });
+        document.head.insertAdjacentHTML('beforeend', `<link rel="manifest" href="data:application/manifest+json;charset=utf-8,${encodeURIComponent(manifestStr)}">`);
+
+        // 2. Pancing Service Worker Bawaan Browser
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(e => console.log("PWA Engine Bypassed Silently"));
+        }
+    } catch(e) {}
+
+    // Tangkap Sinyal Izin Install dari Chrome
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        const installBtn = document.getElementById('pwa-install-btn');
-        if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
+        // Munculkan kapsul hanya jika aplikasi belum diinstal
+        if (!isAppInstalled) {
+            const installBtn = document.getElementById('pwa-install-btn');
+            if(installBtn) { installBtn.classList.remove('hidden'); installBtn.classList.add('flex'); }
+        }
     });
 
+    // Fungsi Saat Kapsul Diklik
     function installPWA() {
-        const btn = document.getElementById('pwa-install-btn');
-        
-        // JIKA DI CANVAS (Belum ada Prompt Asli dari HP) -> Jalankan Simulasi Visual
-        if (!deferredPrompt) {
-            btn.innerHTML = `
-                <div class="w-9 h-9 bg-green-500 rounded-full flex items-center justify-center shadow-inner"><i class="ph-bold ph-check text-white text-lg"></i></div>
-                <div class="flex flex-col text-left"><span class="text-[8px] font-black text-green-300 uppercase tracking-widest leading-none mb-1">Simulasi Selesai</span><span class="text-[11px] font-bold text-white leading-none">Berhasil Diinstal!</span></div>
-            `;
-            btn.classList.add('bg-green-900/90', 'border-green-500/50');
-            showToast("Berfungsi! (Instalasi asli otomatis aktif saat di-Hosting ke GitHub)");
-            
-            // Sembunyikan setelah 3 detik
-            setTimeout(() => { btn.style.display = 'none'; }, 3000);
-            return;
+        if (deferredPrompt) {
+            // Panggil Jendela Instalasi Asli Android/Chrome
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    const installBtn = document.getElementById('pwa-install-btn');
+                    if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
+                    showToast("Menyiapkan Instalasi...");
+                }
+                deferredPrompt = null;
+            });
+        } else {
+            // Fallback Peringatan jika diblokir oleh Canvas/Live Preview
+            alert("⚠️ INSTALL INSTAN DIBLOKIR BROWSER!\n\nKarena Anda membuka aplikasi ini di dalam Editor/Canvas, sistem keamanan Chrome menolak memunculkan jendela instalasi.\n\nSistem ini akan bekerja 100% otomatis seperti aplikasi asli setelah file HTML ini Anda Upload ke GitHub Pages.");
         }
-        
-        // JIKA DI HOSTING ASLI (HP) -> Munculkan Jendela Install Bawaan Android/Chrome
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            deferredPrompt = null;
-            if(btn) { btn.style.display = 'none'; }
-            if(choiceResult.outcome === 'accepted') showToast("Menyiapkan Instalasi AlkaApp...");
-        });
     }
 
+    // Deteksi Jika Sukses Terinstal
     window.addEventListener('appinstalled', (evt) => {
+        isAppInstalled = true;
         const installBtn = document.getElementById('pwa-install-btn');
         if(installBtn) { installBtn.classList.add('hidden'); installBtn.classList.remove('flex'); }
         showToast("AlkaApp berhasil diinstal!");
