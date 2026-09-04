@@ -1589,31 +1589,169 @@
         const a = document.createElement('a'); a.href = url; a.download = `Brosur_${index}_AlKautsar.png`; a.target = '_blank'; document.body.appendChild(a); a.click(); document.body.removeChild(a); showToast("Brosur " + index + " sedang diunduh...");
     }
 
-    const inpSearch = document.getElementById('inp-sekolah-search'); const resultsBox = document.getElementById('school-results');
-    const autoNpsn = document.getElementById('auto-npsn'); const autoProv = document.getElementById('auto-prov'); const autoKab = document.getElementById('auto-kab'); const autoKec = document.getElementById('auto-kec');
+    const inpSearch = document.getElementById('inp-sekolah-search'); 
+    const resultsBox = document.getElementById('school-results');
     let searchTimeout;
+
+    const getEl = (id) => document.getElementById(id);
+
+    // Cache API Wilayah sejak awal agar "Ketik Manual" instan
+    let cachedProv = null;
+    fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json').then(r=>r.json()).then(d => cachedProv = d).catch(()=>{});
 
     if(inpSearch) {
         inpSearch.addEventListener('input', function(e) {
-            const keyword = e.target.value.trim(); clearTimeout(searchTimeout); autoNpsn.value = ''; autoProv.value = ''; autoKab.value = ''; autoKec.value = '';
+            const keyword = e.target.value.trim(); clearTimeout(searchTimeout); 
+            
+            let aNpsn = getEl('auto-npsn'); let aProv = getEl('auto-prov'); let aKab = getEl('auto-kab'); let aKec = getEl('auto-kec');
+            if(aNpsn) aNpsn.value = ''; if(aProv) aProv.value = ''; if(aKab) aKab.value = ''; if(aKec) aKec.value = '';
+            
+            [aNpsn, aProv, aKab, aKec].forEach(el => { if(el){ el.disabled = true; el.classList.add('bg-slate-100/50'); } });
+
             if (keyword.length < 3) { resultsBox.classList.add('hidden'); return; }
-            searchTimeout = setTimeout(async () => {
-                try {
-                    const res = await fetch('https://api-sekolah-kita.pages.dev/api/sekolah?limit=15&keyword=' + encodeURIComponent(keyword)); const json = await res.json(); resultsBox.innerHTML = '';
-                    if (json.status === 'success' && json.data && json.data.length > 0) {
-                        json.data.forEach(s => {
-                            const div = document.createElement('div'); div.className = "p-3 mx-1 my-1.5 bg-orange-50/90 border border-orange-300 rounded-xl hover:bg-orange-100 hover:shadow-md cursor-pointer transition-all";
-                            div.innerHTML = `<p class="font-bold text-[11px] text-slate-900 mb-0.5 leading-tight">${s.nama}</p><p class="text-[9px] text-slate-600">Kec. ${s.nama_kecamatan ? s.nama_kecamatan.replace('KEC. ','') : '-'} | NPSN: <b class="text-orange-700">${s.npsn || '-'}</b></p>`;
-                            div.onclick = () => { inpSearch.value = s.nama; autoNpsn.value = s.npsn || '-'; autoProv.value = s.nama_provinsi || '-'; autoKab.value = s.nama_kabupaten || '-'; autoKec.value = s.nama_kecamatan || '-'; resultsBox.classList.add('hidden'); showToast("Sekolah dipilih!"); };
-                            resultsBox.appendChild(div);
-                        });
-                        const manualDiv = document.createElement('div'); manualDiv.className = "p-3 text-center border-t border-slate-200 mt-1 bg-slate-50 cursor-pointer hover:bg-slate-100"; manualDiv.innerHTML = `<p class="text-[10px] text-blue-600 font-bold">Ketik manual</p>`;
-                        manualDiv.onclick = () => { resultsBox.classList.add('hidden'); autoNpsn.value = 'Ketik Manual'; autoProv.value = 'Ketik Manual'; autoKab.value = 'Ketik Manual'; autoKec.value = 'Ketik Manual'; }; resultsBox.appendChild(manualDiv); resultsBox.classList.remove('hidden');
-                    } else { resultsBox.innerHTML = `<div class="p-4 text-center"><p class="text-[10px] font-bold text-slate-600 mb-3">Sekolah tidak ditemukan.</p><button type="button" onclick="document.getElementById('school-results').classList.add('hidden'); document.getElementById('auto-npsn').value = 'Ketik Manual'; document.getElementById('auto-prov').value = 'Ketik Manual'; document.getElementById('auto-kab').value = 'Ketik Manual'; document.getElementById('auto-kec').value = 'Ketik Manual';" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-bold">Ketik Manual Saja</button></div>`; resultsBox.classList.remove('hidden'); }
-                } catch (error) { resultsBox.classList.add('hidden'); }
-            }, 500); 
+            
+            const isNumeric = /^\d+$/.test(keyword); 
+
+            if (isNumeric && keyword.length < 8) {
+                resultsBox.innerHTML = `<div class="p-4 text-center"><div class="w-10 h-10 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-2"><i class="ph-bold ph-keyboard text-xl"></i></div><p class="text-[10px] font-bold text-blue-700 mb-1">Menunggu NPSN Lengkap</p><p class="text-[9px] text-slate-500 mb-3 leading-relaxed">Silakan ketik 8 digit angka NPSN secara lengkap agar sekolah langsung muncul.</p><button type="button" id="btn-manual-search" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-bold shadow-sm transition active:scale-95 focus:outline-none">Ketik Manual Saja</button></div>`;
+                resultsBox.classList.remove('hidden');
+                document.getElementById('btn-manual-search').onclick = aktifkanKetikManual; 
+                return;
+            }
+            
+            // Tampilan loading standar yang lebih profesional
+            resultsBox.innerHTML = `<div class="p-3 text-center text-slate-500 text-[10px] font-bold"><i class="ph-bold ph-spinner animate-spin mr-1 inline-block align-middle text-sm"></i> Mencari data sekolah...</div>`;
+            resultsBox.classList.remove('hidden');
+
+            searchTimeout = setTimeout(() => {
+                let hasRendered = false; 
+
+                const prosesRenderCepat = (rawData) => {
+                    if (hasRendered || !rawData || rawData.length === 0) return;
+                    
+                    let uniqueNPSN = new Set();
+                    let foundData = rawData.filter(s => {
+                        if (!s.npsn || !s.nama || uniqueNPSN.has(s.npsn)) return false;
+                        uniqueNPSN.add(s.npsn); return true;
+                    });
+
+                    if (foundData.length === 0) return;
+                    
+                    hasRendered = true; 
+                    resultsBox.innerHTML = '';
+                    
+                    foundData.slice(0, 15).forEach(s => {
+                        const div = document.createElement('div'); 
+                        div.className = "p-3 mx-1 my-1.5 bg-blue-50/90 border border-blue-200 rounded-xl hover:bg-blue-100 hover:shadow-md cursor-pointer transition-all";
+                        let kecTxt = s.kec ? s.kec.replace('KEC. ','') : '-';
+                        div.innerHTML = `<p class="font-bold text-[11px] text-slate-900 mb-0.5 leading-tight">${s.nama}</p><p class="text-[9px] text-slate-600">Kec. ${kecTxt} | NPSN: <b class="text-blue-700">${s.npsn || '-'}</b></p>`;
+                        div.onclick = () => { 
+                            inpSearch.value = s.nama; kembalikanKeInputText(); 
+                            let uNpsn = getEl('auto-npsn'); let uProv = getEl('auto-prov'); let uKab = getEl('auto-kab'); let uKec = getEl('auto-kec');
+                            if(uNpsn) uNpsn.value = s.npsn || '-'; if(uProv) uProv.value = s.prov || '-'; if(uKab) uKab.value = s.kab || '-'; if(uKec) uKec.value = s.kec || '-'; 
+                            resultsBox.classList.add('hidden'); showToast("Data Sekolah Terkunci!"); 
+                        };
+                        resultsBox.appendChild(div);
+                    });
+                    const manualDiv = document.createElement('div'); manualDiv.className = "p-3 text-center border-t border-slate-200 mt-1 bg-slate-50 cursor-pointer hover:bg-slate-100"; manualDiv.innerHTML = `<p class="text-[10px] text-orange-600 font-bold">Sekolah tidak ada di daftar? Ketik Manual</p>`;
+                    manualDiv.onclick = aktifkanKetikManual; resultsBox.appendChild(manualDiv);
+                };
+
+                const handleTimeout = setTimeout(() => {
+                    if (!hasRendered) {
+                        hasRendered = true;
+                        resultsBox.innerHTML = `<div class="p-4 text-center"><div class="w-10 h-10 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-2"><i class="ph-bold ph-warning-circle text-xl"></i></div><p class="text-[10px] font-bold text-red-600 mb-1">Sekolah tidak ditemukan.</p><p class="text-[9px] text-slate-500 mb-3">Pastikan data benar, atau pilih wilayah secara manual di bawah.</p><button type="button" id="btn-manual-search" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-bold shadow-sm transition active:scale-95 focus:outline-none">Pilih Wilayah Manual</button></div>`; 
+                        document.getElementById('btn-manual-search').onclick = aktifkanKetikManual; 
+                    }
+                }, 3000);
+
+                if (isNumeric && keyword.length === 8) {
+                    fetch(`https://api-sekolah-indonesia.vercel.app/sekolah?npsn=${keyword}`).then(r=>r.json()).then(j => {
+                        let d = j.dataSekolah || j.data || []; if (!Array.isArray(d)) d = [d];
+                        prosesRenderCepat(d.map(i => ({nama: i.sekolah||i.nama, npsn: i.npsn, prov: i.propinsi||i.provinsi, kab: i.kabupaten_kota||i.kabupaten, kec: i.kecamatan})));
+                    }).catch(()=>{});
+                } else if (!isNumeric) {
+                    fetch(`https://api-sekolah-indonesia.vercel.app/sekolah?s=${encodeURIComponent(keyword)}`).then(r=>r.json()).then(j => {
+                        let d = j.dataSekolah || j.data || []; if (!Array.isArray(d)) d = [d];
+                        prosesRenderCepat(d.map(i => ({nama: i.sekolah||i.nama, npsn: i.npsn, prov: i.propinsi||i.provinsi, kab: i.kabupaten_kota||i.kabupaten, kec: i.kecamatan})));
+                    }).catch(()=>{});
+
+                    fetch(`https://api-sekolah-kita.pages.dev/api/sekolah?limit=15&keyword=${encodeURIComponent(keyword)}`).then(r=>r.json()).then(j => {
+                        if(j.status === 'success') prosesRenderCepat((j.data || []).map(i => ({nama: i.nama, npsn: i.npsn, prov: i.nama_provinsi, kab: i.nama_kabupaten, kec: i.nama_kecamatan})));
+                    }).catch(()=>{});
+                }
+            }, 300); 
         });
+
         document.addEventListener('click', (e) => { if (!inpSearch.contains(e.target) && !resultsBox.contains(e.target)) resultsBox.classList.add('hidden'); });
+
+        function kembalikanKeInputText() {
+            ['auto-prov', 'auto-kab', 'auto-kec'].forEach(id => {
+                let el = document.getElementById(id);
+                if (el && el.tagName === 'SELECT') {
+                    let input = document.createElement('input');
+                    input.type = 'text'; input.id = el.id; input.name = el.name || id; input.className = el.className; input.disabled = true;
+                    el.parentNode.replaceChild(input, el);
+                }
+            });
+        }
+
+        async function aktifkanKetikManual() {
+            resultsBox.classList.add('hidden');
+            let aNpsn = getEl('auto-npsn');
+            if(aNpsn) { aNpsn.disabled = false; aNpsn.value = ''; aNpsn.classList.remove('bg-slate-100/50'); aNpsn.placeholder = "Ketik NPSN..."; aNpsn.focus(); }
+            
+            let aProv = getEl('auto-prov'); let aKab = getEl('auto-kab'); let aKec = getEl('auto-kec');
+            const replaceToSelect = (oldEl, ph) => {
+                if(!oldEl || oldEl.tagName === 'SELECT') return oldEl;
+                let sel = document.createElement('select');
+                sel.id = oldEl.id; sel.name = oldEl.name || oldEl.id; sel.className = oldEl.className.replace('bg-slate-100/50','');
+                sel.innerHTML = `<option value="">${ph}</option>`;
+                oldEl.parentNode.replaceChild(sel, oldEl); return sel;
+            };
+
+            aProv = replaceToSelect(aProv, "-- Pilih Provinsi --");
+            aKab = replaceToSelect(aKab, "-- Pilih Kabupaten --");
+            aKec = replaceToSelect(aKec, "-- Pilih Kecamatan --");
+
+            showToast("Mode Manual Aktif");
+
+            if(cachedProv) {
+                cachedProv.forEach(p => { aProv.innerHTML += `<option value="${p.name}" data-id="${p.id}">${p.name}</option>`; });
+            } else {
+                try {
+                    let res = await fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+                    cachedProv = await res.json();
+                    cachedProv.forEach(p => { aProv.innerHTML += `<option value="${p.name}" data-id="${p.id}">${p.name}</option>`; });
+                } catch(e) { console.log('Gagal muat API Provinsi'); }
+            }
+
+            aProv.addEventListener('change', async function() {
+                aKab.innerHTML = '<option value="">-- Loading... --</option>'; aKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+                let selOpt = this.options[this.selectedIndex];
+                if(!selOpt || !selOpt.dataset.id) { aKab.innerHTML = '<option value="">-- Pilih Kabupaten --</option>'; return; }
+                
+                try {
+                    let res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selOpt.dataset.id}.json`);
+                    let kabs = await res.json();
+                    aKab.innerHTML = '<option value="">-- Pilih Kabupaten --</option>';
+                    kabs.forEach(k => { aKab.innerHTML += `<option value="${k.name}" data-id="${k.id}">${k.name}</option>`; });
+                } catch(e) {}
+            });
+
+            aKab.addEventListener('change', async function() {
+                aKec.innerHTML = '<option value="">-- Loading... --</option>';
+                let selOpt = this.options[this.selectedIndex];
+                if(!selOpt || !selOpt.dataset.id) { aKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>'; return; }
+                
+                try {
+                    let res = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${selOpt.dataset.id}.json`);
+                    let kecs = await res.json();
+                    aKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+                    kecs.forEach(k => { aKec.innerHTML += `<option value="${k.name}" data-id="${k.id}">${k.name}</option>`; });
+                } catch(e) {}
+            });
+        }
     }
 
     const selProv = document.getElementById('inp-provinsi'); const selKab = document.getElementById('inp-kabkota'); const selKec = document.getElementById('inp-kecamatan'); const selDesa = document.getElementById('inp-desa');
@@ -2360,6 +2498,42 @@
         }
     }
 
+    // ========================================================
+    // ROBOT PENGISI TAHUN AJARAN & KELAS OTOMATIS (COPAS & BERES)
+    // ========================================================
+    setInterval(() => {
+        // 1. Siapkan opsi Tahun Ajaran (2026-2035)
+        let opsiTA = '<option value="" selected disabled>Pilih...</option>';
+        for (let i = 2026; i <= 2035; i++) {
+            opsiTA += `<option value="${i}/${i+1}">${i}/${i+1}</option>`;
+        }
+
+        // 2. Siapkan opsi Kelas SD (1 sampai 6)
+        let opsiKelas = '<option value="" selected disabled>Pilih...</option>';
+        for (let i = 1; i <= 6; i++) {
+            opsiKelas += `<option value="${i}">${i}</option>`;
+        }
+        
+        // Robot mencari otomatis SEMUA dropdown di layar
+        document.querySelectorAll('select').forEach(dropdown => {
+            let identitas = (dropdown.id + " " + dropdown.name).toLowerCase();
+            
+            // Eksekusi untuk Dropdown Tahun Ajaran
+            if ((identitas.includes("tahun") || identitas.includes("ajaran") || identitas === "ta") && !identitas.includes("lahir")) {
+                if (dropdown.options.length <= 1) { 
+                    dropdown.innerHTML = opsiTA;
+                }
+            }
+
+            // Eksekusi untuk Dropdown Kelas
+            // Jika isinya kurang dari 7 (1 placeholder + 6 kelas), maka timpa full
+            if (identitas.includes("kelas")) {
+                if (dropdown.options.length < 7) { 
+                    dropdown.innerHTML = opsiKelas;
+                }
+            }
+        });
+    }, 1000);
 </script>
 </body>
 </html>
