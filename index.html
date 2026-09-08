@@ -2536,83 +2536,93 @@
     }, 1000);
 </script>   <!-- INI YANG KETINGGALAN BOSKU! -->
 
+
 <style>
     /* ==========================================
-       JURUS M-BANKING: MODE SIANG (TERANG & 5D) 
+       1. JURUS M-BANKING: MODE SIANG (TERANG & 5D) 
        ========================================== */
-    
-    /* 1. Background Gelap Menjadi Terang Kalem */
-    body.theme-siang,
-    body.theme-siang #view-portal,
-    body.theme-siang #view-brosur,
-    body.theme-siang #modal-admin-login,
-    body.theme-siang .bg-\[\#0f172a\] {
-        background-color: #e2e8f0 !important;
-        background-image: none !important;
+    body.theme-siang, body.theme-siang #view-portal, body.theme-siang #view-brosur,
+    body.theme-siang #modal-admin-login, body.theme-siang .bg-\[\#0f172a\] {
+        background-color: #e2e8f0 !important; background-image: none !important;
     }
 
-    /* 2. Kotak Menu 5D - Timbul Elegan */
-    body.theme-siang #view-portal button.bg-white\/10 {
-        background-color: #e2e8f0 !important;
-        border: 2px solid #ffffff !important;
-        box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6), 
-                   -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+    /* 5D Kotak Menu Portal & PSB */
+    body.theme-siang #view-portal button.bg-white\/10,
+    body.theme-siang #view-home .grid-cols-3 button,
+    body.theme-siang .page-section .bg-white {
+        background-color: #e2e8f0 !important; border: 2px solid #ffffff !important;
+        box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6), -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
     }
-    
-    /* Cekung saat ditekan */
-    body.theme-siang #view-portal button.bg-white\/10:active {
-        box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.6),
-                    inset -4px -4px 8px rgba(255, 255, 255, 0.8) !important;
+    body.theme-siang #view-portal button.bg-white\/10:active,
+    body.theme-siang #view-home .grid-cols-3 button:active {
+        box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.8) !important;
     }
 
-    /* 3. Teks Menu Bawah Icon Dibuat Kontras (Bukan Hantu Lagi) */
-    body.theme-siang #view-portal span.text-slate-200 {
-        color: #475569 !important;
-        font-weight: 800 !important;
-    }
+    /* 5D Teks Portal Kontras */
+    body.theme-siang #view-portal span.text-slate-200 { color: #475569 !important; font-weight: 800 !important; }
+    body.theme-siang #view-portal h2.text-white { color: #1e293b !important; }
 
-    /* 4. Teks Judul Kategori (Layanan Publik, dll) */
-    body.theme-siang #view-portal h2.text-white {
-        color: #1e293b !important;
-    }
-
-    /* 5. Navigasi Bawah (Dock) 5D */
-    body.theme-siang .bg-\[\#1e293b\]\/90 {
-        background-color: #e2e8f0 !important;
-        border: 2px solid #ffffff !important;
-        box-shadow: 0 -5px 15px rgba(0,0,0,0.05) !important;
-    }
-    body.theme-siang #btn-portal-dashboard span.text-white,
-    body.theme-siang #view-portal .group-hover\:text-white:hover {
-        color: #1e293b !important;
-    }
-    body.theme-siang #nav-indicator {
-        background-color: #e2e8f0 !important;
-        border: 2px solid #ffffff !important;
-        box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.6), 
-                   -3px -3px 6px rgba(255, 255, 255, 0.8) !important;
-    }
-
-    /* 6. Admin Login Card 5D */
-    body.theme-siang #admin-login-card {
-        background-color: #e2e8f0 !important;
-        border: 2px solid #ffffff !important;
-        box-shadow: 10px 10px 20px rgba(163, 177, 198, 0.6), 
-                   -10px -10px 20px rgba(255, 255, 255, 0.8) !important;
-    }
+    /* 5D Navigasi Bawah & Form Admin */
+    body.theme-siang .bg-\[\#1e293b\]\/90 { background-color: #e2e8f0 !important; border: 2px solid #ffffff !important; box-shadow: 0 -5px 15px rgba(0,0,0,0.05) !important; }
+    body.theme-siang #btn-portal-dashboard span.text-white, body.theme-siang #view-portal .group-hover\:text-white:hover { color: #1e293b !important; }
+    body.theme-siang #nav-indicator { background-color: #e2e8f0 !important; border: 2px solid #ffffff !important; box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.6), -3px -3px 6px rgba(255, 255, 255, 0.8) !important; }
+    body.theme-siang #admin-login-card { background-color: #e2e8f0 !important; border: 2px solid #ffffff !important; box-shadow: 10px 10px 20px rgba(163, 177, 198, 0.6), -10px -10px 20px rgba(255, 255, 255, 0.8) !important; }
     body.theme-siang #admin-login-card h2 { color: #1e293b !important; }
-    body.theme-siang #admin-pwd {
-        background-color: #e2e8f0 !important;
-        color: #1e293b !important;
-        border: none !important;
-        box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.6),
-                    inset -4px -4px 8px rgba(255, 255, 255, 0.8) !important;
+    body.theme-siang #admin-pwd { background-color: #e2e8f0 !important; color: #1e293b !important; border: none !important; box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.8) !important; }
+
+    /* ==========================================
+       2. JURUS SINKRONISASI: PSB MODE MALAM (NEON)
+       (Otomatis menyulap PSB jadi Dark Mode)
+       ========================================== */
+    body:not(.theme-siang) { background-color: #0f172a !important; }
+    
+    /* Background Page & Frame PSB Gelap */
+    body:not(.theme-siang) #view-home, body:not(.theme-siang) #view-syarat,
+    body:not(.theme-siang) #view-biaya, body:not(.theme-siang) #view-hasil,
+    body:not(.theme-siang) #view-timeline, body:not(.theme-siang) #view-register,
+    body:not(.theme-siang) #form-container {
+        background-color: #0f172a !important;
     }
+
+    /* Header Navigasi Atas PSB */
+    body:not(.theme-siang) .sticky.bg-white\/95 { background-color: rgba(15, 23, 42, 0.95) !important; border-bottom-color: #1e293b !important; }
+    body:not(.theme-siang) .sticky span, body:not(.theme-siang) .sticky h2, body:not(.theme-siang) #big-title { color: #f1f5f9 !important; }
+    body:not(.theme-siang) .sticky button { background-color: #1e293b !important; color: #cbd5e1 !important; border: 1px solid #334155 !important; }
+
+    /* Teks Judul P S B bersinar Neon */
+    body:not(.theme-siang) #dyn-judul-web { color: #3b82f6 !important; text-shadow: 0 0 20px rgba(59, 130, 246, 0.8) !important; }
+    body:not(.theme-siang) #dyn-sub-judul { color: #f97316 !important; text-shadow: 0 0 10px rgba(249, 115, 22, 0.5) !important; }
+
+    /* Kotak-kotak Card Menu PSB jadi Glassmorphism Gelap */
+    body:not(.theme-siang) .page-section .bg-white,
+    body:not(.theme-siang) #view-home .grid-cols-3 button,
+    body:not(.theme-siang) .form-step > div,
+    body:not(.theme-siang) .bg-slate-50,
+    body:not(.theme-siang) .bg-white\/90,
+    body:not(.theme-siang) .bg-white\/95 {
+        background-color: #1e293b !important; border-color: #334155 !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* Mengubah semua teks terang ke gelap */
+    body:not(.theme-siang) .text-slate-800, body:not(.theme-siang) .page-section h3, body:not(.theme-siang) .page-section h4 { color: #f1f5f9 !important; }
+    body:not(.theme-siang) .text-slate-700, body:not(.theme-siang) .text-slate-600 { color: #cbd5e1 !important; }
+    body:not(.theme-siang) label.text-slate-700 { color: #94a3b8 !important; }
+    body:not(.theme-siang) #view-home .grid-cols-3 button span { color: #94a3b8 !important; }
+    
+    /* Ikon Menu PSB bersinar (Neon Glow) */
+    body:not(.theme-siang) #view-home .grid-cols-3 button i { text-shadow: 0 0 8px currentColor; }
+
+    /* Tombol Detail Selengkapnya */
+    body:not(.theme-siang) button[onclick="openProgramModal()"] { background-color: #0f172a !important; border-color: #3b82f6 !important; color: #60a5fa !important; box-shadow: 0 0 15px rgba(59,130,246,0.3) !important; }
+
+    /* Form Input Pendaftaran & Cek Kelulusan */
+    body:not(.theme-siang) .custom-input, body:not(.theme-siang) #inp-cek-hasil { background-color: #0f172a !important; border-color: #334155 !important; color: #f8fafc !important; }
+    body:not(.theme-siang) .custom-input:disabled { background-color: #1e293b !important; color: #64748b !important; }
 </style>
 
-<!-- TOMBOL SAKLAR (Pojok Kiri Atas, Hanya Ikon Bulat Saja) -->
-<button id="btn-theme-toggle" type="button" class="fixed top-5 left-4 z-[9999] w-10 h-10 flex items-center justify-center bg-slate-800 rounded-full shadow-lg border border-white/20 transition-all hover:scale-110 active:scale-90 outline-none">
-    <i id="theme-icon" class="ph-bold ph-sun text-xl text-yellow-400"></i>
+<!-- TOMBOL SAKLAR (Pojok Kiri Atas, Default Siang) -->
+<button id="btn-theme-toggle" type="button" class="fixed top-5 left-4 z-[9999] w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-lg border border-slate-300 transition-all hover:scale-110 active:scale-90 outline-none">
+    <i id="theme-icon" class="ph-bold ph-moon text-xl text-indigo-600"></i>
 </button>
 
 <script>
@@ -2621,44 +2631,296 @@
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        if (localStorage.getItem('mode-siang') === 'aktif') {
+        // KUNCI PERUBAHAN: Jika belum pernah disetting (baru pertama kali buka web), 
+        // atau memang disetting aktif, maka OTOMATIS MODE SIANG!
+        if (localStorage.getItem('mode-siang') !== 'mati') {
             aktifkanSiang();
+        } else {
+            matikanSiang(); // Hanya mode malam jika user benar-benar pernah mematikannya
         }
 
         if (btnTheme) {
             btnTheme.addEventListener('click', () => {
-                if (body.classList.contains('theme-siang')) {
-                    matikanSiang();
-                } else {
-                    aktifkanSiang();
-                }
+                if (body.classList.contains('theme-siang')) { matikanSiang(); } else { aktifkanSiang(); }
             });
         }
 
         function aktifkanSiang() {
-            body.classList.add('theme-siang');
-            localStorage.setItem('mode-siang', 'aktif');
+            body.classList.add('theme-siang'); localStorage.setItem('mode-siang', 'aktif');
             if (!btnTheme) return;
-            btnTheme.classList.replace('bg-slate-800', 'bg-white');
-            btnTheme.classList.replace('border-white/20', 'border-slate-300');
-            if (themeIcon) {
-                themeIcon.classList.replace('ph-sun', 'ph-moon');
-                themeIcon.classList.replace('text-yellow-400', 'text-indigo-600');
-            }
+            btnTheme.classList.replace('bg-slate-800', 'bg-white'); btnTheme.classList.replace('border-white/20', 'border-slate-300');
+            if (themeIcon) { themeIcon.classList.replace('ph-sun', 'ph-moon'); themeIcon.classList.replace('text-yellow-400', 'text-indigo-600'); }
         }
 
         function matikanSiang() {
-            body.classList.remove('theme-siang');
-            localStorage.setItem('mode-siang', 'mati');
+            body.classList.remove('theme-siang'); localStorage.setItem('mode-siang', 'mati');
             if (!btnTheme) return;
-            btnTheme.classList.replace('bg-white', 'bg-slate-800');
-            btnTheme.classList.replace('border-slate-300', 'border-white/20');
-            if (themeIcon) {
-                themeIcon.classList.replace('ph-moon', 'ph-sun');
-                themeIcon.classList.replace('text-indigo-600', 'text-yellow-400');
-            }
+            btnTheme.classList.replace('bg-white', 'bg-slate-800'); btnTheme.classList.replace('border-slate-300', 'border-white/20');
+            if (themeIcon) { themeIcon.classList.replace('ph-moon', 'ph-sun'); themeIcon.classList.replace('text-indigo-600', 'text-yellow-400'); }
         }
     })();
+</script>
+
+<style>
+    /* 1. Kembalikan ukuran kalender ke Normal & Rapi */
+    .flatpickr-calendar {
+        width: 310px !important; 
+        max-width: 95vw !important; 
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        padding-bottom: 0 !important; 
+    }
+    
+    /* 2. Sembunyikan elemen Dropdown & Input bawaan Flatpickr yang jelek */
+    .flatpickr-monthDropdown-months, .numInputWrapper {
+        display: none !important;
+    }
+
+    /* 3. Desain Tombol Judul Custom (Pengganti Dropdown) */
+    .flatpickr-current-month {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding-top: 0 !important;
+    }
+    .custom-my-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 5px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+    }
+    .custom-my-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
+    /* 4. Panel Overlay Grid */
+    .custom-grid-overlay {
+        position: absolute;
+        top: 50px; 
+        left: 0; right: 0; bottom: 0;
+        background: #f8fafc;
+        z-index: 50;
+        display: none; 
+        flex-direction: column;
+        padding: 12px;
+        border-radius: 0 0 16px 16px;
+    }
+    .custom-grid-overlay.is-active {
+        display: flex !important;
+    }
+
+    .custom-grid-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .grid-nav-btn {
+        background: white;
+        color: #3b82f6;
+        width: 32px; height: 32px;
+        border-radius: 8px;
+        display: flex; justify-content: center; align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+        cursor: pointer; transition: all 0.2s;
+    }
+    .grid-nav-btn:hover { background: #eff6ff; border-color: #bfdbfe; }
+    
+    .grid-title-btn {
+        background: #eff6ff;
+        color: #1e40af;
+        font-weight: 800;
+        font-size: 13px;
+        padding: 6px 16px;
+        border-radius: 8px;
+        border: 1px solid #bfdbfe;
+        cursor: pointer; transition: all 0.2s;
+    }
+    .grid-title-btn:hover { background: #dbeafe; }
+
+    .custom-grid-body {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: minmax(36px, 1fr);
+        gap: 8px;
+        flex: 1;
+    }
+    .grid-item {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex; justify-content: center; align-items: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    .grid-item:hover { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .grid-item.active {
+        background: #3b82f6 !important;
+        color: white !important;
+        border-color: #2563eb !important;
+        box-shadow: 0 4px 10px -2px rgba(59, 130, 246, 0.5) !important;
+    }
+    .grid-item.out-of-range {
+        opacity: 0.4; background: transparent; box-shadow: none; border-color: transparent;
+    }
+</style>
+
+<script>
+    setInterval(() => {
+        if (typeof flatpickr !== 'undefined') {
+            document.querySelectorAll('.flatpickr-date:not(.flatpickr-input)').forEach(el => {
+                flatpickr(el, {
+                    locale: "id",
+                    dateFormat: "d F Y",
+                    disableMobile: "true",
+                    
+                    onReady: function(selectedDates, dateStr, instance) {
+                        const monthContainer = instance.calendarContainer.querySelector('.flatpickr-current-month');
+                        if(monthContainer.querySelector('.custom-my-btn')) return; 
+
+                        // 1. Tombol Judul Custom
+                        const btn = document.createElement('button');
+                        btn.className = 'custom-my-btn';
+                        btn.type = 'button';
+                        monthContainer.appendChild(btn);
+
+                        const updateBtnText = () => {
+                            btn.innerHTML = `${instance.l10n.months.longhand[instance.currentMonth]} ${instance.currentYear} <i class="ph-bold ph-caret-down text-[12px]"></i>`;
+                        };
+                        updateBtnText(); // Setel teks awal
+
+                        // 2. Buat Layar Overlay Grid
+                        const overlay = document.createElement('div');
+                        overlay.className = 'custom-grid-overlay';
+                        overlay.onclick = (e) => e.stopPropagation(); 
+
+                        const header = document.createElement('div');
+                        header.className = 'custom-grid-header';
+
+                        const prevBtn = document.createElement('button');
+                        prevBtn.className = 'grid-nav-btn'; prevBtn.type = 'button';
+                        prevBtn.innerHTML = '<i class="ph-bold ph-caret-left"></i>';
+
+                        const nextBtn = document.createElement('button');
+                        nextBtn.className = 'grid-nav-btn'; nextBtn.type = 'button';
+                        nextBtn.innerHTML = '<i class="ph-bold ph-caret-right"></i>';
+
+                        const titleBtn = document.createElement('button');
+                        titleBtn.className = 'grid-title-btn'; titleBtn.type = 'button';
+
+                        header.append(prevBtn, titleBtn, nextBtn);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'custom-grid-body';
+
+                        overlay.append(header, grid);
+                        instance.calendarContainer.appendChild(overlay);
+
+                        // State & Logika Engine Mutlak
+                        let targetYear = instance.currentYear;
+                        let viewMode = 'months';
+                        let currentDecade = Math.floor(targetYear / 10) * 10;
+
+                        const renderMonths = () => {
+                            viewMode = 'months';
+                            titleBtn.innerText = targetYear;
+                            grid.innerHTML = '';
+                            instance.l10n.months.shorthand.forEach((m, i) => {
+                                const mBtn = document.createElement('button');
+                                mBtn.type = 'button';
+                                mBtn.className = 'grid-item' + (i === instance.currentMonth && targetYear === instance.currentYear ? ' active' : '');
+                                mBtn.innerText = m;
+                                mBtn.onclick = (e) => {
+                                    e.preventDefault(); e.stopPropagation();
+                                    
+                                    instance.jumpToDate(new Date(targetYear, i, 1));
+                                    
+                                    // KUNCI PERBAIKAN: Paksa teks judul ikut berubah seketika!
+                                    btn.innerHTML = `${instance.l10n.months.longhand[i]} ${targetYear} <i class="ph-bold ph-caret-down text-[12px]"></i>`;
+                                    
+                                    overlay.classList.remove('is-active'); 
+                                };
+                                grid.appendChild(mBtn);
+                            });
+                        };
+
+                        const renderYears = () => {
+                            viewMode = 'years';
+                            titleBtn.innerText = `${currentDecade} - ${currentDecade + 9}`;
+                            grid.innerHTML = '';
+                            for (let i = currentDecade - 1; i <= currentDecade + 10; i++) {
+                                const yBtn = document.createElement('button');
+                                yBtn.type = 'button';
+                                yBtn.className = 'grid-item' + (i === targetYear ? ' active' : '') + (i < currentDecade || i > currentDecade + 9 ? ' out-of-range' : '');
+                                yBtn.innerText = i;
+                                yBtn.onclick = (e) => {
+                                    e.preventDefault(); e.stopPropagation();
+                                    targetYear = i;
+                                    currentDecade = Math.floor(targetYear / 10) * 10;
+                                    renderMonths(); 
+                                };
+                                grid.appendChild(yBtn);
+                            }
+                        };
+
+                        btn.onclick = (e) => {
+                            e.preventDefault(); e.stopPropagation();
+                            if (overlay.classList.contains('is-active')) {
+                                overlay.classList.remove('is-active');
+                            } else {
+                                targetYear = instance.currentYear;
+                                currentDecade = Math.floor(targetYear / 10) * 10;
+                                overlay.classList.add('is-active');
+                                renderMonths();
+                            }
+                        };
+
+                        titleBtn.onclick = (e) => {
+                            e.preventDefault(); e.stopPropagation();
+                            if (viewMode === 'months') renderYears();
+                        };
+
+                        prevBtn.onclick = (e) => {
+                            e.preventDefault(); e.stopPropagation();
+                            if (viewMode === 'months') {
+                                targetYear--;
+                                renderMonths();
+                            } else {
+                                currentDecade -= 10;
+                                renderYears();
+                            }
+                        };
+
+                        nextBtn.onclick = (e) => {
+                            e.preventDefault(); e.stopPropagation();
+                            if (viewMode === 'months') {
+                                targetYear++;
+                                renderMonths();
+                            } else {
+                                currentDecade += 10;
+                                renderYears();
+                            }
+                        };
+
+                        // Amankan perubahan saat memencet panah bawaan (< >) kalender utama
+                        instance.config.onMonthChange.push(updateBtnText);
+                        instance.config.onYearChange.push(updateBtnText);
+                    }
+                });
+            });
+        }
+    }, 1000);
 </script>
 </body>
 </html>
